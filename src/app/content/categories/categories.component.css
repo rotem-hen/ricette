@@ -1,0 +1,22 @@
+.category-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.category {
+    display: flex;
+    height: 150px;
+    width: 40vw;
+    margin-top: 20px;
+    border: 1px solid rgb(36, 184, 221);
+    border-radius: 15px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 30px;
+    padding: 0px 7px;
+}

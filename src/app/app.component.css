@@ -25,4 +25,5 @@ app-content {
     margin-top: 50px;
     margin-bottom: 100px;
     flex: 1;
+    direction: rtl;
 }
