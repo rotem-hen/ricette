@@ -1,0 +1,11 @@
+.plus-icon {
+    color: white;
+    background-color: #515C5D;
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    text-align: center;
+    border: 5px solid #515C5D;
+    border-radius: 100%;
+}
