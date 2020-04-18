@@ -1,7 +1,8 @@
 <div class="category-container">
-    <div *ngFor="let i of categories" class="category">
-        <a [routerLink]="['/categories', i.id]">
-            {{ i.name }}
-          </a>
+    <div
+    *ngFor="let i of categories"
+    class="category"
+    (click)="onCategoryClick(i)">
+        {{ i.name }}
     </div>
 </div>
