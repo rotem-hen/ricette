@@ -1,0 +1,28 @@
+.app {
+    color: #515C5D;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+app-top-panel {
+    position: fixed;
+    top: 0;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100vw;
+}
+
+app-add-button {
+    position: fixed;
+    bottom: 5vh;
+    left: 3vh;
+}
+
+app-content {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    flex: 1;
+}
