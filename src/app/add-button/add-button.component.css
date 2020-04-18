@@ -9,3 +9,24 @@
     border: 5px solid #515C5D;
     border-radius: 100%;
 }
+
+.popover {
+    padding: 5px 20px;
+    font-size: 20px;
+    line-height: 25px;
+    width: 200px;
+    text-align: center;
+    color: white;
+    background-color: #515C5D;
+    border-radius: 45px;
+}
+
+.shown {
+    opacity: 1;
+    transition: opacity ease-in 150ms;
+}
+
+.hidden {
+    opacity: 0;
+    transition: opacity ease-out 150ms;
+}

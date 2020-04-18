@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { data } from '../../db';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -10,9 +11,13 @@ export class CategoriesComponent implements OnInit {
 
   public categories = data;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  onCategoryClick(category): void {
+    this.router.navigate(['/categories', category.id]);
   }
 
 }

@@ -23,8 +23,4 @@ export class RecipesComponent implements OnInit {
 
     this.recipesList = entry.recipes;
   }
-
-  onBack(): void {
-    this.router.navigate(['']);
-  }
 }

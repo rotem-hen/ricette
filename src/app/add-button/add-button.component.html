@@ -1,1 +1,7 @@
-<i class="fas fa-plus plus-icon"></i>
+<div class="popover" [class.shown]="showPopover" [class.hidden]="!showPopover">
+    <p>הוספת קטגוריה</p>
+    <p>הוספת מתכון</p>
+</div>
+<i
+(click)='togglePopover()'
+class="fas fa-plus plus-icon"></i>

@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddButtonComponent implements OnInit {
 
+  public showPopover: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  togglePopover() {
+    this.showPopover = !this.showPopover;
   }
 
 }
