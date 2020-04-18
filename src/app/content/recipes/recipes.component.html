@@ -1,0 +1,9 @@
+<p>קטגוריית {{ categoryName }}</p>
+<button class='btn btn-outline-secondary'
+        (click)='onBack()'
+        style='width:80px; background-color: darksalmon;'>
+    <i class='fa fa-chevron-left'></i> חזרה
+</button>
+<div *ngFor="let i of recipesList" class="recipe-entry">
+    {{ i.title }}
+</div>

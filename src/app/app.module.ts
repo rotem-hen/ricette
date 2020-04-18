@@ -5,20 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TopPanelComponent } from './top-panel/top-panel.component';
 import { AddButtonComponent } from './add-button/add-button.component';
-import { ContentComponent } from './content/content.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ContentModule } from './content/content.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopPanelComponent,
-    AddButtonComponent,
-    ContentComponent
+    AddButtonComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     FontAwesomeModule,
+    ContentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
