@@ -8,6 +8,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { RecipePageComponent } from './recipe-page/recipe-page.component';
 import { ContentComponent } from './content.component';
 import { BackButtonComponent } from './back-button/back-button.component';
+import { RecipeEntryComponent } from './recipe-entry/recipe-entry.component';
 
 @NgModule({
   declarations: [
@@ -15,13 +16,15 @@ import { BackButtonComponent } from './back-button/back-button.component';
     CategoriesComponent,
     RecipesComponent,
     RecipePageComponent,
-    BackButtonComponent
+    BackButtonComponent,
+    RecipeEntryComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'categories/:id', component: RecipesComponent },
+      { path: 'categories', component: CategoriesComponent },
       { path: '', component: CategoriesComponent },
       { path: '**', component: CategoriesComponent }
     ])
