@@ -2,6 +2,7 @@
     <div
     *ngFor="let i of categories"
     class="category"
+    style="background: {{ i.color }}"
     (click)="onCategoryClick(i)">
         {{ i.name }}
     </div>

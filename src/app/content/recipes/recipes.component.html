@@ -2,6 +2,4 @@
     <app-back-button [link]="['']"></app-back-button>
     <span class="category-name">{{ categoryName }}</span>
 </span>
-<div *ngFor="let i of recipesList" class="recipe-entry">
-    {{ i.title }}
-</div>
+<app-recipe-entry *ngFor="let i of recipesList" [recipe]="i"></app-recipe-entry>

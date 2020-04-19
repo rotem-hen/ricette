@@ -1,0 +1,12 @@
+.recipe-entry {
+    margin: 20px 20px;
+    padding: 0px 30px;
+    font-size: 20px;
+    border: 1px solid green;
+    border-radius: 45px;
+}
+
+.recipe-entry img {
+    height: 80px;
+    width: 80px;
+}

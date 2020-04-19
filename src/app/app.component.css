@@ -8,11 +8,12 @@
 app-top-panel {
     position: fixed;
     top: 0;
-    background: #fff;
+    background: #fffaf5;;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100vw;
+    padding-top: 10px;
 }
 
 app-add-button {
