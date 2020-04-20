@@ -1,4 +1,7 @@
 <div class="recipe-entry">
     <img src="./assets/food.JPG" />
-    {{ recipe.title }}
+    <span class="title">{{ recipe.title }}</span>
+<span *ngFor="let i of categoryColors">
+    <div class="category-color" style="background-color: {{ i }};"></div>
+</span>
 </div>

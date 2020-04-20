@@ -1,12 +1,31 @@
 .recipe-entry {
     margin: 20px 20px;
     padding: 0px 30px;
-    font-size: 20px;
-    border: 1px solid green;
     border-radius: 45px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(237, 241, 241);
 }
 
 .recipe-entry img {
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
+    min-height: 70px;
+    min-width: 70px;
+    padding: 10px 0px;
+}
+
+.title {
+    font-size: 20px;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.category-color {
+    height: 15px;
+    width: 15px;
+    border-radius: 45px;
+    margin: 1px;
+    border: 1px solid #515C5D;
 }

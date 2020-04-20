@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class CategoriesComponent implements OnInit {
 
-  public categories = data;
+  public categories = data.categories;
 
   constructor(private router: Router) { }
 

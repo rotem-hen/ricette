@@ -3,6 +3,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 app-top-panel {
@@ -18,8 +19,8 @@ app-top-panel {
 
 app-add-button {
     position: fixed;
-    bottom: 5vh;
-    left: 3vh;
+    bottom: 5%;
+    left: 3%;
 }
 
 app-content {
@@ -27,4 +28,6 @@ app-content {
     margin-bottom: 100px;
     flex: 1;
     direction: rtl;
+    width: 100%;
+    max-width: 1000px;
 }

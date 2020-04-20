@@ -19,14 +19,19 @@
     color: white;
     background-color: #515C5D;
     border-radius: 45px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 65px;
 }
 
 .shown {
-    opacity: 1;
-    transition: opacity ease-in 150ms;
+    height: 115px;
+    transition: all linear 180ms;
 }
 
 .hidden {
-    opacity: 0;
-    transition: opacity ease-out 150ms;
+    height: 0;
+    width: 0;
+    padding: 0;
+    transition: all linear 180ms;
 }
