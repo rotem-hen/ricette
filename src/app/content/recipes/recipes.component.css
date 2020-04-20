@@ -3,3 +3,13 @@
     margin: 50px 10px;
     font-weight: bold;
 }
+
+.no-recepies {
+    font-size: 25px;
+    padding: 60px;
+    text-align: center;
+}
+
+.no-recepies img {
+    height: 140px;
+}

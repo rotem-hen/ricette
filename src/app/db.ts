@@ -65,10 +65,10 @@ export const data =
         { "id": 1, "title": "מרק עדשים", categories: [3,6,8]},
         { "id": 2, "title": "מרק פטריות", categories: [3,6,8]},
         { "id": 3, "title": "שקשוקה מקסיקנית", categories: []},
-        { "id": 1, "title": "בנדיקט", categories: [1,3,8]},
+        { "id": 1, "title": "בנדיקט", categories: [3,8]},
         { "id": 2, "title": "אפוגטו", categories: [4,7,8]},
         { "id": 3, "title": "סביצ'ה", categories: [2,3,5]},
-        { "id": 1, "title": "בורקס", categories: [1,3,8]},
+        { "id": 1, "title": "בורקס", categories: [3,8]},
         { "id": 2, "title": "ראמן", categories: [2,3,6]},
         { "id": 3, "title": "ריזוטו", categories: [3,7,8]}
     ]
