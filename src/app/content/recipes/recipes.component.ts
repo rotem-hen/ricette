@@ -9,7 +9,8 @@ import { data } from '../../db';
 })
 export class RecipesComponent implements OnInit {
 
-  public categoryName = '';
+  public categoryName: string = '';
+  public categoryId: number;
   public recipesList = [];
 
   constructor(
@@ -17,10 +18,12 @@ export class RecipesComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    const param = this.route.snapshot.paramMap.get('id');
-    const entry = data.find(category => category.id === +param);
-    this.categoryName = entry.name;
+    this.categoryId = +this.route.snapshot.paramMap.get('id');
+    const category = data.categories.find(category => category.id === this.categoryId);
+    this.categoryName = category.name;
 
-    this.recipesList = entry.recipes;
+    this.recipesList = !this.categoryId ?
+    data.recipes.filter(recipe => !recipe.categories.length) :
+    data.recipes.filter(recipe => recipe.categories.includes(category.id));
   }
 }

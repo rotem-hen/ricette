@@ -1,83 +1,75 @@
 export const data = 
-[
-    {
-        "id": 1,
-        "name": "כאנפילים",
-        "color": "#A5EABF",
-        "recipes": [
-            { "id": 1, "title": "כאנפיל בחרדל"},
-            { "id": 2, "title": "כאנפיל מטוגן"},
-            { "id": 3, "title": "כאנפיל קצוץ"}
-        ]
-    },
-    {
-        "id": 2,
-        "name": "פנגולינים",
-        "color": "#8DD7D9",
-        "recipes": [
-            { "id": 1, "title": "פנגולין במרק עטלפים"},
-            { "id": 2, "title": "פנגולין בזיגוג סילאן"},
-            { "id": 3, "title": "פנגולין אפוי"}
-        ]
-    },
-    {
-        "id": 3,
-        "name": "חמורים",
-        "color": "#F6E193",
-        "recipes": [
-            { "id": 1, "title": "חמור דרכים"},
-            { "id": 2, "title": "חמור ברוטב עגבניות"},
-            { "id": 3, "title": "חמור בתנור"}
-        ]
-    },
-    {
-        "id": 4,
-        "name": "שפנים",
-        "color": "#F6B8A2",
-        "recipes": [
-            { "id": 1, "title": "שפן צלוי"},
-            { "id": 2, "title": "שפן צלוי 2"},
-            { "id": 3, "title": "שפן מסוג שפן צלוי"}
-        ]
-    },
-    {
-        "id": 5,
-        "name": "ארנבות",
-        "color": "#D4DFE9",
-        "recipes": [
-            { "id": 1, "title": "ארנבת שמנה"},
-            { "id": 2, "title": "ארנבת בשמנת"},
-            { "id": 3, "title": "ארנבת בקארי"}
-        ]
-    },
-    {
-        "id": 6,
-        "name": "ברנבים",
-        "color": "#E2BADE",
-        "recipes": [
-            { "id": 1, "title": "ברנב בלימון"},
-            { "id": 2, "title": "ברנב אסייתי"},
-            { "id": 3, "title": "ברנב מוקרם"}
-        ]
-    },
-    {
-        "id": 10,
-        "name": "איטלקי",
-        "color": "#EDBCBA",
-        "recipes": [
-            { "id": 1, "title": "פסטה"},
-            { "id": 2, "title": "ניוקי"},
-            { "id": 3, "title": "ריזוטו"}
-        ]
-    },
-    {
-        "id": 11,
-        "name": "קינוחים",
-        "color": "#BEC6A4",
-        "recipes": [
-            { "id": 1, "title": "חומיות"},
-            { "id": 2, "title": "עוגת ביסקוויטים"},
-            { "id": 3, "title": "פנה-פורטה"}
-        ]
-    }
-]
+{
+    "categories":
+    [
+        {
+            "id": 1,
+            "name": "ארוחות בוקר",
+            "color": "#A5EABF"
+        },
+        {
+            "id": 2,
+            "name": "ארוחות צהריים",
+            "color": "#8DD7D9"
+        },
+        {
+            "id": 3,
+            "name": "ארוחות ערב",
+            "color": "#F6E193"
+        },
+        {
+            "id": 4,
+            "name": "קינוחים",
+            "color": "#F6B8A2"
+        },
+        {
+            "id": 5,
+            "name": "דגים",
+            "color": "#D4DFE9"
+        },
+        {
+            "id": 6,
+            "name": "מרקים",
+            "color": "#E2BADE"
+        },
+        {
+            "id": 7,
+            "name": "איטלקי",
+            "color": "#EDBCBA"
+        },
+        {
+            "id": 8,
+            "name": "צמחוני",
+            "color": "#BEC6A4"
+        },
+        {
+            "id": 0,
+            "name": "ללא קטגוריה",
+            "color": "#b7b7b7"
+        }
+    ],
+    "recipes":
+    [
+        { "id": 1, "title": "קציצות דגים", categories: [2,5]},
+        { "id": 2, "title": "דניס בחמאת לימון", categories: [2,5]},
+        { "id": 3, "title": "לזניית בטטה", categories: [3,7,8]},
+        { "id": 1, "title": "סלט אורז קר ובטטות צלויות", categories: [3,8]},
+        { "id": 2, "title": "חומיות", categories: [4,8]},
+        { "id": 3, "title": "עוגת ביסקוויטים", categories: [4,8]},
+        { "id": 1, "title": "עוגת לוטוס", categories: [4,8]},
+        { "id": 2, "title": "פיצה עם פפרוני", categories: [3,7]},
+        { "id": 3, "title": "פסטה ארביאטה", categories: [2,3,7,8]},
+        { "id": 1, "title": "פסטה ראגו", categories: [2,3,7]},
+        { "id": 2, "title": "פילה סלמון", categories: [2,5]},
+        { "id": 3, "title": "רצועות חזה עוף בלימון ודבש", categories: []},
+        { "id": 1, "title": "מרק עדשים", categories: [3,6,8]},
+        { "id": 2, "title": "מרק פטריות", categories: [3,6,8]},
+        { "id": 3, "title": "שקשוקה מקסיקנית", categories: []},
+        { "id": 1, "title": "בנדיקט", categories: [1,3,8]},
+        { "id": 2, "title": "אפוגטו", categories: [4,7,8]},
+        { "id": 3, "title": "סביצ'ה", categories: [2,3,5]},
+        { "id": 1, "title": "בורקס", categories: [1,3,8]},
+        { "id": 2, "title": "ראמן", categories: [2,3,6]},
+        { "id": 3, "title": "ריזוטו", categories: [3,7,8]}
+    ]
+}
