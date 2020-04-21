@@ -9,7 +9,7 @@
 app-top-panel {
     position: fixed;
     top: 0;
-    background: #fffaf5;;
+    background: #fffaf5;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
