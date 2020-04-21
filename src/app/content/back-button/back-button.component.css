@@ -3,6 +3,9 @@
     height: 50px;
     font-size: 30px;
     margin: 50px 10px;
-    background-color: rgb(136, 1, 86);
+    background-color: #ffbe7c;
     color: white;
+    border-radius: 45px;
+    border: none;
+    padding: 0;
 }
