@@ -1,21 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-back-button',
   templateUrl: './back-button.component.html',
   styleUrls: ['./back-button.component.css']
 })
-export class BackButtonComponent implements OnInit {
+export class BackButtonComponent {
+  constructor(private _location: Location) {}
 
-  @Input() link;
-
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-  }
-
-  onBack() {
-    this.router.navigate(this.link);
+  public onBack(): void {
+    this._location.back();
   }
 }
