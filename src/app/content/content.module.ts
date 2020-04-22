@@ -23,16 +23,14 @@ import { RecipeEntryComponent } from './recipe-entry/recipe-entry.component';
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: 'categories/:id', component: RecipesComponent },
+      { path: 'recipes/:rid', component: RecipePageComponent },
+      { path: 'categories/:cid', component: RecipesComponent },
       { path: 'categories', component: CategoriesComponent },
       { path: '', component: CategoriesComponent },
       { path: '**', component: CategoriesComponent }
     ])
   ],
-  exports: [
-    ContentComponent,
-    BackButtonComponent
-  ],
+  exports: [ContentComponent, BackButtonComponent],
   bootstrap: [CategoriesComponent]
 })
-export class ContentModule { }
+export class ContentModule {}
