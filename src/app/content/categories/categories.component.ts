@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { data } from '../../db';
 import { Router } from '@angular/router';
 
@@ -7,17 +7,12 @@ import { Router } from '@angular/router';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
-export class CategoriesComponent implements OnInit {
-
+export class CategoriesComponent {
   public categories = data.categories;
 
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private router: Router) {}
 
   onCategoryClick(category): void {
     this.router.navigate(['/categories', category.id]);
   }
-
 }
