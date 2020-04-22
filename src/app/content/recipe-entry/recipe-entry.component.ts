@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { data } from '../../db';
+import { Router } from '@angular/router';
+import { Recipe } from './interface/recipe.interface';
 
 @Component({
   selector: 'app-recipe-entry',
@@ -7,10 +9,10 @@ import { data } from '../../db';
   styleUrls: ['./recipe-entry.component.css']
 })
 export class RecipeEntryComponent implements OnInit {
+  @Input() recipe: Recipe;
 
-  @Input() recipe;
   public categoryColors;
-  constructor() { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     const recipeCategoriesIds: number[] = this.recipe.categories;
@@ -18,4 +20,7 @@ export class RecipeEntryComponent implements OnInit {
     this.categoryColors = recipeCategories.map(c => c.color);
   }
 
+  onRecipeClick(): void {
+    this.router.navigate(['recipes', this.recipe.id]);
+  }
 }
