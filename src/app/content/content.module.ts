@@ -7,7 +7,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipePageComponent } from './recipe-page/recipe-page.component';
 import { ContentComponent } from './content.component';
-import { BackButtonComponent } from './back-button/back-button.component';
+import { ContentTitleComponent } from './content-title/content-title.component';
 import { RecipeEntryComponent } from './recipe-entry/recipe-entry.component';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { RecipeEntryComponent } from './recipe-entry/recipe-entry.component';
     CategoriesComponent,
     RecipesComponent,
     RecipePageComponent,
-    BackButtonComponent,
+    ContentTitleComponent,
     RecipeEntryComponent
   ],
   imports: [
@@ -30,7 +30,7 @@ import { RecipeEntryComponent } from './recipe-entry/recipe-entry.component';
       { path: '**', component: CategoriesComponent }
     ])
   ],
-  exports: [ContentComponent, BackButtonComponent],
+  exports: [ContentComponent, ContentTitleComponent],
   bootstrap: [CategoriesComponent]
 })
 export class ContentModule {}
