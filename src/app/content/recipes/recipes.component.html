@@ -1,4 +1,4 @@
-<app-content-title title="categoryName"></app-content-title>
+<app-content-title [title]="categoryName"></app-content-title>
 <app-recipe-entry *ngFor="let i of recipesList" [recipe]="i"></app-recipe-entry>
 <div class="no-recepies" *ngIf="!recipesList.length">
     <img src="./assets/cactus.png" />

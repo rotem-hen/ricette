@@ -10,3 +10,11 @@ body {
     margin: 0;
     background-color: #fffaf5;
 }
+
+.titleDiv {
+  display: flex;
+  align-items: center;
+  margin: 50px 10px;
+  font-size: 30px;
+  font-weight: bold;
+}
