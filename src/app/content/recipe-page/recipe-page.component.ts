@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Recipe } from '../recipe-entry/interface/recipe.interface';
+import { data } from '../../db';
 
 @Component({
   selector: 'app-recipe-page',
@@ -7,11 +9,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./recipe-page.component.css']
 })
 export class RecipePageComponent implements OnInit {
-  public recipeId: number;
+  public recipe: Recipe;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.recipeId = +this.route.snapshot.paramMap.get('rid');
+    const recipeId = +this.route.snapshot.paramMap.get('rid');
+    this.recipe = data.recipes.find(r => r.id === recipeId);
   }
 }
