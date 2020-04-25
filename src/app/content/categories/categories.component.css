@@ -10,13 +10,5 @@
     height: 150px;
     width: 40%;
     margin-top: 20px;
-    border-radius: 15px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    text-overflow: ellipsis;
-    overflow: hidden;
     font-size: 30px;
-    padding: 0px 7px;
-    cursor: pointer;
 }

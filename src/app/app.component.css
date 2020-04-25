@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-app-top-panel {
+app-navbar {
     position: fixed;
     top: 0;
     background: #fffaf5;
