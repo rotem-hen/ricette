@@ -1,1 +1,8 @@
 <app-content-title [title]="recipe.title"></app-content-title>
+<img src="./assets/food.JPG" class="page-image" />
+<div class="ingredients">
+    <li *ngFor="let i of recipe.ingredients">{{ i }}</li>
+</div>
+<div class="prep">
+    <li *ngFor="let p of recipe.prep">{{ p }}</li>
+</div>
