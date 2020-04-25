@@ -10,3 +10,21 @@ body {
     margin: 0;
     background-color: #fffaf5;
 }
+
+.button {
+  border-radius: 15px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 0px 7px;
+  background-color: transparent;
+  font-family: 'Jacqueline FM', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}

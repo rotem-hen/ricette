@@ -1,7 +1,7 @@
 <div class="category-container">
     <div
     *ngFor="let i of categories"
-    class="category"
+    class="category button"
     style="background: {{ i.color }}"
     (click)="onCategoryClick(i)">
         {{ i.name }}
