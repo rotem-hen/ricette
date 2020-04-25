@@ -31,3 +31,7 @@ app-content {
     width: 100%;
     max-width: 1000px;
 }
+
+app-content-title {
+    width: 50%;
+}

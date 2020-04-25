@@ -1,0 +1,22 @@
+.ingredients, .prep {
+    margin: 50px 20px;
+}
+
+.page-image {
+    width: 150px;
+    height:150px;
+    min-width: 150px;
+    min-height: 150px;
+    float: left;
+    margin: 0px 20px 20px 20px;
+}
+
+li {
+    margin: 10px;
+    list-style-type: none;
+    line-height: 25px;
+}
+
+.prep li {
+    list-style-type: circle;
+}
