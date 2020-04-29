@@ -121,7 +121,7 @@ export const data = {
     },
     {
       id: 8,
-      title: 'פיצה עם פפרוני',
+      title: 'פיצה עם סלאמי',
       isFavourite: false,
       categories: [3, 7],
       ingredients: [],
