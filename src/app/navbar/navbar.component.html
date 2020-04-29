@@ -8,7 +8,8 @@
 </nav>
 
 <nav class="narrow">
-  <i class="fas fa-bars square-icon"></i>
+  <i class="fas fa-bars square-icon" (click)="onMenuClick()"></i>
+  <app-navbar-items *ngIf="menuShown"></app-navbar-items>
   <div class="search-container">
     <i class="fas fa-search square-icon"></i>
     <input type="text" />
