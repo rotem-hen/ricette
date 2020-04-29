@@ -44,12 +44,23 @@ export const data = {
       id: 0,
       name: 'ללא קטגוריה',
       color: '#b7b7b7'
+    },
+    {
+      id: 1000,
+      name: 'כל המתכונים',
+      color: '#b7b7b7'
+    },
+    {
+      id: 2000,
+      name: 'מועדפים',
+      color: '#b7b7b7'
     }
   ],
   recipes: [
     {
       id: 1,
       title: 'קציצות דגים',
+      isFavourite: false,
       categories: [2, 5],
       ingredients: [],
       prep: []
@@ -57,6 +68,7 @@ export const data = {
     {
       id: 2,
       title: 'דניס בחמאת לימון',
+      isFavourite: false,
       categories: [2, 5],
       ingredients: ['2 פילה דניס', '60 גרם חמאה', 'גרידה מלימון אחד', 'כוס יין לבן', '1/4 כוס יין לבן', '3 שיני שום'],
       prep: [
@@ -70,6 +82,7 @@ export const data = {
     {
       id: 3,
       title: 'לזניית בטטה',
+      isFavourite: false,
       categories: [3, 7, 8],
       ingredients: [],
       prep: []
@@ -77,6 +90,7 @@ export const data = {
     {
       id: 4,
       title: 'סלט אורז קר ובטטות צלויות',
+      isFavourite: false,
       categories: [3, 8],
       ingredients: [],
       prep: []
@@ -84,6 +98,7 @@ export const data = {
     {
       id: 5,
       title: 'חומיות',
+      isFavourite: true,
       categories: [4, 8],
       ingredients: [],
       prep: []
@@ -91,6 +106,7 @@ export const data = {
     {
       id: 6,
       title: 'עוגת ביסקוויטים',
+      isFavourite: true,
       categories: [4, 8],
       ingredients: [],
       prep: []
@@ -98,6 +114,7 @@ export const data = {
     {
       id: 7,
       title: 'עוגת לוטוס',
+      isFavourite: false,
       categories: [4, 8],
       ingredients: [],
       prep: []
@@ -105,6 +122,7 @@ export const data = {
     {
       id: 8,
       title: 'פיצה עם פפרוני',
+      isFavourite: false,
       categories: [3, 7],
       ingredients: [],
       prep: []
@@ -112,6 +130,7 @@ export const data = {
     {
       id: 9,
       title: 'פסטה ארביאטה',
+      isFavourite: false,
       categories: [2, 3, 7, 8],
       ingredients: [],
       prep: []
@@ -119,6 +138,7 @@ export const data = {
     {
       id: 10,
       title: 'פסטה ראגו',
+      isFavourite: true,
       categories: [2, 3, 7],
       ingredients: [],
       prep: []
@@ -126,6 +146,7 @@ export const data = {
     {
       id: 11,
       title: 'פילה סלמון',
+      isFavourite: false,
       categories: [2, 5],
       ingredients: [],
       prep: []
@@ -133,6 +154,7 @@ export const data = {
     {
       id: 12,
       title: 'רצועות חזה עוף בלימון ודבש',
+      isFavourite: false,
       categories: [],
       ingredients: [],
       prep: []
@@ -140,6 +162,7 @@ export const data = {
     {
       id: 13,
       title: 'מרק עדשים',
+      isFavourite: false,
       categories: [3, 6, 8],
       ingredients: [],
       prep: []
@@ -147,6 +170,7 @@ export const data = {
     {
       id: 14,
       title: 'מרק פטריות',
+      isFavourite: false,
       categories: [3, 6, 8],
       ingredients: [],
       prep: []
@@ -154,6 +178,7 @@ export const data = {
     {
       id: 15,
       title: 'שקשוקה מקסיקנית',
+      isFavourite: false,
       categories: [],
       ingredients: [],
       prep: []
@@ -161,6 +186,7 @@ export const data = {
     {
       id: 16,
       title: 'בנדיקט',
+      isFavourite: false,
       categories: [3, 8],
       ingredients: [],
       prep: []
@@ -168,6 +194,7 @@ export const data = {
     {
       id: 17,
       title: 'אפוגטו',
+      isFavourite: false,
       categories: [4, 7, 8],
       ingredients: [],
       prep: []
@@ -175,6 +202,7 @@ export const data = {
     {
       id: 18,
       title: "סביצ'ה",
+      isFavourite: false,
       categories: [2, 3, 5],
       ingredients: [],
       prep: []
@@ -182,6 +210,7 @@ export const data = {
     {
       id: 19,
       title: 'בורקס',
+      isFavourite: false,
       categories: [3, 8],
       ingredients: [],
       prep: []
@@ -189,6 +218,7 @@ export const data = {
     {
       id: 20,
       title: 'ראמן',
+      isFavourite: false,
       categories: [2, 3, 6],
       ingredients: [],
       prep: []
@@ -196,6 +226,7 @@ export const data = {
     {
       id: 21,
       title: 'ריזוטו',
+      isFavourite: false,
       categories: [3, 7, 8],
       ingredients: [],
       prep: []

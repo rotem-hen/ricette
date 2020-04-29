@@ -1,0 +1,12 @@
+.navbar-item {
+    border: 1px solid;
+    line-height: 50px;
+    width: 130px;
+    margin: 0px 10px;
+    color: #515C5D;
+}
+
+.selected {
+    color: white;
+    background-color: #515C5D;
+}

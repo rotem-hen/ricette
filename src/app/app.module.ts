@@ -7,10 +7,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AddButtonComponent } from './add-button/add-button.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContentModule } from './content/content.module';
-import { NavbarItemComponent } from './navbar-item/navbar-item.component';
+import { NavbarItemsComponent } from './navbar-items/navbar-items.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, AddButtonComponent, NavbarItemComponent],
+  declarations: [AppComponent, NavbarComponent, AddButtonComponent, NavbarItemsComponent],
   imports: [BrowserModule, FormsModule, FontAwesomeModule, ContentModule],
   providers: [],
   bootstrap: [AppComponent]
