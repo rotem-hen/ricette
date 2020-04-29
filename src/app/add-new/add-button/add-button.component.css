@@ -12,16 +12,20 @@
 
 .popover {
     padding: 5px 20px;
-    font-size: 20px;
-    line-height: 25px;
     width: 200px;
     text-align: center;
-    color: white;
-    background-color: #515C5D;
     border-radius: 45px;
     overflow: hidden;
     position: absolute;
     bottom: 65px;
+    background-color: #515C5D;
+}
+.popover button {
+    font-size: 20px;
+    line-height: 35px;
+    color: white;
+    padding: 5px;
+    margin: 5px 5px;
 }
 
 .shown {
