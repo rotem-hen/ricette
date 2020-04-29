@@ -5,5 +5,5 @@ export interface Category {
   name: string;
   color: string;
   hidden?: boolean;
-  selector?: (recipe: Recipe) => Category[];
+  selector?: (recipe: Recipe) => boolean;
 }
