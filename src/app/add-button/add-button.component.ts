@@ -18,8 +18,8 @@ export class AddButtonComponent {
   }
 
   private onOutsideClick = (e): void => {
-    if (e.target.offsetParent.nodeName.toLowerCase() === 'app-add-button') { return; }
+    if (e.target.offsetParent?.nodeName?.toLowerCase() === 'app-add-button') return;
     this.showPopover = !this.showPopover;
     document.removeEventListener('click', this.onOutsideClick);
-  }
+  };
 }
