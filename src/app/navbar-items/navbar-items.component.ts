@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoriesTypes } from '../enum/categories-types.enum';
+import { CategoriesIds } from '../content/category-views/category-views';
 
 @Component({
   selector: 'app-navbar-items',
@@ -9,7 +9,7 @@ import { CategoriesTypes } from '../enum/categories-types.enum';
 })
 export class NavbarItemsComponent implements OnInit {
   public selected: number;
-  private links = [['categories'], ['categories', CategoriesTypes.ALL], ['categories', CategoriesTypes.FAVORITES]];
+  private links = [['categories'], ['categories', CategoriesIds.ALL], ['categories', CategoriesIds.FAVORITES]];
 
   constructor(private router: Router) {}
 

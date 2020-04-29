@@ -1,4 +1,4 @@
-export class Recipe {
+export interface Recipe {
   id: number;
   title: string;
   categories: number[];

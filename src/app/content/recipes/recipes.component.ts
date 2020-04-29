@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { data } from '../../db';
-import { CategoriesTypes } from '../../enum/categories-types.enum';
+import { categoryViews } from '../category-views/category-views';
+import { Category } from '../interface/category.interface';
+import { Recipe } from '../interface/recipe.interface';
+
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
@@ -10,29 +13,22 @@ import { CategoriesTypes } from '../../enum/categories-types.enum';
 export class RecipesComponent implements OnInit {
   public categoryName = '';
   public categoryId: number;
-  public recipesList = [];
+  public recipesList: Recipe[];
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.categoryId = +params['cid'];
-      const category = data.categories.find(category => category.id === this.categoryId);
+      const categories: Category[] = data.categories;
+      const category = categories.concat(categoryViews).find(category => category.id === this.categoryId);
       this.categoryName = category.name;
 
-      switch (this.categoryId) {
-        case CategoriesTypes.UNCATEGORIZED:
-          this.recipesList = data.recipes.filter(recipe => !recipe.categories.length);
-          break;
-        case CategoriesTypes.ALL:
-          this.recipesList = data.recipes;
-          break;
-        case CategoriesTypes.FAVORITES:
-          this.recipesList = data.recipes.filter(recipe => recipe.isFavourite);
-          break;
-        default:
-          this.recipesList = data.recipes.filter(recipe => recipe.categories.includes(category.id));
-      }
+      this.recipesList = data.recipes.filter(
+        category.selector ?
+        category.selector :
+        (recipe: Recipe): boolean => recipe.categories.includes(category.id)
+      );
     });
   }
 }

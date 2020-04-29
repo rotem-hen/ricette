@@ -39,21 +39,6 @@ export const data = {
       id: 8,
       name: 'צמחוני',
       color: '#BEC6A4'
-    },
-    {
-      id: 0,
-      name: 'ללא קטגוריה',
-      color: '#b7b7b7'
-    },
-    {
-      id: 1000,
-      name: 'כל המתכונים',
-      color: '#b7b7b7'
-    },
-    {
-      id: 2000,
-      name: 'מועדפים',
-      color: '#b7b7b7'
     }
   ],
   recipes: [
