@@ -12,18 +12,6 @@
     text-align: center;
 }
 
-.navbar-item {
-    border: 1px solid;
-    line-height: 50px;
-    width: 130px;
-    margin: 0px 10px;
-}
-
-.selected {
-    color: white;
-    background-color: #515C5D;
-}
-
 .search-container {
     display: flex;
     flex-direction: row;
