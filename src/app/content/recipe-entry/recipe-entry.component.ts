@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { data } from '../../db';
 import { Router } from '@angular/router';
-import { Recipe } from './interface/recipe.interface';
+import { Recipe } from '../interface/recipe.interface';
 
 @Component({
   selector: 'app-recipe-entry',
