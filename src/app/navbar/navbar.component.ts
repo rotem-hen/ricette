@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  public menuShown = false;
+
+  public onMenuClick(): void {
+    this.menuShown = !this.menuShown;
+  }
+}
