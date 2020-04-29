@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { data } from '../../db';
 import { Router } from '@angular/router';
 import { Category } from '../interface/category.interface';
-import { categoryViews, CategoriesIds } from '../category-views/category-views';
+import { categoryViews } from '../category-views/category-views';
 
 @Component({
   selector: 'app-categories',
