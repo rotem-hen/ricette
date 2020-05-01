@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-button',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AddButtonComponent {
   public showPopover = false;
+
+  constructor(private modalService: NgbModal) {}
 
   public togglePopover(): void {
     this.showPopover = !this.showPopover;
@@ -22,4 +25,8 @@ export class AddButtonComponent {
     this.showPopover = !this.showPopover;
     document.removeEventListener('click', this.onOutsideClick);
   };
+
+  public openCategoryModal(newCategoryModal): void {
+    newCategoryModal.open();
+  }
 }
