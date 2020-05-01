@@ -2,9 +2,9 @@ import { Category } from '../interface/category.interface';
 import { Recipe } from '../interface/recipe.interface';
 
 export enum CategoriesIds {
-  UNCATEGORIZED = 0,
-  ALL = 1000,
-  FAVORITES = 2000
+  UNCATEGORIZED = '0',
+  ALL = '1000',
+  FAVORITES = '2000'
 }
 
 export const categoryViews: Category[] = [

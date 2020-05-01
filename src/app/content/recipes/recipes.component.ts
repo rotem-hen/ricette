@@ -12,14 +12,14 @@ import { Recipe } from '../interface/recipe.interface';
 })
 export class RecipesComponent implements OnInit {
   public categoryName = '';
-  public categoryId: number;
+  public categoryId: string;
   public recipesList: Recipe[];
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.categoryId = +params['cid'];
+      this.categoryId = params['cid'];
       const categories: Category[] = data.categories;
       const category = categories.concat(categoryViews).find(category => category.id === this.categoryId);
       this.categoryName = category.name;
