@@ -1,7 +1,9 @@
 <div class="popover-menu" [class.shown]="showPopover" [class.hidden]="!showPopover">
-    <button class="button">הוספת קטגוריה</button>
+    <button class="button" (click)="openCategoryModal(newCategoryModal)">הוספת קטגוריה</button>
     <button class="button">הוספת מתכון</button>
 </div>
 <i
 (click)='togglePopover()'
 class="fas fa-plus plus-icon"></i>
+
+<app-new-category-modal #newCategoryModal></app-new-category-modal>

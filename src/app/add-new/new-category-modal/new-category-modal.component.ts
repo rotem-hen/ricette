@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,35 +7,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./new-category-modal.component.css']
 })
 export class NewCategoryModalComponent {
-  closeResult: string;
+  @ViewChild('newCategoryModal') modalRef: ElementRef;
 
   constructor(private modalService: NgbModal) {}
 
-  openBackDropCustomClass(content) {
-    this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
-  }
-
-  openWindowCustomClass(content) {
-    this.modalService.open(content, { windowClass: 'dark-modal' });
-  }
-
-  openSm(content) {
-    this.modalService.open(content, { size: 'sm' });
-  }
-
-  openLg(content) {
-    this.modalService.open(content, { size: 'lg' });
-  }
-
-  openXl(content) {
-    this.modalService.open(content, { size: 'xl' });
-  }
-
-  openVerticallyCentered(content) {
-    this.modalService.open(content, { centered: true });
-  }
-
-  openScrollableContent(longContent) {
-    this.modalService.open(longContent, { scrollable: true });
+  public open(): void {
+    this.modalService.open(this.modalRef, { scrollable: true });
   }
 }
