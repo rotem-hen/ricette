@@ -14,7 +14,7 @@ export class RecipePageComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const recipeId = +this.route.snapshot.paramMap.get('rid');
+    const recipeId = this.route.snapshot.paramMap.get('rid');
     this.recipe = data.recipes.find(r => r.id === recipeId);
   }
 }

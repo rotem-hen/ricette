@@ -15,7 +15,7 @@ export class RecipeEntryComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const recipeCategoriesIds: number[] = this.recipe.categories;
+    const recipeCategoriesIds: string[] = this.recipe.categories;
     const recipeCategories = data.categories.filter(c => recipeCategoriesIds.includes(c.id));
     this.categoryColors = recipeCategories.map(c => c.color);
   }
