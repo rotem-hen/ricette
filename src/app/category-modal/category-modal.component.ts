@@ -1,15 +1,16 @@
 import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { data } from '../../db';
+import { data } from '../db';
 import { Recipe } from 'app/content/interface/recipe.interface';
+import * as uuid from 'uuid';
 
 @Component({
-  selector: 'app-new-category-modal',
-  templateUrl: './new-category-modal.component.html',
-  styleUrls: ['./new-category-modal.component.css']
+  selector: 'app-category-modal',
+  templateUrl: './category-modal.component.html',
+  styleUrls: ['./category-modal.component.css']
 })
-export class NewCategoryModalComponent implements OnInit {
-  @ViewChild('newCategoryModal') modalRef: ElementRef;
+export class CategoryModalComponent implements OnInit {
+  @ViewChild('categoryModal') modalRef: ElementRef;
   public categoryNameInput: string;
 
   options: {
@@ -28,7 +29,7 @@ export class NewCategoryModalComponent implements OnInit {
 
   public onOK(modal, categoryColor): void {
     modal.close('Ok click');
-    const id = 200;
+    const id: string = uuid.v4();
     data.categories.push({ id, name: this.categoryNameInput, color: categoryColor });
     data.recipes.forEach((recipe: Recipe) => {
       if (this.isRecipeSelected(recipe.id)) {

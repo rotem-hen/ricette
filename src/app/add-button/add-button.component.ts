@@ -26,7 +26,7 @@ export class AddButtonComponent {
     document.removeEventListener('click', this.onOutsideClick);
   };
 
-  public openCategoryModal(newCategoryModal): void {
-    newCategoryModal.open();
+  public openCategoryModal(categoryModal): void {
+    categoryModal.open();
   }
 }
