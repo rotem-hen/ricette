@@ -8,6 +8,7 @@ body {
     font-family: 'Jacqueline FM', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     height: 100%;
     margin: 0;
+    color: #515C5D;
     background-color: #fffaf5;
     text-align: right;
     direction: rtl;
@@ -25,6 +26,7 @@ body {
   font-family: 'Jacqueline FM', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 15px;
   cursor: pointer;
+  color: #515C5D;
 }
 
 button:focus {
