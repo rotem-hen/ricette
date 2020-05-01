@@ -1,0 +1,31 @@
+.modal-title {
+    width: 100%;
+}
+
+p {
+    text-decoration: underline;
+    margin-top: 16px;
+}
+
+.category-name-input {
+    width: 80%;
+}
+
+.form-recipes-checkboxes {
+    display: flex;
+    align-items: center;
+}
+
+.form-check-label {
+    margin: 5px 5px;
+    width: 85%;
+}
+
+.form-checkbox {
+    margin: 5px 5px;
+}
+
+.pick-color {
+    height: 100px;
+    width: 200px;
+}

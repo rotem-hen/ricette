@@ -2,17 +2,17 @@
   <i class="far fa-edit square-icon"></i>
   <app-navbar-items></app-navbar-items>
   <div class="search-container">
-    <input type="text" />
+    <input type="text" class="form-control" />
     <i class="fas fa-search square-icon"></i>
   </div>
 </nav>
 
 <nav class="narrow">
+  <i class="far fa-edit square-icon"></i>
+  <div class="search-container">
+    <input type="text" class="form-control" />
+    <i class="fas fa-search square-icon"></i>
+  </div>
   <i class="fas fa-bars square-icon" (click)="onMenuClick()"></i>
   <app-navbar-items *ngIf="menuShown"></app-navbar-items>
-  <div class="search-container">
-    <i class="fas fa-search square-icon"></i>
-    <input type="text" />
-  </div>
-  <i class="far fa-edit square-icon"></i>
 </nav>

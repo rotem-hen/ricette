@@ -10,10 +10,12 @@ import { ContentModule } from './content/content.module';
 import { NavbarItemsComponent } from './navbar-items/navbar-items.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewCategoryModalComponent } from './add-new/new-category-modal/new-category-modal.component';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { NewRecipeModalComponent } from './add-new/new-recipe-modal/new-recipe-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, AddButtonComponent, NavbarItemsComponent, NewCategoryModalComponent],
-  imports: [BrowserModule, FormsModule, FontAwesomeModule, ContentModule, NgbModule],
+  declarations: [AppComponent, NavbarComponent, AddButtonComponent, NavbarItemsComponent, NewCategoryModalComponent, NewRecipeModalComponent],
+  imports: [BrowserModule, FormsModule, FontAwesomeModule, ContentModule, NgbModule, ColorPickerModule],
   providers: [],
   bootstrap: [AppComponent]
 })
