@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryModalComponent } from './category-modal/category-modal.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
+import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ToastsContainerComponent } from './toasts-container/toasts-container.co
     AddButtonComponent,
     NavbarItemsComponent,
     CategoryModalComponent,
-    ToastsContainerComponent
+    ToastsContainerComponent,
+    RecipeModalComponent
   ],
   imports: [BrowserModule, FormsModule, FontAwesomeModule, ContentModule, NgbModule, ColorPickerModule],
   providers: [],

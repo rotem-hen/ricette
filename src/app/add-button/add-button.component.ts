@@ -29,4 +29,8 @@ export class AddButtonComponent {
   public openCategoryModal(categoryModal): void {
     categoryModal.open({});
   }
+
+  public openRecipeModal(recipeModal): void {
+    recipeModal.open({});
+  }
 }
