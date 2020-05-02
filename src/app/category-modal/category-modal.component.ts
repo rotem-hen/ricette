@@ -3,6 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { data } from '../db';
 import { Recipe } from 'app/content/interface/recipe.interface';
 import * as uuid from 'uuid';
+import { CategoryModalState } from './interface/category-modal-state.interface';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-category-modal',
@@ -11,26 +13,23 @@ import * as uuid from 'uuid';
 })
 export class CategoryModalComponent implements OnInit {
   @ViewChild('categoryModal') modalRef: ElementRef;
-  public categoryNameInput: string;
+  public state: CategoryModalState;
 
-  options: {
-    recipe: Recipe;
-    selected: boolean;
-  }[];
   constructor(private modalService: NgbModal) {}
 
   public ngOnInit(): void {
-    this.options = data.recipes.map(recipe => ({ recipe, selected: false }));
+    this.state = this.getInitislState();
   }
 
-  public open(): void {
+  public open(state: CategoryModalState): void {
+    this.state = state && !_.isEmpty(state) ? state : this.getInitislState();
     this.modalService.open(this.modalRef, { scrollable: true });
   }
 
-  public onOK(modal, categoryColor): void {
+  public onOK(modal): void {
     modal.close('Ok click');
     const id: string = uuid.v4();
-    data.categories.push({ id, name: this.categoryNameInput, color: categoryColor });
+    data.categories.push({ id, name: this.state.categoryNameInput, color: this.state.color });
     data.recipes.forEach((recipe: Recipe) => {
       if (this.isRecipeSelected(recipe.id)) {
         recipe.categories.push(id);
@@ -39,10 +38,18 @@ export class CategoryModalComponent implements OnInit {
   }
 
   public onCategoryNameInputChange(event): void {
-    this.categoryNameInput = event.target.value;
+    this.state.categoryNameInput = event.target.value;
   }
 
   private isRecipeSelected(id): boolean {
-    return this.options.find(o => o.recipe.id === id).selected;
+    return this.state.options.find(o => o.recipe.id === id).selected;
+  }
+
+  private getInitislState(): CategoryModalState {
+    return {
+      categoryNameInput: '',
+      color: '',
+      options: data.recipes.map(recipe => ({ recipe, selected: false }))
+    };
   }
 }

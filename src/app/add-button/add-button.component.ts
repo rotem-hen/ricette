@@ -27,6 +27,6 @@ export class AddButtonComponent {
   };
 
   public openCategoryModal(categoryModal): void {
-    categoryModal.open();
+    categoryModal.open({});
   }
 }
