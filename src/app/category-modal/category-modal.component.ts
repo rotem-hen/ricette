@@ -5,6 +5,7 @@ import { Recipe } from 'app/content/interface/recipe.interface';
 import * as uuid from 'uuid';
 import { CategoryModalState } from './interface/category-modal-state.interface';
 import _ from 'lodash';
+import { ToastService } from 'app/toast-service/toast.service';
 
 @Component({
   selector: 'app-category-modal',
@@ -15,7 +16,7 @@ export class CategoryModalComponent implements OnInit {
   @ViewChild('categoryModal') modalRef: ElementRef;
   public state: CategoryModalState;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, public toastService: ToastService) {}
 
   public ngOnInit(): void {
     this.state = this.getInitislState();
@@ -26,8 +27,11 @@ export class CategoryModalComponent implements OnInit {
     this.modalService.open(this.modalRef, { scrollable: true });
   }
 
-  public onOK(modal): void {
-    modal.close('Ok click');
+  public onOK(modal, errorToast): void {
+    if (!this.state.categoryNameInput || !this.state.color) {
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 3000 });
+      return;
+    }
     const id: string = uuid.v4();
     data.categories.push({ id, name: this.state.categoryNameInput, color: this.state.color });
     data.recipes.forEach((recipe: Recipe) => {
@@ -35,6 +39,7 @@ export class CategoryModalComponent implements OnInit {
         recipe.categories.push(id);
       }
     });
+    modal.close('Ok click');
   }
 
   public onCategoryNameInputChange(event): void {

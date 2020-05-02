@@ -1,3 +1,8 @@
+.ngb-toasts {
+    right: 20px;
+    top: 10px;
+}
+
 .modal-title {
     width: 100%;
 }
@@ -11,6 +16,19 @@ p {
     width: 80%;
 }
 
+.pick-color {
+    height: 100px;
+    width: 200px;
+}
+
+.add-recipes-to-category {
+    margin: 40px 0px;
+}
+
+.col {
+    padding: 0;
+}
+
 .form-recipes-checkboxes {
     display: flex;
     align-items: center;
@@ -19,13 +37,9 @@ p {
 .form-check-label {
     margin: 5px 5px;
     width: 85%;
+    text-align: right;
 }
 
 .form-checkbox {
     margin: 5px 5px;
-}
-
-.pick-color {
-    height: 100px;
-    width: 200px;
 }

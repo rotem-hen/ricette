@@ -1,4 +1,8 @@
- <ng-template #categoryModal let-modal>
+<ng-template #errorToast>
+  אנא בחרו שם וצבע לקטגוריה
+</ng-template>
+
+<ng-template #categoryModal let-modal>
     <div class="modal-header">
       <h4 class="modal-title">הוספת קטגוריה</h4>
       <button type="button" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -6,18 +10,26 @@
       </button>
     </div>
     <div class="modal-body">
+      <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
       <p>שם הקטגוריה:</p>
       <input #categoryName (keyup)="onCategoryNameInputChange($event)" type="text" class="form-control category-name-input" />
       <p>בחרו צבע רקע:</p>
       <button [cpPosition]="'bottom'" [(colorPicker)]="this.state.color" [style.background]="this.state.color" class="button pick-color">{{ categoryName.value || 'שם הקטגוריה' }}</button>
-      <p *ngIf="state.options.length">הוסיפו מתכונים לקטגוריה:</p>
-      <div class="form-recipes-checkboxes" *ngFor="let option of state.options">
-        <input class="form-checkbox" type="checkbox" [(ngModel)]="option.selected" />
-        <label class="form-check-label">{{ option.recipe.title }}</label>
+      <div class="row" *ngIf="state.options.length" class="add-recipes-to-category">
+        <div class="col">
+          <div ngbDropdown placement="bottom" class="d-inline-block">
+            <button class="btn btn-outline-primary" ngbDropdownToggle>הוסיפו מתכונים לקטגוריה</button>
+            <div ngbDropdownMenu>
+              <div class="form-recipes-checkboxes" *ngFor="let option of state.options">
+              <input class="form-checkbox" type="checkbox" [(ngModel)]="option.selected" />
+              <label class="form-check-label">{{ option.recipe.title }}</label>
+            </div></div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
-      <button type="button" class="btn btn-success" (click)="onOK(modal)" ngbAutofocus>אישור</button>
+      <button type="button" class="btn btn-success" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
     </div>
   </ng-template>
