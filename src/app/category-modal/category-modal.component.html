@@ -9,15 +9,15 @@
       <p>שם הקטגוריה:</p>
       <input #categoryName (keyup)="onCategoryNameInputChange($event)" type="text" class="form-control category-name-input" />
       <p>בחרו צבע רקע:</p>
-      <button [cpPosition]="'bottom'" [(colorPicker)]="categoryColor" [style.background]="categoryColor" class="button pick-color">{{ categoryName.value || 'שם הקטגוריה' }}</button>
-      <p *ngIf="options.length">הוסיפו מתכונים לקטגוריה:</p>
-      <div class="form-recipes-checkboxes" *ngFor="let option of options">
+      <button [cpPosition]="'bottom'" [(colorPicker)]="this.state.color" [style.background]="this.state.color" class="button pick-color">{{ categoryName.value || 'שם הקטגוריה' }}</button>
+      <p *ngIf="state.options.length">הוסיפו מתכונים לקטגוריה:</p>
+      <div class="form-recipes-checkboxes" *ngFor="let option of state.options">
         <input class="form-checkbox" type="checkbox" [(ngModel)]="option.selected" />
         <label class="form-check-label">{{ option.recipe.title }}</label>
       </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
-      <button type="button" class="btn btn-success" (click)="onOK(modal, categoryColor)" ngbAutofocus>אישור</button>
+      <button type="button" class="btn btn-success" (click)="onOK(modal)" ngbAutofocus>אישור</button>
     </div>
   </ng-template>
