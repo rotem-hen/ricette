@@ -11,9 +11,17 @@ import { NavbarItemsComponent } from './navbar-items/navbar-items.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryModalComponent } from './category-modal/category-modal.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, AddButtonComponent, NavbarItemsComponent, CategoryModalComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    AddButtonComponent,
+    NavbarItemsComponent,
+    CategoryModalComponent,
+    ToastsContainerComponent
+  ],
   imports: [BrowserModule, FormsModule, FontAwesomeModule, ContentModule, NgbModule, ColorPickerModule],
   providers: [],
   bootstrap: [AppComponent]
