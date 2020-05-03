@@ -1,0 +1,60 @@
+.ngb-toasts {
+    right: 20px;
+    top: 10px;
+}
+
+.modal-title {
+    width: 100%;
+}
+
+p {
+    text-decoration: underline;
+    margin-top: 16px;
+}
+
+.input-group input, .input-group textarea {
+    width: 80%;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.input-group .input-group-text {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    width: 100px;
+}
+
+.form-control {
+    box-sizing: border-box;
+}
+
+.add-categories-to-recipe {
+    margin: 40px 0px;
+}
+
+.col {
+    padding: 0;
+}
+
+.form-categories-checkboxes {
+    display: flex;
+    align-items: center;
+}
+
+.form-check-label {
+    margin: 5px 5px;
+    width: 85%;
+    text-align: right;
+}
+
+.form-checkbox {
+    margin: 5px 5px;
+}
+
+.ngx-img-container {
+    width: 80%;
+}

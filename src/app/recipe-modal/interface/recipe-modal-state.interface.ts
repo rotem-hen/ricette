@@ -5,6 +5,7 @@ export interface RecipeModalState {
   isFavourite: boolean;
   ingredients: string[];
   prep: string[];
+  image: string;
   options: {
     category: Category;
     selected: boolean;

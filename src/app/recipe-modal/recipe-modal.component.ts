@@ -31,13 +31,24 @@ export class RecipeModalComponent implements OnInit {
     modal.close('Ok click');
   }
 
-  /*public onCategoryNameInputChange(event): void {
-    this.state.categoryNameInput = event.target.value;
+  public onRecipeNameInputChange(event): void {
+    this.state.title = event.target.value;
   }
 
+  public onIngredientsInputChange(event): void {
+    this.state.ingredients = event.target.value;
+  }
+
+  public onPrepInputChange(event): void {
+    this.state.prep = event.target.value;
+  }
+
+  public onSelect(image) {
+    this.state.image = image;
+  }
   private isRecipeSelected(id): boolean {
-    return this.state.options.find(o => o.recipe.id === id).selected;
-  }*/
+    return this.state.options.find(o => o.category.id === id).selected;
+  }
 
   private getInitislState(): RecipeModalState {
     return {
@@ -45,6 +56,7 @@ export class RecipeModalComponent implements OnInit {
       isFavourite: false,
       ingredients: [],
       prep: [],
+      image: '',
       options: data.categories.map(category => ({ category, selected: false }))
     };
   }
