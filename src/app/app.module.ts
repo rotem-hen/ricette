@@ -13,6 +13,7 @@ import { CategoryModalComponent } from './category-modal/category-modal.componen
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
+import { NgxImgModule } from 'ngx-img';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,15 @@ import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
     ToastsContainerComponent,
     RecipeModalComponent
   ],
-  imports: [BrowserModule, FormsModule, FontAwesomeModule, ContentModule, NgbModule, ColorPickerModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    FontAwesomeModule,
+    ContentModule,
+    NgbModule,
+    ColorPickerModule,
+    NgxImgModule.forRoot()
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
