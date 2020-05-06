@@ -1,5 +1,5 @@
 <ng-template #errorToast>
-    אנא בחרו שם וצבע לקטגוריה
+    אנא בחרו שם למתכון
 </ng-template>
   
 <ng-template #recipeModal let-modal>
@@ -32,15 +32,15 @@
             <textarea (keyup)="onPrepInputChange($event)" type="text" class="form-control prep-input" rows="10"></textarea>
         </div>
 
-        <div class="form-is-favourite-checkboxe">
-            <input class="form-checkbox" type="checkbox" [(ngModel)]="state.isFavourite" />
-            <label class="form-check-label">הוסיפו למועדפים</label>
-        </div>
-
         <div class="ngx-img-container">
             <ngx-img (onSelect)="onSelect($event)" [config]="{ crop: [{ ratio: 1 }] }"></ngx-img>
         </div>
         
+        <div class="form-is-favourite-checkbox">
+            <input class="form-checkbox" type="checkbox" [(ngModel)]="state.isFavourite" />
+            <label class="form-check-label">הוספה למועדפים</label>
+        </div>
+
         <div class="row" *ngIf="state.options.length" class="add-categories-to-recipe">
             <div class="col">
                 <div ngbDropdown placement="bottom" class="d-inline-block">
