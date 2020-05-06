@@ -1,5 +1,5 @@
 <div class="recipe-entry" (click)="onRecipeClick()">
-    <img src="./assets/food.JPG" />
+    <img [src]="recipe.image || './assets/food.jpg'" />
     <span class="entry-title">{{ recipe.title }}</span>
 <span *ngFor="let i of categoryColors">
     <div class="category-color" style="background-color: {{ i }};"></div>

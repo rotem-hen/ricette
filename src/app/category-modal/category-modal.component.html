@@ -11,10 +11,20 @@
     </div>
     <div class="modal-body">
       <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
-      <p>שם הקטגוריה:</p>
-      <input #categoryName (keyup)="onCategoryNameInputChange($event)" type="text" class="form-control category-name-input" />
-      <p>בחרו צבע רקע:</p>
-      <button [cpPosition]="'bottom'" [(colorPicker)]="this.state.color" [style.background]="this.state.color" class="button pick-color">{{ categoryName.value || 'שם הקטגוריה' }}</button>
+      <div class="input-group mb-3">
+        <div class="input-group-append">
+            <span class="input-group-text">שם הקטגוריה</span>
+        </div>
+        <input #categoryName (keyup)="onCategoryNameInputChange($event)" type="text" class="form-control category-name-input" />
+      </div>
+      
+      <div class="input-group mb-3">
+        <div class="input-group-append">
+            <span class="input-group-text">צבע רקע</span>
+        </div>
+        <button [cpPosition]="'bottom'" [(colorPicker)]="this.state.color" [style.background]="this.state.color" class="button pick-color">{{ categoryName.value || 'שם הקטגוריה' }}</button>
+      </div>
+
       <div class="row" *ngIf="state.options.length" class="add-recipes-to-category">
         <div class="col">
           <div ngbDropdown placement="bottom" class="d-inline-block">

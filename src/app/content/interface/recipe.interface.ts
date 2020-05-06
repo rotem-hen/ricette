@@ -3,6 +3,7 @@ export interface Recipe {
   title: string;
   categories: string[];
   isFavourite: boolean;
-  ingredients: string[];
-  prep: string[];
+  ingredients: string;
+  prep: string;
+  image: string;
 }
