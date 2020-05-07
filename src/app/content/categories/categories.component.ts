@@ -3,7 +3,7 @@ import { data } from '../../db';
 import { Router } from '@angular/router';
 import { Category } from '../interface/category.interface';
 import { categoryViews } from '../category-views/category-views';
-import { EditModeService } from 'app/app-services/edit-mode-service/edit-mode.service';
+import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
 
 @Component({
   selector: 'app-categories',

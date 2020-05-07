@@ -9,6 +9,7 @@ import { RecipePageComponent } from './recipe-page/recipe-page.component';
 import { ContentComponent } from './content.component';
 import { ContentTitleComponent } from './content-title/content-title.component';
 import { RecipeEntryComponent } from './recipe-entry/recipe-entry.component';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RecipeEntryComponent } from './recipe-entry/recipe-entry.component';
     RecipeEntryComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
