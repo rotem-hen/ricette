@@ -4,7 +4,7 @@ import { data } from '../db';
 import * as uuid from 'uuid';
 import { RecipeModalState } from './interface/recipe-modal-state.interface';
 import _ from 'lodash';
-import { ToastService } from 'app/toast-service/toast.service';
+import { ToastService } from 'app/app-services/toast-service/toast.service';
 
 @Component({
   selector: 'app-recipe-modal',

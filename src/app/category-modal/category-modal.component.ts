@@ -5,7 +5,7 @@ import { Recipe } from 'app/content/interface/recipe.interface';
 import * as uuid from 'uuid';
 import { CategoryModalState } from './interface/category-modal-state.interface';
 import _ from 'lodash';
-import { ToastService } from 'app/toast-service/toast.service';
+import { ToastService } from 'app/app-services/toast-service/toast.service';
 
 @Component({
   selector: 'app-category-modal',

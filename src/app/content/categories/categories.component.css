@@ -3,6 +3,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-top: 30px;
 }
 
 .category {
@@ -11,4 +12,19 @@
     width: 40%;
     margin-top: 20px;
     font-size: 30px;
+    position: relative;
+    overflow: visible;
+}
+
+.x {
+    position: absolute;
+    border-radius: 45px;
+    right: -15px;
+    top: -15px;
+    font-size: 35px;
+    color: #d21448;
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+    background-color: #fffaf5;
 }
