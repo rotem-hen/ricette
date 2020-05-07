@@ -1,7 +1,8 @@
 import { Recipe } from 'app/content/interface/recipe.interface';
 
 export interface CategoryModalState {
-  categoryNameInput: string;
+  id: string;
+  name: string;
   color: string;
   options: {
     recipe: Recipe;

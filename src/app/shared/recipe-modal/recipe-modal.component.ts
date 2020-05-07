@@ -5,6 +5,7 @@ import * as uuid from 'uuid';
 import { RecipeModalState } from './interface/recipe-modal-state.interface';
 import _ from 'lodash';
 import { ToastService } from 'app/shared/toast-service/toast.service';
+import { EditModeService } from '../edit-mode-service/edit-mode.service';
 
 @Component({
   selector: 'app-recipe-modal',
@@ -15,15 +16,25 @@ export class RecipeModalComponent implements OnInit {
   @ViewChild('recipeModal') modalRef: ElementRef;
   public state: RecipeModalState;
 
-  constructor(private modalService: NgbModal, public toastService: ToastService) {}
+  constructor(
+    private modalService: NgbModal,
+    public toastService: ToastService,
+    private editModeService: EditModeService
+  ) {}
 
   public ngOnInit(): void {
-    this.state = this.getInitislState();
+    this.state = this.getInitialState();
   }
 
   public open(state: RecipeModalState): void {
-    this.state = state && !_.isEmpty(state) ? state : this.getInitislState();
-    this.modalService.open(this.modalRef, { scrollable: true });
+    this.state = state && !_.isEmpty(state) ? state : this.getInitialState();
+    this.modalService.open(this.modalRef, {
+      scrollable: true,
+      beforeDismiss: () => {
+        this.toastService.removeAll();
+        return true;
+      }
+    });
   }
 
   public onOK(modal, errorToast): void {
@@ -31,17 +42,14 @@ export class RecipeModalComponent implements OnInit {
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 3000 });
       return;
     }
-    const id: string = uuid.v4();
+
     const categories = this.state.options.filter(o => o.selected).map(o => o.category.id);
-    data.recipes.push({
-      id,
-      categories,
-      title: this.state.title,
-      isFavourite: this.state.isFavourite,
-      ingredients: this.state.ingredients,
-      prep: this.state.prep,
-      image: this.state.image
-    });
+    if (this.editModeService.isEditMode) {
+      const i = data.recipes.findIndex(r => r.id === this.state.id);
+      data.recipes[i] = { ...this.state, categories };
+    } else {
+      data.recipes.push({ ...this.state, categories });
+    }
     modal.close('Ok click');
   }
 
@@ -61,8 +69,9 @@ export class RecipeModalComponent implements OnInit {
     this.state.image = image;
   }
 
-  private getInitislState(): RecipeModalState {
+  private getInitialState(): RecipeModalState {
     return {
+      id: uuid.v4(),
       title: '',
       isFavourite: false,
       ingredients: '',
