@@ -8,32 +8,23 @@ import { AddButtonComponent } from './add-button/add-button.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContentModule } from './content/content.module';
 import { NavbarItemsComponent } from './navbar-items/navbar-items.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CategoryModalComponent } from './category-modal/category-modal.component';
-import { ColorPickerModule } from 'ngx-color-picker';
-import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
-import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
-import { NgxImgModule } from 'ngx-img';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     AddButtonComponent,
-    NavbarItemsComponent,
-    CategoryModalComponent,
-    ToastsContainerComponent,
-    RecipeModalComponent
+    NavbarItemsComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     FormsModule,
     FontAwesomeModule,
-    ContentModule,
-    NgbModule,
-    ColorPickerModule,
-    NgxImgModule.forRoot()
+    ContentModule
   ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,10 +1,10 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { data } from '../db';
+import { data } from '../../db';
 import * as uuid from 'uuid';
 import { RecipeModalState } from './interface/recipe-modal-state.interface';
 import _ from 'lodash';
-import { ToastService } from 'app/app-services/toast-service/toast.service';
+import { ToastService } from 'app/shared/toast-service/toast.service';
 
 @Component({
   selector: 'app-recipe-modal',
@@ -59,9 +59,6 @@ export class RecipeModalComponent implements OnInit {
 
   public onSelect(image): void {
     this.state.image = image;
-  }
-  private isRecipeSelected(id): boolean {
-    return this.state.options.find(o => o.category.id === id).selected;
   }
 
   private getInitislState(): RecipeModalState {

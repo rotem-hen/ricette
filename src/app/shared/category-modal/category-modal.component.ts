@@ -1,11 +1,11 @@
 import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { data } from '../db';
+import { data } from '../../db';
 import { Recipe } from 'app/content/interface/recipe.interface';
 import * as uuid from 'uuid';
 import { CategoryModalState } from './interface/category-modal-state.interface';
 import _ from 'lodash';
-import { ToastService } from 'app/app-services/toast-service/toast.service';
+import { ToastService } from 'app/shared/toast-service/toast.service';
 
 @Component({
   selector: 'app-category-modal',
