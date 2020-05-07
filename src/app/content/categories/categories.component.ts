@@ -3,6 +3,7 @@ import { data } from '../../db';
 import { Router } from '@angular/router';
 import { Category } from '../interface/category.interface';
 import { categoryViews } from '../category-views/category-views';
+import { EditModeService } from 'app/app-services/edit-mode-service/edit-mode.service';
 
 @Component({
   selector: 'app-categories',
@@ -11,8 +12,9 @@ import { categoryViews } from '../category-views/category-views';
 })
 export class CategoriesComponent implements OnInit {
   public categories: Category[];
+  public editMode: boolean;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private editService: EditModeService) {}
 
   ngOnInit(): void {
     this.categories = [
@@ -22,6 +24,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   onCategoryClick(category: Category): void {
-    this.router.navigate(['/categories', category.id]);
+    if (this.editService.isEditMode) {
+      //open modal for editing
+    } else {
+      this.router.navigate(['/categories', category.id]);
+    }
   }
 }
