@@ -24,10 +24,16 @@ export class CategoriesComponent implements OnInit {
   }
 
   onCategoryClick(category: Category): void {
-    if (this.editService.isEditMode) {
-      //open modal for editing
-    } else {
+    if (!this.editService.isEditMode) {
       this.router.navigate(['/categories', category.id]);
     }
+  }
+
+  onEditClick(category: Category, categoryModal): void {
+    categoryModal.open({});
+  }
+
+  onDeleteClick(category: Category): void {
+    const a = 0;
   }
 }

@@ -4,7 +4,16 @@
         class="category button"
         style="background: {{ i.color }}"
         (click)="onCategoryClick(i)">
-        <div *ngIf="editService.isEditMode" class="x"><i class="fas fa-times-circle"></i></div>
+        <i
+            *ngIf="editService.isEditMode"
+            class="x fas fa-times-circle"
+            (click)="onDeleteClick(i)"></i>
         {{ i.name }}
+        <i
+            *ngIf="editService.isEditMode"
+            class="edit-button far fa-edit square-icon"
+            (click)="onEditClick(i, categoryModal)"></i>
     </div>
 </div>
+
+<app-category-modal #categoryModal></app-category-modal>

@@ -23,8 +23,12 @@
     top: -15px;
     font-size: 35px;
     color: #d21448;
-    height: 35px;
-    width: 35px;
-    line-height: 35px;
     background-color: #fffaf5;
+}
+
+.edit-button {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    font-size: 25px;
 }
