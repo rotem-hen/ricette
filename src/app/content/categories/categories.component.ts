@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Category } from '../interface/category.interface';
 import { categoryViews } from '../category-views/category-views';
 import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
+import { CategoryModalState } from 'app/shared/category-modal/interface/category-modal-state.interface';
 
 @Component({
   selector: 'app-categories',
@@ -17,10 +18,7 @@ export class CategoriesComponent implements OnInit {
   constructor(private router: Router, private editService: EditModeService) {}
 
   ngOnInit(): void {
-    this.categories = [
-      ...data.categories, 
-      ...categoryViews.filter(c => !c.hidden)
-    ]
+    this.categories = [...data.categories, ...categoryViews.filter(c => !c.hidden)];
   }
 
   onCategoryClick(category: Category): void {
@@ -30,10 +28,18 @@ export class CategoriesComponent implements OnInit {
   }
 
   onEditClick(category: Category, categoryModal): void {
-    categoryModal.open({});
+    const state: CategoryModalState = {
+      id: category.id,
+      name: category.name,
+      color: category.color,
+      options: data.recipes.map(recipe => {
+        return { recipe, selected: recipe.categories.includes(category.id) };
+      })
+    };
+    categoryModal.open(state);
   }
 
   onDeleteClick(category: Category): void {
-    const a = 0;
+    data.categories = data.categories.filter(c => c.id !== category.id);
   }
 }
