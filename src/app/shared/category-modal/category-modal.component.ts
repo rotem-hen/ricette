@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { data } from '../../db';
 import { Recipe } from 'app/content/interface/recipe.interface';
@@ -13,10 +13,10 @@ import { EditModeService } from '../edit-mode-service/edit-mode.service';
   templateUrl: './category-modal.component.html',
   styleUrls: ['./category-modal.component.css']
 })
-export class CategoryModalComponent implements OnInit {
+export class CategoryModalComponent {
   @ViewChild('categoryModal') modalRef: ElementRef;
   public state: CategoryModalState;
-  public action = 'הוספת';
+  public action: string;
 
   constructor(
     private modalService: NgbModal,
@@ -24,15 +24,9 @@ export class CategoryModalComponent implements OnInit {
     private editModeService: EditModeService
   ) {}
 
-  public ngOnInit(): void {
-    this.state = this.getInitialState();
-  }
-
   public open(state: CategoryModalState): void {
-    if (state && !_.isEmpty(state)) {
-      this.state = state;
-      this.action = 'עריכת';
-    }
+    this.state = state && !_.isEmpty(state) ? state : this.getInitialState();
+    this.action = state && !_.isEmpty(state) ? 'עריכת' : 'הוספת';
     this.modalService.open(this.modalRef, {
       scrollable: true,
       beforeDismiss: () => {

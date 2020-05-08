@@ -2,5 +2,5 @@
 <app-recipe-entry *ngFor="let i of recipesList" [recipe]="i"></app-recipe-entry>
 <div class="no-recepies" *ngIf="!recipesList.length">
     <img src="./assets/cactus.png" />
-    <p>אין כאן <span *ngIf="categoryId">עדיין </span>מתכונים</p>
+    <p>אין כאן <span *ngIf="categoryId !== CategoriesIds.UNCATEGORIZED">עדיין </span>מתכונים</p>
 </div>
