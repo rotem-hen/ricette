@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { data } from '../../db';
 import { Router } from '@angular/router';
 import { Category } from '../interface/category.interface';
-import { categoryViews } from '../category-views/category-views';
+import { categoryViews, CategoriesIds } from '../category-views/category-views';
 import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
 import { CategoryModalState } from 'app/shared/category-modal/interface/category-modal-state.interface';
 
@@ -14,10 +14,11 @@ import { CategoryModalState } from 'app/shared/category-modal/interface/category
 export class CategoriesComponent implements OnInit {
   public categories: Category[];
   public editMode: boolean;
-
+  public CategoriesIds;
   constructor(private router: Router, private editService: EditModeService) {}
 
   ngOnInit(): void {
+    this.CategoriesIds = CategoriesIds;
     this.categories = [...data.categories, ...categoryViews.filter(c => !c.hidden)];
   }
 
@@ -41,5 +42,9 @@ export class CategoriesComponent implements OnInit {
 
   onDeleteClick(category: Category): void {
     data.categories = data.categories.filter(c => c.id !== category.id);
+    data.recipes = data.recipes.map(r => {
+      const newCategories = r.categories.filter(c => c !== category.id);
+      return { ...r, categories: newCategories };
+    });
   }
 }

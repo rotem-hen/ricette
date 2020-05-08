@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
 
 @Component({
   selector: 'app-add-button',
@@ -9,9 +9,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AddButtonComponent {
   public showPopover = false;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(public editModeService: EditModeService) {}
 
   public togglePopover(): void {
+    if (this.editModeService.isEditMode) return;
     this.showPopover = !this.showPopover;
     if (this.showPopover) {
       document.addEventListener('click', this.onOutsideClick);
