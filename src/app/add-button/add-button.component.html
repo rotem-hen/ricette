@@ -4,7 +4,7 @@
 </div>
 <i
 (click)='togglePopover()'
-class="fas fa-plus plus-icon"></i>
+class="fas fa-plus plus-icon" [class.disabled]="editModeService.isEditMode"></i>
 
 <app-category-modal #categoryModal></app-category-modal>
 <app-recipe-modal #recipeModal></app-recipe-modal>

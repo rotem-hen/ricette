@@ -5,12 +5,12 @@
         style="background: {{ i.color }}"
         (click)="onCategoryClick(i)">
         <i
-            *ngIf="editService.isEditMode"
+            *ngIf="editService.isEditMode && i.id != CategoriesIds.UNCATEGORIZED"
             class="x fas fa-times-circle"
             (click)="onDeleteClick(i)"></i>
         {{ i.name }}
         <i
-            *ngIf="editService.isEditMode"
+            *ngIf="editService.isEditMode && i.id != CategoriesIds.UNCATEGORIZED"
             class="edit-button far fa-edit square-icon"
             (click)="onEditClick(i, categoryModal)"></i>
     </div>

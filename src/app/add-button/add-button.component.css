@@ -41,3 +41,8 @@
     padding: 0;
     transition: all linear 180ms;
 }
+
+.disabled {
+    background-color: #b5b5b5;
+    border: 5px solid #b5b5b5;
+}
