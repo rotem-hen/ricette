@@ -15,6 +15,7 @@ import { EditModeService } from '../edit-mode-service/edit-mode.service';
 export class RecipeModalComponent implements OnInit {
   @ViewChild('recipeModal') modalRef: ElementRef;
   public state: RecipeModalState;
+  public action = 'הוספת';
 
   constructor(
     private modalService: NgbModal,
@@ -27,7 +28,10 @@ export class RecipeModalComponent implements OnInit {
   }
 
   public open(state: RecipeModalState): void {
-    this.state = state && !_.isEmpty(state) ? state : this.getInitialState();
+    if (state && !_.isEmpty(state)) {
+      this.state = state;
+      this.action = 'עריכת';
+    }
     this.modalService.open(this.modalRef, {
       scrollable: true,
       beforeDismiss: () => {
@@ -50,6 +54,7 @@ export class RecipeModalComponent implements OnInit {
     } else {
       data.recipes.push({ ...this.state, categories });
     }
+    this.editModeService.toggleEditMode(false);
     modal.close('Ok click');
   }
 
@@ -80,6 +85,4 @@ export class RecipeModalComponent implements OnInit {
       options: data.categories.map(category => ({ category, selected: false }))
     };
   }
-
-  //private 
 }

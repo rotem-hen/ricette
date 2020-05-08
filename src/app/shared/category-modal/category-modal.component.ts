@@ -16,18 +16,23 @@ import { EditModeService } from '../edit-mode-service/edit-mode.service';
 export class CategoryModalComponent implements OnInit {
   @ViewChild('categoryModal') modalRef: ElementRef;
   public state: CategoryModalState;
+  public action = 'הוספת';
 
   constructor(
     private modalService: NgbModal,
     public toastService: ToastService,
-    private editModeService: EditModeService) {}
+    private editModeService: EditModeService
+  ) {}
 
   public ngOnInit(): void {
     this.state = this.getInitialState();
   }
 
   public open(state: CategoryModalState): void {
-    this.state = state && !_.isEmpty(state) ? state : this.getInitialState();
+    if (state && !_.isEmpty(state)) {
+      this.state = state;
+      this.action = 'עריכת';
+    }
     this.modalService.open(this.modalRef, {
       scrollable: true,
       beforeDismiss: () => {
@@ -56,6 +61,7 @@ export class CategoryModalComponent implements OnInit {
         recipe.categories = recipe.categories.filter(c => c !== this.state.id);
       }
     });
+    this.editModeService.toggleEditMode(false);
     modal.close('Ok click');
   }
 

@@ -6,6 +6,7 @@
     flex-direction: row;
     align-items: center;
     background-color: rgb(237, 241, 241);
+    position: relative;
 }
 
 .recipe-entry img {
@@ -29,4 +30,21 @@
     border-radius: 45px;
     margin: 1px;
     border: 1px solid #515C5D;
+}
+
+.x {
+    position: absolute;
+    border-radius: 45px;
+    right: -5px;
+    top: -5px;
+    font-size: 30px;
+    color: #d21448;
+    background-color: #fffaf5;
+}
+
+.edit-button {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    font-size: 25px;
 }
