@@ -4,7 +4,7 @@
   
 <ng-template #recipeModal let-modal>
     <div class="modal-header">
-    <h4 class="modal-title">הוספת מתכון</h4>
+    <h4 class="modal-title">{{ action }} מתכון</h4>
     <button type="button" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -15,21 +15,21 @@
             <div class="input-group-append">
                 <span class="input-group-text">שם המתכון</span>
             </div>
-            <input (keyup)="onRecipeNameInputChange($event)" type="text" class="form-control recipe-name-input" />
+            <input [value]="state.title" (keyup)="onRecipeNameInputChange($event)" type="text" class="form-control recipe-name-input" />
         </div>
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">מצרכים</span>
             </div>
-            <textarea (keyup)="onIngredientsInputChange($event)" type="text" class="form-control ingredients-input" rows="5"></textarea>
+            <textarea [value]="state.ingredients" (keyup)="onIngredientsInputChange($event)" type="text" class="form-control ingredients-input" rows="5"></textarea>
         </div>
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">אופן הכנה</span>
             </div>
-            <textarea (keyup)="onPrepInputChange($event)" type="text" class="form-control prep-input" rows="10"></textarea>
+            <textarea [value]="state.prep" (keyup)="onPrepInputChange($event)" type="text" class="form-control prep-input" rows="10"></textarea>
         </div>
 
         <div class="ngx-img-container">

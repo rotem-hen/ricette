@@ -9,10 +9,10 @@ import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service'
 export class AddButtonComponent {
   public showPopover = false;
 
-  constructor(public editModeService: EditModeService) {}
+  constructor(private editModeService: EditModeService) {}
 
   public togglePopover(): void {
-    if (this.editModeService.isEditMode) return;
+    this.editModeService.toggleEditMode(false);
     this.showPopover = !this.showPopover;
     if (this.showPopover) {
       document.addEventListener('click', this.onOutsideClick);

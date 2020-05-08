@@ -1,7 +1,19 @@
 <div class="recipe-entry" (click)="onRecipeClick()">
     <img [src]="recipe.image || './assets/food.jpg'" />
-    <span class="entry-title">{{ recipe.title }}</span>
+    <span class="entry-title">
+        <i
+            *ngIf="editModeService.isEditMode"
+            class="x fas fa-times-circle"
+            (click)="onDeleteClick(recipe)"></i>
+        {{ recipe.title }}
+        <i
+            *ngIf="editModeService.isEditMode"
+            class="edit-button far fa-edit square-icon"
+            (click)="onEditClick(recipe, recipeModal)"></i>
+    </span>
 <span *ngFor="let i of categoryColors">
     <div class="category-color" style="background-color: {{ i }};"></div>
 </span>
 </div>
+
+<app-recipe-modal #recipeModal></app-recipe-modal>

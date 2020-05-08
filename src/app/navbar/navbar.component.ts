@@ -12,10 +12,15 @@ export class NavbarComponent {
   constructor(private editModeService: EditModeService) {}
 
   public onMenuClick(): void {
+    this.editModeService.toggleEditMode(false);
     this.menuShown = !this.menuShown;
   }
 
   public onEditClick(): void {
     this.editModeService.toggleEditMode();
+  }
+
+  public searchInputClick(): void {
+    this.editModeService.toggleEditMode(false);
   }
 }

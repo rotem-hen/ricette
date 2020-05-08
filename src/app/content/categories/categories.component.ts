@@ -5,6 +5,7 @@ import { Category } from '../interface/category.interface';
 import { categoryViews, CategoriesIds } from '../category-views/category-views';
 import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
 import { CategoryModalState } from 'app/shared/category-modal/interface/category-modal-state.interface';
+import { Scroller } from 'app/shared/scroll-top';
 
 @Component({
   selector: 'app-categories',
@@ -15,24 +16,23 @@ export class CategoriesComponent implements OnInit {
   public categories: Category[];
   public editMode: boolean;
   public CategoriesIds;
-  constructor(private router: Router, private editService: EditModeService) {}
+  constructor(private router: Router, private editModeService: EditModeService, private scroller: Scroller) {}
 
   ngOnInit(): void {
+    this.scroller.scrollTop();
     this.CategoriesIds = CategoriesIds;
     this.categories = [...data.categories, ...categoryViews.filter(c => !c.hidden)];
   }
 
   onCategoryClick(category: Category): void {
-    if (!this.editService.isEditMode) {
+    if (!this.editModeService.isEditMode) {
       this.router.navigate(['/categories', category.id]);
     }
   }
 
   onEditClick(category: Category, categoryModal): void {
     const state: CategoryModalState = {
-      id: category.id,
-      name: category.name,
-      color: category.color,
+      ...category,
       options: data.recipes.map(recipe => {
         return { recipe, selected: recipe.categories.includes(category.id) };
       })
