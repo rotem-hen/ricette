@@ -14,7 +14,7 @@ export class RecipeEntryComponent implements OnInit {
   @Input() recipe: Recipe;
 
   public categoryColors;
-  constructor(private router: Router, public editModeService: EditModeService) {}
+  constructor(private router: Router, public editService: EditModeService) {}
 
   ngOnInit(): void {
     const recipeCategoriesIds: string[] = this.recipe.categories;
@@ -23,22 +23,22 @@ export class RecipeEntryComponent implements OnInit {
   }
 
   onRecipeClick(): void {
-    if (!this.editModeService.isEditMode) {
+    if (!this.editService.isEditMode) {
       this.router.navigate(['recipes', this.recipe.id]);
     }
   }
 
-  onEditClick(recipe: Recipe, recipeModal): void {
+  onEditClick(recipeModal): void {
     const state: RecipeModalState = {
-      ...recipe,
+      ...this.recipe,
       options: data.categories.map(category => {
-        return { category, selected: recipe.categories.includes(category.id) };
+        return { category, selected: this.recipe.categories.includes(category.id) };
       })
     };
     recipeModal.open(state);
   }
 
-  onDeleteClick(recipe: Recipe): void {
-    data.recipes = data.recipes.filter(r => r.id !== recipe.id);
+  onDeleteClick(): void {
+    data.recipes = data.recipes.filter(r => r.id !== this.recipe.id);
   }
 }

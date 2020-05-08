@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { data } from '../../db';
-import { categoryViews } from '../category-views/category-views';
+import { categoryViews, CategoriesIds } from '../category-views/category-views';
 import { Category } from '../interface/category.interface';
 import { Recipe } from '../interface/recipe.interface';
 import { Scroller } from 'app/shared/scroll-top';
@@ -15,11 +15,13 @@ export class RecipesComponent implements OnInit {
   public categoryName = '';
   public categoryId: string;
   public recipesList: Recipe[];
+  public CategoriesIds;
 
   constructor(private route: ActivatedRoute, private scroller: Scroller) {}
 
   ngOnInit(): void {
     this.scroller.scrollTop();
+    this.CategoriesIds = CategoriesIds;
     this.route.params.subscribe((params: Params) => {
       this.categoryId = params['cid'];
       const categories: Category[] = data.categories;

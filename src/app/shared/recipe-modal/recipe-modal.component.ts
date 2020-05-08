@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { data } from '../../db';
 import * as uuid from 'uuid';
@@ -12,7 +12,7 @@ import { EditModeService } from '../edit-mode-service/edit-mode.service';
   templateUrl: './recipe-modal.component.html',
   styleUrls: ['./recipe-modal.component.css']
 })
-export class RecipeModalComponent implements OnInit {
+export class RecipeModalComponent {
   @ViewChild('recipeModal') modalRef: ElementRef;
   public state: RecipeModalState;
   public action = 'הוספת';
@@ -23,15 +23,9 @@ export class RecipeModalComponent implements OnInit {
     private editModeService: EditModeService
   ) {}
 
-  public ngOnInit(): void {
-    this.state = this.getInitialState();
-  }
-
   public open(state: RecipeModalState): void {
-    if (state && !_.isEmpty(state)) {
-      this.state = state;
-      this.action = 'עריכת';
-    }
+    this.state = state && !_.isEmpty(state) ? state : this.getInitialState();
+    this.action = state && !_.isEmpty(state) ? 'עריכת' : 'הוספת';
     this.modalService.open(this.modalRef, {
       scrollable: true,
       beforeDismiss: () => {
