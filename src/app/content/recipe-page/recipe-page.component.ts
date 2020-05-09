@@ -37,6 +37,19 @@ export class RecipePageComponent implements OnInit, OnDestroy {
     });
   }
 
+  public onWhatsappClick(): void {
+    let text = `${this.recipe.title}
+
+מצרכים:
+${this.recipe.ingredients}
+
+אופן הכנה:
+${this.recipe.prep}`;
+
+    text = encodeURI(text);
+    location.href = `whatsapp://send?text=${text}`;
+  }
+
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

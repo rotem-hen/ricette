@@ -21,3 +21,11 @@ li {
 .prep li {
     list-style-type: circle;
 }
+
+.share {
+    font-size: 50px;
+    margin: 20px;
+    bottom: 0;
+    position: absolute;
+    color: #038879;
+}
