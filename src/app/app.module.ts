@@ -7,15 +7,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AddButtonComponent } from './add-button/add-button.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContentModule } from './content/content.module';
-import { NavbarItemsComponent } from './navbar-items/navbar-items.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    AddButtonComponent,
-    NavbarItemsComponent
+    AddButtonComponent
   ],
   imports: [
     SharedModule,

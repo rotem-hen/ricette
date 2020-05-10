@@ -1,4 +1,4 @@
-.wide, .narrow {
+.navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -15,6 +15,7 @@
 .search-container {
     display: flex;
     flex-direction: row;
+    width: 60%;
 }
 
 .search-container input {
@@ -23,30 +24,8 @@
     width: 100%;
 }
 
-@media screen and (min-width: 815px) {
-    .wide {
-      display: flex;
-    }
-
-    .narrow {
-        display: none;
-    }
-
-    .search-container {
-        width: 30%;
-    }
-}
-
-@media screen and (max-width: 815px) {
-   .wide {
-        display: none;
-    }
-  
-    .narrow {
-        display: flex;
-    }
-
-    .search-container {
-        width: 70%;
-    }
+li {
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
