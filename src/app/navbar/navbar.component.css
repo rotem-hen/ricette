@@ -12,6 +12,10 @@
     text-align: center;
 }
 
+.navbar-toggler {
+    border: none;
+    color: #515C5D;
+}
 .search-container {
     display: flex;
     flex-direction: row;
