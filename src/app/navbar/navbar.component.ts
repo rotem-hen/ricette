@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
 import { Router } from '@angular/router';
 import { CategoriesIds } from '../content/category-views/category-views';
+import { SearchService } from 'app/shared/search-service/search.service';
 
 @Component({
   selector: 'app-navbar',
@@ -28,7 +29,7 @@ export class NavbarComponent {
     }
   ];
 
-  constructor(private router: Router, private editModeService: EditModeService) {}
+  constructor(private router: Router, private editModeService: EditModeService, public searchService: SearchService) {}
 
   public onMenuClick(): void {
     this.editModeService.toggleEditMode(false);
@@ -46,5 +47,12 @@ export class NavbarComponent {
     this.editModeService.toggleEditMode(false);
     this.collapsed = true;
     this.router.navigate(link);
+  }
+
+  public onSearchInputChange(event): void {
+    this.searchService.setSearchTerm(event.target.value);
+    if (this.router.url !== `/categories/${CategoriesIds.SEARCH_RESULTS}`) {
+      this.router.navigate(['/categories', CategoriesIds.SEARCH_RESULTS]);
+    }
   }
 }

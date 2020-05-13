@@ -7,7 +7,7 @@
 
 .square-icon {
     font-size: 30px;
-    width: 50px;
+    width: 48px;
     margin: 10px;
     text-align: center;
 }
@@ -15,7 +15,11 @@
 .navbar-toggler {
     border: none;
     color: #515C5D;
+    padding: 0;
 }
+
+
+
 .search-container {
     display: flex;
     flex-direction: row;

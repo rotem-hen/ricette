@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
   <i class="far fa-edit square-icon" (click)="onEditClick()"></i>
   <div class="search-container">
-    <input (click)="searchInputClick()" type="text" class="form-control" />
+    <input [(ngModel)]="this.searchService.searchTerm" (keyup)="onSearchInputChange($event)" (click)="searchInputClick()" type="text" class="form-control" />
     <i class="fas fa-search square-icon"></i>
   </div>
   <button class="navbar-toggler" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed" aria-label="Toggle navigation" (click)="collapsed = !collapsed">
