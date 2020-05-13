@@ -21,7 +21,6 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, public editMode: EditModeService, private scroller: Scroller) {}
 
   ngOnInit(): void {
-    this.scroller.scrollTop();
     const recipeId = this.route.snapshot.paramMap.get('rid');
     this.recipe = data.recipes.find(r => r.id === recipeId);
     this.editMode.editModeChange.pipe(takeUntil(this.destroy$)).subscribe((value: boolean) => {

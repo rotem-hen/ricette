@@ -5,7 +5,6 @@ import { Category } from '../interface/category.interface';
 import { categoryViews, CategoriesIds } from '../category-views/category-views';
 import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
 import { CategoryModalState } from 'app/shared/category-modal/interface/category-modal-state.interface';
-import { Scroller } from 'app/shared/scroll-top';
 
 @Component({
   selector: 'app-categories',
@@ -16,10 +15,10 @@ export class CategoriesComponent implements OnInit {
   public categories: Category[];
   public editMode: boolean;
   public CategoriesIds;
-  constructor(private router: Router, private editModeService: EditModeService, private scroller: Scroller) {}
+
+  constructor(private router: Router, private editModeService: EditModeService) {}
 
   ngOnInit(): void {
-    this.scroller.scrollTop();
     this.CategoriesIds = CategoriesIds;
     this.categories = [...data.categories, ...categoryViews.filter(c => !c.hidden)];
   }

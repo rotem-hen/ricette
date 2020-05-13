@@ -14,8 +14,6 @@ export class ContentTitleComponent {
   constructor(private _location: Location, private editModeService: EditModeService, private scroller: Scroller) {}
 
   public onBack(): void {
-    this.scroller.scrollTop();
-    this.editModeService.toggleEditMode(false);
     this._location.back();
   }
 }
