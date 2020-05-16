@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { data } from '../../db';
 import { categoryViews, CategoriesIds } from '../category-views/category-views';
@@ -6,18 +6,21 @@ import { Category } from '../interface/category.interface';
 import { Recipe } from '../interface/recipe.interface';
 import { Scroller } from 'app/shared/scroll-top';
 import { SearchService } from 'app/shared/search-service/search.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
-export class RecipesComponent implements OnInit {
+export class RecipesComponent implements OnInit, OnDestroy {
   public categoryName = '';
   public searchCategoryName = categoryViews.find(c => c.id === CategoriesIds.SEARCH_RESULTS).name;
   public categoryId: string;
   public recipesList: Recipe[];
   public CategoriesIds;
+  private destroy$ = new Subject();
 
   constructor(private route: ActivatedRoute, private scroller: Scroller, private searchService: SearchService) {}
 
@@ -36,7 +39,7 @@ export class RecipesComponent implements OnInit {
       if (this.categoryId === CategoriesIds.SEARCH_RESULTS) {
         this.applySearch(this.searchService.searchTerm);
 
-        this.searchService.searchTermChange.subscribe(value => {
+        this.searchService.searchTermChange.pipe(takeUntil(this.destroy$)).subscribe(value => {
           this.applySearch(value);
         });
       }
@@ -44,7 +47,13 @@ export class RecipesComponent implements OnInit {
   }
 
   private applySearch(value: string): void {
+    if (this.categoryId !== CategoriesIds.SEARCH_RESULTS) return;
     this.categoryName = `${this.searchCategoryName}: ${value}`;
     this.recipesList = data.recipes.filter(r => r.title.includes(value));
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
