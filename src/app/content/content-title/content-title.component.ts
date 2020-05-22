@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Location } from '@angular/common';
-import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
-import { Scroller } from 'app/shared/scroll-top';
 
 @Component({
   selector: 'app-content-title',
@@ -9,9 +7,9 @@ import { Scroller } from 'app/shared/scroll-top';
   styleUrls: ['./content-title.component.css']
 })
 export class ContentTitleComponent {
-  @Input() title;
+  @Input() title: string;
 
-  constructor(private _location: Location, private editModeService: EditModeService, private scroller: Scroller) {}
+  constructor(private _location: Location) {}
 
   public onBack(): void {
     this._location.back();

@@ -18,7 +18,6 @@ export class RecipeModalComponent {
   public state: RecipeModalState;
   public action = 'הוספת';
   private categoryList: Category[];
-  private recipeList: Recipe[];
 
   constructor(
     private modalService: NgbModal,
@@ -27,7 +26,6 @@ export class RecipeModalComponent {
     private dbService: DatabaseService
   ) {
     this.dbService.getCategories().subscribe(c => (this.categoryList = c));
-    this.dbService.getRecipes().subscribe(r => (this.recipeList = r));
   }
 
   public open(state: RecipeModalState): void {
@@ -48,11 +46,12 @@ export class RecipeModalComponent {
       return;
     }
 
-    const categories = this.state.options.filter(o => o.selected);
+    const categoryIds = this.state.options.filter(o => o.selected).map(o => o.category.id);
+    const categoryRefs = categoryIds.map(id => this.dbService.getCategoryRef(id));
     if (this.editModeService.isEditMode) {
-      this.dbService.editRecipe(this.state.id, { ..._.omit(this.state, 'options') });
+      this.dbService.editRecipe(this.state.id, { ..._.omit(this.state, 'options'), categories: categoryRefs });
     } else {
-      this.dbService.addRecipe({ ..._.omit(this.state, 'options'), categories });
+      this.dbService.addRecipe({ ..._.omit(this.state, 'options'), categories: categoryRefs });
     }
     this.editModeService.toggleEditMode(false);
     modal.close('Ok click');
