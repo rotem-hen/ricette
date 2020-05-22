@@ -39,7 +39,7 @@ export class CategoryModalComponent {
     });
   }
 
-  public onOK(modal, errorToast): void {
+  public async onOK(modal, errorToast): Promise<void> {
     if (!this.state.name || !this.state.color) {
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 3000 });
       return;
@@ -48,14 +48,14 @@ export class CategoryModalComponent {
     if (this.editModeService.isEditMode) {
       this.dbService.editCategory(this.state.id, this.state.name, this.state.color);
     } else {
-      this.dbService.addCategory(this.state.name, this.state.color);
+      this.state.id = await this.dbService.addCategory(this.state.name, this.state.color);
     }
 
     this.recipeList.forEach((recipe: Recipe) => {
       if (this.isRecipeSelected(recipe.id) && !recipe.categories.some(c => c.id === this.state.id)) {
-        recipe.categories.push({ id: this.state.id });
+        this.dbService.addCategoryToRecipe(recipe.id, this.state.id);
       } else if (!this.isRecipeSelected(recipe.id)) {
-        recipe.categories = recipe.categories.filter(c => c.id !== this.state.id);
+        this.dbService.removeCategoryFromRecipe(recipe.id, this.state.id);
       }
     });
 

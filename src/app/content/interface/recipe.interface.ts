@@ -1,7 +1,9 @@
+import { DocumentReference } from 'angularfire2/firestore';
+
 export interface Recipe {
   id?: string;
   title: string;
-  categories: { id: string }[];
+  categories: DocumentReference[];
   isFavourite: boolean;
   ingredients: string;
   prep: string;

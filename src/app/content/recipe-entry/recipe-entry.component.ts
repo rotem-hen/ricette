@@ -5,6 +5,7 @@ import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service'
 import { RecipeModalState } from 'app/shared/recipe-modal/interface/recipe-modal-state.interface';
 import { DatabaseService } from 'app/shared/database-service/database.service';
 import { Category } from '../interface/category.interface';
+import { DocumentReference } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-recipe-entry',
@@ -19,7 +20,7 @@ export class RecipeEntryComponent {
   constructor(private router: Router, public editService: EditModeService, private dbService: DatabaseService) {
     this.dbService.getCategories().subscribe(c => {
       this.categoryList = c;
-      const recipeCategoriesIds: { id: string }[] = this.recipe.categories;
+      const recipeCategoriesIds: DocumentReference[] = this.recipe.categories;
       const recipeCategories = this.categoryList.filter(c => recipeCategoriesIds.some(cat => cat.id === c.id));
       this.categoryColors = recipeCategories.map(c => c.color);
     });
