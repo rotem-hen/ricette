@@ -1,55 +1,58 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { data } from '../../db';
 import { categoryViews, CategoriesIds } from '../category-views/category-views';
-import { Category } from '../interface/category.interface';
 import { Recipe } from '../interface/recipe.interface';
-import { Scroller } from 'app/shared/scroll-top';
 import { SearchService } from 'app/shared/search-service/search.service';
-import { Subject } from 'rxjs';
+import { Subject, combineLatest } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DatabaseService } from 'app/shared/database-service/database.service';
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
-export class RecipesComponent implements OnInit, OnDestroy {
+export class RecipesComponent implements OnDestroy {
   public categoryName = '';
   public searchCategoryName = categoryViews.find(c => c.id === CategoriesIds.SEARCH_RESULTS).name;
   public categoryId: string;
-  public recipesList: Recipe[];
-  public CategoriesIds;
+  public recipeList: Recipe[];
+  private allRecipes: Recipe[];
+  public CategoriesIds = CategoriesIds;
   private destroy$ = new Subject();
 
-  constructor(private route: ActivatedRoute, private scroller: Scroller, private searchService: SearchService) {}
-
-  ngOnInit(): void {
-    this.CategoriesIds = CategoriesIds;
+  constructor(private route: ActivatedRoute, private searchService: SearchService, private dbService: DatabaseService) {
     this.route.params.subscribe((params: Params) => {
       this.categoryId = params['cid'];
-      const categories: Category[] = data.categories;
-      const category = categories.concat(categoryViews).find(category => category.id === this.categoryId);
-      this.categoryName = category.name;
+      combineLatest([this.dbService.getCategories(), this.dbService.getRecipes()])
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(([categories, recipes]) => {
+          const allCategories = categories.concat(categoryViews);
+          const category = allCategories.find(c => c.id === this.categoryId);
+          this.categoryName = category.name;
 
-      this.recipesList = data.recipes.filter(
-        category.selector ? category.selector : (recipe: Recipe): boolean => recipe.categories.includes(category.id)
-      );
+          this.allRecipes = recipes;
+          this.recipeList = recipes.filter(
+            category.selector
+              ? category.selector
+              : (recipe: Recipe): boolean => recipe.categories.some(c => c.id === category.id)
+          );
 
-      if (this.categoryId === CategoriesIds.SEARCH_RESULTS) {
-        this.applySearch(this.searchService.searchTerm);
+          if (this.categoryId === CategoriesIds.SEARCH_RESULTS) {
+            this.applySearch(this.searchService.searchTerm);
 
-        this.searchService.searchTermChange.pipe(takeUntil(this.destroy$)).subscribe(value => {
-          this.applySearch(value);
+            this.searchService.searchTermChange.pipe(takeUntil(this.destroy$)).subscribe(value => {
+              this.applySearch(value);
+            });
+          }
         });
-      }
     });
   }
 
   private applySearch(value: string): void {
     if (this.categoryId !== CategoriesIds.SEARCH_RESULTS) return;
     this.categoryName = `${this.searchCategoryName}: ${value}`;
-    this.recipesList = data.recipes.filter(r => r.title.includes(value));
+    this.recipeList = this.allRecipes.filter(r => r.title.includes(value));
   }
 
   public ngOnDestroy(): void {

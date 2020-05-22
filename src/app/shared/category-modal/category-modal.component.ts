@@ -1,12 +1,11 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { data } from '../../db';
 import { Recipe } from 'app/content/interface/recipe.interface';
-import * as uuid from 'uuid';
 import { CategoryModalState } from './interface/category-modal-state.interface';
 import _ from 'lodash';
 import { ToastService } from 'app/shared/toast-service/toast.service';
 import { EditModeService } from '../edit-mode-service/edit-mode.service';
+import { DatabaseService } from '../database-service/database.service';
 
 @Component({
   selector: 'app-category-modal',
@@ -17,12 +16,16 @@ export class CategoryModalComponent {
   @ViewChild('categoryModal') modalRef: ElementRef;
   public state: CategoryModalState;
   public action: string;
+  private recipeList: Recipe[];
 
   constructor(
     private modalService: NgbModal,
     public toastService: ToastService,
-    private editModeService: EditModeService
-  ) {}
+    private editModeService: EditModeService,
+    private dbService: DatabaseService
+  ) {
+    this.dbService.getRecipes().subscribe(r => (this.recipeList = r));
+  }
 
   public open(state: CategoryModalState): void {
     this.state = state && !_.isEmpty(state) ? state : this.getInitialState();
@@ -43,18 +46,19 @@ export class CategoryModalComponent {
     }
 
     if (this.editModeService.isEditMode) {
-      const i = data.categories.findIndex(c => c.id === this.state.id);
-      data.categories[i] = this.state;
+      this.dbService.editCategory(this.state.id, this.state.name, this.state.color);
     } else {
-      data.categories.push(this.state);
+      this.dbService.addCategory(this.state.name, this.state.color);
     }
-    data.recipes.forEach((recipe: Recipe) => {
-      if (this.isRecipeSelected(recipe.id) && !recipe.categories.includes(this.state.id)) {
-        recipe.categories.push(this.state.id);
+
+    this.recipeList.forEach((recipe: Recipe) => {
+      if (this.isRecipeSelected(recipe.id) && !recipe.categories.some(c => c.id === this.state.id)) {
+        recipe.categories.push({ id: this.state.id });
       } else if (!this.isRecipeSelected(recipe.id)) {
-        recipe.categories = recipe.categories.filter(c => c !== this.state.id);
+        recipe.categories = recipe.categories.filter(c => c.id !== this.state.id);
       }
     });
+
     this.editModeService.toggleEditMode(false);
     modal.close('Ok click');
   }
@@ -69,10 +73,9 @@ export class CategoryModalComponent {
 
   private getInitialState(): CategoryModalState {
     return {
-      id: uuid.v4(),
       name: '',
       color: '',
-      options: data.recipes.map(recipe => ({ recipe, selected: false }))
+      options: this.recipeList.map(recipe => ({ recipe, selected: false }))
     };
   }
 }

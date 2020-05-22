@@ -1,7 +1,7 @@
 import { Recipe } from './recipe.interface';
 
 export interface Category {
-  id: string;
+  id?: string;
   name: string;
   color: string;
   hidden?: boolean;
