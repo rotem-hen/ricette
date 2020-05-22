@@ -41,6 +41,7 @@ export class RecipeModalComponent {
   }
 
   public onOK(modal, errorToast): void {
+    modal.close('Ok click');
     if (!this.state.title) {
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 3000 });
       return;
@@ -54,7 +55,6 @@ export class RecipeModalComponent {
       this.dbService.addRecipe({ ..._.omit(this.state, 'options'), categories: categoryRefs });
     }
     this.editModeService.toggleEditMode(false);
-    modal.close('Ok click');
   }
 
   public onRecipeNameInputChange(event): void {
