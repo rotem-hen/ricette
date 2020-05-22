@@ -40,6 +40,7 @@ export class CategoryModalComponent {
   }
 
   public async onOK(modal, errorToast): Promise<void> {
+    modal.close('Ok click');
     if (!this.state.name || !this.state.color) {
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 3000 });
       return;
@@ -60,7 +61,6 @@ export class CategoryModalComponent {
     });
 
     this.editModeService.toggleEditMode(false);
-    modal.close('Ok click');
   }
 
   public onCategoryNameInputChange(event): void {
