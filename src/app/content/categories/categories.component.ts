@@ -42,6 +42,8 @@ export class CategoriesComponent {
   }
 
   onDeleteClick(category: Category): void {
-    this.dbService.deleteCategory(category.id);
+    if (confirm(`אתם בטוחים שתרצו למחוק את הקטגוריה ${category.name}?`)) {
+      this.dbService.deleteCategory(category.id);
+    }
   }
 }

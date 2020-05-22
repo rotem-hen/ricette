@@ -43,6 +43,8 @@ export class RecipeEntryComponent {
   }
 
   onDeleteClick(): void {
-    this.dbService.deleteRecipe(this.recipe.id);
+    if (confirm(`אתם בטוחים שתרצו למחוק את המתכון ${this.recipe.title}?`)) {
+      this.dbService.deleteRecipe(this.recipe.id);
+    }
   }
 }
