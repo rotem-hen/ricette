@@ -1,11 +1,12 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { data } from '../../db';
-import * as uuid from 'uuid';
 import { RecipeModalState } from './interface/recipe-modal-state.interface';
 import _ from 'lodash';
 import { ToastService } from 'app/shared/toast-service/toast.service';
 import { EditModeService } from '../edit-mode-service/edit-mode.service';
+import { DatabaseService } from '../database-service/database.service';
+import { Category } from 'app/content/interface/category.interface';
+import { Recipe } from 'app/content/interface/recipe.interface';
 
 @Component({
   selector: 'app-recipe-modal',
@@ -16,12 +17,18 @@ export class RecipeModalComponent {
   @ViewChild('recipeModal') modalRef: ElementRef;
   public state: RecipeModalState;
   public action = 'הוספת';
+  private categoryList: Category[];
+  private recipeList: Recipe[];
 
   constructor(
     private modalService: NgbModal,
     public toastService: ToastService,
-    private editModeService: EditModeService
-  ) {}
+    private editModeService: EditModeService,
+    private dbService: DatabaseService
+  ) {
+    this.dbService.getCategories().subscribe(c => (this.categoryList = c));
+    this.dbService.getRecipes().subscribe(r => (this.recipeList = r));
+  }
 
   public open(state: RecipeModalState): void {
     this.state = state && !_.isEmpty(state) ? state : this.getInitialState();
@@ -41,12 +48,11 @@ export class RecipeModalComponent {
       return;
     }
 
-    const categories = this.state.options.filter(o => o.selected).map(o => o.category.id);
+    const categories = this.state.options.filter(o => o.selected);
     if (this.editModeService.isEditMode) {
-      const i = data.recipes.findIndex(r => r.id === this.state.id);
-      data.recipes[i] = { ...this.state, categories };
+      this.dbService.editRecipe(this.state.id, { ..._.omit(this.state, 'options') });
     } else {
-      data.recipes.push({ ...this.state, categories });
+      this.dbService.addRecipe({ ..._.omit(this.state, 'options'), categories });
     }
     this.editModeService.toggleEditMode(false);
     modal.close('Ok click');
@@ -70,13 +76,12 @@ export class RecipeModalComponent {
 
   private getInitialState(): RecipeModalState {
     return {
-      id: uuid.v4(),
       title: '',
       isFavourite: false,
       ingredients: '',
       prep: '',
       image: '',
-      options: data.categories.map(category => ({ category, selected: false }))
+      options: this.categoryList.map(category => ({ category, selected: false }))
     };
   }
 }

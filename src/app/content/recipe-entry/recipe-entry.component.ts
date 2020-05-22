@@ -1,25 +1,28 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { data } from '../../db';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
 import { RecipeModalState } from 'app/shared/recipe-modal/interface/recipe-modal-state.interface';
+import { DatabaseService } from 'app/shared/database-service/database.service';
+import { Category } from '../interface/category.interface';
 
 @Component({
   selector: 'app-recipe-entry',
   templateUrl: './recipe-entry.component.html',
   styleUrls: ['./recipe-entry.component.css']
 })
-export class RecipeEntryComponent implements OnInit {
+export class RecipeEntryComponent {
   @Input() recipe: Recipe;
+  private categoryList: Category[];
+  public categoryColors: string[];
 
-  public categoryColors;
-  constructor(private router: Router, public editService: EditModeService) {}
-
-  ngOnInit(): void {
-    const recipeCategoriesIds: string[] = this.recipe.categories;
-    const recipeCategories = data.categories.filter(c => recipeCategoriesIds.includes(c.id));
-    this.categoryColors = recipeCategories.map(c => c.color);
+  constructor(private router: Router, public editService: EditModeService, private dbService: DatabaseService) {
+    this.dbService.getCategories().subscribe(c => {
+      this.categoryList = c;
+      const recipeCategoriesIds: { id: string }[] = this.recipe.categories;
+      const recipeCategories = this.categoryList.filter(c => recipeCategoriesIds.some(cat => cat.id === c.id));
+      this.categoryColors = recipeCategories.map(c => c.color);
+    });
   }
 
   onRecipeClick(): void {
@@ -31,14 +34,14 @@ export class RecipeEntryComponent implements OnInit {
   onEditClick(recipeModal): void {
     const state: RecipeModalState = {
       ...this.recipe,
-      options: data.categories.map(category => {
-        return { category, selected: this.recipe.categories.includes(category.id) };
+      options: this.categoryList.map(category => {
+        return { category, selected: this.recipe.categories.some(c => c.id === category.id) };
       })
     };
     recipeModal.open(state);
   }
 
   onDeleteClick(): void {
-    data.recipes = data.recipes.filter(r => r.id !== this.recipe.id);
+    this.dbService.deleteRecipe(this.recipe.id);
   }
 }
