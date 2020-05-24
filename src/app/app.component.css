@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+.main-container {
+    width: 100%;
+}
+
 app-navbar {
     position: fixed;
     top: 0;

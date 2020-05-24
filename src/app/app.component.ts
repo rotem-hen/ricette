@@ -5,6 +5,7 @@ import { EditModeService } from './shared/edit-mode-service/edit-mode.service';
 import { Scroller } from './shared/scroll-top';
 import { SearchService } from './shared/search-service/search.service';
 import { takeUntil } from 'rxjs/operators';
+import { AuthService } from './shared/auth-service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent implements OnDestroy {
     private router: Router,
     private editModeService: EditModeService,
     private scroller: Scroller,
-    private searchService: SearchService
+    private searchService: SearchService,
+    public authService: AuthService
   ) {
     router.events.pipe(takeUntil(this.destroy$)).subscribe(val => {
       if (val instanceof NavigationEnd) {
