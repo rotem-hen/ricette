@@ -12,6 +12,9 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { RouterModule } from '@angular/router';
+import { ContentComponent } from './content/content.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +30,16 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ContentModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    RouterModule.forRoot([
+      { path: 'categories', component: ContentComponent },
+      { path: 'login', component: AppComponent },
+      { path: '', component: AppComponent },
+      { path: '**', component: AppComponent }
+    ])
   ],
   exports: [],
-  providers: [AngularFirestore],
+  providers: [AngularFirestore, AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

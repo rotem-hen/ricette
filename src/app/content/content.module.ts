@@ -10,6 +10,7 @@ import { ContentComponent } from './content.component';
 import { ContentTitleComponent } from './content-title/content-title.component';
 import { RecipeEntryComponent } from './recipe-entry/recipe-entry.component';
 import { SharedModule } from 'app/shared/shared.module';
+import { AuthGuard } from 'app/shared/auth-guard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -25,11 +26,9 @@ import { SharedModule } from 'app/shared/shared.module';
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: 'recipes/:rid', component: RecipePageComponent },
-      { path: 'categories/:cid', component: RecipesComponent },
-      { path: 'categories', component: CategoriesComponent },
-      { path: '', component: CategoriesComponent },
-      { path: '**', component: CategoriesComponent }
+      { path: 'recipes/:rid', component: RecipePageComponent, canActivate: [AuthGuard] },
+      { path: 'categories/:cid', component: RecipesComponent, canActivate: [AuthGuard] },
+      { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] }
     ])
   ],
   exports: [ContentComponent, ContentTitleComponent],
