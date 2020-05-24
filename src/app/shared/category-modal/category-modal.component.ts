@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Recipe } from 'app/content/interface/recipe.interface';
 import { CategoryModalState } from './interface/category-modal-state.interface';
-import _ from 'lodash';
+import { isEmpty, omit } from 'lodash';
 import { ToastService } from 'app/shared/toast-service/toast.service';
 import { EditModeService } from '../edit-mode-service/edit-mode.service';
 import { DatabaseService } from '../database-service/database.service';
@@ -28,8 +28,8 @@ export class CategoryModalComponent {
   }
 
   public open(state: CategoryModalState): void {
-    this.state = state && !_.isEmpty(state) ? state : this.getInitialState();
-    this.action = state && !_.isEmpty(state) ? 'עריכת' : 'הוספת';
+    this.state = state && !isEmpty(state) ? state : this.getInitialState();
+    this.action = state && !isEmpty(state) ? 'עריכת' : 'הוספת';
     this.modalService.open(this.modalRef, {
       scrollable: true,
       beforeDismiss: () => {
@@ -47,9 +47,9 @@ export class CategoryModalComponent {
     }
 
     if (this.editModeService.isEditMode) {
-      this.dbService.editCategory(this.state.id, this.state.name, this.state.color);
+      this.dbService.editCategory(omit(this.state, 'options'));
     } else {
-      this.state.id = await this.dbService.addCategory(this.state.name, this.state.color);
+      this.state.id = await this.dbService.addCategory(omit(this.state, 'options'));
     }
 
     this.recipeList.forEach((recipe: Recipe) => {

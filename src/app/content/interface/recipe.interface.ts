@@ -1,7 +1,7 @@
 import { DocumentReference } from 'angularfire2/firestore';
 
 export interface Recipe {
-  uid?: DocumentReference;
+  uid?: string;
   id?: string;
   title: string;
   categories: DocumentReference[];

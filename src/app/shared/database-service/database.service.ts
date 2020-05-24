@@ -4,6 +4,7 @@ import { Category } from 'app/content/interface/category.interface';
 import { Recipe } from 'app/content/interface/recipe.interface';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { AuthService } from '../auth-service/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ export class DatabaseService {
   public categories$: AngularFirestoreCollection<Category>;
   public recipes$: AngularFirestoreCollection<Recipe>;
 
-  constructor(private firestore: AngularFirestore) {
-    this.categories$ = firestore.collection<Category>('categories');
-    this.recipes$ = firestore.collection<Recipe>('recipes');
+  constructor(private firestore: AngularFirestore, private authService: AuthService) {
+    this.categories$ = firestore.collection<Category>('categories', ref => ref.where('uid', '==', authService.loggedInUserId));
+    this.recipes$ = firestore.collection<Recipe>('recipes', ref => ref.where('uid', '==', authService.loggedInUserId));
   }
 
   public getCategories(): Observable<Category[]> {
@@ -25,7 +26,7 @@ export class DatabaseService {
     return this.recipes$.valueChanges({ idField: 'id' });
   }
 
-  public editCategory(id: string, name: string, color: string): void {
+  public editCategory({ id, name, color }: Category): void {
     this.categories$.doc(id).update({ name, color });
   }
 
@@ -33,14 +34,14 @@ export class DatabaseService {
     this.recipes$.doc(id).update({ ...recipe });
   }
 
-  public async addCategory(name: string, color: string): Promise<string> {
-    const newCategoryRef = await this.categories$.add({ name, color });
-    return new Promise(resolve => resolve(newCategoryRef.id));
+  public async addCategory(category: Category): Promise<string> {
+    const { id } = await this.categories$.add({ ...category, uid: this.authService.loggedInUserId });
+    return id;
   }
 
   public async addRecipe(recipe: Recipe): Promise<string> {
-    const newRecipeRef = await this.recipes$.add({ ...recipe });
-    return new Promise(resolve => resolve(newRecipeRef.id));
+    const { id } = await this.recipes$.add({ ...recipe, uid: this.authService.loggedInUserId });
+    return id;
   }
 
   public deleteCategory(id: string): void {
@@ -59,7 +60,7 @@ export class DatabaseService {
     this.recipes$.doc(id).delete();
   }
 
-  public addCategoryToRecipe(recipeId, categoryId): void {
+  public addCategoryToRecipe(recipeId: string, categoryId: string): void {
     const categoryRef = this.getCategoryRef(categoryId);
     this.recipes$
       .doc(recipeId)
@@ -72,7 +73,7 @@ export class DatabaseService {
       });
   }
 
-  public removeCategoryFromRecipe(recipeId, categoryId): void {
+  public removeCategoryFromRecipe(recipeId: string, categoryId: string): void {
     this.recipes$
       .doc(recipeId)
       .get()
