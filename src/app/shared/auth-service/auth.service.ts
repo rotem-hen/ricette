@@ -16,10 +16,18 @@ interface User {
 })
 export class AuthService {
   user$: Observable<User>;
+  loggedInUserId: string;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
     this.user$ = afAuth.authState.pipe(
-      switchMap(user => (user ? afs.doc<User>(`users/${user.uid}`).valueChanges() : of(null)))
+      switchMap(user => {
+        if (user) {
+          this.loggedInUserId = user.uid;
+          return afs.doc<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
     );
   }
 

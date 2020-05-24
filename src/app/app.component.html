@@ -1,14 +1,9 @@
-<div class="app">
-    <div *ngIf="authService.user$ | async as user; else login" class="main-container">
-        <pre>{{ user | json }}</pre>
-        <hr>
-        <button class="button" (click)="authService.signOut()">Sign Out</button>
-        <app-navbar></app-navbar>
-        <app-content></app-content>
-        <app-add-button></app-add-button>
-    </div>
-
-    <ng-template #login>
-        <button class="button" (click)="authService.googleSignin()">Login with Google</button>
-    </ng-template>
+<div *ngIf="authService.user$ | async as user; else login" class="main-container">
+    <app-navbar></app-navbar>
+    <app-content></app-content>
+    <app-add-button></app-add-button>
 </div>
+
+<ng-template #login>
+    <button class="button" (click)="authService.googleSignin()">Login with Google</button>
+</ng-template>

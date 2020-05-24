@@ -1,13 +1,10 @@
-.app {
+.main-container {
+    width: 100%;
     color: #515C5D;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.main-container {
-    width: 100%;
 }
 
 app-navbar {

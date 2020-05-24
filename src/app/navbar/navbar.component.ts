@@ -3,6 +3,7 @@ import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service'
 import { Router } from '@angular/router';
 import { CategoriesIds } from '../content/category-views/category-views';
 import { SearchService } from 'app/shared/search-service/search.service';
+import { AuthService } from 'app/shared/auth-service/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,7 +30,12 @@ export class NavbarComponent {
     }
   ];
 
-  constructor(private router: Router, private editModeService: EditModeService, public searchService: SearchService) {}
+  constructor(
+    private router: Router,
+    private editModeService: EditModeService,
+    public searchService: SearchService,
+    public authService: AuthService
+  ) {}
 
   public onMenuClick(): void {
     this.editModeService.toggleEditMode(false);
