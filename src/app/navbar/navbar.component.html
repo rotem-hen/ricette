@@ -15,7 +15,11 @@
           {{ i.text }}
         </a>
       </li>
-      <li><button class="button" (click)="authService.signOut()">Sign Out</button></li>
+      <li class="nav-item" ngbDropdown>
+        <a class="nav-link" style="cursor: pointer" ngbDropdownToggle role="button" (click)="authService.signOut()">
+          <i class="fas fa-sign-out-alt nav-link"></i>
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
