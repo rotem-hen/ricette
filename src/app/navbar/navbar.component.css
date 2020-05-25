@@ -5,6 +5,10 @@
     width: 100%;
 }
 
+.bg-light {
+    background-color: #edf1f1 !important;
+}
+
 .square-icon {
     font-size: 30px;
     width: 48px;
@@ -12,13 +16,15 @@
     text-align: center;
 }
 
+.fa-sign-out-alt {
+    font-size: 30px;
+}
+
 .navbar-toggler {
     border: none;
     color: #515C5D;
     padding: 0;
 }
-
-
 
 .search-container {
     display: flex;
@@ -36,4 +42,11 @@ li {
     display: flex;
     align-items: center;
     text-align: center;
+}
+
+@media (min-width: 768px)
+{
+    li {
+        border-right: 1px solid #dadada;
+    }
 }

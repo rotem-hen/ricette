@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: rgb(237, 241, 241);
+    background-color: #edf1f1;
     position: relative;
 }
 
