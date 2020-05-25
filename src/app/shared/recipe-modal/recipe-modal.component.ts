@@ -41,12 +41,12 @@ export class RecipeModalComponent {
   }
 
   public onOK(modal, errorToast): void {
-    modal.close('Ok click');
     if (!this.state.title) {
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 3000 });
       return;
     }
 
+    modal.close('Ok click');
     const categoryIds = this.state.options.filter(o => o.selected).map(o => o.category.id);
     const categoryRefs = categoryIds.map(id => this.dbService.getCategoryRef(id));
     if (this.editModeService.isEditMode) {
