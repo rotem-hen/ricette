@@ -10,7 +10,7 @@ import { ToastService } from '../toast-service/toast.service';
 export class ToastsContainerComponent {
   constructor(public toastService: ToastService) {}
 
-  isTemplate(toast): boolean {
+  public isTemplate(toast): boolean {
     return toast.textOrTpl instanceof TemplateRef;
   }
 }

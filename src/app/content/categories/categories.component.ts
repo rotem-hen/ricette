@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '../interface/category.interface';
 import { categoryViews, CategoriesIds } from '../category-views/category-views';
@@ -12,26 +12,28 @@ import { DatabaseService } from 'app/shared/database-service/database.service';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
-export class CategoriesComponent {
+export class CategoriesComponent implements OnInit {
   public categoryList: Category[];
   public recipeList: Recipe[];
   public editMode: boolean;
   public CategoriesIds;
 
-  constructor(private router: Router, private editModeService: EditModeService, private dbService: DatabaseService) {
+  constructor(private router: Router, private editModeService: EditModeService, private dbService: DatabaseService) {}
+
+  public ngOnInit(): void {
     this.CategoriesIds = CategoriesIds;
     const additionalViews = categoryViews.filter(c => !c.hidden);
     this.dbService.getCategories().subscribe(c => (this.categoryList = c.concat(additionalViews)));
     this.dbService.getRecipes().subscribe(r => (this.recipeList = r));
   }
 
-  onCategoryClick(category: Category): void {
+  public onCategoryClick(category: Category): void {
     if (!this.editModeService.isEditMode) {
       this.router.navigate(['/categories', category.id]);
     }
   }
 
-  onEditClick(category: Category, categoryModal): void {
+  public onEditClick(category: Category, categoryModal): void {
     const state: CategoryModalState = {
       ...category,
       options: this.recipeList.map(recipe => {
@@ -41,7 +43,7 @@ export class CategoriesComponent {
     categoryModal.open(state);
   }
 
-  onDeleteClick(category: Category): void {
+  public onDeleteClick(category: Category): void {
     if (confirm(`אתם בטוחים שתרצו למחוק את הקטגוריה ${category.name}?`)) {
       this.dbService.deleteCategory(category.id);
     }

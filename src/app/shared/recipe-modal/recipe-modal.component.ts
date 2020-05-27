@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RecipeModalState } from './interface/recipe-modal-state.interface';
 import { omit, isEmpty } from 'lodash';
@@ -6,14 +6,13 @@ import { ToastService } from 'app/shared/toast-service/toast.service';
 import { EditModeService } from '../edit-mode-service/edit-mode.service';
 import { DatabaseService } from '../database-service/database.service';
 import { Category } from 'app/content/interface/category.interface';
-import { Recipe } from 'app/content/interface/recipe.interface';
 
 @Component({
   selector: 'app-recipe-modal',
   templateUrl: './recipe-modal.component.html',
   styleUrls: ['./recipe-modal.component.css']
 })
-export class RecipeModalComponent {
+export class RecipeModalComponent implements OnInit {
   @ViewChild('recipeModal') modalRef: ElementRef;
   public state: RecipeModalState;
   public action = 'הוספת';
@@ -21,10 +20,12 @@ export class RecipeModalComponent {
 
   constructor(
     private modalService: NgbModal,
-    public toastService: ToastService,
+    private toastService: ToastService,
     private editModeService: EditModeService,
     private dbService: DatabaseService
-  ) {
+  ) {}
+
+  public ngOnInit(): void {
     this.dbService.getCategories().subscribe(c => (this.categoryList = c));
   }
 

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Recipe } from 'app/content/interface/recipe.interface';
 import { CategoryModalState } from './interface/category-modal-state.interface';
@@ -12,7 +12,7 @@ import { DatabaseService } from '../database-service/database.service';
   templateUrl: './category-modal.component.html',
   styleUrls: ['./category-modal.component.css']
 })
-export class CategoryModalComponent {
+export class CategoryModalComponent implements OnInit {
   @ViewChild('categoryModal') modalRef: ElementRef;
   public state: CategoryModalState;
   public action: string;
@@ -20,10 +20,12 @@ export class CategoryModalComponent {
 
   constructor(
     private modalService: NgbModal,
-    public toastService: ToastService,
+    private toastService: ToastService,
     private editModeService: EditModeService,
     private dbService: DatabaseService
-  ) {
+  ) {}
+
+  public ngOnInit(): void {
     this.dbService.getRecipes().subscribe(r => (this.recipeList = r));
   }
 

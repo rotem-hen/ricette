@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
@@ -12,12 +12,14 @@ import { DatabaseService } from 'app/shared/database-service/database.service';
   templateUrl: './recipe-page.component.html',
   styleUrls: ['./recipe-page.component.css']
 })
-export class RecipePageComponent implements OnDestroy {
+export class RecipePageComponent implements OnInit, OnDestroy {
   @ViewChild('recipeModal') recipeModalRef;
   public recipe: Recipe;
   private destroy$ = new Subject();
 
-  constructor(private route: ActivatedRoute, public editMode: EditModeService, private dbService: DatabaseService) {
+  constructor(private route: ActivatedRoute, private editMode: EditModeService, private dbService: DatabaseService) {}
+
+  public ngOnInit(): void {
     combineLatest([this.dbService.getCategories(), this.dbService.getRecipes()])
       .pipe(takeUntil(this.destroy$))
       .subscribe(([categories, recipes]) => {
