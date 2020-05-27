@@ -14,7 +14,7 @@ export class SearchService {
     });
   }
 
-  public setSearchTerm(value): void {
+  public setSearchTerm(value: string): void {
     this.searchTermChange.next(value);
   }
 }

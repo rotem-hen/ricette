@@ -14,7 +14,9 @@ export class DatabaseService {
   public recipes$: AngularFirestoreCollection<Recipe>;
 
   constructor(private firestore: AngularFirestore, private authService: AuthService) {
-    this.categories$ = firestore.collection<Category>('categories', ref => ref.where('uid', '==', authService.loggedInUserId));
+    this.categories$ = firestore.collection<Category>('categories', ref =>
+      ref.where('uid', '==', authService.loggedInUserId)
+    );
     this.recipes$ = firestore.collection<Recipe>('recipes', ref => ref.where('uid', '==', authService.loggedInUserId));
   }
 

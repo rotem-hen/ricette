@@ -17,11 +17,7 @@ import { RouterModule } from '@angular/router';
 import { ContentComponent } from './content/content.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    AddButtonComponent
-  ],
+  declarations: [AppComponent, NavbarComponent, AddButtonComponent],
   imports: [
     SharedModule,
     BrowserModule,

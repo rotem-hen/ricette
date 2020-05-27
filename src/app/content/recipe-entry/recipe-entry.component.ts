@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
@@ -12,12 +12,14 @@ import { DocumentReference } from 'angularfire2/firestore';
   templateUrl: './recipe-entry.component.html',
   styleUrls: ['./recipe-entry.component.css']
 })
-export class RecipeEntryComponent {
+export class RecipeEntryComponent implements OnInit {
   @Input() recipe: Recipe;
   private categoryList: Category[];
   public categoryColors: string[];
 
-  constructor(private router: Router, public editService: EditModeService, private dbService: DatabaseService) {
+  constructor(private router: Router, public editService: EditModeService, private dbService: DatabaseService) {}
+
+  public ngOnInit(): void {
     this.dbService.getCategories().subscribe(c => {
       this.categoryList = c;
       const recipeCategoriesIds: DocumentReference[] = this.recipe.categories;
@@ -26,13 +28,13 @@ export class RecipeEntryComponent {
     });
   }
 
-  onRecipeClick(): void {
+  public onRecipeClick(): void {
     if (!this.editService.isEditMode) {
       this.router.navigate(['recipes', this.recipe.id]);
     }
   }
 
-  onEditClick(recipeModal): void {
+  public onEditClick(recipeModal): void {
     const state: RecipeModalState = {
       ...this.recipe,
       options: this.categoryList.map(category => {
@@ -42,7 +44,7 @@ export class RecipeEntryComponent {
     recipeModal.open(state);
   }
 
-  onDeleteClick(): void {
+  public onDeleteClick(): void {
     if (confirm(`אתם בטוחים שתרצו למחוק את המתכון ${this.recipe.title}?`)) {
       this.dbService.deleteRecipe(this.recipe.id);
     }

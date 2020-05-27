@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { categoryViews, CategoriesIds } from '../category-views/category-views';
 import { Recipe } from '../interface/recipe.interface';
@@ -12,7 +12,7 @@ import { DatabaseService } from 'app/shared/database-service/database.service';
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
-export class RecipesComponent implements OnDestroy {
+export class RecipesComponent implements OnInit, OnDestroy {
   public categoryName = '';
   public searchCategoryName = categoryViews.find(c => c.id === CategoriesIds.SEARCH_RESULTS).name;
   public categoryId: string;
@@ -21,7 +21,13 @@ export class RecipesComponent implements OnDestroy {
   public CategoriesIds = CategoriesIds;
   private destroy$ = new Subject();
 
-  constructor(private route: ActivatedRoute, private searchService: SearchService, private dbService: DatabaseService) {
+  constructor(
+    private route: ActivatedRoute,
+    private searchService: SearchService,
+    private dbService: DatabaseService
+  ) {}
+
+  ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.categoryId = params['cid'];
       combineLatest([this.dbService.getCategories(), this.dbService.getRecipes()])
