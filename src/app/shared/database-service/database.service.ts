@@ -15,9 +15,11 @@ export class DatabaseService {
 
   constructor(private firestore: AngularFirestore, private authService: AuthService) {
     this.categories$ = firestore.collection<Category>('categories', ref =>
-      ref.where('uid', '==', authService.loggedInUserId)
+      ref.where('uid', '==', authService.loggedInUserId).orderBy('name')
     );
-    this.recipes$ = firestore.collection<Recipe>('recipes', ref => ref.where('uid', '==', authService.loggedInUserId));
+    this.recipes$ = firestore.collection<Recipe>('recipes', ref =>
+      ref.where('uid', '==', authService.loggedInUserId).orderBy('title')
+    );
   }
 
   public getCategories(): Observable<Category[]> {
