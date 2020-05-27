@@ -28,7 +28,8 @@ import { AuthGuard } from 'app/shared/auth-guard/auth.guard';
     RouterModule.forRoot([
       { path: 'recipes/:rid', component: RecipePageComponent, canActivate: [AuthGuard] },
       { path: 'categories/:cid', component: RecipesComponent, canActivate: [AuthGuard] },
-      { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] }
+      { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
+      { path: '**', component: CategoriesComponent, canActivate: [AuthGuard] }
     ])
   ],
   exports: [ContentComponent, ContentTitleComponent],
