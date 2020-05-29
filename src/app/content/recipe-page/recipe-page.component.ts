@@ -6,6 +6,7 @@ import { Subject, combineLatest } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { RecipeModalState } from 'app/shared/recipe-modal/interface/recipe-modal-state.interface';
 import { DatabaseService } from 'app/shared/database-service/database.service';
+import { Category } from '../interface/category.interface';
 
 @Component({
   selector: 'app-recipe-page',
@@ -15,28 +16,33 @@ import { DatabaseService } from 'app/shared/database-service/database.service';
 export class RecipePageComponent implements OnInit, OnDestroy {
   @ViewChild('recipeModal') recipeModalRef;
   public recipe: Recipe;
+  private categoryList: Category[];
   private destroy$ = new Subject();
 
-  constructor(private route: ActivatedRoute, private editMode: EditModeService, private dbService: DatabaseService) {}
+  constructor(private route: ActivatedRoute, private editMode: EditModeService, private dbService: DatabaseService) {
+    this.dbService.getCategories().subscribe(c => (this.categoryList = c));
+  }
 
   public ngOnInit(): void {
-    combineLatest([this.dbService.getCategories(), this.dbService.getRecipes()])
+    this.dbService
+      .getRecipes()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(([categories, recipes]) => {
+      .subscribe(recipes => {
         const recipeId = this.route.snapshot.paramMap.get('rid');
         this.recipe = recipes.find(r => r.id === recipeId);
-        this.editMode.editModeChange.pipe(takeUntil(this.destroy$)).subscribe((value: boolean) => {
-          if (value) {
-            const state: RecipeModalState = {
-              ...this.recipe,
-              options: categories.map(category => {
-                return { category, selected: this.recipe.categories.some(c => c.id === category.id) };
-              })
-            };
-            this.recipeModalRef.open(state);
-          }
-        });
       });
+
+    this.editMode.editModeChange.pipe(takeUntil(this.destroy$)).subscribe((value: boolean) => {
+      if (value) {
+        const state: RecipeModalState = {
+          ...this.recipe,
+          options: this.categoryList.map(category => {
+            return { category, selected: this.recipe.categories.some(c => c.id === category.id) };
+          })
+        };
+        this.recipeModalRef.open(state);
+      }
+    });
   }
 
   public onWhatsappClick(): void {

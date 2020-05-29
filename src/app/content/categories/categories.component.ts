@@ -16,12 +16,11 @@ export class CategoriesComponent implements OnInit {
   public categoryList: Category[];
   public recipeList: Recipe[];
   public editMode: boolean;
-  public CategoriesIds;
+  public CategoriesIds = CategoriesIds;
 
   constructor(private router: Router, private editModeService: EditModeService, private dbService: DatabaseService) {}
 
   public ngOnInit(): void {
-    this.CategoriesIds = CategoriesIds;
     const additionalViews = categoryViews.filter(c => !c.hidden);
     this.dbService.getCategories().subscribe(c => (this.categoryList = c.concat(additionalViews)));
     this.dbService.getRecipes().subscribe(r => (this.recipeList = r));
