@@ -5,7 +5,7 @@ import { EditModeService } from './shared/edit-mode-service/edit-mode.service';
 import { Scroller } from './shared/scroll-top';
 import { SearchService } from './shared/search-service/search.service';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from './shared/auth-service/auth.service';
+import { AuthService, LoginState } from './shared/auth-service/auth.service';
 import { SwUpdate } from '@angular/service-worker';
 
 @Component({
@@ -15,6 +15,7 @@ import { SwUpdate } from '@angular/service-worker';
 })
 export class AppComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
+  public LoginState = LoginState;
 
   constructor(
     private router: Router,
