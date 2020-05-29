@@ -1,9 +1,15 @@
-<div *ngIf="authService.user$ | async as user; else login" class="main-container">
-    <app-navbar></app-navbar>
-    <app-content></app-content>
-    <app-add-button></app-add-button>
+<div [ngSwitch]="authService.state">
+    <div *ngSwitchCase="LoginState.Loading" class="loading">
+        <i class="fas fa-spin fa-circle-notch"></i>
+    </div>
+    <div *ngSwitchCase="LoginState.LoggedOut">
+        <i class="fas fa-user-circle"></i>
+        <i class="fab fa-google"></i>
+        <button class="button" (click)="authService.googleSignin()">Login with Google</button>
+    </div>
+    <div *ngSwitchDefault class="main-container">
+        <app-navbar></app-navbar>
+        <app-content></app-content>
+        <app-add-button></app-add-button>
+    </div>
 </div>
-
-<ng-template #login>
-    <button class="button" (click)="authService.googleSignin()">Login with Google</button>
-</ng-template>

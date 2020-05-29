@@ -15,6 +15,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { RouterModule } from '@angular/router';
 import { ContentComponent } from './content/content.component';
+import { AuthGuard } from './shared/auth-guard/auth.guard';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, AddButtonComponent],
@@ -28,7 +29,7 @@ import { ContentComponent } from './content/content.component';
     AngularFirestoreModule.enablePersistence(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     RouterModule.forRoot([
-      { path: 'categories', component: ContentComponent },
+      { path: 'categories', component: ContentComponent, canActivate: [AuthGuard] },
       { path: 'login', component: AppComponent },
       { path: '', component: AppComponent },
       { path: '**', component: AppComponent }
