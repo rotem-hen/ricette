@@ -10,7 +10,7 @@ import { ContentComponent } from './content.component';
 import { ContentTitleComponent } from './content-title/content-title.component';
 import { RecipeEntryComponent } from './recipe-entry/recipe-entry.component';
 import { SharedModule } from 'app/shared/shared.module';
-import { AuthGuard } from 'app/shared/auth-guard/auth.guard';
+import { AuthGuard } from 'app/shared/auth.guard';
 
 @NgModule({
   declarations: [

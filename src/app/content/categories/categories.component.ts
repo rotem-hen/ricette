@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '../interface/category.interface';
 import { categoryViews, CategoriesIds } from '../category-views/category-views';
-import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
+import { EditModeService } from 'app/shared/edit-mode.service';
 import { CategoryModalState } from 'app/shared/category-modal/interface/category-modal-state.interface';
 import { Recipe } from '../interface/recipe.interface';
-import { DatabaseService } from 'app/shared/database-service/database.service';
+import { DatabaseService } from 'app/shared/database.service';
 
 @Component({
   selector: 'app-categories',

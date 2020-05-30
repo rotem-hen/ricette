@@ -1,11 +1,11 @@
 import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
-import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
-import { Subject, combineLatest } from 'rxjs';
+import { EditModeService } from 'app/shared/edit-mode.service';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { RecipeModalState } from 'app/shared/recipe-modal/interface/recipe-modal-state.interface';
-import { DatabaseService } from 'app/shared/database-service/database.service';
+import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
 
 @Component({

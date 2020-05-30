@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
-import { EditModeService } from './shared/edit-mode-service/edit-mode.service';
+import { EditModeService } from './shared/edit-mode.service';
 import { Scroller } from './shared/scroll-top';
-import { SearchService } from './shared/search-service/search.service';
+import { SearchService } from './shared/search.service';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService, LoginState } from './shared/auth-service/auth.service';
+import { AuthService, LoginState } from './shared/auth.service';
 import { SwUpdate } from '@angular/service-worker';
 
 @Component({

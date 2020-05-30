@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
+import { EditModeService } from 'app/shared/edit-mode.service';
 import { Router } from '@angular/router';
 import { CategoriesIds } from '../content/category-views/category-views';
-import { SearchService } from 'app/shared/search-service/search.service';
-import { AuthService } from 'app/shared/auth-service/auth.service';
+import { SearchService } from 'app/shared/search.service';
+import { AuthService } from 'app/shared/auth.service';
 
 @Component({
   selector: 'app-navbar',
