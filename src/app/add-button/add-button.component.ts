@@ -4,7 +4,7 @@ import { EditModeService } from 'app/shared/edit-mode.service';
 @Component({
   selector: 'app-add-button',
   templateUrl: './add-button.component.html',
-  styleUrls: ['./add-button.component.css']
+  styleUrls: ['./add-button.component.scss']
 })
 export class AddButtonComponent {
   public showPopover = false;

@@ -10,13 +10,15 @@ import { DatabaseService } from '../database.service';
 @Component({
   selector: 'app-category-modal',
   templateUrl: './category-modal.component.html',
-  styleUrls: ['./category-modal.component.css']
+  styleUrls: ['./category-modal.component.scss']
 })
 export class CategoryModalComponent implements OnInit {
   @ViewChild('categoryModal') modalRef: ElementRef;
   public state: CategoryModalState;
   public action: string;
   private recipeList: Recipe[];
+  public errorMessage: string;
+  public loading = false;
 
   constructor(
     private modalService: NgbModal,
@@ -43,26 +45,35 @@ export class CategoryModalComponent implements OnInit {
 
   public async onOK(modal, errorToast): Promise<void> {
     if (!this.state.name || !this.state.color) {
+      this.errorMessage = 'אנא בחרו שם וצבע לקטגוריה';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 3000 });
       return;
     }
 
-    modal.close('Ok click');
-    if (this.editModeService.isEditMode) {
-      this.dbService.editCategory(omit(this.state, 'options'));
-    } else {
-      this.state.id = await this.dbService.addCategory(omit(this.state, 'options'));
+    this.loading = true;
+
+    try {
+      if (this.editModeService.isEditMode) {
+        await this.dbService.editCategory(omit(this.state, 'options'));
+      } else {
+        this.state.id = await this.dbService.addCategory(omit(this.state, 'options'));
+      }
+
+      this.recipeList.forEach((recipe: Recipe) => {
+        if (this.isRecipeSelected(recipe.id) && !recipe.categories.some(c => c.id === this.state.id)) {
+          this.dbService.addCategoryToRecipe(recipe.id, this.state.id);
+        } else if (!this.isRecipeSelected(recipe.id)) {
+          this.dbService.removeCategoryFromRecipe(recipe.id, this.state.id);
+        }
+      });
+      this.editModeService.toggleEditMode(false);
+      modal.close('Ok click');
+    } catch (error) {
+      this.errorMessage = 'שגיאה בשמירת הקטגוריה. בדקו את כל השדות';
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
     }
 
-    this.recipeList.forEach((recipe: Recipe) => {
-      if (this.isRecipeSelected(recipe.id) && !recipe.categories.some(c => c.id === this.state.id)) {
-        this.dbService.addCategoryToRecipe(recipe.id, this.state.id);
-      } else if (!this.isRecipeSelected(recipe.id)) {
-        this.dbService.removeCategoryFromRecipe(recipe.id, this.state.id);
-      }
-    });
-
-    this.editModeService.toggleEditMode(false);
+    this.loading = false;
   }
 
   public onCategoryNameInputChange(event): void {

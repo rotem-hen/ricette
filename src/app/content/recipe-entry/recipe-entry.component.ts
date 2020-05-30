@@ -6,18 +6,25 @@ import { RecipeModalState } from 'app/shared/recipe-modal/interface/recipe-modal
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
 import { DocumentReference } from 'angularfire2/firestore';
+import { ToastService } from 'app/shared/toast.service';
 
 @Component({
   selector: 'app-recipe-entry',
   templateUrl: './recipe-entry.component.html',
-  styleUrls: ['./recipe-entry.component.css']
+  styleUrls: ['./recipe-entry.component.scss']
 })
 export class RecipeEntryComponent implements OnInit {
   @Input() recipe: Recipe;
   private categoryList: Category[];
   public categoryColors: string[];
+  public errorMessage: string;
 
-  constructor(private router: Router, public editService: EditModeService, private dbService: DatabaseService) {}
+  constructor(
+    private router: Router,
+    public editService: EditModeService,
+    private dbService: DatabaseService,
+    private toastService: ToastService
+  ) {}
 
   public ngOnInit(): void {
     this.dbService.getCategories().subscribe(c => {
@@ -44,9 +51,14 @@ export class RecipeEntryComponent implements OnInit {
     recipeModal.open(state);
   }
 
-  public onDeleteClick(): void {
+  public async onDeleteClick(errorToast): Promise<void> {
     if (confirm(`אתם בטוחים שתרצו למחוק את המתכון ${this.recipe.title}?`)) {
-      this.dbService.deleteRecipe(this.recipe.id);
+      try {
+        await this.dbService.deleteRecipe(this.recipe.id);
+      } catch (error) {
+        this.errorMessage = 'שגיאה במחיקת המתכון. אנא נסו שוב';
+        this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
+      }
     }
   }
 }

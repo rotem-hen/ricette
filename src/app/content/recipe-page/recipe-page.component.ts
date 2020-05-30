@@ -11,7 +11,7 @@ import { Category } from '../interface/category.interface';
 @Component({
   selector: 'app-recipe-page',
   templateUrl: './recipe-page.component.html',
-  styleUrls: ['./recipe-page.component.css']
+  styleUrls: ['./recipe-page.component.scss']
 })
 export class RecipePageComponent implements OnInit, OnDestroy {
   @ViewChild('recipeModal') recipeModalRef;
