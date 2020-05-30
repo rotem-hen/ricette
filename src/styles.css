@@ -2,10 +2,15 @@
 @font-face {
     font-family: Jacqueline FM;
     src: url(assets/fonts/jacqueline-regular-fm.ttf) format("opentype");
-  }
+}
+
+@font-face {
+  font-family: Stanga;
+  src: url(assets/fonts/stanga-light-aaa1.ttf) format("opentype");
+}
 
 body {
-    font-family: 'Jacqueline FM', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Stanga', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     height: 100%;
     margin: 0;
     color: #515C5D;
@@ -23,8 +28,6 @@ body {
   overflow: hidden;
   padding: 0px 7px;
   background-color: transparent;
-  font-family: 'Jacqueline FM', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 15px;
   cursor: pointer;
   color: #515C5D;
   border: none;
