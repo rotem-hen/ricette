@@ -32,7 +32,7 @@ export class NavbarComponent {
 
   constructor(
     private router: Router,
-    private editModeService: EditModeService,
+    public editModeService: EditModeService,
     public searchService: SearchService,
     public authService: AuthService
   ) {}
