@@ -15,7 +15,8 @@
 li {
     margin: 10px;
     list-style-type: none;
-    line-height: 25px;
+    line-height: 30px;
+    font-size: 30px;
 }
 
 .prep li {
