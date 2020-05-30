@@ -3,9 +3,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Recipe } from 'app/content/interface/recipe.interface';
 import { CategoryModalState } from './interface/category-modal-state.interface';
 import { isEmpty, omit } from 'lodash';
-import { ToastService } from 'app/shared/toast-service/toast.service';
-import { EditModeService } from '../edit-mode-service/edit-mode.service';
-import { DatabaseService } from '../database-service/database.service';
+import { ToastService } from 'app/shared/toast.service';
+import { EditModeService } from '../edit-mode.service';
+import { DatabaseService } from '../database.service';
 
 @Component({
   selector: 'app-category-modal',

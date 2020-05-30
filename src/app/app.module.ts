@@ -15,7 +15,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { RouterModule } from '@angular/router';
 import { ContentComponent } from './content/content.component';
-import { AuthGuard } from './shared/auth-guard/auth.guard';
+import { AuthGuard } from './shared/auth.guard';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, AddButtonComponent],

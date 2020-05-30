@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { categoryViews, CategoriesIds } from '../category-views/category-views';
 import { Recipe } from '../interface/recipe.interface';
-import { SearchService } from 'app/shared/search-service/search.service';
+import { SearchService } from 'app/shared/search.service';
 import { Subject, combineLatest } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DatabaseService } from 'app/shared/database-service/database.service';
+import { DatabaseService } from 'app/shared/database.service';
 
 @Component({
   selector: 'app-recipes',

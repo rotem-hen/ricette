@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EditModeService } from 'app/shared/edit-mode-service/edit-mode.service';
+import { EditModeService } from 'app/shared/edit-mode.service';
 
 @Component({
   selector: 'app-add-button',

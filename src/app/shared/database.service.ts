@@ -4,7 +4,7 @@ import { Category } from 'app/content/interface/category.interface';
 import { Recipe } from 'app/content/interface/recipe.interface';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { AuthService } from '../auth-service/auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
