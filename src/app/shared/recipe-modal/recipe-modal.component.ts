@@ -10,13 +10,15 @@ import { Category } from 'app/content/interface/category.interface';
 @Component({
   selector: 'app-recipe-modal',
   templateUrl: './recipe-modal.component.html',
-  styleUrls: ['./recipe-modal.component.css']
+  styleUrls: ['./recipe-modal.component.scss']
 })
 export class RecipeModalComponent implements OnInit {
   @ViewChild('recipeModal') modalRef: ElementRef;
   public state: RecipeModalState;
   public action = 'הוספת';
   private categoryList: Category[];
+  public errorMessage: string;
+  public loading = false;
 
   constructor(
     private modalService: NgbModal,
@@ -41,21 +43,31 @@ export class RecipeModalComponent implements OnInit {
     });
   }
 
-  public onOK(modal, errorToast): void {
+  public async onOK(modal, errorToast): Promise<void> {
     if (!this.state.title) {
+      this.errorMessage = 'אנא בחרו שם למתכון';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 3000 });
       return;
     }
 
-    modal.close('Ok click');
-    const categoryIds = this.state.options.filter(o => o.selected).map(o => o.category.id);
-    const categoryRefs = categoryIds.map(id => this.dbService.getCategoryRef(id));
-    if (this.editModeService.isEditMode) {
-      this.dbService.editRecipe(this.state.id, { ...omit(this.state, 'options'), categories: categoryRefs });
-    } else {
-      this.dbService.addRecipe({ ...omit(this.state, 'options'), categories: categoryRefs });
+    this.loading = true;
+
+    try {
+      const categoryIds = this.state.options.filter(o => o.selected).map(o => o.category.id);
+      const categoryRefs = categoryIds.map(id => this.dbService.getCategoryRef(id));
+      if (this.editModeService.isEditMode) {
+        await this.dbService.editRecipe(this.state.id, { ...omit(this.state, 'options'), categories: categoryRefs })
+      } else {
+        await this.dbService.addRecipe({ ...omit(this.state, 'options'), categories: categoryRefs });
+      }
+      this.editModeService.toggleEditMode(false);
+      modal.close('Ok click');
+    } catch (error) {
+      this.errorMessage = 'שגיאה בשמירת המתכון. בדקו את כל השדות';
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
     }
-    this.editModeService.toggleEditMode(false);
+
+    this.loading = false;
   }
 
   public onRecipeNameInputChange(event): void {

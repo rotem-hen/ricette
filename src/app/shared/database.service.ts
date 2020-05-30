@@ -30,12 +30,12 @@ export class DatabaseService {
     return this.recipes$.valueChanges({ idField: 'id' });
   }
 
-  public editCategory({ id, name, color }: Category): void {
-    this.categories$.doc(id).update({ name, color });
+  public async editCategory({ id, name, color }: Category): Promise<void> {
+    return this.categories$.doc(id).update({ name, color });
   }
 
-  public editRecipe(id: string, recipe: Recipe): void {
-    this.recipes$.doc(id).update({ ...recipe });
+  public async editRecipe(id: string, recipe: Recipe): Promise<void> {
+    return this.recipes$.doc(id).update({ ...recipe });
   }
 
   public async addCategory(category: Category): Promise<string> {
@@ -48,9 +48,8 @@ export class DatabaseService {
     return id;
   }
 
-  public deleteCategory(id: string): void {
+  public async deleteCategory(id: string): Promise<void> {
     const categoryRef = this.categories$.doc(id);
-    categoryRef.delete();
 
     const query = this.recipes$.ref.where('categories', 'array-contains', categoryRef.ref);
     query.get().then(recipes => {
@@ -58,10 +57,12 @@ export class DatabaseService {
         this.removeCategoryFromRecipeWithDoc(doc, id);
       });
     });
+
+    return categoryRef.delete();
   }
 
-  public deleteRecipe(id: string): void {
-    this.recipes$.doc(id).delete();
+  public async deleteRecipe(id: string): Promise<void> {
+    return this.recipes$.doc(id).delete();
   }
 
   public addCategoryToRecipe(recipeId: string, categoryId: string): void {

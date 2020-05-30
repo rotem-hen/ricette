@@ -1,8 +1,9 @@
 <ng-template #errorToast>
-    אנא בחרו שם למתכון
+    {{ errorMessage }}
 </ng-template>
-  
+
 <ng-template #recipeModal let-modal>
+    <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
     <div class="modal-header">
     <h4 class="modal-title">{{ action }} מתכון</h4>
     <button type="button" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -44,7 +45,7 @@
         <div class="row" *ngIf="state.options.length" class="add-categories-to-recipe">
             <div class="col">
                 <div ngbDropdown placement="bottom" class="d-inline-block">
-                    <button class="btn btn-outline-primary" ngbDropdownToggle>הוסיפו קטגוריות למתכון <i class="fas fa-angle-down"></i></button>
+                    <button class="btn btn-outline-primary" ngbDropdownToggle>הוסיפו קטגוריות למתכון</button>
                         <div ngbDropdownMenu>
                         <div class="form-categories-checkboxes" *ngFor="let option of state.options">
                             <input class="form-checkbox" type="checkbox" [(ngModel)]="option.selected" />

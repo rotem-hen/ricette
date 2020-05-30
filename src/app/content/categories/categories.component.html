@@ -1,3 +1,7 @@
+<ng-template #errorToast>
+    {{ errorMessage }}
+</ng-template>
+
 <div class="category-container">
     <div
         *ngFor="let i of categoryList"
@@ -7,7 +11,7 @@
         <i
             *ngIf="editModeService.isEditMode && i.id != CategoriesIds.UNCATEGORIZED"
             class="x fas fa-times-circle"
-            (click)="onDeleteClick(i)"></i>
+            (click)="onDeleteClick(i, errorToast)"></i>
         {{ i.name }}
         <i
             *ngIf="editModeService.isEditMode && i.id != CategoriesIds.UNCATEGORIZED"

@@ -7,6 +7,33 @@
     width: 100%;
 }
 
+.mask {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    background-color: white;
+    opacity: 0.5;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+
+    > i {
+        animation-name: spin;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
 .category-name-input {
     width: 80%;
 }

@@ -1,10 +1,14 @@
+<ng-template #errorToast>
+    {{ errorMessage }}
+</ng-template>
+
 <div class="recipe-entry" (click)="onRecipeClick()">
     <img [src]="recipe.image || './assets/food.jpg'" />
     <span class="entry-title">
         <i
             *ngIf="editService.isEditMode"
             class="x fas fa-times-circle"
-            (click)="onDeleteClick()"></i>
+            (click)="onDeleteClick(errorToast)"></i>
         {{ recipe.title }}
         <i
             *ngIf="editService.isEditMode"
