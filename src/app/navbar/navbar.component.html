@@ -1,5 +1,10 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-  <i class="far fa-edit square-icon" (click)="onEditClick()"></i>
+  <i
+    class="far fa-edit square-icon"
+    [ngClass]="{ green: this.editModeService.isEditMode }"
+    (click)="onEditClick()"
+    style="cursor: pointer;">
+  </i>
   <div class="search-container">
     <input [(ngModel)]="this.searchService.searchTerm" (keyup)="onSearchInputChange($event)" (click)="searchInputClick()" type="text" class="form-control" />
     <i class="fas fa-search square-icon"></i>

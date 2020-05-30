@@ -22,12 +22,14 @@
     background-color: #515C5D;
 }
 .popover-menu button {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 35px;
-    color: white;
+    color: #515C5D;
     padding: 5px;
     margin: 5px 5px;
     width: 150px;
+    background: #f6e193;
+    box-shadow: 0 6px #c7b677;
 }
 
 .shown {

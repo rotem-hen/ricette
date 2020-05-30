@@ -2,10 +2,14 @@
     <div *ngSwitchCase="LoginState.Loading" class="loading">
         <i class="fas fa-spin fa-circle-notch"></i>
     </div>
-    <div *ngSwitchCase="LoginState.LoggedOut">
-        <i class="fas fa-user-circle"></i>
-        <i class="fab fa-google"></i>
-        <button class="button" (click)="authService.googleSignin()">Login with Google</button>
+    <div *ngSwitchCase="LoginState.LoggedOut" class="login-page">
+        <div class="login-pane">
+            <i class="fas fa-user-circle"></i>
+            <button class="button btn btn-2 btn-2g" (click)="authService.googleSignin()">
+                <i class="fab fa-google"></i>
+                התחברו עם גוגל
+            </button>
+        </div>
     </div>
     <div *ngSwitchDefault class="main-container">
         <app-navbar></app-navbar>

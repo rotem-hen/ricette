@@ -28,7 +28,9 @@ export class CategoriesComponent implements OnInit {
 
   public onCategoryClick(category: Category): void {
     if (!this.editModeService.isEditMode) {
-      this.router.navigate(['/categories', category.id]);
+      setTimeout(() => {
+        this.router.navigate(['/categories', category.id]);
+      }, 200);
     }
   }
 
