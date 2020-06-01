@@ -34,6 +34,8 @@
 }
 
 .button {
+    letter-spacing: 2px;
+    word-spacing: 4px;
     font-size: 35px;
     background-color: white;
     color: #515C5D;
