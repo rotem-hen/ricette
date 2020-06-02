@@ -16,9 +16,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { RouterModule } from '@angular/router';
 import { ContentComponent } from './content/content.component';
 import { AuthGuard } from './shared/auth.guard';
+import { UpdateNotificationComponent } from './update-notification/update-notification.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, AddButtonComponent],
+  declarations: [AppComponent, NavbarComponent, AddButtonComponent, UpdateNotificationComponent],
   imports: [
     SharedModule,
     BrowserModule,

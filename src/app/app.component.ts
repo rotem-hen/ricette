@@ -11,10 +11,11 @@ import { SwUpdate } from '@angular/service-worker';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
+  public updateExist = false;
   public LoginState = LoginState;
 
   constructor(
@@ -37,9 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
-        if (confirm('קיימת גרסה חדשה. לעדכן?')) {
-          window.location.reload();
-        }
+        this.updateExist = true;
       });
     }
   }

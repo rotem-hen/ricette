@@ -23,14 +23,14 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 15px 15px #505c5d;
-}
 
-.login-page .fa-user-circle {
-    font-size: 60px;
-}
+    .fa-user-circle {
+        font-size: 60px;
+    }
 
-.login-page .fa-google {
-    color: #4284f3;
+    .fa-google {
+        color: #4284f3;
+    }
 }
 
 .button {
@@ -61,6 +61,23 @@ app-add-button {
     position: fixed;
     bottom: 5%;
     left: 3%;
+}
+
+app-update-notification {
+    position: fixed;
+    bottom: 5%;
+    right: -45px;
+}
+
+.notification-shown {
+    right: -45px;
+    transition: all linear 180ms;
+}
+
+.notification-hidden {
+    right: -250px;
+    height: 0;
+    width: 0;
 }
 
 app-content {
