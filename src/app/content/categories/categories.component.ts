@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Category } from '../interface/category.interface';
 import { categoryViews, CategoriesIds } from '../category-views/category-views';
 import { EditModeService } from 'app/shared/edit-mode.service';
-import { CategoryModalState } from 'app/shared/category-modal/interface/category-modal-state.interface';
+import { CategoryModalState } from 'app/shared/interface/category-modal-state.interface';
 import { Recipe } from '../interface/recipe.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { ToastService } from 'app/shared/toast.service';

@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RecipeModalState } from './interface/recipe-modal-state.interface';
+import { RecipeModalState } from '../interface/recipe-modal-state.interface';
 import { omit, isEmpty } from 'lodash';
 import { ToastService } from 'app/shared/toast.service';
 import { EditModeService } from '../edit-mode.service';
