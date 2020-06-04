@@ -39,7 +39,8 @@ export class AuthService {
   async googleSignin(): Promise<void> {
     const provider = new auth.GoogleAuthProvider();
     this.state = LoginState.Loading;
-    const credentials = await this.afAuth.auth.signInWithPopup(provider);
+    await this.afAuth.auth.signInWithRedirect(provider);
+    const credentials = await this.afAuth.auth.getRedirectResult();
     this.updateUserData(credentials.user);
     this.router.navigate(['/categories']);
   }
