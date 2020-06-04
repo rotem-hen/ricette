@@ -4,7 +4,7 @@ import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { RecipeModalState } from 'app/shared/recipe-modal/interface/recipe-modal-state.interface';
+import { RecipeModalState } from 'app/shared/interface/recipe-modal-state.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
 

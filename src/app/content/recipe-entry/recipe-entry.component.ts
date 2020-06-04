@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
-import { RecipeModalState } from 'app/shared/recipe-modal/interface/recipe-modal-state.interface';
+import { RecipeModalState } from 'app/shared/interface/recipe-modal-state.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
 import { DocumentReference } from 'angularfire2/firestore';
