@@ -1,0 +1,25 @@
+<ng-template #errorToast>
+    {{ errorMessage }}
+</ng-template>
+
+<ng-template #recipeImageModal let-modal>
+    <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
+    <div class="modal-header">
+    <h4 class="modal-title">תמונה למתכון</h4>
+    <button type="button" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+    <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+    
+    <div class="ngx-img-container">
+        <ngx-img (onSelect)="onSelect($event)" [config]="{ crop: [{ ratio: 1 }], output: 'blob' }"></ngx-img>
+    </div>
+
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
+    <button type="button" class="btn btn-success" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
+    </div>
+</ng-template>

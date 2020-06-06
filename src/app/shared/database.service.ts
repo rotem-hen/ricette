@@ -38,6 +38,10 @@ export class DatabaseService {
     return this.recipes$.doc(id).update({ ...recipe });
   }
 
+  public async editRecipeImage(id: string, image: string): Promise<void> {
+    return this.recipes$.doc(id).update({ image });
+  }
+
   public async addCategory(category: Category): Promise<string> {
     const { id } = await this.categories$.add({ ...category, uid: this.authService.loggedInUserId });
     return id;

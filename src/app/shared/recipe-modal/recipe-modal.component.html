@@ -32,10 +32,6 @@
             </div>
             <textarea [value]="state.prep" (keyup)="onPrepInputChange($event)" type="text" class="form-control prep-input" rows="10"></textarea>
         </div>
-
-        <div class="ngx-img-container">
-            <ngx-img (onSelect)="onSelect($event)" [config]="{ crop: [{ ratio: 1 }] }"></ngx-img>
-        </div>
         
         <div class="form-is-favourite-checkbox">
             <input class="form-checkbox" type="checkbox" [(ngModel)]="state.isFavourite" />

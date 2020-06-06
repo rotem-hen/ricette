@@ -7,10 +7,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxImgModule } from 'ngx-img';
 import { FormsModule } from '@angular/forms';
+import { RecipeImageModalComponent } from './recipe-image-modal/recipe-image-modal.component';
 
 @NgModule({
-  declarations: [CategoryModalComponent, RecipeModalComponent, ToastsContainerComponent],
+  declarations: [
+    CategoryModalComponent,
+    RecipeModalComponent,
+    ToastsContainerComponent,
+    RecipeImageModalComponent
+  ],
   imports: [CommonModule, NgbModule, ColorPickerModule, NgxImgModule.forRoot(), FormsModule],
-  exports: [CategoryModalComponent, RecipeModalComponent, ToastsContainerComponent]
+  exports: [
+    CategoryModalComponent,
+    RecipeModalComponent,
+    ToastsContainerComponent,
+    RecipeImageModalComponent
+  ]
 })
-export class SharedModule { }
+export class SharedModule {}
