@@ -26,7 +26,12 @@
     font-size: 40px;
     line-height: 40px;
     margin-right: 10px;
-    width: 100%;
+    flex: 1 1 auto;
+}
+
+.category-container {
+    display: flex;
+    flex-direction: row;
 }
 
 .category-color {
