@@ -55,6 +55,7 @@ export class RecipeModalComponent implements OnInit {
     try {
       const categoryIds = this.state.options.filter(o => o.selected).map(o => o.category.id);
       const categoryRefs = categoryIds.map(id => this.dbService.getCategoryRef(id));
+
       if (this.editModeService.isEditMode) {
         await this.dbService.editRecipe(this.state.id, { ...omit(this.state, 'options'), categories: categoryRefs })
       } else {
@@ -80,10 +81,6 @@ export class RecipeModalComponent implements OnInit {
 
   public onPrepInputChange(event): void {
     this.state.prep = event.target.value;
-  }
-
-  public onSelect(image): void {
-    this.state.image = image;
   }
 
   private getInitialState(): RecipeModalState {

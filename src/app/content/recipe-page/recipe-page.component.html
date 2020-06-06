@@ -1,5 +1,5 @@
 <app-content-title [title]="recipe && recipe.title"></app-content-title>
-    <img [src]="recipe && recipe.image || './assets/food.jpg'" class="page-image" />
+    <img *ngIf="image | async; let url" [src]="url" class="page-image" (click)="onImageClick(recipeImageModal)" />
 <div class="ingredients" *ngIf="recipe && recipe.ingredients.length > 0">
     <li *ngFor="let i of recipe.ingredients.split('\n')">{{ i }}</li>
 </div>
@@ -7,4 +7,6 @@
     <li *ngFor="let p of recipe.prep.split('\n')">{{ p }}</li>
 </div>
 <i (click)="onWhatsappClick()" class="share fab fa-whatsapp-square"></i>
+
 <app-recipe-modal #recipeModal></app-recipe-modal>
+<app-recipe-image-modal #recipeImageModal></app-recipe-image-modal>

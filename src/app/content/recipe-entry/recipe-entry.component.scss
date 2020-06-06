@@ -7,14 +7,18 @@
     align-items: center;
     background-color: #edf1f1;
     position: relative;
+    justify-content: space-between;
 
-    img {
+    figure {
         height: 70px;
         width: 70px;
-        min-height: 70px;
-        min-width: 70px;
-        padding: 10px 0px;
-        border-radius: 25px;
+        margin: 10px 0px;
+
+        img {
+            height: 70px;
+            width: 70px;
+            border-radius: 25px;
+        }
     }
 }
 

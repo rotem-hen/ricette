@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { ContentComponent } from './content/content.component';
 import { AuthGuard } from './shared/auth.guard';
 import { UpdateNotificationComponent } from './update-notification/update-notification.component';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, AddButtonComponent, UpdateNotificationComponent],
@@ -37,7 +38,7 @@ import { UpdateNotificationComponent } from './update-notification/update-notifi
     ])
   ],
   exports: [],
-  providers: [AngularFirestore, AngularFireAuth],
+  providers: [AngularFirestore, AngularFireAuth, AngularFireStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

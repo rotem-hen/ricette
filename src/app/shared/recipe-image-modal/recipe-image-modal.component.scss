@@ -1,0 +1,46 @@
+.ngb-toasts {
+    right: 20px;
+    top: 10px;
+}
+
+.modal-title {
+    width: 100%;
+    font-size: 35px;
+    line-height: 35px;
+}
+
+.mask {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    background-color: white;
+    opacity: 0.5;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+
+    > i {
+        animation-name: spin;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+button {
+    font-size: 30px;
+    line-height: 30px;
+}
+
+.ngx-img-container {
+    width: 80%;
+}
