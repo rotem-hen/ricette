@@ -48,7 +48,13 @@ export class RecipeImageModalComponent implements OnInit {
       await this.afStorage.upload(link, imageBlob, {
         cacheControl: 'max-age=31536000'
       });
-      await this.dbService.editRecipeImage(this.recipeId, link);
+
+      await this.afStorage
+        .ref(link)
+        .getDownloadURL()
+        .toPromise()
+        .then(url => this.dbService.editRecipeImage(this.recipeId, url));
+
       modal.close('Ok click');
     } catch (error) {
       this.errorMessage = 'שגיאה בשמירת התמונה';

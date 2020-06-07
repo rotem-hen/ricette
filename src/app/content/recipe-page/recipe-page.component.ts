@@ -2,12 +2,11 @@ import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
-import { Subject, Observable, of } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil, catchError } from 'rxjs/operators';
 import { RecipeModalState } from 'app/shared/interface/recipe-modal-state.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
-import { RecipeImageService } from 'app/shared/recipe-image.service';
 
 @Component({
   selector: 'app-recipe-page',
@@ -19,14 +18,9 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   public recipe: Recipe;
   private categoryList: Category[];
   private destroy$ = new Subject();
-  public image: Observable<string>;
+  public imageSrc: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private editMode: EditModeService,
-    private dbService: DatabaseService,
-    private recipeImageService: RecipeImageService
-  ) {
+  constructor(private route: ActivatedRoute, private editMode: EditModeService, private dbService: DatabaseService) {
     this.dbService.getCategories().subscribe(c => (this.categoryList = c));
   }
 
@@ -37,7 +31,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
       .subscribe(recipes => {
         const recipeId = this.route.snapshot.paramMap.get('rid');
         this.recipe = recipes.find(r => r.id === recipeId);
-        this.image = this.recipeImageService.getRecipeImage(this.recipe.image);
+        this.imageSrc = this.recipe.image ? this.recipe.image : './assets/food.jpg';
       });
 
     this.editMode.editModeChange.pipe(takeUntil(this.destroy$)).subscribe((value: boolean) => {

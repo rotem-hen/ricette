@@ -7,8 +7,6 @@ import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
 import { DocumentReference } from 'angularfire2/firestore';
 import { ToastService } from 'app/shared/toast.service';
-import { Observable } from 'rxjs';
-import { RecipeImageService } from 'app/shared/recipe-image.service';
 
 @Component({
   selector: 'app-recipe-entry',
@@ -20,14 +18,13 @@ export class RecipeEntryComponent implements OnInit {
   private categoryList: Category[];
   public categoryColors: string[];
   public errorMessage: string;
-  public image: Observable<string>;
+  public imageSrc: string;
 
   constructor(
     private router: Router,
     public editService: EditModeService,
     private dbService: DatabaseService,
-    private toastService: ToastService,
-    private recipeImageService: RecipeImageService
+    private toastService: ToastService
   ) {}
 
   public ngOnInit(): void {
@@ -38,7 +35,7 @@ export class RecipeEntryComponent implements OnInit {
       this.categoryColors = recipeCategories.map(c => c.color);
     });
 
-    this.image = this.recipeImageService.getRecipeImage(this.recipe.image);
+    this.imageSrc = this.recipe.image ? this.recipe.image : './assets/food.jpg';
   }
 
   public onRecipeClick(): void {
