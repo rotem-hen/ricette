@@ -4,7 +4,7 @@
 
 <div class="recipe-entry" (click)="onRecipeClick()">
     <figure>
-        <img *ngIf="image | async; let url" [src]="url" />
+        <img *ngIf="imageSrc" [src]="imageSrc" />
     </figure>
     <span class="entry-title">
         <i
