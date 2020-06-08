@@ -42,3 +42,9 @@ button:focus {
 ::after {
   box-sizing: content-box;
 }
+
+.confirm .modal-content {
+  background-color: transparent;
+  border: none;
+  width: 350px;
+}

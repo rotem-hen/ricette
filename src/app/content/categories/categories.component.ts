@@ -7,6 +7,8 @@ import { CategoryModalState } from 'app/shared/interface/category-modal-state.in
 import { Recipe } from '../interface/recipe.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { ToastService } from 'app/shared/toast.service';
+import { ConfirmService } from 'app/shared/confirm.service';
+import { Button } from 'app/shared/interface/button.inteface';
 
 @Component({
   selector: 'app-categories',
@@ -20,7 +22,13 @@ export class CategoriesComponent implements OnInit {
   public CategoriesIds = CategoriesIds;
   public errorMessage: string;
 
-  constructor(private router: Router, private editModeService: EditModeService, private dbService: DatabaseService, private toastService: ToastService) {}
+  constructor(
+    private router: Router,
+    private editModeService: EditModeService,
+    private dbService: DatabaseService,
+    private toastService: ToastService,
+    private confirmService: ConfirmService
+  ) {}
 
   public ngOnInit(): void {
     const additionalViews = categoryViews.filter(c => !c.hidden);
@@ -47,13 +55,33 @@ export class CategoriesComponent implements OnInit {
   }
 
   public async onDeleteClick(category: Category, errorToast): Promise<void> {
-    if (confirm(`אתם בטוחים שתרצו למחוק את הקטגוריה ${category.name}?`)) {
-      try {
-        await this.dbService.deleteCategory(category.id);
-      } catch (error) {
-        this.errorMessage = 'שגיאה במחיקת הקטגוריה. אנא נסו שוב';
-        this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
+    const confirmButtons: Button[] = [
+      {
+        text: 'מחיקה',
+        color: '#ecbdc5',
+        action: (): Promise<void> => this.deleteCategory(category, errorToast)
       }
+    ];
+
+    this.confirmService
+      .confirm(
+        `מחיקת הקטגוריה '${category.name}'`,
+        `האם אתם בטוחים שאתם רוצים למחוק את הקטגוריה?
+        המתכונים שבתוכה לא יימחקו.`,
+        confirmButtons
+      )
+      .then()
+      .catch(() => {
+        // User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)
+      });
+  }
+
+  private async deleteCategory(category: Category, errorToast): Promise<void> {
+    try {
+      await this.dbService.deleteCategory(category.id);
+    } catch (error) {
+      this.errorMessage = 'שגיאה במחיקת הקטגוריה. אנא נסו שוב';
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
     }
   }
 }
