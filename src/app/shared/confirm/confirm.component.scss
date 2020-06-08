@@ -1,0 +1,42 @@
+.modal-header {
+  border: none;
+  border-bottom: 1px solid grey;
+  background-color: #d8e2d7;;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.modal-body {
+  font-size: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-bottom: 1px solid grey;
+  background-color: antiquewhite;
+}
+
+.modal-footer {
+  font-size: 20px;
+  line-height: 20px;
+  justify-content: space-between;
+  border: none;
+  background-color: #d8e2d7;;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+
+  button {
+    border: 1px solid grey;
+  }
+}
+
+.action-buttons>* {
+  margin: .25rem;
+}
+
+.close {
+  padding: 0;
+  margin: 0;
+}
+
+i {
+  font-size: 50px;
+}
