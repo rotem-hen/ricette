@@ -14,12 +14,12 @@
     <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
     
     <div class="ngx-img-container">
-        <ngx-img (onSelect)="onSelect($event)" [config]="{ crop: [{ ratio: 1 }], output: 'blob' }"></ngx-img>
+        <ngx-img (onSelect)="onSelect($event)" (onReset)="reset()" [config]="{ crop: [{ ratio: 1 }], output: 'blob' }"></ngx-img>
     </div>
 
     </div>
     <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
-    <button type="button" class="btn btn-success" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
+    <button type="button" class="btn btn-success" [disabled]="!imageStr" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
     </div>
 </ng-template>

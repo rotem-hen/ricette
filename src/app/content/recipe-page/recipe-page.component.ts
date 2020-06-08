@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
 import { Subject } from 'rxjs';
-import { takeUntil, catchError } from 'rxjs/operators';
+import { takeUntil, catchError, map } from 'rxjs/operators';
 import { RecipeModalState } from 'app/shared/interface/recipe-modal-state.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
@@ -18,20 +18,22 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   public recipe: Recipe;
   private categoryList: Category[];
   private destroy$ = new Subject();
-  public imageSrc: string;
 
   constructor(private route: ActivatedRoute, private editMode: EditModeService, private dbService: DatabaseService) {
     this.dbService.getCategories().subscribe(c => (this.categoryList = c));
   }
 
   public ngOnInit(): void {
+    const recipeId = this.route.snapshot.paramMap.get('rid');
+
     this.dbService
       .getRecipes()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(recipes => {
-        const recipeId = this.route.snapshot.paramMap.get('rid');
-        this.recipe = recipes.find(r => r.id === recipeId);
-        this.imageSrc = this.recipe.image ? this.recipe.image : './assets/food.jpg';
+      .pipe(
+        takeUntil(this.destroy$),
+        map(recipes => recipes.find(r => r.id === recipeId))
+      )
+      .subscribe(recipe => {
+        this.recipe = recipe;
       });
 
     this.editMode.editModeChange.pipe(takeUntil(this.destroy$)).subscribe((value: boolean) => {

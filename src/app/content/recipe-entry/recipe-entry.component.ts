@@ -18,7 +18,6 @@ export class RecipeEntryComponent implements OnInit {
   private categoryList: Category[];
   public categoryColors: string[];
   public errorMessage: string;
-  public imageSrc: string;
 
   constructor(
     private router: Router,
@@ -34,8 +33,6 @@ export class RecipeEntryComponent implements OnInit {
       const recipeCategories = this.categoryList.filter(c => recipeCategoriesIds.some(cat => cat.id === c.id));
       this.categoryColors = recipeCategories.map(c => c.color);
     });
-
-    this.imageSrc = this.recipe.image ? this.recipe.image : './assets/food.jpg';
   }
 
   public onRecipeClick(): void {
