@@ -15,7 +15,7 @@ import { Category } from 'app/content/interface/category.interface';
 export class RecipeModalComponent implements OnInit {
   @ViewChild('recipeModal') modalRef: ElementRef;
   public state: RecipeModalState;
-  public action = 'הוספת';
+  public action: string;
   private categoryList: Category[];
   public errorMessage: string;
   public loading = false;
