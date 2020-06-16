@@ -38,6 +38,8 @@ export class CategoryModalComponent implements OnInit {
     this.action = state && !isEmpty(state) ? 'עריכת' : 'הוספת';
     this.modalService.open(this.modalRef, {
       scrollable: true,
+      backdrop: 'static',
+      keyboard: false,
       beforeDismiss: () => {
         this.toastService.removeAll();
         return true;
