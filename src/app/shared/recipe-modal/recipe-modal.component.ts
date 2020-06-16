@@ -7,6 +7,7 @@ import { EditModeService } from '../edit-mode.service';
 import { DatabaseService } from '../database.service';
 import { Category } from 'app/content/interface/category.interface';
 import * as uuid from 'uuid';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-modal',
@@ -24,6 +25,7 @@ export class RecipeModalComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private toastService: ToastService,
+    private router: Router,
     private editModeService: EditModeService,
     private dbService: DatabaseService
   ) {}
@@ -58,7 +60,7 @@ export class RecipeModalComponent implements OnInit {
 
     const timeout = new Promise(resolve => setTimeout(resolve, 2000));
     try {
-      const id = uuid.v4();
+      const id = this.state.id ?? uuid.v4();
       const categoryIds = this.state.options.filter(o => o.selected).map(o => o.category.id);
       const categoryRefs = categoryIds.map(id => this.dbService.getCategoryRef(id));
 
@@ -67,6 +69,7 @@ export class RecipeModalComponent implements OnInit {
         : this.dbService.addRecipe(id, { ...omit(this.state, 'options'), categories: categoryRefs });
       await Promise.race([savePromise, timeout]);
       this.editModeService.toggleEditMode(false);
+      this.router.navigate(['/recipes', id]);
       modal.close('Ok click');
     } catch (error) {
       this.errorMessage = 'שגיאה בשמירת המתכון. בדקו את כל השדות';
