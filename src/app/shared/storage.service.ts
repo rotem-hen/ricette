@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from 'angularfire2/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +15,10 @@ export class StorageService {
 
   public async getDownloadUrlFromLink(link: string): Promise<string> {
     return this.afStorage.ref(link).getDownloadURL().toPromise();
+  }
+
+  public async removeImage(url: string): Promise<void> {
+    const photoRef = this.afStorage.storage.refFromURL(url);
+    return photoRef.delete();
   }
 }

@@ -88,7 +88,7 @@ export class RecipeEntryComponent implements OnInit {
 
   private async deleteRecipe(errorToast): Promise<void> {
     try {
-      await this.dbService.deleteRecipe(this.recipe.id);
+      await this.dbService.deleteRecipe(this.recipe.id, this.recipe.image);
     } catch (error) {
       this.errorMessage = 'שגיאה במחיקת המתכון. אנא נסו שוב';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });

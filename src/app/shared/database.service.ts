@@ -5,6 +5,7 @@ import { Recipe } from 'app/content/interface/recipe.interface';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,11 @@ export class DatabaseService {
   public categories$: AngularFirestoreCollection<Category>;
   public recipes$: AngularFirestoreCollection<Recipe>;
 
-  constructor(private firestore: AngularFirestore, private authService: AuthService) {
+  constructor(
+    private firestore: AngularFirestore,
+    private authService: AuthService,
+    private storageService: StorageService
+  ) {
     this.categories$ = firestore.collection<Category>('categories', ref =>
       ref.where('uid', '==', authService.loggedInUserId).orderBy('name')
     );
@@ -65,7 +70,8 @@ export class DatabaseService {
     return categoryRef.delete();
   }
 
-  public async deleteRecipe(id: string): Promise<void> {
+  public async deleteRecipe(id: string, imageUrl: string): Promise<void> {
+    this.storageService.removeImage(imageUrl);
     return this.recipes$.doc(id).delete();
   }
 
