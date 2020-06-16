@@ -6,6 +6,7 @@ import { isEmpty, omit } from 'lodash';
 import { ToastService } from 'app/shared/toast.service';
 import { EditModeService } from '../edit-mode.service';
 import { DatabaseService } from '../database.service';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-category-modal',
@@ -53,12 +54,14 @@ export class CategoryModalComponent implements OnInit {
 
     this.loading = true;
 
+    const timeout = new Promise(resolve => setTimeout(resolve, 2000));
     try {
-      if (this.editModeService.isEditMode) {
-        await this.dbService.editCategory(omit(this.state, 'options'));
-      } else {
-        this.state.id = await this.dbService.addCategory(omit(this.state, 'options'));
-      }
+      const id = uuid.v4();
+      const savePromise = this.editModeService.isEditMode
+        ? this.dbService.editCategory(omit(this.state, 'options'))
+        : this.dbService.addCategory(id, omit(this.state, 'options')).then(() => (this.state.id = id));
+
+      await Promise.race([savePromise, timeout]);
 
       this.recipeList.forEach((recipe: Recipe) => {
         if (this.isRecipeSelected(recipe.id) && !recipe.categories.some(c => c.id === this.state.id)) {

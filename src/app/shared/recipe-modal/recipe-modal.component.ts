@@ -6,6 +6,7 @@ import { ToastService } from 'app/shared/toast.service';
 import { EditModeService } from '../edit-mode.service';
 import { DatabaseService } from '../database.service';
 import { Category } from 'app/content/interface/category.interface';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-recipe-modal',
@@ -53,15 +54,16 @@ export class RecipeModalComponent implements OnInit {
 
     this.loading = true;
 
+    const timeout = new Promise(resolve => setTimeout(resolve, 2000));
     try {
+      const id = uuid.v4();
       const categoryIds = this.state.options.filter(o => o.selected).map(o => o.category.id);
       const categoryRefs = categoryIds.map(id => this.dbService.getCategoryRef(id));
 
-      if (this.editModeService.isEditMode) {
-        await this.dbService.editRecipe(this.state.id, { ...omit(this.state, 'options'), categories: categoryRefs })
-      } else {
-        await this.dbService.addRecipe({ ...omit(this.state, 'options'), categories: categoryRefs });
-      }
+      const savePromise = this.editModeService.isEditMode
+        ? this.dbService.editRecipe(this.state.id, { ...omit(this.state, 'options'), categories: categoryRefs })
+        : this.dbService.addRecipe(id, { ...omit(this.state, 'options'), categories: categoryRefs });
+      await Promise.race([savePromise, timeout]);
       this.editModeService.toggleEditMode(false);
       modal.close('Ok click');
     } catch (error) {
