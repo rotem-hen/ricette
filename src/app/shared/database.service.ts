@@ -35,8 +35,9 @@ export class DatabaseService {
     return this.recipes$.valueChanges({ idField: 'id' });
   }
 
-  public async editCategory({ id, name, color }: Category): Promise<void> {
-    return this.categories$.doc(id).update({ name, color });
+  public async editCategory({ id, name, color }: Category): Promise<string> {
+    await this.categories$.doc(id).update({ name, color });
+    return id;
   }
 
   public async editRecipe(id: string, recipe: Recipe): Promise<void> {
@@ -47,14 +48,16 @@ export class DatabaseService {
     return this.recipes$.doc(id).update({ image });
   }
 
-  public async addCategory(category: Category): Promise<string> {
-    const { id } = await this.categories$.add({ ...category, uid: this.authService.loggedInUserId });
-    return id;
+  public async addCategory(id: string, category: Category): Promise<void> {
+    return this.categories$
+      .doc(id)
+      .set({ ...category, uid: this.authService.loggedInUserId })
+      .catch(e => console.error(e));
   }
 
-  public async addRecipe(recipe: Recipe): Promise<string> {
-    const { id } = await this.recipes$.add({ ...recipe, uid: this.authService.loggedInUserId });
-    return id;
+  public async addRecipe(id: string, recipe: Recipe): Promise<void> {
+    const doc = this.recipes$.doc(id);
+    await doc.set({ ...recipe, uid: this.authService.loggedInUserId });
   }
 
   public async deleteCategory(id: string): Promise<void> {
