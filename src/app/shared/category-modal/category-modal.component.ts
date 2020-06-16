@@ -70,7 +70,7 @@ export class CategoryModalComponent implements OnInit {
       modal.close('Ok click');
     } catch (error) {
       this.errorMessage = 'שגיאה בשמירת הקטגוריה. בדקו את כל השדות';
-      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
 
     this.loading = false;

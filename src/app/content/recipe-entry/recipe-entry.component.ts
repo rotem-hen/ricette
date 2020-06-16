@@ -91,20 +91,20 @@ export class RecipeEntryComponent implements OnInit {
       await this.dbService.deleteRecipe(this.recipe.id);
     } catch (error) {
       this.errorMessage = 'שגיאה במחיקת המתכון. אנא נסו שוב';
-      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
   }
 
   private async deleteRecipeFromCategory(categoryId: string, errorToast): Promise<void> {
     if (Object.values(SpecialCategories).includes(categoryId)) {
       this.errorMessage = 'לא ניתן להסיר מהקטגוריה הנוכחית';
-      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
     try {
       await this.dbService.removeCategoryFromRecipe(this.recipe.id, categoryId);
     } catch (error) {
       this.errorMessage = 'שגיאה בהסרת המתכון מהקטגוריה. אנא נסו שוב';
-      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
   }
 }
