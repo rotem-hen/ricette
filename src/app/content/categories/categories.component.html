@@ -9,12 +9,12 @@
         style="background: {{ i.color }}"
         (click)="onCategoryClick(i)">
         <i
-            *ngIf="editModeService.isEditMode && i.id != CategoriesIds.UNCATEGORIZED"
+            *ngIf="editModeService.isEditMode && i.id != SpecialCategories.UNCATEGORIZED"
             class="x fas fa-times-circle"
             (click)="onDeleteClick(i, errorToast)"></i>
         {{ i.name }}
         <i
-            *ngIf="editModeService.isEditMode && i.id != CategoriesIds.UNCATEGORIZED"
+            *ngIf="editModeService.isEditMode && i.id != SpecialCategories.UNCATEGORIZED"
             class="edit-button far fa-edit square-icon"
             (click)="onEditClick(i, categoryModal)"></i>
     </div>

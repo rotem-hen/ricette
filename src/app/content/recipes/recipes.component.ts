@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { categoryViews, CategoriesIds } from '../category-views/category-views';
+import { categoryViews, SpecialCategories } from '../category-views/category-views';
 import { Recipe } from '../interface/recipe.interface';
 import { SearchService } from 'app/shared/search.service';
 import { Subject, combineLatest } from 'rxjs';
@@ -14,11 +14,11 @@ import { DatabaseService } from 'app/shared/database.service';
 })
 export class RecipesComponent implements OnInit, OnDestroy {
   public categoryName = '';
-  public searchCategoryName = categoryViews.find(c => c.id === CategoriesIds.SEARCH_RESULTS).name;
+  public searchCategoryName = categoryViews.find(c => c.id === SpecialCategories.SEARCH_RESULTS).name;
   public categoryId: string;
   public recipeList: Recipe[];
   private allRecipes: Recipe[];
-  public CategoriesIds = CategoriesIds;
+  public SpecialCategories = SpecialCategories;
   private destroy$ = new Subject();
 
   constructor(
@@ -44,7 +44,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
               : (recipe: Recipe): boolean => recipe.categories.some(c => c.id === category.id)
           );
 
-          if (this.categoryId === CategoriesIds.SEARCH_RESULTS) {
+          if (this.categoryId === SpecialCategories.SEARCH_RESULTS) {
             this.applySearch(this.searchService.searchTerm);
 
             this.searchService.searchTermChange.pipe(takeUntil(this.destroy$)).subscribe(value => {
@@ -56,7 +56,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
   }
 
   private applySearch(value: string): void {
-    if (this.categoryId !== CategoriesIds.SEARCH_RESULTS) return;
+    if (this.categoryId !== SpecialCategories.SEARCH_RESULTS) return;
     this.categoryName = `${this.searchCategoryName}: ${value}`;
     this.recipeList = this.allRecipes.filter(r => r.title.includes(value));
   }

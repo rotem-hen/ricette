@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '../interface/category.interface';
-import { categoryViews, CategoriesIds } from '../category-views/category-views';
+import { categoryViews, SpecialCategories } from '../category-views/category-views';
 import { EditModeService } from 'app/shared/edit-mode.service';
 import { CategoryModalState } from 'app/shared/interface/category-modal-state.interface';
 import { Recipe } from '../interface/recipe.interface';
@@ -19,7 +19,7 @@ export class CategoriesComponent implements OnInit {
   public categoryList: Category[];
   public recipeList: Recipe[];
   public editMode: boolean;
-  public CategoriesIds = CategoriesIds;
+  public SpecialCategories = SpecialCategories;
   public errorMessage: string;
 
   constructor(

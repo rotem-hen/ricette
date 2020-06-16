@@ -9,7 +9,7 @@ import { DocumentReference } from 'angularfire2/firestore';
 import { ToastService } from 'app/shared/toast.service';
 import { Button } from 'app/shared/interface/button.inteface';
 import { ConfirmService } from 'app/shared/confirm.service';
-import { CategoriesIds } from '../category-views/category-views';
+import { SpecialCategories } from '../category-views/category-views';
 
 @Component({
   selector: 'app-recipe-entry',
@@ -22,7 +22,6 @@ export class RecipeEntryComponent implements OnInit {
   private categoryList: Category[];
   public categoryColors: string[];
   public errorMessage: string;
-  private CategoriesIds = CategoriesIds;
 
   constructor(
     private router: Router,
@@ -58,7 +57,7 @@ export class RecipeEntryComponent implements OnInit {
   }
 
   public async onDeleteClick(errorToast): Promise<void> {
-    const isCategory = !(Object as any).values(this.CategoriesIds).includes(this.categoryId);
+    const isCategory = !Object.values(SpecialCategories).includes(this.categoryId);
     const confirmButtons: Button[] = [
       {
         text: 'מחיקת המתכון',
@@ -97,7 +96,7 @@ export class RecipeEntryComponent implements OnInit {
   }
 
   private async deleteRecipeFromCategory(categoryId: string, errorToast): Promise<void> {
-    if ((Object as any).values(CategoriesIds).includes(categoryId)) {
+    if (Object.values(SpecialCategories).includes(categoryId)) {
       this.errorMessage = 'לא ניתן להסיר מהקטגוריה הנוכחית';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
     }
