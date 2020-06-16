@@ -32,6 +32,7 @@ export class CategoryModalComponent implements OnInit {
   }
 
   public open(state: CategoryModalState): void {
+    this.toastService.removeAll();
     this.state = state && !isEmpty(state) ? state : this.getInitialState();
     this.action = state && !isEmpty(state) ? 'עריכת' : 'הוספת';
     this.modalService.open(this.modalRef, {
