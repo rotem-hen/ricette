@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { EditModeService } from 'app/shared/edit-mode.service';
 import { Router } from '@angular/router';
-import { CategoriesIds } from '../content/category-views/category-views';
+import { SpecialCategories } from '../content/category-views/category-views';
 import { SearchService } from 'app/shared/search.service';
 import { AuthService } from 'app/shared/auth.service';
 
@@ -20,12 +20,12 @@ export class NavbarComponent {
     },
     {
       text: 'כל המתכונים',
-      onClick: (): void => this.onNavButtonClick(['categories', CategoriesIds.ALL]),
+      onClick: (): void => this.onNavButtonClick(['categories', SpecialCategories.ALL]),
       iconClasses: 'fas fa-list-ul'
     },
     {
       text: 'מועדפים',
-      onClick: (): void => this.onNavButtonClick(['categories', CategoriesIds.FAVORITES]),
+      onClick: (): void => this.onNavButtonClick(['categories', SpecialCategories.FAVORITES]),
       iconClasses: 'far fa-star'
     }
   ];
@@ -57,8 +57,8 @@ export class NavbarComponent {
 
   public onSearchInputChange(event): void {
     this.searchService.setSearchTerm(event.target.value);
-    if (this.router.url !== `/categories/${CategoriesIds.SEARCH_RESULTS}`) {
-      this.router.navigate(['/categories', CategoriesIds.SEARCH_RESULTS]);
+    if (this.router.url !== `/categories/${SpecialCategories.SEARCH_RESULTS}`) {
+      this.router.navigate(['/categories', SpecialCategories.SEARCH_RESULTS]);
     }
   }
 }

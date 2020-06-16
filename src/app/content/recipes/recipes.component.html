@@ -2,8 +2,8 @@
 <app-recipe-entry *ngFor="let i of recipeList" [recipe]="i" [categoryId]="categoryId"></app-recipe-entry>
 <div class="no-recepies" *ngIf="!recipeList || !recipeList.length">
     <img src="./assets/cactus.png" />
-    <p *ngIf="categoryId !== CategoriesIds.SEARCH_RESULTS; else noResult">
-        אין כאן <span *ngIf="categoryId !== CategoriesIds.UNCATEGORIZED">עדיין </span>מתכונים
+    <p *ngIf="categoryId !== SpecialCategories.SEARCH_RESULTS; else noResult">
+        אין כאן <span *ngIf="categoryId !== SpecialCategories.UNCATEGORIZED">עדיין </span>מתכונים
     </p>
     <ng-template #noResult>
         <p>
