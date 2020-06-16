@@ -81,7 +81,7 @@ export class CategoriesComponent implements OnInit {
       await this.dbService.deleteCategory(category.id);
     } catch (error) {
       this.errorMessage = 'שגיאה במחיקת הקטגוריה. אנא נסו שוב';
-      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
   }
 }

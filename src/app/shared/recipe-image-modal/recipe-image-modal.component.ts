@@ -49,7 +49,7 @@ export class RecipeImageModalComponent {
       modal.close('Ok click');
     } catch (error) {
       this.errorMessage = 'שגיאה בשמירת התמונה';
-      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 8000 });
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
 
     this.loading = false;
