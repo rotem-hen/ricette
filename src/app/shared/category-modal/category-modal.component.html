@@ -16,7 +16,7 @@
         <div class="input-group-append">
             <span class="input-group-text">שם הקטגוריה</span>
         </div>
-        <input #categoryName [value]="this.state.name" (keyup)="onCategoryNameInputChange($event)" type="text" class="form-control category-name-input" />
+        <input #categoryName [value]="this.state.name" (input)="onCategoryNameInputChange($event)" type="text" class="form-control category-name-input" />
       </div>
       
       <div class="input-group mb-3">
