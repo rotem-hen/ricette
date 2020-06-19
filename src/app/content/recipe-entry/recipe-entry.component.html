@@ -2,7 +2,6 @@
     {{ errorMessage }}
 </ng-template>
 
-<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
 <div *ngIf="recipe" class="recipe-entry" (click)="onRecipeClick()">
     <figure>
         <img [src]="recipe.image || './assets/food.jpg'" />
