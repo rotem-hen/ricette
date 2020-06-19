@@ -13,12 +13,17 @@
     <div class="modal-body">
     
     <div class="ngx-img-container">
-        <ngx-img (onSelect)="onSelect($event)" (onReset)="reset()" [config]="{ crop: [{ ratio: 1 }], output: 'blob' }"></ngx-img>
+        <ngx-img [imgSrc]="existingImgDownloadUrl" (onSelect)="onSelect($event)" (onReset)="reset()" [config]="{ crop: [{ ratio: 1 }], output: 'blob' }"></ngx-img>
     </div>
 
     </div>
     <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
-    <button type="button" class="btn btn-success" [disabled]="!imageStr" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
+        <button type="button" class="btn btn-danger" (click)="onDeleteImage(modal, errorToast)">
+            <i class="far fa-trash-alt"></i>
+        </button>
+        <div class="action-buttons">
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
+            <button type="button" class="btn btn-success" [disabled]="!imageStr" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
+        </div>
     </div>
 </ng-template>
