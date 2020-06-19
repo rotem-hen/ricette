@@ -63,12 +63,19 @@ export class DatabaseService {
   public async deleteCategory(id: string): Promise<void> {
     const categoryRef = this.categories$.doc(id);
 
-    const query = this.recipes$.ref.where('categories', 'array-contains', categoryRef.ref);
-    query.get().then(recipes => {
-      recipes.forEach(doc => {
-        this.removeCategoryFromRecipeWithDoc(doc, id);
-      });
-    });
+    const query = this.recipes$.ref
+      .where('uid', '==', this.authService.loggedInUserId)
+      .where('categories', 'array-contains', categoryRef.ref);
+    try {
+      const relatedRecipies = await query.get();
+
+      for (const doc of relatedRecipies.docs) {
+        await this.removeCategoryFromRecipeWithDoc(doc, id);
+      }
+    } catch (e) {
+      console.error('Error removing category from recipies', e);
+      throw e;
+    }
 
     return categoryRef.delete();
   }
@@ -101,8 +108,14 @@ export class DatabaseService {
       });
   }
 
-  private removeCategoryFromRecipeWithDoc(doc: DocumentData, categoryId: string): void {
-    doc.ref.update({ categories: doc.data().categories.filter(c => c.id !== categoryId) });
+  private removeCategoryFromRecipeWithDoc(
+    doc: firebase.firestore.DocumentSnapshot<DocumentData>,
+    categoryId: string
+  ): Promise<void> {
+    return doc.ref.update({ categories: doc.data().categories.filter(c => c.id !== categoryId) }).catch(e => {
+      console.error(`Error removing category from recipe ${doc.id}`, e);
+      throw e;
+    });
   }
 
   public getCategoryRef(id: string): DocumentReference {
