@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, Input } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../toast.service';
 import { DatabaseService } from '../database.service';
@@ -11,6 +11,7 @@ import { StorageService } from '../storage.service';
   styleUrls: ['./recipe-image-modal.component.scss']
 })
 export class RecipeImageModalComponent {
+  @Input() existingImgDownloadUrl: string;
   @ViewChild('recipeImageModal') modalRef: ElementRef;
   public errorMessage: string;
   public loading = false;
@@ -55,6 +56,20 @@ export class RecipeImageModalComponent {
     this.loading = false;
   }
 
+  public async onDeleteImage(modal: NgbModalRef, errorToast): Promise<void> {
+    this.loading = true;
+
+    try {
+      await this.storageService.removeImage(this.existingImgDownloadUrl);
+      await this.dbService.editRecipeImage(this.recipeId, '');
+      modal.close('Ok click');
+    } catch (error) {
+      this.errorMessage = 'שגיאה בהסרת התמונה';
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
+    }
+
+    this.loading = false;
+  }
   public onSelect(image: string): void {
     this.imageStr = image;
   }

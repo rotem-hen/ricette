@@ -12,4 +12,4 @@
 </div>
 
 <app-recipe-modal #recipeModal></app-recipe-modal>
-<app-recipe-image-modal #recipeImageModal></app-recipe-image-modal>
+<app-recipe-image-modal #recipeImageModal [existingImgDownloadUrl]="recipe && recipe.image"></app-recipe-image-modal>

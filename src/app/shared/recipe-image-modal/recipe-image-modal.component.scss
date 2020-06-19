@@ -36,9 +36,21 @@
     }
 }
 
+.modal-footer {
+    justify-content: space-between;
+}
+
+.action-buttons>* {
+    margin: .25rem;
+}
+
 button {
     font-size: 30px;
     line-height: 30px;
+
+    > i {
+        font-size: 20px;
+    }
 }
 
 .ngx-img-container {
