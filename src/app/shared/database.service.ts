@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentReference, Docume
 import { Category } from 'app/content/interface/category.interface';
 import { Recipe } from 'app/content/interface/recipe.interface';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { StorageService } from './storage.service';
 
@@ -28,11 +28,11 @@ export class DatabaseService {
   }
 
   public getCategories(): Observable<Category[]> {
-    return this.categories$.valueChanges({ idField: 'id' });
+    return this.categories$.valueChanges({ idField: 'id' }).pipe(takeUntil(this.authService.logout$));
   }
 
   public getRecipes(): Observable<Recipe[]> {
-    return this.recipes$.valueChanges({ idField: 'id' });
+    return this.recipes$.valueChanges({ idField: 'id' }).pipe(takeUntil(this.authService.logout$));
   }
 
   public async editCategory({ id, name, color }: Category): Promise<string> {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, merge } from 'rxjs';
+import { Observable, of, merge, Subject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
@@ -22,15 +22,19 @@ export enum LoginState {
 })
 export class AuthService {
   user$: Observable<User>;
+  logout$ = new Subject();
   loggedInUserId: string;
   state: LoginState = LoginState.Loading;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
     this.user$ = afAuth.authState.pipe(
+      tap(user => {
+        if (user) this.updateUserData(user);
+      }),
       switchMap(user => (user ? afs.doc<User>(`users/${user.uid}`).valueChanges() : of(null)))
     );
 
-    this.user$.subscribe(user => {
+    this.user$.subscribe(async user => {
       this.state = user ? LoginState.LoggedIn : LoginState.LoggedOut;
       this.loggedInUserId = user ? user.uid : null;
     });
@@ -40,12 +44,11 @@ export class AuthService {
     const provider = new auth.GoogleAuthProvider();
     this.state = LoginState.Loading;
     await this.afAuth.auth.signInWithRedirect(provider);
-    const credentials = await this.afAuth.auth.getRedirectResult();
-    this.updateUserData(credentials.user);
-    this.router.navigate(['/categories']);
   }
 
   async signOut(): Promise<boolean> {
+    this.logout$.next();
+    this.logout$.complete();
     await this.afAuth.auth.signOut();
     return this.router.navigate(['/login']);
   }

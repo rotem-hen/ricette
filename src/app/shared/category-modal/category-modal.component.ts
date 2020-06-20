@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Recipe } from 'app/content/interface/recipe.interface';
 import { CategoryModalState } from '../interface/category-modal-state.interface';
@@ -7,19 +7,23 @@ import { ToastService } from 'app/shared/toast.service';
 import { EditModeService } from '../edit-mode.service';
 import { DatabaseService } from '../database.service';
 import * as uuid from 'uuid';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-category-modal',
   templateUrl: './category-modal.component.html',
   styleUrls: ['./category-modal.component.scss']
 })
-export class CategoryModalComponent implements OnInit {
+export class CategoryModalComponent implements OnInit, OnDestroy {
   @ViewChild('categoryModal') modalRef: ElementRef;
   public state: CategoryModalState;
   public action: string;
   private recipeList: Recipe[];
   public errorMessage: string;
   public loading = false;
+
+  private destroy$ = new Subject();
 
   constructor(
     private modalService: NgbModal,
@@ -29,7 +33,10 @@ export class CategoryModalComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.dbService.getRecipes().subscribe(r => (this.recipeList = r));
+    this.dbService
+      .getRecipes()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(r => (this.recipeList = r));
   }
 
   public open(state: CategoryModalState): void {
@@ -96,5 +103,10 @@ export class CategoryModalComponent implements OnInit {
       color: '',
       options: this.recipeList.map(recipe => ({ recipe, selected: false }))
     };
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
