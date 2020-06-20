@@ -20,7 +20,10 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
   constructor(private route: ActivatedRoute, private editMode: EditModeService, private dbService: DatabaseService) {
-    this.dbService.getCategories().subscribe(c => (this.categoryList = c));
+    this.dbService
+      .getCategories()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(c => (this.categoryList = c));
   }
 
   public ngOnInit(): void {

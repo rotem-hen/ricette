@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '../interface/category.interface';
 import { categoryViews, SpecialCategories } from '../category-views/category-views';
@@ -9,18 +9,22 @@ import { DatabaseService } from 'app/shared/database.service';
 import { ToastService } from 'app/shared/toast.service';
 import { ConfirmService } from 'app/shared/confirm.service';
 import { Button } from 'app/shared/interface/button.inteface';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent implements OnInit, OnDestroy {
   public categoryList: Category[];
   public recipeList: Recipe[];
   public editMode: boolean;
   public SpecialCategories = SpecialCategories;
   public errorMessage: string;
+
+  private destroy$ = new Subject();
 
   constructor(
     private router: Router,
@@ -32,8 +36,14 @@ export class CategoriesComponent implements OnInit {
 
   public ngOnInit(): void {
     const additionalViews = categoryViews.filter(c => !c.hidden);
-    this.dbService.getCategories().subscribe(c => (this.categoryList = c.concat(additionalViews)));
-    this.dbService.getRecipes().subscribe(r => (this.recipeList = r));
+    this.dbService
+      .getCategories()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(c => (this.categoryList = c.concat(additionalViews)));
+    this.dbService
+      .getRecipes()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(r => (this.recipeList = r));
   }
 
   public onCategoryClick(category: Category): void {
@@ -83,5 +93,10 @@ export class CategoriesComponent implements OnInit {
       this.errorMessage = 'שגיאה במחיקת הקטגוריה. אנא נסו שוב';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
