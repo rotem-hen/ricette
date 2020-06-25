@@ -2,9 +2,10 @@
     <div *ngSwitchCase="LoginState.Loading" class="loading">
         <i class="fas fa-spin fa-circle-notch"></i>
     </div>
-    <div *ngSwitchCase="LoginState.LoggedOut" class="login-page">
+    <div *ngSwitchCase="LoginState.LoggedOut" class="login-container">
+        <img src="../assets/cooking.png" />
+        מוכנים לבשל?
         <div class="login-pane">
-            <i class="fas fa-user-circle"></i>
             <button class="button btn btn-2 btn-2g" (click)="authService.googleSignin()">
                 <i class="fab fa-google"></i>
                 התחברו עם גוגל

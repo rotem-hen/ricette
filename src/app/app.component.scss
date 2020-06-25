@@ -7,30 +7,21 @@
     align-items: center;
 }
 
-.loading, .login-page {
+.loading, .login-container {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 50px;
+    font-size: 60px;
+    flex-direction: column;
+
+    img {
+        width: 350px;
+    }
 }
 
-.login-pane {
-    background-color: #d8f0ec;
-    padding: 20px 10px;
-    border-radius: 35px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 15px 15px #505c5d;
-
-    .fa-user-circle {
-        font-size: 60px;
-    }
-
-    .fa-google {
-        color: #4284f3;
-    }
+.fa-google {
+    color: #4284f3;
 }
 
 .button {
@@ -38,11 +29,11 @@
     word-spacing: 4px;
     font-size: 35px;
     line-height: 35px;
-    background-color: white;
-    color: #515C5D;
+    background-color: #d5b58b;
+    color: #426a75;
     padding: 10px 20px;
     margin: 10px 5px;
-    box-shadow: 5px 5px #515C5D;
+    box-shadow: 5px 5px #426a75;
 }
 
 app-navbar {
