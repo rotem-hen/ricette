@@ -10,7 +10,10 @@ import { ToastService } from 'app/shared/toast.service';
 import { ConfirmService } from 'app/shared/confirm.service';
 import { Button } from 'app/shared/interface/button.inteface';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
+import { AuthService } from 'app/shared/auth.service';
+import initialCategories from './initial-categories.json';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-categories',
@@ -31,10 +34,15 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     private editModeService: EditModeService,
     private dbService: DatabaseService,
     private toastService: ToastService,
-    private confirmService: ConfirmService
+    private confirmService: ConfirmService,
+    private authService: AuthService
   ) {}
 
   public ngOnInit(): void {
+    const sub = this.authService.newUser$.pipe(filter(uid => uid !== null)).subscribe((uid: string) => {
+      this.createInitialCategories(uid);
+      sub.unsubscribe();
+    });
     const additionalViews = categoryViews.filter(c => !c.hidden);
     this.dbService
       .getCategories()
@@ -93,6 +101,18 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       this.errorMessage = 'שגיאה במחיקת הקטגוריה. אנא נסו שוב';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
+  }
+
+  private async createInitialCategories(uid: string): Promise<void> {
+    const promises = initialCategories.map(({ name, color }: Category) =>
+      this.dbService.addCategory(uuid.v4(), {
+        uid,
+        name,
+        color
+      })
+    );
+
+    await Promise.all(promises);
   }
 
   public ngOnDestroy(): void {

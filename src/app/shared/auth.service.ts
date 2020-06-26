@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, merge, Subject } from 'rxjs';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
@@ -23,6 +23,7 @@ export enum LoginState {
 export class AuthService {
   user$: Observable<User>;
   logout$ = new Subject();
+  newUser$ = new BehaviorSubject(null);
   loggedInUserId: string;
   state: LoginState = LoginState.Loading;
 
@@ -53,8 +54,12 @@ export class AuthService {
     return this.router.navigate(['/login']);
   }
 
-  private updateUserData({ uid, email }: User): Promise<void> {
+  private async updateUserData({ uid, email }: User): Promise<void> {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${uid}`);
+    const userData = await userRef.get().toPromise();
+    if (!userData.exists) {
+      this.newUser$.next(uid);
+    }
     return userRef.set({ uid, email }, { merge: true });
   }
 }
