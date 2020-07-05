@@ -1,7 +1,7 @@
 <app-content-title [title]="categoryName"></app-content-title>
 <app-recipe-entry *ngFor="let i of recipeList" [recipe]="i" [categoryId]="categoryId"></app-recipe-entry>
 <div class="no-recepies" *ngIf="!recipeList || !recipeList.length">
-    <img src="./assets/cactus.png" />
+    <img src="./assets/cactus.png" width="140" height="140" />
     <p *ngIf="categoryId !== SpecialCategories.SEARCH_RESULTS; else noResult">
         אין כאן <span *ngIf="categoryId !== SpecialCategories.UNCATEGORIZED">עדיין </span>מתכונים
     </p>
