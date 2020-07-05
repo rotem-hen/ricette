@@ -41,6 +41,9 @@ export class RecipeImageModalComponent {
     this.loading = true;
 
     try {
+      if (this.existingImgDownloadUrl) {
+        await this.storageService.removeImage(this.existingImgDownloadUrl);
+      }
       const imageBlob = await (await fetch(this.imageStr)).blob();
       const fileName = `recipeImages/${uuid.v4()}`;
       await this.storageService.upload(fileName, imageBlob);
