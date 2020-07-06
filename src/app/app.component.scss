@@ -20,20 +20,24 @@
     }
 }
 
-.fa-google {
-    color: #4284f3;
-}
-
 .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     letter-spacing: 2px;
     word-spacing: 4px;
     font-size: 35px;
     line-height: 35px;
-    background-color: #d5b58b;
+    background-color: #ffe7c6;
     color: #426a75;
     padding: 10px 20px;
     margin: 10px 5px;
     box-shadow: 5px 5px #426a75;
+    border: 1px solid #426a75;
+
+    > img {
+        width: 30px;
+    } 
 }
 
 app-navbar {
