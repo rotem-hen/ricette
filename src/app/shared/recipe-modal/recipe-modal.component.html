@@ -33,18 +33,24 @@
         </div>
         
         <div class="form-is-favourite-checkbox">
-            <input class="form-checkbox" type="checkbox" [(ngModel)]="state.isFavourite" />
-            <label class="form-check-label">הוספה למועדפים</label>
+            <label class="container form-check-label">
+                <input class="form-checkbox" [(ngModel)]="state.isFavourite" type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+                הוספה למועדפים
+            </label>
         </div>
 
         <div class="row" *ngIf="state.options.length" class="add-categories-to-recipe">
             <div class="col">
                 <div ngbDropdown placement="bottom" class="d-inline-block">
                     <button class="btn btn-outline-primary" ngbDropdownToggle>הוסיפו קטגוריות למתכון</button>
-                        <div ngbDropdownMenu>
+                    <div ngbDropdownMenu>
                         <div class="form-categories-checkboxes" *ngFor="let option of state.options">
-                            <input class="form-checkbox" type="checkbox" [(ngModel)]="option.selected" />
-                            <label class="form-check-label">{{ option.category.name }}</label>
+                            <label class="container form-check-label">
+                                <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked">
+                                <span class="checkmark"></span>
+                                {{ option.category.name }}
+                            </label>
                         </div>
                     </div>
                 </div>
