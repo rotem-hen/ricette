@@ -31,9 +31,13 @@
             <button class="btn btn-outline-primary" ngbDropdownToggle>הוסיפו מתכונים לקטגוריה</button>
             <div ngbDropdownMenu>
               <div class="form-recipes-checkboxes" *ngFor="let option of state.options">
-              <input class="form-checkbox" type="checkbox" [(ngModel)]="option.selected" />
-              <label class="form-check-label">{{ option.recipe.title }}</label>
-            </div></div>
+                <label class="container form-check-label">
+                  <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                  {{ option.recipe.title }}
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
