@@ -17,7 +17,6 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   public recipe: Recipe;
   public state: RecipeEditState;
   private categoryList: Category[];
-  private recipeCategories: string[];
   private destroy$ = new Subject();
 
   constructor(
@@ -63,8 +62,6 @@ export class RecipePageComponent implements OnInit, OnDestroy {
             return { category, selected: this.recipe.categories.some(c => c.id === category.id) };
           })
         };
-
-        this.recipeCategories = null;
       });
   }
 
