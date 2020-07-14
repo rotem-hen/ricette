@@ -35,6 +35,16 @@ export class AddButtonComponent {
 
   public openRecipeEdit(): void {
     const newId = uuid.v4();
-    this.router.navigate(['/recipes', newId]);
+    this.router.navigate(['/recipes', newId], {
+      state: { currentCategory: this.getCurrentCategory() }
+    });
+  }
+
+  private getCurrentCategory(): string {
+    const [host, type, id] = this.router.url.split('/');
+    if (type !== 'categories') {
+      return;
+    }
+    return id;
   }
 }

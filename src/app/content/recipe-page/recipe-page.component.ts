@@ -49,7 +49,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
             image: '',
             newRecipe: true,
             options: this.categoryList.map(category => {
-              return { category, selected: false };
+              return { category, selected: history.state.currentCategory === category.id };
             })
           };
           this.editModeService.toggleEditMode(true);
