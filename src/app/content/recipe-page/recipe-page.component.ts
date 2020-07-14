@@ -1,10 +1,10 @@
 import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
-import { Subject } from 'rxjs';
-import { takeUntil, catchError, map } from 'rxjs/operators';
-import { RecipeModalState } from 'app/shared/interface/recipe-modal-state.interface';
+import { Subject, combineLatest } from 'rxjs';
+import { takeUntil, catchError, map, tap } from 'rxjs/operators';
+import { RecipeEditState } from 'app/shared/interface/recipe-edit-state.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
 
@@ -14,12 +14,17 @@ import { Category } from '../interface/category.interface';
   styleUrls: ['./recipe-page.component.scss']
 })
 export class RecipePageComponent implements OnInit, OnDestroy {
-  @ViewChild('recipeModal') recipeModalRef;
   public recipe: Recipe;
+  public state: RecipeEditState;
   private categoryList: Category[];
+  private recipeCategories: string[];
   private destroy$ = new Subject();
 
-  constructor(private route: ActivatedRoute, private editMode: EditModeService, private dbService: DatabaseService) {
+  constructor(
+    private route: ActivatedRoute,
+    public editModeService: EditModeService,
+    private dbService: DatabaseService
+  ) {
     this.dbService
       .getCategories()
       .pipe(takeUntil(this.destroy$))
@@ -27,29 +32,40 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    const recipeId = this.route.snapshot.paramMap.get('rid');
-
-    this.dbService
-      .getRecipes()
-      .pipe(
-        takeUntil(this.destroy$),
-        map(recipes => recipes.find(r => r.id === recipeId))
-      )
-      .subscribe(recipe => {
-        this.recipe = recipe;
-      });
-
-    this.editMode.editModeChange.pipe(takeUntil(this.destroy$)).subscribe((value: boolean) => {
-      if (value) {
-        const state: RecipeModalState = {
+    let recipeId;
+    combineLatest([
+      this.route.paramMap.pipe(tap(params => (recipeId = params.get('rid')))),
+      this.dbService.getRecipes()
+    ])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([params, recipes]) => {
+        this.recipe = recipes.find(r => r.id === recipeId);
+        if (!this.recipe) {
+          this.state = {
+            id: recipeId,
+            title: '',
+            isFavourite: false,
+            ingredients: '',
+            prep: '',
+            image: '',
+            newRecipe: true,
+            options: this.categoryList.map(category => {
+              return { category, selected: false };
+            })
+          };
+          this.editModeService.toggleEditMode(true);
+          return;
+        }
+        this.state = {
           ...this.recipe,
+          newRecipe: false,
           options: this.categoryList.map(category => {
             return { category, selected: this.recipe.categories.some(c => c.id === category.id) };
           })
         };
-        this.recipeModalRef.open(state);
-      }
-    });
+
+        this.recipeCategories = null;
+      });
   }
 
   public onWhatsappClick(): void {

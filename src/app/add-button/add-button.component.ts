@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { EditModeService } from 'app/shared/edit-mode.service';
+import * as uuid from 'uuid';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-button',
@@ -9,7 +11,7 @@ import { EditModeService } from 'app/shared/edit-mode.service';
 export class AddButtonComponent {
   public showPopover = false;
 
-  constructor(private editModeService: EditModeService) {}
+  constructor(private editModeService: EditModeService, private router: Router) {}
 
   public togglePopover(): void {
     this.editModeService.toggleEditMode(false);
@@ -31,7 +33,8 @@ export class AddButtonComponent {
     categoryModal.open({});
   }
 
-  public openRecipeModal(recipeModal): void {
-    recipeModal.open({});
+  public openRecipeEdit(): void {
+    const newId = uuid.v4();
+    this.router.navigate(['/recipes', newId]);
   }
 }

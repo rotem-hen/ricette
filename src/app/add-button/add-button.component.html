@@ -1,10 +1,9 @@
 <div class="popover-menu" [class.shown]="showPopover" [class.hidden]="!showPopover">
     <button class="button btn btn-2 btn-2g" (click)="openCategoryModal(categoryModal)">הוספת קטגוריה</button>
-    <button class="button btn btn-2 btn-2g" (click)="openRecipeModal(recipeModal)">הוספת מתכון</button>
+    <button class="button btn btn-2 btn-2g" (click)="openRecipeEdit()">הוספת מתכון</button>
 </div>
 <i
 (click)='togglePopover()'
 class="fas fa-plus plus-icon"></i>
 
 <app-category-modal #categoryModal></app-category-modal>
-<app-recipe-modal #recipeModal></app-recipe-modal>

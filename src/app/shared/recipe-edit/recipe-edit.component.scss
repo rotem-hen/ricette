@@ -3,12 +3,6 @@
     top: 10px;
 }
 
-.modal-title {
-    width: 100%;
-    font-size: 35px;
-    line-height: 35px;
-}
-
 .mask {
     height: 100vh;
     display: flex;
@@ -35,62 +29,86 @@
     }
 }
 
-.input-group input, .input-group textarea {
-    width: 80%;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    font-size: 25px;
-    line-height: 25px;
-    color: black;
-}
-
-.input-group .input-group-text {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    width: 80px;
-    font-size: 30px;
+.recipe-edit-container {
+    margin: 0px 10px;
     line-height: 30px;
-    color: black;
-}
-
-label, button {
     font-size: 30px;
-    line-height: 30px;
-}
-
-.form-control {
-    box-sizing: border-box;
-}
-
-.add-categories-to-recipe {
-    margin: 40px 0px;
-}
-
-.col {
-    padding: 0;
-}
-
-.form-is-favourite-checkbox {
-    margin: 16px 0px;
-}
-
-.form-categories-checkboxes {
     display: flex;
-    align-items: center;
-}
+    flex-direction: column;
+    justify-content: center;
 
-.form-check-label {
-    margin: 5px 5px;
-    width: 85%;
-    text-align: right;
-}
+    .recipe-name-input {
+        margin-top: 60px;
+        margin-bottom: 20px;
+        font-size: 50px;
+        line-height: 50px;
+        font-weight: bold;
+        color: #515C5D;
+    }
+    
+    .form-is-favourite-checkbox {
+        margin-bottom: 20px;
+    }
+    
+    .add-categories-to-recipe {
+        margin-bottom: 20px;
+    
+        .col {
+            padding: 0;
+        }
 
-.form-checkbox {
-    margin: 5px 5px;
+        .dropdown-toggle {
+            line-height: 30px;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .form-categories-checkboxes {
+            display: flex;
+            align-items: center;
+
+            .checkbox-category-name {
+                padding: 2px 3px;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .form-check-label {
+        margin: 5px;
+        line-height: 30px;
+        font-size: 30px;
+        text-align: right;
+        width: 80%;
+    }
+    
+    textarea {
+        margin-bottom: 20px;
+        list-style-type: none;
+        color: #515C5D;
+        flex: 1 1 auto;
+        position: relative;
+    }
+    
+    .buttons-container {
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        
+        button {
+            line-height: 30px;
+            font-size: 30px;
+            width: 40px;
+            height: 50px;
+            margin: 5px;
+            border: 1px solid #b7b9b7;
+            border-radius: 45px;
+        }
+    }
 }
 
 // checkboxes

@@ -1,0 +1,39 @@
+<ng-template #errorToast>
+    {{ errorMessage }}
+</ng-template>
+
+<div class="recipe-edit-container" *ngIf="state">
+    <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
+    <input [value]="state.title" (input)="onRecipeNameInputChange($event)" type="text" class="recipe-name-input" placeholder="שם המתכון" />
+    <div class="form-is-favourite-checkbox">
+        <label class="container form-check-label">
+            <input class="form-checkbox" [(ngModel)]="state.isFavourite" type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+            הוספה למועדפים
+        </label>
+    </div>
+    <div class="row" *ngIf="state.options.length" class="add-categories-to-recipe">
+        <div class="col">
+            <div ngbDropdown placement="bottom" class="d-inline-block">
+                <button class="btn btn-outline-primary" ngbDropdownToggle>בחרו קטגוריות למתכון</button>
+                <div ngbDropdownMenu>
+                    <div class="form-categories-checkboxes" *ngFor="let option of state.options">
+                        <label class="container form-check-label">
+                            <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            <div class="checkbox-category-name" style="background: {{ option.category.color }};">
+                                {{ option.category.name }}
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <textarea [value]="state.ingredients" (input)="onIngredientsInputChange($event)" type="text" class="ingredients-input" rows="5" placeholder="מרכיבים"></textarea>
+    <textarea [value]="state.prep" (input)="onPrepInputChange($event)" type="text" class="prep-input" rows="10" placeholder="אופן הכנה"></textarea>
+    <div class="buttons-container">
+        <button type="button" class="btn btn-light" (click)="onCancel()">ביטול</button>
+        <button type="button" class="btn btn-success" (click)="onOK(errorToast)" ngbAutofocus>שמירה</button>
+    </div>
+</div>
