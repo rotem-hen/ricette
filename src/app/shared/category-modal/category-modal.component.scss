@@ -71,6 +71,10 @@ label, button {
 
 .add-recipes-to-category {
     margin: 40px 0px;
+
+    .dropdown-toggle {
+        line-height: 30px;
+    }
 }
 
 .col {

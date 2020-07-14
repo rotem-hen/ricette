@@ -9,9 +9,9 @@ import { Location } from '@angular/common';
 export class ContentTitleComponent {
   @Input() title: string;
 
-  constructor(private _location: Location) {}
+  constructor(private location: Location) {}
 
   public onBack(): void {
-    this._location.back();
+    this.location.back();
   }
 }
