@@ -12,6 +12,19 @@
     border-radius: 25px;
 }
 
+.labels-container {
+    margin: 10px 20px;
+}
+
+.category-label {
+    display: inline-block;
+    padding: 4px;
+    font-size: 20px;
+    line-height: 20px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
 li {
     margin: 10px;
     list-style-type: none;
