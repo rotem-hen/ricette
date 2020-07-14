@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
-import { RecipeModalState } from 'app/shared/interface/recipe-modal-state.interface';
+import { RecipeEditState } from 'app/shared/interface/recipe-edit-state.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
 import { DocumentReference } from 'angularfire2/firestore';
@@ -46,14 +46,10 @@ export class RecipeEntryComponent implements OnInit {
     }
   }
 
-  public onEditClick(recipeModal): void {
-    const state: RecipeModalState = {
-      ...this.recipe,
-      options: this.categoryList.map(category => {
-        return { category, selected: this.recipe.categories.some(c => c.id === category.id) };
-      })
-    };
-    recipeModal.open(state);
+  public onEditClick(): void {
+    this.router.navigate(['/recipes', this.recipe.id]).then(() => {
+      this.editService.toggleEditMode(true);
+    });
   }
 
   public async onDeleteClick(errorToast): Promise<void> {

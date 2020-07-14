@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryModalComponent } from './category-modal/category-modal.component';
-import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
+import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ColorPickerModule } from 'ngx-color-picker';
@@ -13,7 +13,7 @@ import { RecipeImageModalComponent } from './recipe-image-modal/recipe-image-mod
 @NgModule({
   declarations: [
     CategoryModalComponent,
-    RecipeModalComponent,
+    RecipeEditComponent,
     ToastsContainerComponent,
     ConfirmComponent,
     RecipeImageModalComponent
@@ -21,7 +21,7 @@ import { RecipeImageModalComponent } from './recipe-image-modal/recipe-image-mod
   imports: [CommonModule, NgbModule, ColorPickerModule, NgxImgModule.forRoot(), FormsModule],
   exports: [
     CategoryModalComponent,
-    RecipeModalComponent,
+    RecipeEditComponent,
     ToastsContainerComponent,
     ConfirmComponent,
     RecipeImageModalComponent
