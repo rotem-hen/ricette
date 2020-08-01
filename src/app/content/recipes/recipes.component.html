@@ -1,4 +1,8 @@
-<app-content-title [title]="categoryName"></app-content-title>
+<app-content-title
+    [title]="categoryName"
+    [onEdit]="onEditCategory(categoryModal)"
+    [showEdit]="isStandardCategory()">
+</app-content-title>
 <app-recipe-entry *ngFor="let i of recipeList" [recipe]="i" [categoryId]="categoryId"></app-recipe-entry>
 <div class="no-recepies" *ngIf="!recipeList || !recipeList.length">
     <img src="./assets/cactus.png" width="140" height="140" />
@@ -11,3 +15,5 @@
         </p>
     </ng-template>
 </div>
+
+<app-category-modal #categoryModal></app-category-modal>

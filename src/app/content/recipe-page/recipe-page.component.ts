@@ -16,6 +16,7 @@ import { Category } from '../interface/category.interface';
 export class RecipePageComponent implements OnInit, OnDestroy {
   public recipe: Recipe;
   public state: RecipeEditState;
+  public isNew: boolean;
   private categoryList: Category[];
   private destroy$ = new Subject();
 
@@ -28,6 +29,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
       .getCategories()
       .pipe(takeUntil(this.destroy$))
       .subscribe(c => (this.categoryList = c));
+    this.isNew = history.state.isNew;
   }
 
   public ngOnInit(): void {

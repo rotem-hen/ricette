@@ -1,7 +1,6 @@
-import { Component, ViewChild, ElementRef, OnInit, OnDestroy, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { RecipeEditState } from '../interface/recipe-edit-state.interface';
-import { omit, isEmpty } from 'lodash';
+import { omit } from 'lodash';
 import { ToastService } from 'app/shared/toast.service';
 import { EditModeService } from '../edit-mode.service';
 import { DatabaseService } from '../database.service';
@@ -12,6 +11,8 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Location } from '@angular/common';
 import { cloneDeep } from 'lodash';
+import { Button } from '../interface/button.inteface';
+import { ConfirmService } from '../confirm.service';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -20,6 +21,7 @@ import { cloneDeep } from 'lodash';
 })
 export class RecipeEditComponent implements OnInit, OnDestroy {
   @Input() state: RecipeEditState;
+  @Input() isNew: boolean;
   private originalState: RecipeEditState;
   public action: string;
   private categoryList: Category[];
@@ -32,6 +34,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private editModeService: EditModeService,
     private dbService: DatabaseService,
+    private confirmService: ConfirmService,
     private location: Location
   ) {}
 
@@ -43,20 +46,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       .subscribe(c => (this.categoryList = c));
   }
 
-  // public open(state: RecipeEditState): void {
-  //   this.toastService.removeAll();
-  //   this.state = state && !isEmpty(state) ? state : this.getInitialState();
-  //   this.action = state && !isEmpty(state) ? 'עריכת' : 'הוספת';
-  //   this.modalService.open(this.modalRef, {
-  //     scrollable: true,
-  //     backdrop: 'static',
-  //     keyboard: false,
-  //     beforeDismiss: () => {
-  //       this.toastService.removeAll();
-  //       return true;
-  //     }
-  //   });
-  // }
   private closeEditMode(): void {
     this.editModeService.toggleEditMode(false);
   }
@@ -65,6 +54,33 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     Object.assign(this.state, this.originalState);
     this.closeEditMode();
     if (this.state.newRecipe) this.location.back();
+  }
+
+  public onDeleteClick(errorToast): void {
+    const confirmButtons: Button[] = [
+      {
+        text: 'מחיקת המתכון',
+        color: '#ecbdc5',
+        action: (): Promise<void> => this.deleteRecipe(errorToast)
+      }
+    ];
+
+    this.confirmService
+      .confirm(`מחיקת המתכון '${this.state.title}'`, `האם למחוק את המתכון?`, confirmButtons)
+      .then()
+      .catch(() => {
+        // User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)
+      });
+  }
+
+  private async deleteRecipe(errorToast): Promise<void> {
+    try {
+      await this.dbService.deleteRecipe(this.state.id, this.state.image);
+      this.router.navigate(['/categories']);
+    } catch (error) {
+      this.errorMessage = 'שגיאה במחיקת המתכון. אנא נסו שוב';
+      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
+    }
   }
 
   public async onOK(errorToast): Promise<void> {

@@ -18,7 +18,7 @@
 </div>
 
 <ng-template #recipeEdit>
-    <app-recipe-edit [state]="state"></app-recipe-edit>
+    <app-recipe-edit [state]="state" [isNew]="isNew"></app-recipe-edit>
 </ng-template>
 
 <app-recipe-image-modal #recipeImageModal [existingImgDownloadUrl]="recipe && recipe.image"></app-recipe-image-modal>
