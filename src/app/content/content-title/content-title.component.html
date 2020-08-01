@@ -3,5 +3,11 @@
         (click)="onBack()">
     <i class="fa fa-chevron-right"></i>
     </button>
-    <span style="width:100%">{{ title }}</span>
+    <span style="width:100%">{{ title }}
+        <i
+            *ngIf="onEdit && editModeService.isEditMode && showEdit"
+            class="far fa-edit"
+            (click)="onEditClick()"
+            ></i>
+    </span>
 </div>

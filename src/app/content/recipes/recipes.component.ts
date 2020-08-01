@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { categoryViews, SpecialCategories } from '../category-views/category-views';
 import { Recipe } from '../interface/recipe.interface';
@@ -6,6 +6,7 @@ import { SearchService } from 'app/shared/search.service';
 import { Subject, combineLatest } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DatabaseService } from 'app/shared/database.service';
+import { CategoryModalState } from 'app/shared/interface/category-modal-state.interface';
 
 @Component({
   selector: 'app-recipes',
@@ -14,8 +15,10 @@ import { DatabaseService } from 'app/shared/database.service';
 })
 export class RecipesComponent implements OnInit, OnDestroy {
   public categoryName = '';
-  public searchCategoryName = categoryViews.find(c => c.id === SpecialCategories.SEARCH_RESULTS).name;
   public categoryId: string;
+  public categoryColor: string;
+
+  public searchCategoryName = categoryViews.find(c => c.id === SpecialCategories.SEARCH_RESULTS).name;
   public recipeList: Recipe[];
   private allRecipes: Recipe[];
   public SpecialCategories = SpecialCategories;
@@ -36,6 +39,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
           const allCategories = categories.concat(categoryViews);
           const category = allCategories.find(c => c.id === this.categoryId);
           this.categoryName = category.name;
+          this.categoryColor = category.color;
 
           this.allRecipes = recipes;
           this.recipeList = recipes.filter(
@@ -59,6 +63,29 @@ export class RecipesComponent implements OnInit, OnDestroy {
     if (this.categoryId !== SpecialCategories.SEARCH_RESULTS) return;
     this.categoryName = `${this.searchCategoryName}: ${value}`;
     this.recipeList = this.allRecipes.filter(r => r.title.includes(value));
+  }
+
+  public onEditCategory(modalRef): () => void {
+    return (): void => {
+      const state: CategoryModalState = {
+        id: this.categoryId,
+        name: this.categoryName,
+        color: this.categoryColor,
+        options: this.allRecipes.map(recipe => {
+          return { recipe, selected: recipe.categories.some(c => c.id === this.categoryId) };
+        })
+      };
+      modalRef.open(state);
+    };
+  }
+
+  public isStandardCategory(): boolean {
+    return (
+      this.categoryId !== SpecialCategories.ALL &&
+      this.categoryId !== SpecialCategories.FAVORITES &&
+      this.categoryId !== SpecialCategories.SEARCH_RESULTS &&
+      this.categoryId !== SpecialCategories.UNCATEGORIZED
+    );
   }
 
   public ngOnDestroy(): void {
