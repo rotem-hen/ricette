@@ -32,6 +32,7 @@
     "core-js": "^2.4.1",
     "cropperjs": "^1.5.6",
     "firebase": "^7.14.4",
+    "lodash": "^4.17.19",
     "ngx-color-picker": "^9.1.0",
     "ngx-img": "^10.19.3",
     "rxjs": "^6.5.5",
