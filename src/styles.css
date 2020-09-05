@@ -9,14 +9,19 @@
   src: url(assets/fonts/stanga-light-aaa1.ttf) format("opentype");
 }
 
+@font-face {
+  font-family: Rounded;
+  src: url(assets/fonts/MPLUSRounded1c-Light.ttf) format("opentype");
+}
+
 body {
-    font-family: 'Stanga', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    height: 100%;
-    margin: 0;
-    color: #515C5D;
-    background-color: #fffaf5;
-    text-align: right;
-    direction: rtl;
+  font-family: 'Stanga', 'Rounded', 'Lucida Sans Regular', Verdana, sans-serif;
+  height: 100%;
+  margin: 0;
+  color: #515C5D;
+  background-color: #fffaf5;
+  text-align: right;
+  direction: rtl;
 }
 
 .button {
