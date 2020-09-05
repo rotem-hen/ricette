@@ -1,6 +1,6 @@
 {
-  "name": "ricette",
-  "short_name": "ricette",
+  "name": "Ricette",
+  "short_name": "Ricette",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
