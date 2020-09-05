@@ -13,7 +13,7 @@
     <div class="modal-body">
     
     <div class="ngx-img-container">
-        <ngx-img [imgSrc]="existingImgDownloadUrl" (onSelect)="onSelect($event)" (onReset)="reset()" [config]="{ crop: [{ ratio: 1 }], output: 'blob' }"></ngx-img>
+        <ngx-img [imgSrc]="existingImgDownloadUrl" (onSelect)="onSelect($event)" (onReset)="reset()" [config]="{ crop: [{ ratio: 1, maxWidth: 1000, maxHeight: 1000 }], output: 'blob', fileSize: 10000 }"></ngx-img>
     </div>
 
     </div>
