@@ -26,6 +26,11 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   public editMode: boolean;
   public SpecialCategories = SpecialCategories;
   public errorMessage: string;
+  public showMessages = {
+    categoriesMessage: false,
+    iosMessage: !this.messageShown('iosMessage') && this.isIos(),
+    androidMessage: !this.messageShown('androidMessage') && this.isAndroid()
+  };
 
   private destroy$ = new Subject();
 
@@ -41,6 +46,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     const sub = this.authService.newUser$.pipe(filter(uid => uid !== null)).subscribe((uid: string) => {
       this.createInitialCategories(uid);
+      this.showMessages.categoriesMessage = true;
       sub.unsubscribe();
     });
     const additionalViews = categoryViews.filter(c => !c.hidden);
@@ -113,6 +119,26 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     );
 
     await Promise.all(promises);
+  }
+
+  public gotIt(item: string): void {
+    this.showMessages[item] = false;
+    localStorage.setItem(item, 'true');
+  }
+
+  public messageShown(item: string): boolean {
+    return !!localStorage.getItem(item);
+  }
+
+  private isIos(): boolean {
+    return (
+      ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform) ||
+      (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+    );
+  }
+
+  private isAndroid(): boolean {
+    return navigator.userAgent.includes('android');
   }
 
   public ngOnDestroy(): void {
