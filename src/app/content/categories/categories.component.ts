@@ -28,8 +28,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   public errorMessage: string;
   public showMessages = {
     categoriesMessage: false,
-    iosMessage: !this.messageShown('iosMessage') && this.isIos(),
-    androidMessage: !this.messageShown('androidMessage') && this.isAndroid()
+    iosMessage: !this.messageShown('iosMessage') && this.isIos() && !this.isPwa(),
+    androidMessage: !this.messageShown('androidMessage') && this.isAndroid() && !this.isPwa()
   };
 
   private destroy$ = new Subject();
@@ -139,6 +139,10 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   private isAndroid(): boolean {
     return navigator.userAgent.includes('android');
+  }
+
+  private isPwa(): boolean {
+    return window.matchMedia('(display-mode: standalone)').matches;
   }
 
   public ngOnDestroy(): void {
