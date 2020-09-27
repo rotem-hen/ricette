@@ -22,6 +22,11 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
   private recipeList: Recipe[];
   public errorMessage: string;
   public loading = false;
+  public NAME_MAX_LENGTH = 25;
+
+  get remainingChars(): number {
+    return this.NAME_MAX_LENGTH - this.state.name.length;
+  }
 
   private destroy$ = new Subject();
 

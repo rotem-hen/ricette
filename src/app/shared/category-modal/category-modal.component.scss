@@ -39,6 +39,17 @@
     width: 80%;
 }
 
+.counter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 5px;
+    font-size: 18px;
+    line-height: 18px;
+    z-index: 3;
+    color: #989898;
+}
+
 .input-group input, .input-group button {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
