@@ -43,6 +43,9 @@ export class AuthService {
 
   async googleSignin(): Promise<void> {
     const provider = new auth.GoogleAuthProvider();
+    provider.setCustomParameters({
+      prompt: 'select_account'
+    });
     this.state = LoginState.Loading;
     await this.afAuth.auth.signInWithRedirect(provider);
   }
