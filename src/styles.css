@@ -10,12 +10,12 @@
 }
 
 @font-face {
-  font-family: Rounded;
-  src: url(assets/fonts/MPLUSRounded1c-Light.ttf) format("opentype");
+  font-family: Euro;
+  src: url(assets/fonts/eurof35.ttf) format("opentype");
 }
 
 body {
-  font-family: 'Stanga', 'Rounded', 'Lucida Sans Regular', Verdana, sans-serif;
+  font-family: 'Stanga', 'Euro', 'Lucida Sans Regular', Verdana, sans-serif;
   height: 100%;
   margin: 0;
   color: #515C5D;
