@@ -17,6 +17,8 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   public recipe: Recipe;
   public state: RecipeEditState;
   public isNew: boolean;
+  public activeStage = -1;
+  public striked = new Set();
   private categoryList: Category[];
   private destroy$ = new Subject();
 
@@ -82,6 +84,22 @@ ${this.recipe.prep}`;
 
   public onImageClick(recipeImageModal): void {
     recipeImageModal.open(this.recipe.id);
+  }
+
+  public onStageClick(i: number): void {
+    this.activeStage = this.activeStage === i ? -1 : i;
+  }
+
+  public onIngredientClick(i: number): void {
+    this.striked[this.striked.has(i) ? 'delete' : 'add'](i);
+  }
+
+  public isStriked(i: number): boolean {
+    return this.striked.has(i);
+  }
+
+  public isSubtitle(ing: string): boolean {
+    return ing.endsWith(':');
   }
 
   public ngOnDestroy(): void {

@@ -26,14 +26,24 @@
 }
 
 li {
-    margin: 10px;
+    margin: 6px;
+    padding: 4px;
     list-style-type: none;
     line-height: 30px;
     font-size: 30px;
+    border-radius: 5px;
 }
 
-.prep li {
-    list-style-type: circle;
+.subtitle {
+    font-weight: bolder;
+}
+
+.striked {
+    text-decoration: line-through;
+}
+
+.active {
+    background-color: #ffe8cb;
 }
 
 .share {
