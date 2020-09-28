@@ -70,7 +70,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   }
 
   public onWhatsappClick(): void {
-    let text = `${this.recipe.title}
+    const text = `${this.recipe.title}
 
 מצרכים:
 ${this.recipe.ingredients}
@@ -78,8 +78,7 @@ ${this.recipe.ingredients}
 אופן הכנה:
 ${this.recipe.prep}`;
 
-    text = encodeURI(text);
-    location.href = `whatsapp://send?text=${text}`;
+    location.href = `whatsapp://send?text=${encodeURIComponent(text)}`;
   }
 
   public onImageClick(recipeImageModal): void {
