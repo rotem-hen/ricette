@@ -44,10 +44,10 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    const sub = this.authService.newUser$.pipe(filter(uid => uid !== null)).subscribe((uid: string) => {
+    this.authService.newUser$.pipe(filter(uid => uid !== null)).subscribe((uid: string) => {
       this.createInitialCategories(uid);
       this.showMessages.categoriesMessage = true;
-      sub.unsubscribe();
+      this.authService.newUser$.next(null);
     });
     const additionalViews = categoryViews.filter(c => !c.hidden);
     this.dbService
