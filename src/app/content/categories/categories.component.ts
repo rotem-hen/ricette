@@ -138,7 +138,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
 
   private isAndroid(): boolean {
-    return navigator.userAgent.includes('android');
+    return navigator.userAgent.toLowerCase().includes('android');
   }
 
   private isPwa(): boolean {
