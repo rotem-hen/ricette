@@ -31,7 +31,7 @@ export class NavbarComponent {
   ];
 
   constructor(
-    private router: Router,
+    public router: Router,
     public editModeService: EditModeService,
     public searchService: SearchService,
     public authService: AuthService
@@ -42,6 +42,8 @@ export class NavbarComponent {
   }
 
   public onEditClick(): void {
+    const [host, type, id] = this.router.url.split('/');
+    if (type === 'recipes' && this.editModeService.isEditMode) return;
     this.editModeService.toggleEditMode();
   }
 
