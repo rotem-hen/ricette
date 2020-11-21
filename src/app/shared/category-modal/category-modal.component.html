@@ -34,9 +34,9 @@
 
       <div class="row" *ngIf="state.options.length" class="add-recipes-to-category">
         <div class="col">
-          <div ngbDropdown placement="bottom" class="d-inline-block">
+          <div ngbDropdown placement="bottom-right" container="body">
             <button class="btn btn-outline-primary" ngbDropdownToggle>בחרו מתכונים לקטגוריה</button>
-            <div ngbDropdownMenu>
+            <div ngbDropdownMenu class="dropdown-recipe-list">
               <div class="form-recipes-checkboxes" *ngFor="let option of state.options">
                 <label class="container form-check-label">
                   <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked">

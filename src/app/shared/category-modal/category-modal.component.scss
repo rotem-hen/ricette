@@ -107,6 +107,11 @@ label, button {
     margin: 5px 5px;
 }
 
+.dropdown-recipe-list {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
 // checkboxes
 
 .container {
