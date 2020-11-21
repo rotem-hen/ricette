@@ -1,7 +1,10 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
   <i
     class="far fa-edit square-icon"
-    [ngClass]="{ green: this.editModeService.isEditMode && this.router.url.split('/')[1] !== 'recipes' }"
+    [ngClass]="{
+      green: this.editModeService.isEditMode && this.router.url.split('/')[1] !== 'recipes',
+      disabled: this.editModeService.isEditMode && this.router.url.split('/')[1] === 'recipes'
+    }"
     (click)="onEditClick()"
     style="cursor: pointer;">
   </i>

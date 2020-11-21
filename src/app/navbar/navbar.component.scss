@@ -52,6 +52,11 @@ li {
     color: #91d824;
 }
 
+.disabled {
+    color: #d4d4d4;
+    cursor: default !important;
+}
+
 @media (min-width: 768px)
 {
     li {
