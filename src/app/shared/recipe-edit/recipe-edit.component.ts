@@ -44,6 +44,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       .getCategories()
       .pipe(takeUntil(this.destroy$))
       .subscribe(c => (this.categoryList = c));
+    if (!this.isNew) this.isNew = history.state.isNew;
   }
 
   private closeEditMode(): void {
