@@ -10,7 +10,7 @@ export class ConfirmService {
   constructor(private modalService: NgbModal) {}
 
   public confirm(title: string, message: string, buttons: Button[]): Promise<boolean> {
-    const modalRef = this.modalService.open(ConfirmComponent, { size: 'sm', windowClass: 'confirm' });
+    const modalRef = this.modalService.open(ConfirmComponent, { size: 'sm', windowClass: 'confirm', centered: true });
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
     modalRef.componentInstance.buttons = buttons;

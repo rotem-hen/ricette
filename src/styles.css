@@ -32,6 +32,10 @@ body {
   top: 0;
 }
 
+.modal-content {
+  margin: 0 auto;
+}
+
 .button {
   border-radius: 15px;
   text-align: center;
