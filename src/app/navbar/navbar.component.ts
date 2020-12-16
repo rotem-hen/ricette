@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { SpecialCategories } from '../content/category-views/category-views';
 import { SearchService } from 'app/shared/search.service';
 import { AuthService } from 'app/shared/auth.service';
+import { PopupService } from '../shared/popup.service';
+import { Button } from 'app/shared/interface/button.inteface';
 
 @Component({
   selector: 'app-navbar',
@@ -27,6 +29,11 @@ export class NavbarComponent {
       text: 'מועדפים',
       onClick: (): void => this.onNavButtonClick(['categories', SpecialCategories.FAVORITES]),
       iconClasses: 'far fa-star'
+    },
+    {
+      text: 'צרו קשר',
+      onClick: (): void => this.onContactClick(),
+      iconClasses: 'far fa-star'
     }
   ];
 
@@ -34,7 +41,8 @@ export class NavbarComponent {
     public router: Router,
     public editModeService: EditModeService,
     public searchService: SearchService,
-    public authService: AuthService
+    public authService: AuthService,
+    public popupService: PopupService
   ) {}
 
   public onMenuClick(): void {
@@ -55,6 +63,16 @@ export class NavbarComponent {
     this.editModeService.toggleEditMode(false);
     this.collapsed = true;
     this.router.navigate(link);
+  }
+
+  public onContactClick(): void {
+    this.collapsed = true;
+    this.popupService
+      .contact()
+      .then()
+      .catch(() => {
+        // User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)
+      });
   }
 
   public onSearchInputChange(event): void {
