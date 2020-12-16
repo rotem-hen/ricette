@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
-import { RecipeEditState } from 'app/shared/interface/recipe-edit-state.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
 import { DocumentReference } from 'angularfire2/firestore';
@@ -10,6 +9,7 @@ import { ToastService } from 'app/shared/toast.service';
 import { Button } from 'app/shared/interface/button.inteface';
 import { PopupService } from 'app/shared/popup.service';
 import { SpecialCategories } from '../category-views/category-views';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-recipe-entry',
@@ -28,7 +28,8 @@ export class RecipeEntryComponent implements OnInit {
     public editService: EditModeService,
     private dbService: DatabaseService,
     private toastService: ToastService,
-    private popupService: PopupService
+    private popupService: PopupService,
+    private analytics: AngularFireAnalytics
   ) {}
 
   public ngOnInit(): void {
@@ -84,6 +85,7 @@ export class RecipeEntryComponent implements OnInit {
 
   private async deleteRecipe(errorToast): Promise<void> {
     try {
+      this.analytics.logEvent('recipe_delete', { name: this.recipe.title, location: 'recipes-list' });
       await this.dbService.deleteRecipe(this.recipe.id, this.recipe.image);
     } catch (error) {
       this.errorMessage = 'שגיאה במחיקת המתכון. אנא נסו שוב';

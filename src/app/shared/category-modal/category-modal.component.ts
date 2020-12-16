@@ -9,6 +9,7 @@ import { DatabaseService } from '../database.service';
 import * as uuid from 'uuid';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-category-modal',
@@ -34,7 +35,8 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private toastService: ToastService,
     private editModeService: EditModeService,
-    private dbService: DatabaseService
+    private dbService: DatabaseService,
+    private analytics: AngularFireAnalytics
   ) {}
 
   public ngOnInit(): void {
@@ -84,6 +86,7 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
           this.dbService.removeCategoryFromRecipe(recipe.id, this.state.id);
         }
       });
+      this.analytics.logEvent('category_edit', { name: this.state.name, isEdit: this.editModeService.isEditMode });
       this.editModeService.toggleEditMode(false);
       modal.close('Ok click');
     } catch (error) {

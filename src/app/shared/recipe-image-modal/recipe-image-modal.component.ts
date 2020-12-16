@@ -5,6 +5,7 @@ import { DatabaseService } from '../database.service';
 import * as uuid from 'uuid';
 import { StorageService } from '../storage.service';
 import { debounce } from 'lodash';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-recipe-image-modal',
@@ -23,7 +24,8 @@ export class RecipeImageModalComponent {
     private modalService: NgbModal,
     private toastService: ToastService,
     private dbService: DatabaseService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private analytics: AngularFireAnalytics
   ) {}
 
   public open(recipeId: string): void {
@@ -53,6 +55,7 @@ export class RecipeImageModalComponent {
       await this.dbService.editRecipeImage(this.recipeId, url);
 
       document.removeEventListener('crop', this.startCrop);
+      this.analytics.logEvent('reciple_image_edit', { recipeId: this.recipeId });
       modal.close('Ok click');
     } catch (error) {
       this.errorMessage = 'שגיאה בשמירת התמונה';

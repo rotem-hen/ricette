@@ -13,6 +13,7 @@ import { Location } from '@angular/common';
 import { cloneDeep } from 'lodash';
 import { Button } from '../interface/button.inteface';
 import { PopupService } from '../popup.service';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -35,7 +36,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     private editModeService: EditModeService,
     private dbService: DatabaseService,
     private popupService: PopupService,
-    private location: Location
+    private location: Location,
+    private analytics: AngularFireAnalytics
   ) {}
 
   public ngOnInit(): void {
@@ -77,6 +79,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   private async deleteRecipe(errorToast): Promise<void> {
     try {
       await this.dbService.deleteRecipe(this.state.id, this.state.image);
+      this.analytics.logEvent('recipe_delete', { name: this.state.title, location: 'recipe-page' });
       this.router.navigate(['/categories']);
     } catch (error) {
       this.errorMessage = 'שגיאה במחיקת המתכון. אנא נסו שוב';
@@ -104,6 +107,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
         : this.dbService.editRecipe(this.state.id, { ...omit(this.state, 'options'), categories: categoryRefs });
       await Promise.race([savePromise, timeout]);
       this.editModeService.toggleEditMode(false);
+      this.analytics.logEvent('recipe_edit', { name: this.state.title, isEdit: !this.state.newRecipe });
       this.router.navigate(['/recipes', id]);
       this.closeEditMode();
     } catch (error) {

@@ -12,6 +12,7 @@ import { Button } from 'app/shared/interface/button.inteface';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 import { AuthService } from 'app/shared/auth.service';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 import initialCategories from './initial-categories.json';
 import * as uuid from 'uuid';
 
@@ -40,7 +41,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     private dbService: DatabaseService,
     private toastService: ToastService,
     private popupService: PopupService,
-    private authService: AuthService
+    private authService: AuthService,
+    private analytics: AngularFireAnalytics
   ) {}
 
   public ngOnInit(): void {
@@ -48,6 +50,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       this.createInitialCategories(uid);
       this.showMessages.categoriesMessage = true;
       this.authService.newUser$.next(null);
+      this.analytics.logEvent('user_registered', {});
     });
     const additionalViews = categoryViews.filter(c => !c.hidden);
     this.dbService
@@ -76,6 +79,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       })
     };
     categoryModal.open(state);
+    this.analytics.logEvent('category_edit', { name: category.name });
   }
 
   public async onDeleteClick(category: Category, errorToast): Promise<void> {
@@ -103,6 +107,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   private async deleteCategory(category: Category, errorToast): Promise<void> {
     try {
       await this.dbService.deleteCategory(category.id);
+      this.analytics.logEvent('category_delete', { name: category.name });
     } catch (error) {
       this.errorMessage = 'שגיאה במחיקת הקטגוריה. אנא נסו שוב';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
