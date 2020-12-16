@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { RouterModule } from '@angular/router';
 import { ContentComponent } from './content/content.component';
 import { AuthGuard } from './shared/auth.guard';
@@ -35,10 +36,12 @@ import { AngularFireStorage } from 'angularfire2/storage';
       { path: 'login', component: AppComponent },
       { path: '', component: AppComponent },
       { path: '**', component: AppComponent }
-    ])
+    ]),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule
   ],
   exports: [],
-  providers: [AngularFirestore, AngularFireAuth, AngularFireStorage],
+  providers: [AngularFirestore, AngularFireAuth, AngularFireStorage, ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
