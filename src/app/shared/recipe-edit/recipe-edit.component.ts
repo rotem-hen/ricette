@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
 import { Location } from '@angular/common';
 import { cloneDeep } from 'lodash';
 import { Button } from '../interface/button.inteface';
-import { ConfirmService } from '../confirm.service';
+import { PopupService } from '../popup.service';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -34,7 +34,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private editModeService: EditModeService,
     private dbService: DatabaseService,
-    private confirmService: ConfirmService,
+    private popupService: PopupService,
     private location: Location
   ) {}
 
@@ -66,7 +66,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       }
     ];
 
-    this.confirmService
+    this.popupService
       .confirm(`מחיקת המתכון '${this.state.title}'`, `האם למחוק את המתכון?`, confirmButtons)
       .then()
       .catch(() => {

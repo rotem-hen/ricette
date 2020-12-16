@@ -8,7 +8,7 @@ import { Category } from '../interface/category.interface';
 import { DocumentReference } from 'angularfire2/firestore';
 import { ToastService } from 'app/shared/toast.service';
 import { Button } from 'app/shared/interface/button.inteface';
-import { ConfirmService } from 'app/shared/confirm.service';
+import { PopupService } from 'app/shared/popup.service';
 import { SpecialCategories } from '../category-views/category-views';
 
 @Component({
@@ -28,7 +28,7 @@ export class RecipeEntryComponent implements OnInit {
     public editService: EditModeService,
     private dbService: DatabaseService,
     private toastService: ToastService,
-    private confirmService: ConfirmService
+    private popupService: PopupService
   ) {}
 
   public ngOnInit(): void {
@@ -70,7 +70,7 @@ export class RecipeEntryComponent implements OnInit {
       });
     }
 
-    this.confirmService
+    this.popupService
       .confirm(
         `מחיקת המתכון '${this.recipe.title}'`,
         isCategory ? `בחרו האם להסיר את המתכון מהקטגוריה או למחוק אותו לגמרי` : `האם למחוק את המתכון?`,

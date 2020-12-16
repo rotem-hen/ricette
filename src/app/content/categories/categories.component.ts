@@ -7,7 +7,7 @@ import { CategoryModalState } from 'app/shared/interface/category-modal-state.in
 import { Recipe } from '../interface/recipe.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { ToastService } from 'app/shared/toast.service';
-import { ConfirmService } from 'app/shared/confirm.service';
+import { PopupService } from 'app/shared/popup.service';
 import { Button } from 'app/shared/interface/button.inteface';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
@@ -39,7 +39,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     private editModeService: EditModeService,
     private dbService: DatabaseService,
     private toastService: ToastService,
-    private confirmService: ConfirmService,
+    private popupService: PopupService,
     private authService: AuthService
   ) {}
 
@@ -87,7 +87,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       }
     ];
 
-    this.confirmService
+    this.popupService
       .confirm(
         `מחיקת הקטגוריה '${category.name}'`,
         `האם אתם בטוחים שאתם רוצים למחוק את הקטגוריה?
