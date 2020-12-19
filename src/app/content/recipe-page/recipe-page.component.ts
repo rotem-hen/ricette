@@ -27,46 +27,48 @@ export class RecipePageComponent implements OnInit, OnDestroy {
     public editModeService: EditModeService,
     private dbService: DatabaseService
   ) {
-    this.dbService
-      .getCategories()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(c => (this.categoryList = c));
     this.isNew = history.state.isNew;
   }
 
   public ngOnInit(): void {
-    let recipeId;
-    combineLatest([
-      this.route.paramMap.pipe(tap(params => (recipeId = params.get('rid')))),
-      this.dbService.getRecipes()
-    ])
+    combineLatest([this.route.paramMap, this.dbService.getRecipes(), this.dbService.getCategories()])
       .pipe(takeUntil(this.destroy$))
-      .subscribe(([params, recipes]) => {
+      .subscribe(([params, recipes, categories]) => {
+        this.categoryList = categories;
+        const recipeId = params.get('rid');
         this.recipe = recipes.find(r => r.id === recipeId);
         if (!this.recipe) {
-          this.state = {
-            id: recipeId,
-            title: '',
-            isFavourite: false,
-            ingredients: '',
-            prep: '',
-            image: '',
-            newRecipe: true,
-            options: this.categoryList.map(category => {
-              return { category, selected: history.state.currentCategory === category.id };
-            })
-          };
+          this.initNewRecipe(recipeId);
           this.editModeService.toggleEditMode(true);
           return;
         }
-        this.state = {
-          ...this.recipe,
-          newRecipe: false,
-          options: this.categoryList.map(category => {
-            return { category, selected: this.recipe.categories.some(c => c.id === category.id) };
-          })
-        };
+        this.initExistingRecipe();
       });
+  }
+
+  private initExistingRecipe(): void {
+    this.state = {
+      ...this.recipe,
+      newRecipe: false,
+      options: this.categoryList.map(category => {
+        return { category, selected: this.recipe.categories.some(c => c.id === category.id) };
+      })
+    };
+  }
+
+  private initNewRecipe(recipeId: string): void {
+    this.state = {
+      id: recipeId,
+      title: '',
+      isFavourite: false,
+      ingredients: '',
+      prep: '',
+      image: '',
+      newRecipe: true,
+      options: this.categoryList.map(category => {
+        return { category, selected: history.state.currentCategory === category.id };
+      })
+    };
   }
 
   public onWhatsappClick(): void {
