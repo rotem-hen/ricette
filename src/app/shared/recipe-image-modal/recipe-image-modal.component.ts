@@ -55,7 +55,7 @@ export class RecipeImageModalComponent {
       await this.dbService.editRecipeImage(this.recipeId, url);
 
       document.removeEventListener('crop', this.startCrop);
-      this.analytics.logEvent('reciple_image_edit', { recipeId: this.recipeId });
+      this.analytics.logEvent('recipe_image_edit', { recipeId: this.recipeId });
       modal.close('Ok click');
     } catch (error) {
       this.errorMessage = 'שגיאה בשמירת התמונה';
