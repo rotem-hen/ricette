@@ -1,3 +1,7 @@
+<ng-template #copyResultToast>
+    {{ copyResultMessage }}
+</ng-template>
+
 <div *ngIf="recipe && !editModeService.isEditMode; else recipeEdit">
     <app-content-title [title]="recipe.title"></app-content-title>
     <div class="labels-container">
@@ -23,7 +27,11 @@
             [class.active]="activeStage === i"
         >{{ p }}</li>
     </div>
-    <i (click)="onWhatsappClick()" class="share fab fa-whatsapp-square"></i>
+    <div class="share-container">
+        <i (click)="onWhatsappClick()" class="share fab fa-whatsapp" style="color:#25d366"></i>
+        <i (click)="onEmailClick()" class="share fas fa-envelope" style="color:#d54c3d"></i>
+        <i (click)="onCopyClick(copyResultToast)" class="share far fa-copy" style="color:#4285f3" *ngIf="shouldShowCopyButton()"></i>
+    </div>
 </div>
 
 <ng-template #recipeEdit>

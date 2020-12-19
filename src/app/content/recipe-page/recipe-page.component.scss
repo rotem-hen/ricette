@@ -46,10 +46,19 @@ li {
     background-color: #ffe8cb;
 }
 
-.share {
-    font-size: 50px;
-    margin: 20px;
-    bottom: 0;
+.share-container {
     position: absolute;
-    color: #038879;
+    margin: 40px 20px;
+    bottom: 0;
+
+    .share {
+        font-size: 30px;
+        margin: 5px;
+        color: #038879;
+        background: #ffffff;
+        border-radius: 100%;
+        text-shadow: 0px 0px black;
+        padding: 8px;
+        box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12), 0px 3px 5px -1px rgba(0, 0, 0, 0.2);
+    }
 }

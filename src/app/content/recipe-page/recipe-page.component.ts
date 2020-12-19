@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
 import { Subject, combineLatest } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { RecipeEditState } from 'app/shared/interface/recipe-edit-state.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
+import { ToastService } from 'app/shared/toast.service';
 
 @Component({
   selector: 'app-recipe-page',
@@ -19,13 +20,15 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   public isNew: boolean;
   public activeStage = -1;
   public striked = new Set();
+  public copyResultMessage: string;
   private categoryList: Category[];
   private destroy$ = new Subject();
 
   constructor(
     private route: ActivatedRoute,
     public editModeService: EditModeService,
-    private dbService: DatabaseService
+    private dbService: DatabaseService,
+    private toastService: ToastService
   ) {
     this.isNew = history.state.isNew;
   }
@@ -71,16 +74,37 @@ export class RecipePageComponent implements OnInit, OnDestroy {
     };
   }
 
-  public onWhatsappClick(): void {
-    const text = `${this.recipe.title}
+  public shouldShowCopyButton(): boolean {
+    return 'clipboard' in navigator;
+  }
+
+  private getShareText(): string {
+    return `${this.recipe.title}
 
 מצרכים:
 ${this.recipe.ingredients}
-
+    
 אופן הכנה:
 ${this.recipe.prep}`;
+  }
 
-    location.href = `whatsapp://send?text=${encodeURIComponent(text)}`;
+  public onWhatsappClick(): void {
+    location.href = `whatsapp://send?text=${encodeURIComponent(this.getShareText())}`;
+  }
+
+  public onEmailClick(): void {
+    location.href = `mailto://?body=${encodeURIComponent(this.getShareText())}`;
+  }
+
+  public async onCopyClick(copyResultToast): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(this.getShareText());
+      this.copyResultMessage = 'המתכון הועתק בהצלחה';
+      this.toastService.show(copyResultToast, { classname: 'bg-success text-light', delay: 4000 });
+    } catch (error) {
+      this.copyResultMessage = 'ההעתקה נכשלה, נסו שוב או שתפו בדרך אחרת';
+      this.toastService.show(copyResultToast, { classname: 'bg-danger text-light', delay: 4000 });
+    }
   }
 
   public onImageClick(recipeImageModal): void {
