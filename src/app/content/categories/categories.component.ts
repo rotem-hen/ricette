@@ -109,7 +109,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       await this.dbService.deleteCategory(category.id);
       this.analytics.logEvent('category_delete', { name: category.name });
     } catch (error) {
-      this.analytics.logEvent('error', { type: 'category_delete', message: error });
+      this.analytics.logEvent('error', { type: 'category_delete', message: error.message });
       this.errorMessage = 'שגיאה במחיקת הקטגוריה. אנא נסו שוב';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }

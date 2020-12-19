@@ -82,7 +82,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       this.analytics.logEvent('recipe_delete', { name: this.state.title, location: 'recipe-page' });
       this.router.navigate(['/categories']);
     } catch (error) {
-      this.analytics.logEvent('error', { type: 'recipe_delete', message: error });
+      this.analytics.logEvent('error', { type: 'recipe_delete', message: error.message });
       this.errorMessage = 'שגיאה במחיקת המתכון. אנא נסו שוב';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
@@ -112,7 +112,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       this.router.navigate(['/recipes', id]);
       this.closeEditMode();
     } catch (error) {
-      this.analytics.logEvent('error', { type: 'recipe_edit', message: error });
+      this.analytics.logEvent('error', { type: 'recipe_edit', message: error.message });
       this.errorMessage = 'שגיאה בשמירת המתכון. בדקו את כל השדות';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }

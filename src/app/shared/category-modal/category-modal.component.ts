@@ -90,7 +90,7 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
       this.editModeService.toggleEditMode(false);
       modal.close('Ok click');
     } catch (error) {
-      this.analytics.logEvent('error', { type: 'category_edit', message: error });
+      this.analytics.logEvent('error', { type: 'category_edit', message: error.message });
       this.errorMessage = 'שגיאה בשמירת הקטגוריה. בדקו את כל השדות';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }

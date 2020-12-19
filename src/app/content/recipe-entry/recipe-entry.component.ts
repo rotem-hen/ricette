@@ -88,7 +88,7 @@ export class RecipeEntryComponent implements OnInit {
       this.analytics.logEvent('recipe_delete', { name: this.recipe.title, location: 'recipes-list' });
       await this.dbService.deleteRecipe(this.recipe.id, this.recipe.image);
     } catch (error) {
-      this.analytics.logEvent('error', { type: 'recipe_delete', message: error });
+      this.analytics.logEvent('error', { type: 'recipe_delete', message: error.message });
       this.errorMessage = 'שגיאה במחיקת המתכון. אנא נסו שוב';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
@@ -102,7 +102,7 @@ export class RecipeEntryComponent implements OnInit {
     try {
       await this.dbService.removeCategoryFromRecipe(this.recipe.id, categoryId);
     } catch (error) {
-      this.analytics.logEvent('error', { type: 'recipe_delete_from_category', message: error });
+      this.analytics.logEvent('error', { type: 'recipe_delete_from_category', message: error.message });
       this.errorMessage = 'שגיאה בהסרת המתכון מהקטגוריה. אנא נסו שוב';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }

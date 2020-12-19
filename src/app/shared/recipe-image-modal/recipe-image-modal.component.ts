@@ -58,7 +58,7 @@ export class RecipeImageModalComponent {
       this.analytics.logEvent('recipe_image_edit', { recipeId: this.recipeId });
       modal.close('Ok click');
     } catch (error) {
-      this.analytics.logEvent('error', { type: 'recipe_image_edit', message: error });
+      this.analytics.logEvent('error', { type: 'recipe_image_edit', message: error.message });
       this.errorMessage = 'שגיאה בשמירת התמונה';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
@@ -75,7 +75,7 @@ export class RecipeImageModalComponent {
       this.analytics.logEvent('recipe_image_delete', { recipeId: this.recipeId });
       modal.close('Ok click');
     } catch (error) {
-      this.analytics.logEvent('error', { type: 'recipe_image_delete', message: error });
+      this.analytics.logEvent('error', { type: 'recipe_image_delete', message: error.message });
       this.errorMessage = 'שגיאה בהסרת התמונה';
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
