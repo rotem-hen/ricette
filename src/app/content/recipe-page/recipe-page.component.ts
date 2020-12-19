@@ -93,7 +93,7 @@ ${this.recipe.prep}`;
   }
 
   public onEmailClick(): void {
-    location.href = `mailto://?body=${encodeURIComponent(this.getShareText())}`;
+    location.href = `mailto:?body=${encodeURIComponent(this.getShareText())}`;
   }
 
   public async onCopyClick(copyResultToast): Promise<void> {
