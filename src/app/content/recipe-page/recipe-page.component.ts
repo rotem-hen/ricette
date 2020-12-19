@@ -1,9 +1,9 @@
-import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
 import { Subject, combineLatest } from 'rxjs';
-import { takeUntil, catchError, map, tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { RecipeEditState } from 'app/shared/interface/recipe-edit-state.interface';
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
