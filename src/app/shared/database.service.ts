@@ -73,7 +73,7 @@ export class DatabaseService {
         await this.removeCategoryFromRecipeWithDoc(doc, id);
       }
     } catch (e) {
-      console.error('Error removing category from recipies', e);
+      console.error('Error removing category from recipes', e);
       throw e;
     }
 
