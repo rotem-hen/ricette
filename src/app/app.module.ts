@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -19,6 +19,7 @@ import { ContentComponent } from './content/content.component';
 import { AuthGuard } from './shared/auth.guard';
 import { UpdateNotificationComponent } from './update-notification/update-notification.component';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { GlobalErrorHandler } from './shared/globalErrorHandler';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, AddButtonComponent, UpdateNotificationComponent],
@@ -41,7 +42,17 @@ import { AngularFireStorage } from 'angularfire2/storage';
     AngularFireAnalyticsModule
   ],
   exports: [],
-  providers: [AngularFirestore, AngularFireAuth, AngularFireStorage, ScreenTrackingService, UserTrackingService],
+  providers: [
+    AngularFirestore,
+    AngularFireAuth,
+    AngularFireStorage,
+    ScreenTrackingService,
+    UserTrackingService,
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
