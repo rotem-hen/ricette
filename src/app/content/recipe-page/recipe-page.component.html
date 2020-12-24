@@ -6,7 +6,7 @@
     <app-content-title [title]="recipe.title"></app-content-title>
     <div class="labels-container">
         <div *ngFor="let o of state.options" style="display: inline-block">
-            <div *ngIf="o.selected" style="background: {{ o.category.color }}" class="category-label">
+            <div *ngIf="o.selected" style="background: {{ o.category.color }}" class="category-label" (click)="onLabelClick(o.category.id)">
                 {{ o.category.name }}
             </div>
         </div>

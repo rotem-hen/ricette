@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
 import { Subject, combineLatest } from 'rxjs';
@@ -26,6 +26,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     public editModeService: EditModeService,
     private dbService: DatabaseService,
     private toastService: ToastService
@@ -105,6 +106,10 @@ ${this.recipe.prep}`;
       this.copyResultMessage = 'ההעתקה נכשלה, נסו שוב או שתפו בדרך אחרת';
       this.toastService.show(copyResultToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
+  }
+
+  public onLabelClick(categoryId: string): void {
+    this.router.navigate(['categories', categoryId]);
   }
 
   public onImageClick(recipeImageModal): void {
