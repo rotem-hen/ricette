@@ -1,0 +1,20 @@
+export const PresetColors = [
+  '#f1c8c8',
+  '#fcad91',
+  '#ffd6c2',
+  '#fecb8d',
+  '#f6e193',
+  '#f9f79c',
+  '#d6dfb8',
+  '#bae889',
+  '#c4e6ab',
+  '#b2e9c7',
+  '#7bf7c5',
+  '#acf3f3',
+  '#74edee',
+  '#d4dfe9',
+  '#b3b4fc',
+  '#e2b8ee',
+  '#f57ec9',
+  '#ee99a8'
+];

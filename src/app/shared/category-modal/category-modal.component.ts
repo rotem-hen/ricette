@@ -10,6 +10,7 @@ import * as uuid from 'uuid';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { PresetColors } from 'app/shared/preset-colors';
 
 @Component({
   selector: 'app-category-modal',
@@ -24,6 +25,7 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
   public errorMessage: string;
   public loading = false;
   public NAME_MAX_LENGTH = 25;
+  public presetColors = PresetColors;
 
   get remainingChars(): number {
     return this.NAME_MAX_LENGTH - this.state.name.length;

@@ -54,6 +54,23 @@ button:focus {
   outline: none;
 }
 
+.preset-colors .preset-color {
+  width: 30px !important;
+  height: 30px !important;
+  margin: 1px !important;
+}
+
+.hex-text, .type-policy {
+  display: none !important;
+}
+
+.preset-label {
+  font-size: 25px !important;
+  text-align: right !important;
+  white-space: pre-wrap !important;
+  line-height: 25px !important;
+}
+
 *,
 ::before, 
 ::after {

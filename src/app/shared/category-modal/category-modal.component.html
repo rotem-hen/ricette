@@ -29,7 +29,16 @@
         <div class="input-group-append">
             <span class="input-group-text">צבע רקע</span>
         </div>
-        <button [cpPosition]="'bottom'" [(colorPicker)]="this.state.color" [style.background]="this.state.color" class="button pick-color">{{ categoryName.value || 'שם הקטגוריה' }}</button>
+        <button
+          class="button pick-color"
+          [cpPosition]="'bottom'"
+          [(colorPicker)]="this.state.color"
+          [style.background]="this.state.color"
+          [cpPresetColors]="presetColors"
+          [cpPresetColorsClass]="'preset-colors'"
+          [cpPresetLabel]="'תוכלו גם לבחור מתוך צבעים מוגדרים מראש:'">
+            {{ categoryName.value || 'שם הקטגוריה' }}
+        </button>
       </div>
 
       <div class="row" *ngIf="state.options.length" class="add-recipes-to-category">
