@@ -84,7 +84,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
 
 מצרכים:
 ${this.recipe.ingredients}
-    
+
 אופן הכנה:
 ${this.recipe.prep}`;
   }
