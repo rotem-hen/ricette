@@ -7,6 +7,8 @@ import { SearchService } from './shared/search.service';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService, LoginState } from './shared/auth.service';
 import { SwUpdate } from '@angular/service-worker';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { BeforeInstallPromptEvent } from 'typings';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +26,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private scroller: Scroller,
     private searchService: SearchService,
     public authService: AuthService,
-    private swUpdate: SwUpdate
+    private swUpdate: SwUpdate,
+    private analytics: AngularFireAnalytics
   ) {}
 
   public ngOnInit(): void {
@@ -34,6 +37,15 @@ export class AppComponent implements OnInit, OnDestroy {
         this.editModeService.toggleEditMode(false);
         if (val.url !== '/categories/3000') this.searchService.setSearchTerm('');
       }
+    });
+
+    window.addEventListener('beforeinstallprompt', (e: BeforeInstallPromptEvent) => {
+      this.analytics.logEvent('install_prompt');
+      e.userChoice.then(choiceResult => {
+        if (choiceResult.outcome === 'accepted') {
+          this.analytics.logEvent('pwa_install');
+        }
+      });
     });
 
     if (this.swUpdate.isEnabled) {
