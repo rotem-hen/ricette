@@ -49,6 +49,7 @@
         <i
             *ngIf="editModeService.isEditMode && i.id != SpecialCategories.UNCATEGORIZED"
             class="edit-button far fa-edit square-icon"
+            title="עריכה"
             (click)="onEditClick(i, categoryModal)"></i>
     </div>
 </div>

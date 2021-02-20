@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
   <i
     class="far fa-edit square-icon"
+    title="עריכה"
     [ngClass]="{
       green: this.editModeService.isEditMode && this.router.url.split('/')[1] !== 'recipes',
       disabled: this.editModeService.isEditMode && this.router.url.split('/')[1] === 'recipes'
@@ -13,7 +14,7 @@
     <i class="fas fa-search square-icon"></i>
   </div>
   <button class="navbar-toggler" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed" aria-label="Toggle navigation" (click)="collapsed = !collapsed">
-    <i class="fas fa-bars square-icon"></i>
+    <i class="fas fa-bars square-icon" title="תפריט"></i>
   </button>
 
   <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
