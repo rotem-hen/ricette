@@ -120,18 +120,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     this.loading = false;
   }
 
-  public onRecipeNameInputChange(event): void {
-    this.state.title = event.target.value;
-  }
-
-  public onIngredientsInputChange(event): void {
-    this.state.ingredients = event.target.value;
-  }
-
-  public onPrepInputChange(event): void {
-    this.state.prep = event.target.value;
-  }
-
   private getInitialState(): RecipeEditState {
     return {
       title: '',

@@ -4,7 +4,7 @@
 
 <div class="recipe-edit-container" *ngIf="state">
     <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
-    <input [value]="state.title" (input)="onRecipeNameInputChange($event)" type="text" class="recipe-name-input" placeholder="שם המתכון" />
+    <input [(ngModel)]="state.title" type="text" class="recipe-name-input" placeholder="שם המתכון" />
     <div class="form-is-favourite-checkbox">
         <label class="container form-check-label">
             <input class="form-checkbox" [(ngModel)]="state.isFavourite" type="checkbox" checked="checked">
@@ -31,9 +31,9 @@
         </div>
     </div>
     <h5>מרכיבים</h5>
-    <textarea [value]="state.ingredients" (input)="onIngredientsInputChange($event)" type="text" class="ingredients-input" rows="5" placeholder="מרכיבים"></textarea>
+    <textarea [(ngModel)]="state.ingredients" type="text" class="ingredients-input" rows="5" placeholder="מרכיבים"></textarea>
     <h5>אופן הכנה</h5>
-    <textarea [value]="state.prep" (input)="onPrepInputChange($event)" type="text" class="prep-input" rows="10" placeholder="אופן הכנה"></textarea>
+    <textarea [(ngModel)]="state.prep" type="text" class="prep-input" rows="10" placeholder="אופן הכנה"></textarea>
     <div class="buttons-container">
         <button type="button" class="btn btn-light" (click)="onCancel()">ביטול</button>
         <button type="button" class="btn btn-danger" (click)="onDeleteClick(errorToast)" *ngIf="!isNew">מחיקת מתכון</button>
