@@ -39,10 +39,14 @@
   margin: 0;
 }
 
-i {
-  font-size: 50px;
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #0645AD;
+  text-decoration: none;
 }
 
-.fa-envelope {
-  color: #0645AD;
+h4 { 
+  margin: 0px 5px;
 }
