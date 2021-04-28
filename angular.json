@@ -20,7 +20,9 @@
             "assets": [
               "src/assets",
               "src/favicon.ico",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/.well-known/assetlinks.json",
+              { "glob": "assetlinks.json", "input": "src/.well-known/", "output": "/" }
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
