@@ -29,6 +29,11 @@
                 </div>
             </div>
         </div>
+        <div *ngFor="let o of state.options" style="display: inline-block">
+            <div *ngIf="o.selected" style="background: {{ o.category.color }}" class="category-label">
+                {{ o.category.name }}
+            </div>
+        </div>
     </div>
     <h5>מרכיבים</h5>
     <textarea [(ngModel)]="state.ingredients" type="text" class="ingredients-input" rows="5" placeholder="מרכיבים"></textarea>
