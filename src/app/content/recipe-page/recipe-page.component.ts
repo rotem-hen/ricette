@@ -90,11 +90,11 @@ ${this.recipe.prep}`;
   }
 
   public onWhatsappClick(): void {
-    location.href = `whatsapp://send?text=${encodeURIComponent(this.getShareText())}`;
+    window.open(`https://wa.me/send?text=${encodeURIComponent(this.getShareText())}`, '_blank');
   }
 
   public onEmailClick(): void {
-    location.href = `mailto:?body=${encodeURIComponent(this.getShareText())}`;
+    window.open(`mailto:?body=${encodeURIComponent(this.getShareText())}`, '_blank');
   }
 
   public async onCopyClick(copyResultToast): Promise<void> {
