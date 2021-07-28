@@ -1,5 +1,10 @@
 <div class="title-container">
-    <button title="חזרה" class="back-button btn btn-2 btn-2i"
+    <button
+        placement="top"
+        ngbTooltip="חזרה"
+        [openDelay]="600"
+        [closeDelay]="300"
+        class="back-button btn btn-2 btn-2i"
         (click)="onBack()">
     <i class="fa fa-chevron-right"></i>
     </button>
@@ -7,7 +12,10 @@
         <i
             *ngIf="onEdit && editModeService.isEditMode && showEdit"
             class="far fa-edit"
-            title="עריכה"
+            placement="top"
+            ngbTooltip="עריכת הקטגוריה"
+            [openDelay]="500"
+            [closeDelay]="300"
             (click)="onEditClick()"
             ></i>
     </span>

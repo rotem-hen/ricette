@@ -3,8 +3,12 @@
     <button class="button btn btn-2 btn-2g" (click)="openRecipeEdit()">הוספת מתכון</button>
 </div>
 <i
-(click)='togglePopover()'
-class="fas fa-plus plus-icon"
-title="הוספת קטגוריה/מתכון"></i>
+    (click)='togglePopover()'
+    class="fas fa-plus plus-icon"
+    placement="right"
+    ngbTooltip="הוספת קטגוריה/מתכון"
+    [openDelay]="600"
+    [closeDelay]="300">
+</i>
 
 <app-category-modal #categoryModal></app-category-modal>

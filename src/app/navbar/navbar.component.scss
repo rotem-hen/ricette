@@ -46,6 +46,10 @@ li {
     text-align: center;
     font-size: 26px;
     line-height: 26px;
+
+    .dropdown-toggle::after {
+        display: none;
+    }
 }
 
 .green {

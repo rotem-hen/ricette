@@ -11,6 +11,7 @@ import { ContentTitleComponent } from './content-title/content-title.component';
 import { RecipeEntryComponent } from './recipe-entry/recipe-entry.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { AuthGuard } from 'app/shared/auth.guard';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AuthGuard } from 'app/shared/auth.guard';
     RecipeEntryComponent
   ],
   imports: [
+    NgbModule,
     SharedModule,
     BrowserModule,
     HttpClientModule,

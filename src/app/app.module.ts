@@ -8,6 +8,7 @@ import { AddButtonComponent } from './add-button/add-button.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContentModule } from './content/content.module';
 import { SharedModule } from './shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
@@ -27,6 +28,7 @@ import { GlobalErrorHandler } from './shared/globalErrorHandler';
     SharedModule,
     BrowserModule,
     FormsModule,
+    NgbModule,
     FontAwesomeModule,
     ContentModule,
     AngularFireModule.initializeApp(environment.firebase),

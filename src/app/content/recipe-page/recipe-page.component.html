@@ -28,9 +28,34 @@
         >{{ p }}</li>
     </div>
     <div class="share-container">
-        <i (click)="onWhatsappClick()" class="share fab fa-whatsapp" style="color:#25d366" title="שיתוף בוואטסאפ"></i>
-        <i (click)="onEmailClick()" class="share fas fa-envelope" style="color:#d54c3d" title="שיתוף באימייל"></i>
-        <i (click)="onCopyClick(copyResultToast)" class="share far fa-copy" style="color:#4285f3" title="העתקת המתכון" *ngIf="shouldShowCopyButton()"></i>
+        <i
+            (click)="onWhatsappClick()"
+            class="share fab fa-whatsapp"
+            style="color:#25d366"
+            placement="top"
+            ngbTooltip="שיתוף בוואטסאפ"
+            [openDelay]="500"
+            [closeDelay]="300">
+        </i>
+        <i
+            (click)="onEmailClick()"
+            class="share fas fa-envelope"
+            style="color:#d54c3d"
+            placement="top"
+            ngbTooltip="שיתוף באימייל"
+            [openDelay]="500"
+            [closeDelay]="300">
+        </i>
+        <i
+            (click)="onCopyClick(copyResultToast)"
+            class="share far fa-copy"
+            style="color:#4285f3"
+            placement="top"
+            ngbTooltip="העתקת המתכון"
+            [openDelay]="500"
+            [closeDelay]="300"
+            *ngIf="shouldShowCopyButton()">
+        </i>
     </div>
 </div>
 
