@@ -3,8 +3,6 @@
     class="far fa-edit square-icon"
     placement="bottom"
     ngbTooltip="עריכה"
-    [openDelay]="500"
-    [closeDelay]="300"
     [ngClass]="{
       green: this.editModeService.isEditMode && this.router.url.split('/')[1] !== 'recipes',
       disabled: this.editModeService.isEditMode && this.router.url.split('/')[1] === 'recipes'
@@ -17,7 +15,7 @@
     <i class="fas fa-search square-icon"></i>
   </div>
   <button class="navbar-toggler" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed" aria-label="Toggle navigation" (click)="collapsed = !collapsed">
-    <i class="fas fa-bars square-icon" placement="bottom" ngbTooltip="תפריט" [openDelay]="500" [closeDelay]="300"></i>
+    <i class="fas fa-bars square-icon" placement="bottom" ngbTooltip="תפריט"></i>
   </button>
 
   <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
@@ -32,9 +30,7 @@
           <i
             class="fas fa-sign-out-alt"
             placement="right"
-            ngbTooltip="יציאה מהחשבון"
-            [openDelay]="500"
-            [closeDelay]="300"></i>
+            ngbTooltip="יציאה מהחשבון"></i>
         </a>
       </li>
     </ul>

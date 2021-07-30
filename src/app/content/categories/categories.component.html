@@ -46,8 +46,6 @@
             class="x fas fa-times-circle"
             placement="left"
             ngbTooltip="מחיקה"
-            [openDelay]="600"
-            [closeDelay]="300"
             (click)="onDeleteClick(i, errorToast)"></i>
         {{ i.name }}
         <i
@@ -55,8 +53,6 @@
             class="edit-button far fa-edit square-icon"
             placement="top"
             ngbTooltip="עריכת הקטגוריה"
-            [openDelay]="600"
-            [closeDelay]="300"
             (click)="onEditClick(i, categoryModal)"></i>
     </div>
 </div>

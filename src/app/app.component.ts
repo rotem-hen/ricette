@@ -42,7 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.tooltipConfig.disableTooltip = 'ontouchstart' in document.documentElement;
-    this.tooltipConfig.openDelay = 500;
+    this.tooltipConfig.openDelay = 600;
 
     window.addEventListener('beforeinstallprompt', (e: BeforeInstallPromptEvent) => {
       this.analytics.logEvent('install_prompt');

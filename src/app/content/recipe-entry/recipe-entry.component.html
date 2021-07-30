@@ -12,8 +12,6 @@
             class="x fas fa-times-circle"
             placement="left"
             ngbTooltip="מחיקה"
-            [openDelay]="600"
-            [closeDelay]="300"
             (click)="onDeleteClick(errorToast)"></i>
         {{ recipe.title }}
         <i
@@ -21,8 +19,6 @@
             class="edit-button far fa-edit square-icon"
             placement="right"
             ngbTooltip="עריכת המתכון"
-            [openDelay]="500"
-            [closeDelay]="300"
             (click)="onEditClick()"></i>
     </span>
     <div class="category-container">
