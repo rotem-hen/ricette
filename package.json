@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:prod": "ng build --prod && http-server -p 80 -c-1 ./dist",
     "build": "ng build",
     "deploy": "ng build --prod && firebase deploy",
     "test": "ng test",
@@ -32,6 +33,7 @@
     "core-js": "^2.4.1",
     "cropperjs": "^1.5.6",
     "firebase": "^7.14.4",
+    "http-server": "^0.12.3",
     "lodash": "^4.17.21",
     "ngx-color-picker": "^9.1.0",
     "ngx-img": "^10.19.3",
