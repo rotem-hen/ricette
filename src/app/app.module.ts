@@ -32,7 +32,7 @@ import { GlobalErrorHandler } from './shared/globalErrorHandler';
     FontAwesomeModule,
     ContentModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence(),
+    AngularFirestoreModule.enablePersistence({ synchronizeTabs: true }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     RouterModule.forRoot([
       { path: 'categories', component: ContentComponent, canActivate: [AuthGuard] },
