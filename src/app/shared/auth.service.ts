@@ -4,7 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
-import { auth } from 'firebase';
+import { auth } from 'firebase/app';
+import 'firebase/auth';
 
 interface User {
   uid: string;
