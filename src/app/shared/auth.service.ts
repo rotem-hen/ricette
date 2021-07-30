@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
-import { auth } from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 
 interface User {
@@ -36,7 +36,7 @@ export class AuthService {
       switchMap(user => (user ? afs.doc<User>(`users/${user.uid}`).valueChanges() : of(null)))
     );
 
-    this.afAuth.auth.getRedirectResult().catch(e => console.error(e));
+    this.afAuth.getRedirectResult().catch(e => console.error(e));
     this.user$.subscribe(async user => {
       this.state = user ? LoginState.LoggedIn : LoginState.LoggedOut;
       this.loggedInUserId = user ? user.uid : null;
@@ -44,18 +44,18 @@ export class AuthService {
   }
 
   async googleSignin(): Promise<void> {
-    const provider = new auth.GoogleAuthProvider();
+    const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({
       prompt: 'select_account'
     });
     this.state = LoginState.Loading;
-    await this.afAuth.auth.signInWithRedirect(provider);
+    await this.afAuth.signInWithRedirect(provider);
   }
 
   async signOut(): Promise<boolean> {
     this.logout$.next();
     this.logout$.complete();
-    await this.afAuth.auth.signOut();
+    await this.afAuth.signOut();
     return this.router.navigate(['/login']);
   }
 

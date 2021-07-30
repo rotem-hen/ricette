@@ -4,7 +4,7 @@ import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
-import { DocumentReference } from 'angularfire2/firestore';
+import { DocumentReference } from '@angular/fire/firestore';
 import { ToastService } from 'app/shared/toast.service';
 import { Button } from 'app/shared/interface/button.inteface';
 import { PopupService } from 'app/shared/popup.service';
