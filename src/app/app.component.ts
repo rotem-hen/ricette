@@ -9,6 +9,7 @@ import { AuthService, LoginState } from './shared/auth.service';
 import { SwUpdate } from '@angular/service-worker';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { BeforeInstallPromptEvent } from 'typings';
+import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private searchService: SearchService,
     public authService: AuthService,
     private swUpdate: SwUpdate,
-    private analytics: AngularFireAnalytics
+    private analytics: AngularFireAnalytics,
+    private tooltipConfig: NgbTooltipConfig
   ) {}
 
   public ngOnInit(): void {
@@ -38,6 +40,9 @@ export class AppComponent implements OnInit, OnDestroy {
         if (val.url !== '/categories/3000') this.searchService.setSearchTerm('');
       }
     });
+
+    this.tooltipConfig.disableTooltip = 'ontouchstart' in document.documentElement;
+    this.tooltipConfig.openDelay = 500;
 
     window.addEventListener('beforeinstallprompt', (e: BeforeInstallPromptEvent) => {
       this.analytics.logEvent('install_prompt');
