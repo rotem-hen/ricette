@@ -8,38 +8,11 @@
 }
 
 .loading, .login-container {
-    color: #476d6f;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 60px;
-    flex-direction: column;
-
-    > img {
-        width: 350px;
-    }
-}
-
-.button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    letter-spacing: 2px;
-    word-spacing: 4px;
-    font-size: 35px;
-    line-height: 35px;
-    background-color: #f1d9ba;
-    color: #475b5d;
-    padding: 10px 20px;
-    margin: 10px 5px;
-    box-shadow: 5px 5px #476d6f;
-    border: 1px solid #476d6f;
-
-    > img {
-        padding-bottom: 3px;
-        padding-left: 3px;
-    }
 }
 
 app-navbar {

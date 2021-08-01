@@ -3,14 +3,7 @@
         <i class="fas fa-spin fa-circle-notch"></i>
     </div>
     <div *ngSwitchCase="LoginState.LoggedOut" class="login-container">
-        <img width="350" height="360" src="../assets/cooking.png" />
-        מוכנים לבשל?
-        <div class="login-pane">
-            <button class="button btn btn-2 btn-2g" (click)="authService.googleSignin()">
-                <img width="35" height="35" src="../assets/Google_logo.svg" />
-                התחברו עם גוגל
-            </button>
-        </div>
+        <app-login-page></app-login-page>
     </div>
     <div *ngSwitchDefault class="main-container">
         <app-navbar></app-navbar>

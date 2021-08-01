@@ -21,9 +21,10 @@ import { AuthGuard } from './shared/auth.guard';
 import { UpdateNotificationComponent } from './update-notification/update-notification.component';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { GlobalErrorHandler } from './shared/globalErrorHandler';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, AddButtonComponent, UpdateNotificationComponent],
+  declarations: [AppComponent, NavbarComponent, AddButtonComponent, UpdateNotificationComponent, LoginPageComponent],
   imports: [
     SharedModule,
     BrowserModule,

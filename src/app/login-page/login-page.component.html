@@ -1,0 +1,12 @@
+<img width="350" height="360" src="../assets/cooking.png" />
+מוכנים לבשל?
+<div class="login-pane">
+    <button class="button btn btn-2 btn-2g" (click)="authService.googleSignin()">
+        <img width="25" height="25" src="../../assets/Google_logo.svg" />
+        התחברו עם גוגל
+    </button>
+    <button class="button btn btn-2 btn-2g" (click)="authService.emailSignUp('a', 'b')">
+        <img width="25" height="25" src="../../assets/email-icon.svg" />
+        התחברו עם אימייל
+    </button>
+</div>
