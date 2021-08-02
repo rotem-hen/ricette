@@ -9,6 +9,7 @@ import { NgxImgModule } from 'ngx-img';
 import { FormsModule } from '@angular/forms';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { RecipeImageModalComponent } from './recipe-image-modal/recipe-image-modal.component';
+import { EmailAuthModalComponent } from './email-auth-modal/email-auth-modal.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RecipeImageModalComponent } from './recipe-image-modal/recipe-image-mod
     RecipeEditComponent,
     ToastsContainerComponent,
     ConfirmComponent,
-    RecipeImageModalComponent
+    RecipeImageModalComponent,
+    EmailAuthModalComponent
   ],
   imports: [CommonModule, NgbModule, ColorPickerModule, NgxImgModule.forRoot(), FormsModule],
   exports: [
@@ -24,7 +26,8 @@ import { RecipeImageModalComponent } from './recipe-image-modal/recipe-image-mod
     RecipeEditComponent,
     ToastsContainerComponent,
     ConfirmComponent,
-    RecipeImageModalComponent
+    RecipeImageModalComponent,
+    EmailAuthModalComponent
   ]
 })
 export class SharedModule {}

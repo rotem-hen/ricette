@@ -8,4 +8,8 @@ import { AuthService } from '../shared/auth.service';
 })
 export class LoginPageComponent {
   constructor(public authService: AuthService) {}
+
+  public openEmailAuthModal(emailAuthModal): void {
+    emailAuthModal.open();
+  }
 }

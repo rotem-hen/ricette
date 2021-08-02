@@ -1,0 +1,59 @@
+<ng-template #errorToast>
+    {{ errorMessage }}
+  </ng-template>
+  
+  <ng-template #emailAuthModal let-modal>
+      <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
+      <div class="modal-header">
+        <h4 class="modal-title">התחברות עם אימייל</h4>
+        <button type="button" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary">התחברות</button>
+            <button type="button" class="btn btn-secondary">הרשמה</button>
+            <button type="button" class="btn btn-secondary">איפוס סיסמה</button>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-append">
+              <span class="input-group-text">אימייל</span>
+          </div>
+          <input
+            #emailAddress
+            [value]="this.emailAddressValue"
+            (input)="onEmailAddressInputChange($event)"
+            type="text"
+            class="form-control field-input" />
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-append">
+                <span class="input-group-text">סיסמה</span>
+            </div>
+            <input
+              #password
+              [value]="this.passwordValue"
+              (input)="onPasswordInputChange($event)"
+              type="text"
+              class="form-control field-input" />
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-append">
+                <span class="input-group-text">סיסמה בשנית</span>
+            </div>
+            <input
+              #secondPassword
+              [value]="this.secondPasswordValue"
+              (input)="onSecondPasswordInputChange($event)"
+              type="text"
+              class="form-control field-input" />
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
+        <button type="button" class="btn btn-success" (click)="onOK(modal, errorToast)" ngbAutofocus>{{ confirmButtonText }}</button>
+      </div>
+    </ng-template>

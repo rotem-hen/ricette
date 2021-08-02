@@ -5,8 +5,10 @@
         <img width="25" height="25" src="../../assets/Google_logo.svg" />
         התחברו עם גוגל
     </button>
-    <button class="button btn btn-2 btn-2g" (click)="authService.emailSignUp('a', 'b')">
+    <button class="button btn btn-2 btn-2g" (click)="openEmailAuthModal(emailAuthModal)">
         <img width="25" height="25" src="../../assets/email-icon.svg" />
         התחברו עם אימייל
     </button>
 </div>
+
+<app-email-auth-modal #emailAuthModal></app-email-auth-modal>
