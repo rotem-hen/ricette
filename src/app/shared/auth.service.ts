@@ -28,6 +28,21 @@ export class AuthService {
   loggedInUserId: string;
   state: LoginState = LoginState.Loading;
 
+  errorCode2String: object = {
+    'auth/invalid-email': 'האימייל לא תקין',
+    'auth/user-disabled': 'אימייל או סיסמה לא נכונים',
+    'auth/user-not-found': 'אימייל או סיסמה לא נכונים',
+    'auth/wrong-password': 'אימייל או סיסמה לא נכונים',
+    'auth/email-already-in-use': 'אימייל כבר קיים במערכת',
+    'auth/operation-not-allowed': 'הפעולה נכשלה (1). נסו שוב או צרו קשר',
+    'auth/weak-password': 'הסיסמה לא חזקה מספיק',
+    'auth/missing-android-pkg-name': 'הפעולה נכשלה (2). נסו שוב או צרו קשר',
+    'auth/missing-continue-uri': 'הפעולה נכשלה (3). נסו שוב או צרו קשר',
+    'auth/missing-ios-bundle-id': 'הפעולה נכשלה (4). נסו שוב או צרו קשר',
+    'auth/invalid-continue-uri': 'הפעולה (5). נסו שוב או צרו קשר',
+    'auth/unauthorized-continue-uri': 'הפעולה נכשלה (6). נסו שוב או צרו קשר',
+  };
+
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
     this.user$ = afAuth.authState.pipe(
       tap(user => {
@@ -57,6 +72,26 @@ export class AuthService {
     this.logout$.complete();
     await this.afAuth.signOut();
     return this.router.navigate(['/login']);
+  }
+
+  async emailSignIn(email: string, pass: string): Promise<void> {
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, pass);
+    } catch (error) {
+      throw new Error(this.errorCode2String[error.code]);
+    }
+  }
+
+  async emailSignup(email: string, pass: string): Promise<void> {
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email, pass);
+    } catch (error) {
+      throw new Error(this.errorCode2String[error.code]);
+    }
+  }
+
+  async emailReset(email: string): Promise<void> {
+    console.log(email);
   }
 
   private async updateUserData({ uid, email }: User): Promise<void> {

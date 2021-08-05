@@ -7,7 +7,7 @@ import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 export enum EmailAuthState {
   Login,
-  Signin,
+  Signup,
   Reset
 }
 
@@ -19,11 +19,17 @@ export enum EmailAuthState {
 export class EmailAuthModalComponent implements OnDestroy {
   @ViewChild('emailAuthModal') modalRef: ElementRef;
   public state: EmailAuthState;
+  public fEmailAuthState = EmailAuthState;
+  public errorMessage: string;
+  public loading = false;
+
   public emailAddressValue: string;
   public passwordValue: string;
   public secondPasswordValue: string;
-  public errorMessage: string;
-  public loading = false;
+
+  public emailAddressChanged: boolean;
+  public passwordChanged: boolean;
+  public secondPasswordChanged: boolean;
 
   private destroy$ = new Subject();
 
@@ -36,6 +42,7 @@ export class EmailAuthModalComponent implements OnDestroy {
 
   public open(): void {
     this.emailAddressValue = this.passwordValue = this.secondPasswordValue = '';
+    this.emailAddressChanged = this.passwordChanged = this.secondPasswordChanged = false;
     this.state = EmailAuthState.Login;
     this.toastService.removeAll();
     this.modalService.open(this.modalRef, {
@@ -50,37 +57,67 @@ export class EmailAuthModalComponent implements OnDestroy {
   }
 
   public async onOK(modal, errorToast): Promise<void> {
-    if (false) {
-      this.errorMessage = 'אנא בחרו שם וצבע לקטגוריה';
+    this.loading = true;
+    try {
+      switch (this.state) {
+        case EmailAuthState.Login:
+          await this.authService.emailSignIn(this.emailAddressValue, this.passwordValue);
+        case EmailAuthState.Signup:
+          await this.authService.emailSignup(this.emailAddressValue, this.passwordValue);
+        case EmailAuthState.Reset:
+          await this.authService.emailReset(this.emailAddressValue);
+      }
+      this.loading = false;
+      modal.close('Ok click');
+    } catch (error) {
+      this.errorMessage = error.message;
       this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 3000 });
-      return;
+      this.loading = false;
+      modal.close('error');
     }
-    modal.close('Ok click');
   }
 
-  public onEmailAddressNameInputChange(event): void {
-    this.emailAddressValue = event.target.value;
-  }
-
-  public onPasswordNameInputChange(event): void {
-    this.passwordValue = event.target.value;
-  }
-
-  public onSecondPasswordNameInputChange(event): void {
-    this.secondPasswordValue = event.target.value;
+  public onInputChange(event, field): void {
+    this[`${field}Value`] = event.target.value;
+    this[`${field}Changed`] = true;
   }
 
   get confirmButtonText(): string {
     switch (this.state) {
       case EmailAuthState.Login:
         return 'התחברות';
-      case EmailAuthState.Signin:
+      case EmailAuthState.Signup:
         return 'הרשמה';
       case EmailAuthState.Reset:
         return 'איפוס סיסמה';
       default:
         return 'התחברות';
     }
+  }
+
+  get isEmailInvalid(): boolean {
+    const emailRegex = /\S+@\S+\.\S+/;
+    return this.emailAddressChanged && !emailRegex.test(this.emailAddressValue.toLowerCase());
+  }
+
+  get isPasswordInvalid(): boolean {
+    return this.passwordChanged && this.state !== this.fEmailAuthState.Reset && this.passwordValue.length < 6;
+  }
+
+  get isSecondPasswordInvalid(): boolean {
+    return (
+      this.secondPasswordChanged &&
+      this.state === EmailAuthState.Signup &&
+      this.passwordValue !== this.secondPasswordValue
+    );
+  }
+
+  get confirmButtonDisabled(): boolean {
+    return this.isEmailInvalid || this.isPasswordInvalid || this.isSecondPasswordInvalid;
+  }
+
+  public setState(state: EmailAuthState): void {
+    this.state = state;
   }
 
   public ngOnDestroy(): void {

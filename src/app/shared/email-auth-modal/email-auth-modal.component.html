@@ -12,48 +12,83 @@
       </div>
       <div class="modal-body">
         <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary">התחברות</button>
-            <button type="button" class="btn btn-secondary">הרשמה</button>
-            <button type="button" class="btn btn-secondary">איפוס סיסמה</button>
+            <button
+                type="button"
+                class="btn btn-secondary"
+                [class.selected]="this.state === fEmailAuthState.Login"
+                (click)="setState(fEmailAuthState.Login)">
+                התחברות
+            </button>
+            <button
+                type="button"
+                class="btn btn-secondary middle"
+                [class.selected]="this.state === fEmailAuthState.Signup"
+                (click)="setState(fEmailAuthState.Signup)">
+                הרשמה
+            </button>
+            <button
+                type="button"
+                class="btn btn-secondary"
+                [class.selected]="this.state === fEmailAuthState.Reset"
+                (click)="setState(fEmailAuthState.Reset)">
+                איפוס סיסמה
+            </button>
         </div>
-        <div class="input-group mb-3">
-          <div class="input-group-append">
-              <span class="input-group-text">אימייל</span>
-          </div>
-          <input
-            #emailAddress
-            [value]="this.emailAddressValue"
-            (input)="onEmailAddressInputChange($event)"
-            type="text"
-            class="form-control field-input" />
-        </div>
-
-        <div class="input-group mb-3">
+        <form>
+            <div class="input-group mb-3">
             <div class="input-group-append">
-                <span class="input-group-text">סיסמה</span>
+                <span class="input-group-text">אימייל</span>
             </div>
             <input
-              #password
-              [value]="this.passwordValue"
-              (input)="onPasswordInputChange($event)"
-              type="text"
-              class="form-control field-input" />
-          </div>
-
-          <div class="input-group mb-3">
-            <div class="input-group-append">
-                <span class="input-group-text">סיסמה בשנית</span>
+                #emailAddress
+                [value]="this.emailAddressValue"
+                (input)="onInputChange($event, 'emailAddress')"
+                type="email"
+                autocomplete="on"
+                class="form-control field-input"
+                [class.is-invalid]="isEmailInvalid" />
+                <div class="error invalid-feedback">
+                    אימייל לא תקין
+                </div>
             </div>
-            <input
-              #secondPassword
-              [value]="this.secondPasswordValue"
-              (input)="onSecondPasswordInputChange($event)"
-              type="text"
-              class="form-control field-input" />
-          </div>
+
+            <div class="input-group mb-3" *ngIf="this.state === fEmailAuthState.Login || this.state === fEmailAuthState.Signup">
+                <div class="input-group-append">
+                    <span class="input-group-text">סיסמה</span>
+                </div>
+                <input
+                #password
+                [value]="this.passwordValue"
+                (input)="onInputChange($event, 'password')"
+                type="password"
+                autocomplete="on"
+                class="form-control field-input"
+                [class.is-invalid]="isPasswordInvalid" />
+                <div class="error invalid-feedback">
+                הסיסמה חייבת להיות לפחות 6 תווים
+                </div>
+            </div>
+
+            <div class="input-group mb-3" *ngIf="this.state === fEmailAuthState.Signup">
+                <div class="input-group-append">
+                    <span class="input-group-text">סיסמה בשנית</span>
+                </div>
+                <input
+                    #secondPassword
+                    [value]="this.secondPasswordValue"
+                    (input)="onInputChange($event, 'secondPassword')"
+                    type="password"
+                    autocomplete="on"
+                    class="form-control field-input"
+                    [class.is-invalid]="isSecondPasswordInvalid" />
+                <div class="error invalid-feedback">
+                    הסיסמאות לא תואמות
+                </div>
+            </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
-        <button type="button" class="btn btn-success" (click)="onOK(modal, errorToast)" ngbAutofocus>{{ confirmButtonText }}</button>
+        <button type="button" class="btn btn-success" (click)="onOK(modal, errorToast)" [disabled]="confirmButtonDisabled" ngbAutofocus>{{ confirmButtonText }}</button>
       </div>
     </ng-template>
