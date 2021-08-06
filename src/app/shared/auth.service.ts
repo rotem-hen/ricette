@@ -39,8 +39,9 @@ export class AuthService {
     'auth/missing-android-pkg-name': 'הפעולה נכשלה (2). נסו שוב או צרו קשר',
     'auth/missing-continue-uri': 'הפעולה נכשלה (3). נסו שוב או צרו קשר',
     'auth/missing-ios-bundle-id': 'הפעולה נכשלה (4). נסו שוב או צרו קשר',
-    'auth/invalid-continue-uri': 'הפעולה (5). נסו שוב או צרו קשר',
+    'auth/invalid-continue-uri': 'הפעולה נכשלה (5). נסו שוב או צרו קשר',
     'auth/unauthorized-continue-uri': 'הפעולה נכשלה (6). נסו שוב או צרו קשר',
+    default: 'הפעולה נכשלה (7). נסו שוב או צרו קשר'
   };
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
@@ -78,7 +79,7 @@ export class AuthService {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
     } catch (error) {
-      throw new Error(this.errorCode2String[error.code]);
+      throw new Error(this.errorCode2String[error.code] ?? this.errorCode2String['default']);
     }
   }
 
@@ -86,7 +87,7 @@ export class AuthService {
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, pass);
     } catch (error) {
-      throw new Error(this.errorCode2String[error.code]);
+      throw new Error(this.errorCode2String[error.code] ?? this.errorCode2String['default']);
     }
   }
 
