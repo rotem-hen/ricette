@@ -59,7 +59,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     if (this.state.newRecipe) this.location.back();
   }
 
-  public onDeleteClick(errorToast): void {
+  public async onDeleteClick(errorToast): Promise<void> {
     const confirmButtons: Button[] = [
       {
         text: 'מחיקת המתכון',
@@ -68,12 +68,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       }
     ];
 
-    this.popupService
-      .confirm(`מחיקת המתכון '${this.state.title}'`, `האם למחוק את המתכון?`, confirmButtons)
-      .then()
-      .catch(() => {
-        // User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)
-      });
+    await this.popupService.confirm(`מחיקת המתכון '${this.state.title}'`, `האם למחוק את המתכון?`, confirmButtons);
   }
 
   private async deleteRecipe(errorToast): Promise<void> {
@@ -118,18 +113,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     }
 
     this.loading = false;
-  }
-
-  private getInitialState(): RecipeEditState {
-    return {
-      title: '',
-      isFavourite: false,
-      ingredients: '',
-      prep: '',
-      image: '',
-      newRecipe: false,
-      options: this.categoryList.map(category => ({ category, selected: false }))
-    };
   }
 
   public ngOnDestroy(): void {

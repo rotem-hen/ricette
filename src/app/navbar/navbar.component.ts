@@ -32,7 +32,7 @@ export class NavbarComponent {
     },
     {
       text: 'צרו קשר',
-      onClick: (): void => this.onContactClick(),
+      onClick: (): Promise<void> => this.onContactClick(),
       iconClasses: 'far fa-star'
     }
   ];
@@ -50,7 +50,7 @@ export class NavbarComponent {
   }
 
   public onEditClick(): void {
-    const [host, type, id] = this.router.url.split('/');
+    const [, type] = this.router.url.split('/');
     if (type === 'recipes' && this.editModeService.isEditMode) return;
     this.editModeService.toggleEditMode();
   }
@@ -65,14 +65,9 @@ export class NavbarComponent {
     this.router.navigate(link);
   }
 
-  public onContactClick(): void {
+  public async onContactClick(): Promise<void> {
     this.collapsed = true;
-    this.popupService
-      .contact()
-      .then()
-      .catch(() => {
-        // User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)
-      });
+    await this.popupService.contact();
   }
 
   public onSearchInputChange(event): void {

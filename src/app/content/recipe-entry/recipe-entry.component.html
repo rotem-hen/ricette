@@ -12,14 +12,16 @@
             class="x fas fa-times-circle"
             placement="left"
             ngbTooltip="מחיקה"
-            (click)="onDeleteClick(errorToast)"></i>
+            (click)="onDeleteClick(errorToast)">
+        </i>
         {{ recipe.title }}
         <i
             *ngIf="editService.isEditMode"
             class="edit-button far fa-edit square-icon"
             placement="right"
             ngbTooltip="עריכת המתכון"
-            (click)="onEditClick()"></i>
+            (click)="onEditClick()">
+        </i>
     </span>
     <div class="category-container">
         <span *ngFor="let i of categoryColors">

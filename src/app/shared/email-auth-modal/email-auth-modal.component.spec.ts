@@ -8,9 +8,8 @@ describe('EmailAuthModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmailAuthModalComponent ]
-    })
-    .compileComponents();
+      declarations: [EmailAuthModalComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

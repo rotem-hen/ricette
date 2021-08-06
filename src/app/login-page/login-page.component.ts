@@ -14,12 +14,7 @@ export class LoginPageComponent {
     emailAuthModal.open();
   }
 
-  public onContactClick(): void {
-    this.popupService
-      .contact()
-      .then()
-      .catch(() => {
-        // User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)
-      });
+  public async onContactClick(): Promise<void> {
+    await this.popupService.contact();
   }
 }

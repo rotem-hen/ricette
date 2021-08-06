@@ -1,94 +1,94 @@
 <ng-template #messageToast>
     {{ toastMessage }}
-  </ng-template>
-  
-  <ng-template #emailAuthModal let-modal>
-      <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
-      <div class="modal-header">
-        <h4 class="modal-title">התחברות עם אימייל</h4>
-        <button type="button" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
+</ng-template>
+
+<ng-template #emailAuthModal let-modal>
+    <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
+    <div class="modal-header">
+    <h4 class="modal-title">התחברות עם אימייל</h4>
+    <button type="button" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+    <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+        <button
+            type="button"
+            class="btn btn-secondary"
+            [class.selected]="this.state === fEmailAuthState.Login"
+            (click)="setState(fEmailAuthState.Login)">
+            התחברות
         </button>
-      </div>
-      <div class="modal-body">
-        <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-            <button
-                type="button"
-                class="btn btn-secondary"
-                [class.selected]="this.state === fEmailAuthState.Login"
-                (click)="setState(fEmailAuthState.Login)">
-                התחברות
-            </button>
-            <button
-                type="button"
-                class="btn btn-secondary middle"
-                [class.selected]="this.state === fEmailAuthState.Signup"
-                (click)="setState(fEmailAuthState.Signup)">
-                הרשמה
-            </button>
-            <button
-                type="button"
-                class="btn btn-secondary"
-                [class.selected]="this.state === fEmailAuthState.Reset"
-                (click)="setState(fEmailAuthState.Reset)">
-                איפוס סיסמה
-            </button>
+        <button
+            type="button"
+            class="btn btn-secondary middle"
+            [class.selected]="this.state === fEmailAuthState.Signup"
+            (click)="setState(fEmailAuthState.Signup)">
+            הרשמה
+        </button>
+        <button
+            type="button"
+            class="btn btn-secondary"
+            [class.selected]="this.state === fEmailAuthState.Reset"
+            (click)="setState(fEmailAuthState.Reset)">
+            איפוס סיסמה
+        </button>
+    </div>
+    <form>
+        <div class="input-group mb-3">
+        <div class="input-group-append">
+            <span class="input-group-text">אימייל</span>
         </div>
-        <form>
-            <div class="input-group mb-3">
+        <input
+            #emailAddress
+            [value]="this.emailAddressValue"
+            (input)="onInputChange($event, 'emailAddress')"
+            type="email"
+            autocomplete="on"
+            class="form-control field-input"
+            [class.is-invalid]="isEmailInvalid" />
+            <div class="error invalid-feedback">
+                אימייל לא תקין
+            </div>
+        </div>
+
+        <div class="input-group mb-3" *ngIf="this.state === fEmailAuthState.Login || this.state === fEmailAuthState.Signup">
             <div class="input-group-append">
-                <span class="input-group-text">אימייל</span>
+                <span class="input-group-text">סיסמה</span>
             </div>
             <input
-                #emailAddress
-                [value]="this.emailAddressValue"
-                (input)="onInputChange($event, 'emailAddress')"
-                type="email"
-                autocomplete="on"
-                class="form-control field-input"
-                [class.is-invalid]="isEmailInvalid" />
-                <div class="error invalid-feedback">
-                    אימייל לא תקין
-                </div>
+            #password
+            [value]="this.passwordValue"
+            (input)="onInputChange($event, 'password')"
+            type="password"
+            autocomplete="on"
+            class="form-control field-input"
+            [class.is-invalid]="isPasswordInvalid" />
+            <div class="error invalid-feedback">
+            הסיסמה חייבת להיות לפחות 6 תווים
             </div>
+        </div>
 
-            <div class="input-group mb-3" *ngIf="this.state === fEmailAuthState.Login || this.state === fEmailAuthState.Signup">
-                <div class="input-group-append">
-                    <span class="input-group-text">סיסמה</span>
-                </div>
-                <input
-                #password
-                [value]="this.passwordValue"
-                (input)="onInputChange($event, 'password')"
+        <div class="input-group mb-3" *ngIf="this.state === fEmailAuthState.Signup">
+            <div class="input-group-append">
+                <span class="input-group-text">סיסמה בשנית</span>
+            </div>
+            <input
+                #secondPassword
+                [value]="this.secondPasswordValue"
+                (input)="onInputChange($event, 'secondPassword')"
                 type="password"
                 autocomplete="on"
                 class="form-control field-input"
-                [class.is-invalid]="isPasswordInvalid" />
-                <div class="error invalid-feedback">
-                הסיסמה חייבת להיות לפחות 6 תווים
-                </div>
+                [class.is-invalid]="isSecondPasswordInvalid" />
+            <div class="error invalid-feedback">
+                הסיסמאות לא תואמות
             </div>
-
-            <div class="input-group mb-3" *ngIf="this.state === fEmailAuthState.Signup">
-                <div class="input-group-append">
-                    <span class="input-group-text">סיסמה בשנית</span>
-                </div>
-                <input
-                    #secondPassword
-                    [value]="this.secondPasswordValue"
-                    (input)="onInputChange($event, 'secondPassword')"
-                    type="password"
-                    autocomplete="on"
-                    class="form-control field-input"
-                    [class.is-invalid]="isSecondPasswordInvalid" />
-                <div class="error invalid-feedback">
-                    הסיסמאות לא תואמות
-                </div>
-            </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
-        <button type="button" class="btn btn-success" (click)="onOK(modal, messageToast)" [disabled]="confirmButtonDisabled" ngbAutofocus>{{ confirmButtonText }}</button>
-      </div>
-    </ng-template>
+        </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
+    <button type="button" class="btn btn-success" (click)="onOK(modal, messageToast)" [disabled]="confirmButtonDisabled" ngbAutofocus>{{ confirmButtonText }}</button>
+    </div>
+</ng-template>

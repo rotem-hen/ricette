@@ -8,9 +8,8 @@ describe('RecipeImageModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecipeImageModalComponent ]
-    })
-    .compileComponents();
+      declarations: [RecipeImageModalComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

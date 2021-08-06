@@ -41,7 +41,7 @@ export class AddButtonComponent {
   }
 
   private getCurrentCategory(): string {
-    const [host, type, id] = this.router.url.split('/');
+    const [, type, id] = this.router.url.split('/');
     if (type !== 'categories') {
       return;
     }

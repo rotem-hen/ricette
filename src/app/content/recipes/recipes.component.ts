@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { categoryViews, SpecialCategories } from '../category-views/category-views';
 import { Recipe } from '../interface/recipe.interface';

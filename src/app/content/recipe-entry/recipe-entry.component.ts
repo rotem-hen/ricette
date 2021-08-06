@@ -47,10 +47,9 @@ export class RecipeEntryComponent implements OnInit {
     }
   }
 
-  public onEditClick(): void {
-    this.router.navigate(['/recipes', this.recipe.id]).then(() => {
-      this.editService.toggleEditMode(true);
-    });
+  public async onEditClick(): Promise<void> {
+    await this.router.navigate(['/recipes', this.recipe.id]);
+    this.editService.toggleEditMode(true);
   }
 
   public async onDeleteClick(errorToast): Promise<void> {
@@ -71,16 +70,11 @@ export class RecipeEntryComponent implements OnInit {
       });
     }
 
-    this.popupService
-      .confirm(
-        `מחיקת המתכון '${this.recipe.title}'`,
-        isCategory ? `בחרו האם להסיר את המתכון מהקטגוריה או למחוק אותו לגמרי` : `האם למחוק את המתכון?`,
-        confirmButtons
-      )
-      .then()
-      .catch(() => {
-        // User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)
-      });
+    await this.popupService.confirm(
+      `מחיקת המתכון '${this.recipe.title}'`,
+      isCategory ? `בחרו האם להסיר את המתכון מהקטגוריה או למחוק אותו לגמרי` : `האם למחוק את המתכון?`,
+      confirmButtons
+    );
   }
 
   private async deleteRecipe(errorToast): Promise<void> {

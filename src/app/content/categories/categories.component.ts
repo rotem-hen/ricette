@@ -91,17 +91,12 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       }
     ];
 
-    this.popupService
-      .confirm(
-        `מחיקת הקטגוריה '${category.name}'`,
-        `האם אתם בטוחים שאתם רוצים למחוק את הקטגוריה?
+    await this.popupService.confirm(
+      `מחיקת הקטגוריה '${category.name}'`,
+      `האם אתם בטוחים שאתם רוצים למחוק את הקטגוריה?
         המתכונים שבתוכה לא יימחקו.`,
-        confirmButtons
-      )
-      .then()
-      .catch(() => {
-        // User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)
-      });
+      confirmButtons
+    );
   }
 
   private async deleteCategory(category: Category, errorToast): Promise<void> {

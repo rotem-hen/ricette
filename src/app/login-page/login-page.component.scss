@@ -6,11 +6,11 @@
     align-items: center;
     font-size: 55px;
     flex-direction: column;
-}
 
-.login-buttons {
-    display: flex;
-    flex-direction: column;
+    .login-buttons {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .top {

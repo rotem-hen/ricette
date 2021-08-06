@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { CategoriesComponent } from './categories/categories.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipePageComponent } from './recipe-page/recipe-page.component';
@@ -10,7 +9,6 @@ import { ContentComponent } from './content.component';
 import { ContentTitleComponent } from './content-title/content-title.component';
 import { RecipeEntryComponent } from './recipe-entry/recipe-entry.component';
 import { SharedModule } from 'app/shared/shared.module';
-import { AuthGuard } from 'app/shared/auth.guard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({

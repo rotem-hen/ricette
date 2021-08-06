@@ -8,9 +8,8 @@ describe('RecipeEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecipeEditComponent ]
-    })
-    .compileComponents();
+      declarations: [RecipeEditComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
