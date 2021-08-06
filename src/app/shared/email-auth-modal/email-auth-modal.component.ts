@@ -78,7 +78,6 @@ export class EmailAuthModalComponent implements OnDestroy {
       this.toastMessage = error.message;
       this.toastService.show(messageToast, { classname: 'bg-danger text-light', delay: 3000 });
       this.loading = false;
-      modal.close('error');
     }
   }
 
@@ -118,7 +117,14 @@ export class EmailAuthModalComponent implements OnDestroy {
   }
 
   get confirmButtonDisabled(): boolean {
-    return this.isEmailInvalid || this.isPasswordInvalid || this.isSecondPasswordInvalid;
+    return (
+      !this.emailAddressChanged ||
+      (this.state !== EmailAuthState.Reset && !this.passwordChanged) ||
+      (this.state === EmailAuthState.Signup && !this.secondPasswordChanged) ||
+      this.isEmailInvalid ||
+      this.isPasswordInvalid ||
+      this.isSecondPasswordInvalid
+    );
   }
 
   public setState(state: EmailAuthState): void {
