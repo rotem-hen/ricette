@@ -30,9 +30,9 @@ export class AuthService {
 
   errorCode2String: object = {
     'auth/invalid-email': 'האימייל לא תקין',
-    'auth/user-disabled': 'אימייל או סיסמה לא נכונים',
-    'auth/user-not-found': 'אימייל או סיסמה לא נכונים',
-    'auth/wrong-password': 'אימייל או סיסמה לא נכונים',
+    'auth/user-disabled': 'אימייל לא פעיל, אנא צרו קשר',
+    'auth/user-not-found': 'אימייל לא קיים',
+    'auth/wrong-password': 'הסיסמה שגויה',
     'auth/email-already-in-use': 'אימייל כבר קיים במערכת',
     'auth/operation-not-allowed': 'הפעולה נכשלה (1). נסו שוב או צרו קשר',
     'auth/weak-password': 'הסיסמה לא חזקה מספיק',
@@ -95,8 +95,7 @@ export class AuthService {
     try {
       await firebase.auth().sendPasswordResetEmail(email);
     } catch (error) {
-      const errorString = error.code === 'auth/user-not-found' ? 'אימייל לא קיים' : this.errorCode2String[error.code];
-      throw new Error(errorString);
+      throw new Error(this.errorCode2String[error.code] ?? this.errorCode2String['default']);
     }
   }
 
