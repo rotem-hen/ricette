@@ -1,4 +1,5 @@
 <div [ngSwitch]="authService.state">
+    <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
     <div *ngSwitchCase="LoginState.Loading" class="loading">
         <i class="fas fa-spin fa-circle-notch"></i>
     </div>
@@ -7,7 +8,6 @@
     </div>
     <div *ngSwitchDefault class="main-container">
         <app-navbar></app-navbar>
-        <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
         <app-content></app-content>
         <app-add-button></app-add-button>
     </div>
