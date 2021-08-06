@@ -1,5 +1,5 @@
-<ng-template #errorToast>
-    {{ errorMessage }}
+<ng-template #messageToast>
+    {{ toastMessage }}
   </ng-template>
   
   <ng-template #emailAuthModal let-modal>
@@ -89,6 +89,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
-        <button type="button" class="btn btn-success" (click)="onOK(modal, errorToast)" [disabled]="confirmButtonDisabled" ngbAutofocus>{{ confirmButtonText }}</button>
+        <button type="button" class="btn btn-success" (click)="onOK(modal, messageToast)" [disabled]="confirmButtonDisabled" ngbAutofocus>{{ confirmButtonText }}</button>
       </div>
     </ng-template>

@@ -20,7 +20,7 @@ export class EmailAuthModalComponent implements OnDestroy {
   @ViewChild('emailAuthModal') modalRef: ElementRef;
   public state: EmailAuthState;
   public fEmailAuthState = EmailAuthState;
-  public errorMessage: string;
+  public toastMessage: string;
   public loading = false;
 
   public emailAddressValue: string;
@@ -56,7 +56,7 @@ export class EmailAuthModalComponent implements OnDestroy {
     });
   }
 
-  public async onOK(modal, errorToast): Promise<void> {
+  public async onOK(modal, messageToast): Promise<void> {
     this.loading = true;
     try {
       switch (this.state) {
@@ -70,8 +70,8 @@ export class EmailAuthModalComponent implements OnDestroy {
       this.loading = false;
       modal.close('Ok click');
     } catch (error) {
-      this.errorMessage = error.message;
-      this.toastService.show(errorToast, { classname: 'bg-danger text-light', delay: 3000 });
+      this.toastMessage = error.message;
+      this.toastService.show(messageToast, { classname: 'bg-danger text-light', delay: 3000 });
       this.loading = false;
       modal.close('error');
     }
