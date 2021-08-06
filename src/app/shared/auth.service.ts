@@ -92,7 +92,12 @@ export class AuthService {
   }
 
   async emailReset(email: string): Promise<void> {
-    console.log(email);
+    try {
+      await firebase.auth().sendPasswordResetEmail(email);
+    } catch (error) {
+      const errorString = error.code === 'auth/user-not-found' ? 'אימייל לא קיים' : this.errorCode2String[error.code];
+      throw new Error(errorString);
+    }
   }
 
   private async updateUserData({ uid, email }: User): Promise<void> {

@@ -62,10 +62,15 @@ export class EmailAuthModalComponent implements OnDestroy {
       switch (this.state) {
         case EmailAuthState.Login:
           await this.authService.emailSignIn(this.emailAddressValue, this.passwordValue);
+          break;
         case EmailAuthState.Signup:
           await this.authService.emailSignup(this.emailAddressValue, this.passwordValue);
+          break;
         case EmailAuthState.Reset:
           await this.authService.emailReset(this.emailAddressValue);
+          this.toastMessage = 'אנא בדקו את תיבת המייל שלכם';
+          this.toastService.show(messageToast, { classname: 'bg-success text-light', delay: 3000 });
+          break;
       }
       this.loading = false;
       modal.close('Ok click');
