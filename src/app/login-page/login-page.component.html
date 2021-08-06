@@ -1,14 +1,21 @@
-<img width="350" height="360" src="../assets/cooking.png" />
-מוכנים לבשל?
-<div class="login-pane">
-    <button class="button btn btn-2 btn-2g" (click)="authService.googleSignin()">
-        <img width="25" height="25" src="../../assets/Google_logo.svg" />
-        התחברו עם גוגל
+<div class="top">
+    <button class="button btn btn-2 btn-2g contact" (click)="onContactClick()">
+        ?
     </button>
-    <button class="button btn btn-2 btn-2g" (click)="openEmailAuthModal(emailAuthModal)">
-        <img width="25" height="25" src="../../assets/email-icon.svg" />
-        התחברו עם אימייל
-    </button>
+</div>
+<div class="main-container">
+    <img width="315" height="324" src="../assets/cooking.png" />
+    מוכנים לבשל?
+    <div class="login-buttons">
+        <button class="button btn btn-2 btn-2g" (click)="authService.googleSignin()">
+            <img width="25" height="25" src="../../assets/Google_logo.svg" />
+            התחברו עם גוגל
+        </button>
+        <button class="button btn btn-2 btn-2g" (click)="openEmailAuthModal(emailAuthModal)">
+            <img width="25" height="25" src="../../assets/email-icon.svg" />
+            התחברו עם אימייל
+        </button>
+    </div>
 </div>
 
 <app-email-auth-modal #emailAuthModal></app-email-auth-modal>

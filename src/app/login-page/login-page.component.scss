@@ -1,20 +1,30 @@
-:host {
+.main-container {
     color: #476d6f;
-    height: 100vh;
+    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 60px;
+    font-size: 55px;
     flex-direction: column;
-
-    > img {
-        width: 350px;
-    }
 }
 
-.login-pane {
+.login-buttons {
     display: flex;
     flex-direction: column;
+}
+
+.top {
+
+    height: 15vh;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+
+    .contact {
+        font-size: 34px !important;
+        padding: 7px 16px !important;
+        margin: 10px !important;
+    }
 }
 
 .button {
@@ -23,11 +33,11 @@
     align-items: center;
     letter-spacing: 2px;
     word-spacing: 4px;
-    font-size: 35px;
-    line-height: 35px;
+    font-size: 30px;
+    line-height: 30px;
     background-color: #f1d9ba;
     color: #475b5d;
-    padding: 10px 20px;
+    padding: 8px 16px;
     margin: 10px 5px;
     box-shadow: 5px 5px #476d6f;
     border: 1px solid #476d6f;
