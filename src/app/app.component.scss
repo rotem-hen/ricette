@@ -1,36 +1,9 @@
-.main-container {
-    width: 100%;
-    color: #515C5D;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .loading {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 60px;
-}
-
-app-navbar {
-    position: fixed;
-    top: 0;
-    background: #fffaf5;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    box-shadow: 0 3px 4px 0 rgba(0,0,0,.2), 0 3px 3px -2px rgba(0,0,0,.14), 0 1px 8px 0 rgba(0,0,0,.12);
-    width: 100vw;
-    z-index: 1;
-}
-
-app-add-button {
-    position: fixed;
-    bottom: 5%;
-    left: 3%;
 }
 
 app-update-notification {
@@ -48,17 +21,4 @@ app-update-notification {
     right: -250px;
     height: 0;
     width: 0;
-}
-
-app-content {
-    padding-top: 50px;
-    padding-bottom: 100px;
-    flex: 1;
-    width: 100%;
-    max-width: 1000px;
-    position: relative;
-}
-
-app-content-title {
-    width: 50%;
 }
