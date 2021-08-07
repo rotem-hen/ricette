@@ -44,6 +44,7 @@
             [value]="this.emailAddressValue"
             (input)="onInputChange($event, 'emailAddress')"
             type="email"
+            name="email"
             autocomplete="on"
             class="form-control field-input"
             [class.is-invalid]="isEmailInvalid" />
@@ -61,6 +62,7 @@
             [value]="this.passwordValue"
             (input)="onInputChange($event, 'password')"
             type="password"
+            name="password"
             autocomplete="on"
             class="form-control field-input"
             [class.is-invalid]="isPasswordInvalid" />
