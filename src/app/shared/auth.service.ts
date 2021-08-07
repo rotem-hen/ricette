@@ -52,7 +52,12 @@ export class AuthService {
       switchMap(user => (user ? afs.doc<User>(`users/${user.uid}`).valueChanges() : of(null)))
     );
 
-    this.afAuth.getRedirectResult().catch(e => console.error(e));
+    this.afAuth
+      .getRedirectResult()
+      .then(({ user }) => {
+        if (user) this.router.navigate(['']);
+      })
+      .catch(e => console.error(e));
     this.user$.subscribe(async user => {
       this.state = user ? LoginState.LoggedIn : LoginState.LoggedOut;
       this.loggedInUserId = user ? user.uid : null;
