@@ -55,7 +55,7 @@ export class AuthService {
     this.afAuth
       .getRedirectResult()
       .then(({ user }) => {
-        if (user) this.router.navigate(['']);
+        if (user) this.onLoginSuccess();
       })
       .catch(e => console.error(e));
     this.user$.subscribe(async user => {
@@ -83,6 +83,7 @@ export class AuthService {
   async emailSignIn(email: string, pass: string): Promise<void> {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
+      this.onLoginSuccess();
     } catch (error) {
       throw new Error(this.errorCode2String[error.code] ?? this.errorCode2String['default']);
     }
@@ -111,5 +112,9 @@ export class AuthService {
       this.newUser$.next(uid);
     }
     return userRef.set({ uid, email }, { merge: true });
+  }
+
+  private onLoginSuccess(): void {
+    this.router.navigate(['']);
   }
 }
