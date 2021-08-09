@@ -17,7 +17,7 @@
             [imgSrc]="existingImgDownloadUrl"
             (onSelect)="onSelect($event)"
             (onReset)="reset()"
-            [config]="{ crop: [{ ratio: 1, maxWidth: 1000, maxHeight: 1000 }], output: 'blob', fileSize: 10000 }">
+            [config]="{ crop: [{ ratio: 1, maxWidth: 1000, maxHeight: 1000 }], output: 'blob', fileSize: 10000, fileType: ['image/gif', 'image/jpeg', 'image/png'] }">
         </ngx-img>
     </div>
 
