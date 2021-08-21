@@ -19,6 +19,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { GlobalErrorHandler } from './shared/globalErrorHandler';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { BackOfficeComponent } from './admin/back-office/back-office.component';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [AppComponent, UpdateNotificationComponent, LoginPageComponent],
@@ -29,6 +30,7 @@ import { BackOfficeComponent } from './admin/back-office/back-office.component';
     NgbModule,
     FontAwesomeModule,
     ContentModule,
+    AdminModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence({ synchronizeTabs: true }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),

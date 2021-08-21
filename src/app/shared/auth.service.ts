@@ -10,6 +10,7 @@ import 'firebase/auth';
 interface User {
   uid: string;
   email: string;
+  role?: string;
 }
 
 export enum LoginState {
