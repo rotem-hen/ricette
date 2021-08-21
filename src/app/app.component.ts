@@ -10,6 +10,7 @@ import { SwUpdate } from '@angular/service-worker';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { BeforeInstallPromptEvent } from 'typings';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
+import { PopupService } from './shared/popup.service';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ export class AppComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     private swUpdate: SwUpdate,
     private analytics: AngularFireAnalytics,
-    private tooltipConfig: NgbTooltipConfig
+    private tooltipConfig: NgbTooltipConfig,
+    private popupService: PopupService
   ) {}
 
   public ngOnInit(): void {
@@ -56,6 +58,17 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
         this.updateExist = true;
+      });
+
+      this.swUpdate.activated.subscribe(() => {
+        this.popupService.whatsNew(
+          ['ההודעה הזו! מעכשיו תדעו מה התעדכן בכל גירסה'],
+          [
+            'בעיה עם העלאת תמונות תוקנה',
+            'אפשרות חיבור גם דרך אימייל',
+            'שיתוף מתכון בוואטסאפ עובד גם במחשב בנוסף לפלאפון'
+          ]
+        );
       });
     }
   }

@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { RecipeImageModalComponent } from './recipe-image-modal/recipe-image-modal.component';
 import { EmailAuthModalComponent } from './email-auth-modal/email-auth-modal.component';
+import { WhatsNewComponent } from './whats-new/whats-new.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EmailAuthModalComponent } from './email-auth-modal/email-auth-modal.com
     ToastsContainerComponent,
     ConfirmComponent,
     RecipeImageModalComponent,
-    EmailAuthModalComponent
+    EmailAuthModalComponent,
+    WhatsNewComponent
   ],
   imports: [CommonModule, NgbModule, ColorPickerModule, NgxImgModule.forRoot(), FormsModule],
   exports: [

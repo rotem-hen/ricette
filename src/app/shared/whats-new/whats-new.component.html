@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h4 class="modal-title">מה חדש</h4>
+      <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h3>מה חדש?</h3>
+      <div *ngFor="let i of newStuff"><i class="fas fa-plus-circle"></i> {{i}}</div>
+      <br>
+      <h3>עדכונים קודמים שאולי פספסתם:</h3>
+      <div *ngFor="let i of olderStuff"><i class="fas fa-plus-circle"></i> {{i}}</div>
+    </div>
+    <div class="modal-footer">
+      <button
+        (click)="dismiss()"
+        class="btn"
+        style="background-color: '#c8ced4';">
+        סגירה
+    </button>
+  </div>
