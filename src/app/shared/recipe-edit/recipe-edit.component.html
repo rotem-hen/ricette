@@ -39,9 +39,12 @@
     <textarea [(ngModel)]="state.ingredients" type="text" class="ingredients-input" rows="5" placeholder="מרכיבים"></textarea>
     <h5>אופן הכנה</h5>
     <textarea [(ngModel)]="state.prep" type="text" class="prep-input" rows="10" placeholder="אופן הכנה"></textarea>
+    <h5>לינק</h5>
+    <input [(ngModel)]="state.link" type="text" class="link-input" placeholder="לינק" />
     <div class="buttons-container">
         <button type="button" class="btn btn-light" (click)="onCancel()">ביטול</button>
         <button type="button" class="btn btn-danger" (click)="onDeleteClick(errorToast)" *ngIf="!isNew">מחיקת מתכון</button>
         <button type="button" class="btn btn-success" (click)="onOK(errorToast)" ngbAutofocus>שמירה</button>
     </div>
+    
 </div>

@@ -6,6 +6,7 @@ export interface RecipeEditState {
   isFavourite: boolean;
   ingredients: string;
   prep: string;
+  link: string;
   image: string;
   newRecipe: boolean;
   options: {

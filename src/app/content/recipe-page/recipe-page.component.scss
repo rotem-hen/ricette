@@ -1,4 +1,4 @@
-.ingredients, .prep {
+.ingredients, .prep, .link {
     margin: 30px 20px 50px 30px;
 }
 
@@ -26,13 +26,25 @@
     cursor: pointer;
 }
 
-li {
+li, a {
     margin: 6px;
     padding: 4px;
     list-style-type: none;
     line-height: 30px;
     font-size: 30px;
     border-radius: 5px;
+}
+
+.link {
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: ltr;
+    white-space: nowrap;
+}
+
+a {
+    color: #0645AD;
 }
 
 .subtitle {

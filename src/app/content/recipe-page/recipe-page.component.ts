@@ -67,6 +67,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
       isFavourite: false,
       ingredients: '',
       prep: '',
+      link: '',
       image: '',
       newRecipe: true,
       options: this.categoryList.map(category => {

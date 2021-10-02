@@ -27,6 +27,9 @@
             [class.active]="activeStage === i"
         >{{ p }}</li>
     </div>
+    <div class="link">
+        <a [href]="recipe.link" target="_blank">{{ recipe.link }}</a>
+    </div>
     <div class="share-container">
         <i
             (click)="onWhatsappClick()"
