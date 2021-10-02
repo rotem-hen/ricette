@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class UpdateNotificationComponent {
   public refresh(): void {
+    localStorage.setItem('newVersion', '1');
     window.location.reload();
   }
 }

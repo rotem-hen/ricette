@@ -40,6 +40,19 @@ export class AppComponent implements OnInit, OnDestroy {
         this.scroller.scrollTop();
         this.editModeService.toggleEditMode(false);
         if (val.url !== '/categories/3000') this.searchService.setSearchTerm('');
+
+        if (localStorage.getItem('newVersion')) {
+          this.popupService.whatsNew(
+            ['ניתן להוסיף לינק לכל מתכון, בתחתית עמוד ההוספה / העריכה של המתכון'],
+            [
+              'בעיה עם העלאת תמונות תוקנה',
+              'אפשרות חיבור גם דרך אימייל',
+              'אם התקנתם את האתר כאפליקציה (במחשב, בטאבלט או בטלפון) ניתן לגשת למידע גם ללא אינטרנט, לאחר טעינה ראשונית עם חיבור',
+              'שיתוף מתכון בוואטסאפ עובד גם במחשב בנוסף לטלפון'
+            ]
+          );
+          localStorage.setItem('newVersion', '');
+        }
       }
     });
 
@@ -58,17 +71,6 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
         this.updateExist = true;
-      });
-
-      this.swUpdate.activated.subscribe(() => {
-        this.popupService.whatsNew(
-          ['ההודעה הזו! מעכשיו תדעו מה התעדכן בכל גירסה'],
-          [
-            'בעיה עם העלאת תמונות תוקנה',
-            'אפשרות חיבור גם דרך אימייל',
-            'שיתוף מתכון בוואטסאפ עובד גם במחשב בנוסף לפלאפון'
-          ]
-        );
       });
     }
   }
