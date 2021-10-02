@@ -81,13 +81,30 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   }
 
   private getShareText(): string {
-    return `${this.recipe.title}
+    let text = `${this.recipe.title}`;
+
+    if (this.recipe.ingredients) {
+      text = text.concat(`
 
 מצרכים:
-${this.recipe.ingredients}
+${this.recipe.ingredients}`);
+    }
+
+    if (this.recipe.prep) {
+      text = text.concat(`
 
 אופן הכנה:
-${this.recipe.prep}`;
+${this.recipe.prep}`);
+    }
+
+    if (this.recipe.link) {
+      text = text.concat(`
+
+לינק:
+${this.recipe.link}`);
+    }
+
+    return text;
   }
 
   public onWhatsappClick(): void {
