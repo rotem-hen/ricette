@@ -7,6 +7,8 @@ export interface RecipeEditState {
   ingredients: string;
   prep: string;
   link: string;
+  duration: number;
+  quantity: string;
   image: string;
   newRecipe: boolean;
   options: {

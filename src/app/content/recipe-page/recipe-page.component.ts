@@ -68,6 +68,8 @@ export class RecipePageComponent implements OnInit, OnDestroy {
       ingredients: '',
       prep: '',
       link: '',
+      duration: 0,
+      quantity: '',
       image: '',
       newRecipe: true,
       options: this.categoryList.map(category => {
@@ -124,6 +126,21 @@ ${this.recipe.link}`);
       this.copyResultMessage = 'ההעתקה נכשלה, נסו שוב או שתפו בדרך אחרת';
       this.toastService.show(copyResultToast, { classname: 'bg-danger text-light', delay: 4000 });
     }
+  }
+
+  public formatDuration(min: number): string {
+    const hours = Math.floor(min / 60);
+    const minutes = min - hours * 60;
+
+    let hoursStr = '';
+    if (hours === 1) hoursStr = 'שעה';
+    else if (hours === 2) hoursStr = 'שעתיים';
+    else if (hours > 2) hoursStr = hours + ' שעות';
+
+    let minutesStr = hours && minutes ? ' ו-' : '';
+    if (minutes) minutesStr += minutes + ' דקות';
+
+    return `${hoursStr}${minutesStr}`;
   }
 
   public onLabelClick(categoryId: string): void {

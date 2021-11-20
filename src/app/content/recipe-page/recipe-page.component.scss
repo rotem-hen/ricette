@@ -1,4 +1,4 @@
-.ingredients, .prep, .link {
+.extra-info, .ingredients, .prep, .link {
     margin: 30px 20px 50px 30px;
 }
 
@@ -24,6 +24,25 @@
     margin: 5px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.extra-info {
+    display: flex;
+    line-height: 26px;
+    font-size: 26px;
+    color: #999999;
+    font-weight: bolder;
+
+    p {
+        margin: 0;
+        margin-left: 10px;
+
+        i {
+            margin-left: 5px;
+            border: 1px solid #999999;
+            border-radius: 5px;
+        }
+    }
 }
 
 li, a {

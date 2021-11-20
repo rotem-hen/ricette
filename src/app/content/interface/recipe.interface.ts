@@ -8,6 +8,8 @@ export interface Recipe {
   isFavourite: boolean;
   ingredients: string;
   prep: string;
+  duration: number;
+  quantity: string;
   link: string;
   image: string;
 }
