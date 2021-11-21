@@ -36,9 +36,24 @@
         </div>
     </div>
     <h5>זמן הכנה</h5>
-    <input [(ngModel)]="state.duration" type="number" />
+    <div class="duration-grid-container">
+        <div class="h">
+            <h5>שעות</h5>
+        </div>
+        <div class="space"></div>
+        <div class="m">
+            <h5>דקות</h5>
+        </div>  
+        <div class="H">
+            <input [(ngModel)]="hours" onclick="this.select()" type="number" placeholder="שעות" />
+        </div>
+        <div class="colon">:</div>
+        <div class="M">
+            <input [(ngModel)]="minutes" onclick="this.select()" type="number" placeholder="דקות" />
+        </div>
+    </div>
     <h5>כמות</h5>
-    <input [(ngModel)]="state.quantity" type="text" placeholder="20 עוגיות, 2 תבניות אינגליש קייק..." />
+    <input [(ngModel)]="state.quantity" type="text" placeholder="5 מנות / 20 עוגיות / 2 תבניות אינגליש קייק..." />
     <h5>מרכיבים</h5>
     <textarea [(ngModel)]="state.ingredients" type="text" class="ingredients-input" rows="5" placeholder="מרכיבים"></textarea>
     <h5>אופן הכנה</h5>

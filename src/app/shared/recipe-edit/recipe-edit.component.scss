@@ -93,6 +93,44 @@
         width: 80%;
     }
     
+    .duration-grid-container {
+        display: grid;
+        width: 90px;
+        align-items: center;
+        grid-template-areas:
+            'm m m m space h h h h'
+            'M M M M colon H H H H'
+            'M M M M colon H H H H'
+            'M M M M colon H H H H';
+
+        div {
+            text-align: center;
+            vertical-align: center;
+
+            input {
+                width: 40px;
+                text-align: center;
+            }
+
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+
+        .colon {
+            margin: 0 5px 20px 5px;
+        }
+
+        .h      { grid-area: h; }
+        .space  { grid-area: space; }
+        .m      { grid-area: m; }
+        .H      { grid-area: H; }
+        .colon  { grid-area: colon; }
+        .M      { grid-area: M; }
+    }
+
     textarea, input {
         margin-bottom: 20px;
         list-style-type: none;

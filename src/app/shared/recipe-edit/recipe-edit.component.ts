@@ -26,6 +26,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   private originalState: RecipeEditState;
   public action: string;
   private categoryList: Category[];
+  public hours: number;
+  public minutes: number;
   public errorMessage: string;
   public loading = false;
   private destroy$ = new Subject();
@@ -47,6 +49,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(c => (this.categoryList = c));
     if (!this.isNew) this.isNew = history.state.isNew;
+    this.hours = this.state.duration ? Math.floor(this.state.duration / 60) : 0;
+    this.minutes = this.state.duration ? this.state.duration - this.hours * 60 : 0;
   }
 
   private closeEditMode(): void {
@@ -97,6 +101,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       const id = this.state.id ?? uuid.v4();
       const categoryIds = this.state.options.filter(o => o.selected).map(o => o.category.id);
       const categoryRefs = categoryIds.map(id => this.dbService.getCategoryRef(id));
+      this.state.duration = this.getDuration();
 
       const savePromise = this.state.newRecipe
         ? this.dbService.addRecipe(id, { ...omit(this.state, 'options'), categories: categoryRefs })
@@ -115,6 +120,9 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     this.loading = false;
   }
 
+  private getDuration(): number {
+    return (this.hours && this.hours > 0 ? this.hours * 60 : 0) + (this.minutes && this.minutes > 0 ? this.minutes : 0);
+  }
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
