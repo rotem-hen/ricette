@@ -38,7 +38,6 @@ import { AdminModule } from './admin/admin.module';
       { path: 'login', component: LoginPageComponent },
       { path: 'bo', component: BackOfficeComponent }
     ]),
-    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule
   ],
   exports: [],
