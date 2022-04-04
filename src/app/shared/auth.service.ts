@@ -56,12 +56,11 @@ export class AuthService {
     this.afAuth
       .getRedirectResult()
       .then(({ user }) => {
-        if (user) this.onLoginSuccess();
+        this.setStateAndUser(user);
       })
       .catch(e => console.error(e));
     this.user$.subscribe(async user => {
-      this.state = user ? LoginState.LoggedIn : LoginState.LoggedOut;
-      this.loggedInUserId = user ? user.uid : null;
+      this.setStateAndUser(user);
     });
   }
 
@@ -83,8 +82,8 @@ export class AuthService {
 
   async emailSignIn(email: string, pass: string): Promise<void> {
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, pass);
-      this.onLoginSuccess();
+      const { user } = await firebase.auth().signInWithEmailAndPassword(email, pass);
+      this.setStateAndUser(user);
     } catch (error) {
       throw new Error(this.errorCode2String[error.code] ?? this.errorCode2String['default']);
     }
@@ -92,7 +91,8 @@ export class AuthService {
 
   async emailSignup(email: string, pass: string): Promise<void> {
     try {
-      await firebase.auth().createUserWithEmailAndPassword(email, pass);
+      const { user } = await firebase.auth().createUserWithEmailAndPassword(email, pass);
+      this.setStateAndUser(user);
     } catch (error) {
       throw new Error(this.errorCode2String[error.code] ?? this.errorCode2String['default']);
     }
@@ -113,6 +113,12 @@ export class AuthService {
       this.newUser$.next(uid);
     }
     return userRef.set({ uid, email }, { merge: true });
+  }
+
+  private setStateAndUser(user: User): void {
+    this.state = user ? LoginState.LoggedIn : LoginState.LoggedOut;
+    this.loggedInUserId = user ? user.uid : null;
+    if (user) this.onLoginSuccess();
   }
 
   private onLoginSuccess(): void {

@@ -10,7 +10,7 @@ import { ToastService } from 'app/shared/toast.service';
 import { PopupService } from 'app/shared/popup.service';
 import { Button } from 'app/shared/interface/button.inteface';
 import { Subject } from 'rxjs';
-import { takeUntil, filter } from 'rxjs/operators';
+import { takeUntil, filter, take } from 'rxjs/operators';
 import { AuthService } from 'app/shared/auth.service';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 import initialCategories from './initial-categories.json';
@@ -46,12 +46,17 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.authService.newUser$.pipe(filter(uid => uid !== null)).subscribe((uid: string) => {
-      this.createInitialCategories(uid);
-      this.showMessages.categoriesMessage = true;
-      this.authService.newUser$.next(null);
-      this.analytics.logEvent('user_registered', {});
-    });
+    this.authService.newUser$
+      .pipe(
+        take(1),
+        filter(uid => uid !== null)
+      )
+      .subscribe((uid: string) => {
+        this.createInitialCategories(uid);
+        this.showMessages.categoriesMessage = true;
+        this.authService.newUser$.next(null);
+        this.analytics.logEvent('user_registered', {});
+      });
     const additionalViews = categoryViews.filter(c => !c.hidden);
     this.dbService
       .getCategories()
@@ -111,15 +116,17 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
 
   private async createInitialCategories(uid: string): Promise<void> {
-    const promises = initialCategories.map(({ name, color }: Category) =>
-      this.dbService.addCategory(uuid.v4(), {
-        uid,
-        name,
-        color
-      })
-    );
+    try {
+      const promises = initialCategories.map(({ name, color }: Category) =>
+        this.dbService.addCategory(uuid.v4(), {
+          uid,
+          name,
+          color
+        })
+      );
 
-    await Promise.all(promises);
+      await Promise.all(promises);
+    } catch (error) {}
   }
 
   public gotIt(item: string): void {
