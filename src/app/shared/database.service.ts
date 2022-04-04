@@ -29,11 +29,19 @@ export class DatabaseService {
   }
 
   public getCategories(): Observable<Category[]> {
-    return this.categories$.valueChanges({ idField: 'id' }).pipe(takeUntil(this.authService.logout$));
+    return this.firestore
+      .collection<Category>('categories', ref =>
+        ref.where('uid', '==', this.authService.loggedInUserId).orderBy('name')
+      )
+      .valueChanges({ idField: 'id' })
+      .pipe(takeUntil(this.authService.logout$));
   }
 
   public getRecipes(): Observable<Recipe[]> {
-    return this.recipes$.valueChanges({ idField: 'id' }).pipe(takeUntil(this.authService.logout$));
+    return this.firestore
+      .collection<Recipe>('recipes', ref => ref.where('uid', '==', this.authService.loggedInUserId).orderBy('title'))
+      .valueChanges({ idField: 'id' })
+      .pipe(takeUntil(this.authService.logout$));
   }
 
   public async editCategory({ id, name, color }: Category): Promise<string> {
