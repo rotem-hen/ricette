@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
         if (val.url.match(new RegExp('^.*/recipes/.*$'))) {
           this.stateService.setState(val.url, null, null);
-        } else if (val.url.includes('/categories')) {
+        } else if (val.url.includes('/categories') || val.url === '/') {
           this.stateService.clearState();
         }
 
