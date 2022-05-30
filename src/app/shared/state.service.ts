@@ -7,6 +7,7 @@ import { State } from 'app/shared/interface/state.interface';
 })
 export class StateService {
   LOCAL_STORAGE_LABEL = 'lastState';
+  EXPIRY_TIME = 9000000; // 2.5 hours
   currentState: State = {
     recipeUrl: '',
     striked: null,
@@ -35,7 +36,10 @@ export class StateService {
 
   public redirectToLastRecipe(): void {
     const url = this.currentState.recipeUrl;
-    if (url) {
+    const time = this.currentState.timeStamp;
+    if (Date.now() - time > this.EXPIRY_TIME) {
+      this.clearState();
+    } else if (url) {
       this.router.navigate(['recipes', url.split('/')[2]]);
     }
   }
