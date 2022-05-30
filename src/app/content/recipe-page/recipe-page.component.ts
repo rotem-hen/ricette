@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
@@ -8,6 +8,7 @@ import { RecipeEditState } from 'app/shared/interface/recipe-edit-state.interfac
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
 import { ToastService } from 'app/shared/toast.service';
+import { StateService } from 'app/shared/state.service';
 
 @Component({
   selector: 'app-recipe-page',
@@ -19,7 +20,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   public state: RecipeEditState;
   public isNew: boolean;
   public activeStage = -1;
-  public striked = new Set();
+  public striked = new Set<number>();
   public copyResultMessage: string;
   private categoryList: Category[];
   private destroy$ = new Subject();
@@ -29,7 +30,8 @@ export class RecipePageComponent implements OnInit, OnDestroy {
     private router: Router,
     public editModeService: EditModeService,
     private dbService: DatabaseService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private stateService: StateService
   ) {
     this.isNew = history.state.isNew;
   }
@@ -48,6 +50,14 @@ export class RecipePageComponent implements OnInit, OnDestroy {
         }
         this.initExistingRecipe();
       });
+    this.striked = this.stateService.getStrikedSet() ?? this.striked;
+    this.activeStage = this.stateService.getStageNumber();
+  }
+
+  @HostListener('click', ['$event.target']) onRecipePageClick(t): void {
+    if (!t.closest('.back-button') && !t.closest('.link')) {
+      this.stateService.setState(location.pathname, this.striked, this.activeStage);
+    }
   }
 
   private initExistingRecipe(): void {

@@ -11,6 +11,7 @@ import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { BeforeInstallPromptEvent } from 'typings';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 import { PopupService } from './shared/popup.service';
+import { StateService } from './shared/state.service';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private swUpdate: SwUpdate,
     private analytics: AngularFireAnalytics,
     private tooltipConfig: NgbTooltipConfig,
-    private popupService: PopupService
+    private popupService: PopupService,
+    private stateService: StateService
   ) {}
 
   public ngOnInit(): void {
@@ -40,6 +42,12 @@ export class AppComponent implements OnInit, OnDestroy {
         this.scroller.scrollTop();
         this.editModeService.toggleEditMode(false);
         if (val.url !== '/categories/3000') this.searchService.setSearchTerm('');
+
+        if (val.url.match(new RegExp('^.*/recipes/.*$'))) {
+          this.stateService.setState(val.url, null, null);
+        } else if (val.url.includes('/categories')) {
+          this.stateService.clearState();
+        }
 
         if (localStorage.getItem('newVersion')) {
           this.popupService.whatsNew(
@@ -74,6 +82,8 @@ export class AppComponent implements OnInit, OnDestroy {
         this.updateExist = true;
       });
     }
+
+    this.stateService.redirectToLastRecipe();
   }
 
   title = 'Why is Everything Hard?';
