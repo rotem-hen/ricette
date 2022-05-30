@@ -118,10 +118,5 @@ export class AuthService {
   private setStateAndUser(user: User): void {
     this.state = user ? LoginState.LoggedIn : LoginState.LoggedOut;
     this.loggedInUserId = user ? user.uid : null;
-    if (user) this.onLoginSuccess();
-  }
-
-  private onLoginSuccess(): void {
-    this.router.navigate(['']);
   }
 }

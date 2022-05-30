@@ -36,9 +36,7 @@ export class StateService {
   public redirectToLastRecipe(): void {
     const url = this.currentState.recipeUrl;
     if (url) {
-      setTimeout(() => {
-        this.router.navigate(['recipes', url.split('/')[2]]);
-      }, 4000);
+      this.router.navigate(['recipes', url.split('/')[2]]);
     }
   }
 
