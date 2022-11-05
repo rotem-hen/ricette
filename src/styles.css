@@ -1,12 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: Stanga;
-  src: url(assets/fonts/stanga-light-aaa1.ttf) format("opentype");
+  src: url(assets/fonts/stanga-regular-aaa1.ttf) format("opentype");
 }
 
 @font-face {
-  font-family: Euro;
-  src: url(assets/fonts/eurof35.ttf) format("opentype");
+  font-family: Stanga-Bold;
+  src: url(assets/fonts/stanga-bold-aaa1.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: Stanga-English;
+  src: url(assets/fonts/stanga-light-aaa.woff) format("woff");
+}
+
+@font-face {
+  font-family: Stanga-English-Bold;
+  src: url(assets/fonts/stanga-regular-aaa.woff) format("woff");
 }
 
 @font-face {
@@ -15,7 +25,7 @@
 }
 
 body {
-  font-family: 'Stanga', 'Euro', 'Rounded', 'Lucida Sans Regular', Verdana, sans-serif;
+  font-family: 'Stanga', 'Stanga-English', 'Rounded', 'Lucida Sans Regular', Verdana, sans-serif;
   height: 100%;
   margin: 0;
   color: #515C5D;
