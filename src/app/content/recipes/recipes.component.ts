@@ -24,6 +24,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
   public SpecialCategories = SpecialCategories;
   private destroy$ = new Subject();
 
+  private QUERY_PARAM = 'searchTerm';
+
   constructor(
     private route: ActivatedRoute,
     private searchService: SearchService,
@@ -49,6 +51,8 @@ export class RecipesComponent implements OnInit, OnDestroy {
           );
 
           if (this.categoryId === SpecialCategories.SEARCH_RESULTS) {
+            const searchParam = new URLSearchParams(window.location.search).get(this.QUERY_PARAM);
+            if (searchParam) this.searchService.searchTerm = searchParam;
             this.applySearch(this.searchService.searchTerm);
 
             this.searchService.searchTermChange.pipe(takeUntil(this.destroy$)).subscribe(value => {
@@ -61,6 +65,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
   private applySearch(value: string): void {
     if (this.categoryId !== SpecialCategories.SEARCH_RESULTS) return;
+    history.replaceState(null, '', `categories/${SpecialCategories.SEARCH_RESULTS}?${this.QUERY_PARAM}=${value}`);
     this.categoryName = `${this.searchCategoryName}: ${value}`;
     this.recipeList = this.allRecipes.filter(r => `${r.title}\n${r.ingredients}`.includes(value));
   }

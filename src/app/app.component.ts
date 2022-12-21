@@ -51,7 +51,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
         if (localStorage.getItem('newVersion')) {
           this.popupService.whatsNew(
-            ['החיפוש הורחב גם למרכיבים (ולא רק שם המתכון)'],
+            [
+              'החיפוש הורחב גם למרכיבים (ולא רק שם המתכון)',
+              'בחזרה מתוצאת חיפוש, מילות החיפוש יישמרו'
+            ],
             [
               'עדכון פונט לשיפור הקריאוּת.',
               'בעיה תוקנה: האפליקציה חזרה למסך הראשי לאחר מעבר בין אפליקציות.',
