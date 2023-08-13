@@ -4,7 +4,7 @@ import { ToastService } from '../toast.service';
 import { DatabaseService } from '../database.service';
 import * as uuid from 'uuid';
 import { StorageService } from '../storage.service';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 @Component({

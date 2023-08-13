@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/co
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Recipe } from 'app/content/interface/recipe.interface';
 import { CategoryModalState } from '../interface/category-modal-state.interface';
-import { isEmpty, omit } from 'lodash';
+import { isEmpty, omit } from 'lodash-es';
 import { ToastService } from 'app/shared/toast.service';
 import { EditModeService } from '../edit-mode.service';
 import { DatabaseService } from '../database.service';

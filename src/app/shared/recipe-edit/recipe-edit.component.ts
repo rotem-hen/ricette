@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { RecipeEditState } from '../interface/recipe-edit-state.interface';
-import { omit } from 'lodash';
+import { omit, cloneDeep } from 'lodash-es';
 import { ToastService } from 'app/shared/toast.service';
 import { EditModeService } from '../edit-mode.service';
 import { DatabaseService } from '../database.service';
@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Location } from '@angular/common';
-import { cloneDeep } from 'lodash';
 import { Button } from '../interface/button.inteface';
 import { PopupService } from '../popup.service';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
