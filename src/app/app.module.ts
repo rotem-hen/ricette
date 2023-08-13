@@ -35,9 +35,9 @@ import { AdminModule } from './admin/admin.module';
     AngularFirestoreModule.enablePersistence({ synchronizeTabs: true }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     RouterModule.forRoot([
-      { path: 'login', component: LoginPageComponent },
-      { path: 'bo', component: BackOfficeComponent }
-    ]),
+    { path: 'login', component: LoginPageComponent },
+    { path: 'bo', component: BackOfficeComponent }
+], { relativeLinkResolution: 'legacy' }),
     AngularFireAnalyticsModule
   ],
   exports: [],

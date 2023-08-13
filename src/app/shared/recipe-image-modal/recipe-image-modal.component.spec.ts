@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RecipeImageModalComponent } from './recipe-image-modal.component';
 
@@ -6,7 +6,7 @@ describe('RecipeImageModalComponent', () => {
   let component: RecipeImageModalComponent;
   let fixture: ComponentFixture<RecipeImageModalComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [RecipeImageModalComponent]
     }).compileComponents();
