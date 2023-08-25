@@ -120,7 +120,7 @@ ${this.recipe.link}`);
   }
 
   public onWhatsappClick(): void {
-    window.open(`https://wa.me/send?text=${encodeURIComponent(this.getShareText())}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(this.getShareText())}`, '_blank');
   }
 
   public onEmailClick(): void {
