@@ -7,7 +7,7 @@
     "start": "ng serve",
     "start:prod": "ng build --configuration production && http-server -p 80 -c-1 ./dist",
     "build": "ng build",
-    "deploy": "ng build --configuration production && firebase deploy",
+    "deploy": "ng build --configuration production && yarn firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -32,6 +32,7 @@
     "core-js": "^2.4.1",
     "cropperjs": "^1.5.6",
     "firebase": "^8.8.1",
+    "firebase-tools": "^11.16",
     "http-server": "^0.12.3",
     "lodash-es": "^4.17.8",
     "ngx-color-picker": "^12.0.0",
