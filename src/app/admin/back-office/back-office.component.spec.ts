@@ -8,9 +8,8 @@ describe('BackOfficeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BackOfficeComponent ]
-    })
-    .compileComponents();
+      declarations: [BackOfficeComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

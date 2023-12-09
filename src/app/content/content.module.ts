@@ -34,19 +34,22 @@ import { AuthGuard } from 'app/shared/auth.guard';
     SharedModule,
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot([
-    {
-        path: '',
-        canActivate: [AuthGuard],
-        component: ContentComponent,
-        children: [
+    RouterModule.forRoot(
+      [
+        {
+          path: '',
+          canActivate: [AuthGuard],
+          component: ContentComponent,
+          children: [
             { path: 'recipes/:rid', component: RecipePageComponent },
             { path: 'categories/:cid', component: RecipesComponent },
             { path: 'categories', component: CategoriesComponent },
             { path: '', redirectTo: '/categories', pathMatch: 'full' }
-        ]
-    }
-], { relativeLinkResolution: 'legacy' })
+          ]
+        }
+      ],
+      { relativeLinkResolution: 'legacy' }
+    )
   ],
   exports: [ContentComponent, ContentTitleComponent],
   bootstrap: [CategoriesComponent]

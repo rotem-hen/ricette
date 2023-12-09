@@ -51,9 +51,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
         if (localStorage.getItem('newVersion')) {
           this.popupService.whatsNew(
-            [
-              'חיבור באמצעות גוגל תוקן'
-            ],
+            ['חיבור באמצעות גוגל תוקן'],
             [
               'שיתוף ב-Whatsapp תוקן',
               'החיפוש הורחב גם למרכיבים (ולא רק שם המתכון)',

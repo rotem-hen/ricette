@@ -1,6 +1,6 @@
 {
   "indexes": [
-    { 
+    {
       "collectionGroup": "categories",
       "queryScope": "COLLECTION",
       "fields": [
@@ -8,7 +8,7 @@
         { "fieldPath": "name", "order": "ASCENDING" }
       ]
     },
-    { 
+    {
       "collectionGroup": "recipes",
       "queryScope": "COLLECTION",
       "fields": [
