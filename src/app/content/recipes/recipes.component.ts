@@ -65,7 +65,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
   private applySearch(value: string): void {
     if (this.categoryId !== SpecialCategories.SEARCH_RESULTS) return;
-    history.replaceState(null, '', `categories/${SpecialCategories.SEARCH_RESULTS}?${this.QUERY_PARAM}=${value}`);
+    history.replaceState(history.state, '', `categories/${SpecialCategories.SEARCH_RESULTS}?${this.QUERY_PARAM}=${value}`);
     this.categoryName = `${this.searchCategoryName}: ${value}`;
     this.recipeList = this.allRecipes.filter(r => `${r.title}\n${r.ingredients}`.includes(value));
   }

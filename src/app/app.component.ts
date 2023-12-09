@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, Scroll } from '@angular/router';
 import { EditModeService } from './shared/edit-mode.service';
-import { Scroller } from './shared/scroll-top.service';
 import { SearchService } from './shared/search.service';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService, LoginState } from './shared/auth.service';
@@ -12,6 +11,7 @@ import { BeforeInstallPromptEvent } from 'typings';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 import { PopupService } from './shared/popup.service';
 import { StateService } from './shared/state.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -26,20 +26,25 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private editModeService: EditModeService,
-    private scroller: Scroller,
     private searchService: SearchService,
     public authService: AuthService,
     private swUpdate: SwUpdate,
     private analytics: AngularFireAnalytics,
     private tooltipConfig: NgbTooltipConfig,
     private popupService: PopupService,
-    private stateService: StateService
-  ) {}
+    private stateService: StateService,
+    private viewportScroller: ViewportScroller
+  ) {
+  }
 
   public ngOnInit(): void {
     this.router.events.pipe(takeUntil(this.destroy$)).subscribe(val => {
+      if (val instanceof Scroll && val.position) {
+        setTimeout(() => {
+          this.viewportScroller.scrollToPosition(val.position);
+        }, 20);
+      }
       if (val instanceof NavigationEnd) {
-        this.scroller.scrollTop();
         this.editModeService.toggleEditMode(false);
         if (val.url !== '/categories/3000') this.searchService.setSearchTerm('');
 
@@ -51,11 +56,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
         if (localStorage.getItem('newVersion')) {
           this.popupService.whatsNew(
-            ['חיבור באמצעות גוגל תוקן'],
+            ['לחיצה על כפתור חזרה מחזירה לאותו המקום בעמוד הקודם'],
             [
-              'שיתוף ב-Whatsapp תוקן',
-              'החיפוש הורחב גם למרכיבים (ולא רק שם המתכון)',
-              'בחזרה מתוצאת חיפוש, מילות החיפוש יישמרו'
+              'חיבור באמצעות גוגל באייפון תוקן'
             ]
           );
           localStorage.setItem('newVersion', '');
