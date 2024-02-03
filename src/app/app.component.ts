@@ -56,9 +56,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
         if (localStorage.getItem('newVersion')) {
           this.popupService.whatsNew(
-            ['לחיצה על כפתור חזרה מחזירה לאותו המקום בעמוד הקודם'],
+            ['הפרדה ברורה יותר בין מרכיבים לאופן הכנה'],
             [
-              'חיבור באמצעות גוגל באייפון תוקן'
+              'לחיצה על כפתור חזרה מחזירה לאותו המקום בעמוד הקודם'
             ]
           );
           localStorage.setItem('newVersion', '');
