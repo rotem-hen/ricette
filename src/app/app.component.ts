@@ -56,8 +56,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
         if (localStorage.getItem('newVersion')) {
           this.popupService.whatsNew(
-            ['הפרדה ברורה יותר בין מרכיבים לאופן הכנה'],
+            ['תיקוני באגים'],
             [
+              'הפרדה ברורה יותר בין מרכיבים לאופן הכנה',
               'לחיצה על כפתור חזרה מחזירה לאותו המקום בעמוד הקודם'
             ]
           );
