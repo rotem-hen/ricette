@@ -49,9 +49,10 @@ export class AppComponent implements OnInit, OnDestroy {
         if (val.url !== '/categories/3000') this.searchService.setSearchTerm('');
 
         if (val.url.match(new RegExp('^.*/recipes/.*$'))) {
-          this.stateService.setState(val.url, null, null);
+          const id = val.url.substring(val.url.lastIndexOf('/') + 1);
+          this.stateService.setStateById(id, val.url, null, null, true);
         } else if (val.url.includes('/categories') || val.url === '/') {
-          this.stateService.clearState();
+          this.stateService.clearLastRecipe(false);
         }
 
         if (localStorage.getItem('newVersion')) {

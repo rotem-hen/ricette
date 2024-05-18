@@ -1,75 +1,127 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { State } from 'app/shared/interface/state.interface';
+import { RecipesState } from 'app/shared/interface/recipes-state.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StateService {
   LOCAL_STORAGE_LABEL = 'lastState';
-  EXPIRY_TIME = 9000000; // 2.5 hours
-  currentState: State = {
-    recipeUrl: '',
-    striked: null,
-    stage: null,
-    timeStamp: 0
+  EXPIRY_TIME = 1000 * 60 * 60 * 2; // 2 hours
+  currentState: RecipesState = {
+    lastRecipeId: null,
+    states: []
   };
 
   constructor(private router: Router) {
     const lastState = localStorage.getItem(this.LOCAL_STORAGE_LABEL);
     if (lastState) {
-      const parsedState = JSON.parse(lastState);
-      this.setCurrentState(
-        parsedState.recipeUrl,
-        this.strikedToSet(parsedState.striked),
-        parseInt(parsedState.stage),
-        parseInt(parsedState.timeStamp)
-      );
+      this.setCurrentStateFromStorage(JSON.parse(lastState));
     }
   }
 
-  public setState(recipeUrl: string, striked: Set<number>, stage: number): void {
-    striked = !striked && this.getStrikedSet() ? this.getStrikedSet() : striked;
-    stage = stage === null && this.getStageNumber() > -1 ? this.getStageNumber() : stage;
-    this.setLocalState(recipeUrl, striked, stage);
+  private setCurrentStateFromStorage(parsedState): void {
+    this.currentState.lastRecipeId = parsedState.lastRecipeId;
+    const now = Date.now();
+    parsedState.states = parsedState.states?.filter(s => now - s.timeStamp < this.EXPIRY_TIME) ?? [];
+    parsedState.states.forEach(s =>
+      this.setCurrentStateById(
+        s.recipeId,
+        s.recipeUrl,
+        this.strikedToSet(s.striked),
+        parseInt(s.stage),
+        parseInt(s.timeStamp),
+        false
+      )
+    );
+  }
+
+  public setStateById(
+    recipeId: string,
+    recipeUrl: string,
+    striked: Set<number>,
+    stage: number,
+    setLastRecipe: boolean
+  ): void {
+    striked = !striked && this.getStrikedSetById(recipeId) ? this.getStrikedSetById(recipeId) : striked;
+    stage = stage === null && this.getStageNumberById(recipeId) > -1 ? this.getStageNumberById(recipeId) : stage;
+    const now = Date.now();
+    this.setCurrentStateById(recipeId, recipeUrl, striked, stage, now, setLastRecipe);
+    this.updateLocalStorage();
+  }
+
+  private setCurrentStateById(
+    recipeId: string,
+    recipeUrl: string,
+    striked: Set<number>,
+    stage: number,
+    timeStamp: number,
+    setLastRecipe: boolean
+  ): void {
+    let recipeInd = this.getIndexById(recipeId);
+    recipeInd = recipeInd > -1 ? recipeInd : this.currentState.states.length;
+    this.currentState.states[recipeInd] = {
+      recipeId,
+      recipeUrl,
+      striked,
+      stage,
+      timeStamp
+    };
+    if (setLastRecipe) this.currentState.lastRecipeId = recipeId;
+  }
+
+  private updateLocalStorage(): void {
+    const states = this.currentState.states.map(
+      s =>
+        `{
+          "recipeId": "${s.recipeId}",
+          "recipeUrl": "${s.recipeUrl}",
+          "striked": "${this.strikedToString(s.striked)}",
+          "stage": "${this.stageToString(s.stage)}",
+          "timeStamp": "${s.timeStamp}"
+        }`
+    );
+
+    const state = `{
+      "lastRecipeId": "${this.currentState.lastRecipeId}",
+      "states": [
+        ${states.join(',')}
+      ]
+    }`;
+    return localStorage.setItem(this.LOCAL_STORAGE_LABEL, state);
   }
 
   public redirectToLastRecipe(): void {
-    const url = this.currentState.recipeUrl;
-    const time = this.currentState.timeStamp;
+    const lastRecipe = this.currentState.states[this.getLastRecipeInd()];
+    if (!lastRecipe) return;
+    const url = lastRecipe.recipeUrl;
+    const time = lastRecipe.timeStamp;
     if (Date.now() - time > this.EXPIRY_TIME) {
-      this.clearState();
+      this.clearLastRecipe(true);
     } else if (url) {
       this.router.navigate(['recipes', url.split('/')[2]]);
     }
   }
 
-  public clearState(): void {
-    this.setLocalState('', null, -1);
+  private clearStateById(recipeId: string): void {
+    const recipeInd = this.getIndexById(recipeId);
+    if (recipeInd > -1) {
+      this.currentState.states.splice(recipeInd, 1);
+    }
   }
 
-  private setCurrentState(recipeUrl: string, striked: Set<number>, stage: number, timeStamp: number): void {
-    this.currentState.recipeUrl = recipeUrl;
-    this.currentState.striked = striked;
-    this.currentState.stage = stage;
-    this.currentState.timeStamp = timeStamp;
+  public clearLastRecipe(includeState: boolean): void {
+    if (includeState) this.clearStateById(this.currentState.lastRecipeId);
+    this.currentState.lastRecipeId = null;
+    this.updateLocalStorage();
   }
 
-  private setLocalState(recipeUrl: string, striked: Set<number>, stage: number): void {
-    const now = Date.now();
-    this.setCurrentState(recipeUrl, striked, stage, now);
-
-    const state = `{
-      "recipeUrl": "${recipeUrl}",
-      "striked": "${this.strikedToString(striked)}",
-      "stage": "${this.stageToString(stage)}",
-      "timeStamp": "${now}"
-    }`;
-    return localStorage.setItem(this.LOCAL_STORAGE_LABEL, state);
+  public getStrikedSetById(recipeId: string): Set<number> {
+    return this.currentState.states[this.getIndexById(recipeId)]?.striked;
   }
 
-  public getStrikedSet(): Set<number> {
-    return this.currentState.striked;
+  public getStageNumberById(recipeId: string): number {
+    return this.currentState.states[this.getIndexById(recipeId)]?.stage;
   }
 
   private strikedToString(striked: Set<number>): string {
@@ -80,11 +132,15 @@ export class StateService {
     return striked ? new Set(striked.split(',').map(i => parseInt(i))) : new Set<number>();
   }
 
-  public getStageNumber(): number {
-    return this.currentState.stage;
-  }
-
   private stageToString(stage: number): string {
     return stage !== null ? stage.toString() : '-1';
+  }
+
+  private getIndexById(recipeId: string): number {
+    return this.currentState.states.findIndex(s => s.recipeId === recipeId);
+  }
+
+  private getLastRecipeInd(): number {
+    return this.getIndexById(this.currentState.lastRecipeId);
   }
 }

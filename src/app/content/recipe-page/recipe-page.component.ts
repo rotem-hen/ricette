@@ -49,14 +49,14 @@ export class RecipePageComponent implements OnInit, OnDestroy {
           return;
         }
         this.initExistingRecipe();
+        this.striked = this.stateService.getStrikedSetById(recipeId) ?? this.striked;
+        this.activeStage = this.stateService.getStageNumberById(recipeId);
       });
-    this.striked = this.stateService.getStrikedSet() ?? this.striked;
-    this.activeStage = this.stateService.getStageNumber();
   }
 
   @HostListener('click', ['$event.target']) onRecipePageClick(t): void {
     if (!t.closest('.back-button') && !t.closest('.link')) {
-      this.stateService.setState(location.pathname, this.striked, this.activeStage);
+      this.stateService.setStateById(this.recipe.id, location.pathname, this.striked, this.activeStage, true);
     }
   }
 
