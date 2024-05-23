@@ -57,10 +57,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
         if (localStorage.getItem('newVersion')) {
           this.popupService.whatsNew(
+            ['תיקון באגים בהוספת מתכון חדש'],
             [
               'סימונים במתכון (כמו מחיקת מצרכים וסימון שלב) יישארו גם ביציאה ממנו וחזרה אליו, ויאופסו רק לאחר כשעתיים ללא שימוש'
-            ],
-            ['הפרדה ברורה יותר בין מרכיבים לאופן הכנה', 'לחיצה על כפתור חזרה מחזירה לאותו המקום בעמוד הקודם']
+            ]
           );
           localStorage.setItem('newVersion', '');
         }
