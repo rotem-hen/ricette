@@ -55,7 +55,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('click', ['$event.target']) onRecipePageClick(t): void {
-    if (!t.closest('.back-button') && !t.closest('.link')) {
+    if (!t.closest('.back-button') && !t.closest('.link') && this.recipe) {
       this.stateService.setStateById(this.recipe.id, location.pathname, this.striked, this.activeStage, true);
     }
   }

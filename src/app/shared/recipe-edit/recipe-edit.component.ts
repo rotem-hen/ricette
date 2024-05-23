@@ -48,8 +48,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(c => (this.categoryList = c));
     if (!this.isNew) this.isNew = history.state.isNew;
-    this.hours = this.state.duration ? Math.floor(this.state.duration / 60) : 0;
-    this.minutes = this.state.duration ? this.state.duration - this.hours * 60 : 0;
+    this.hours = this.state?.duration ? Math.floor(this.state.duration / 60) : 0;
+    this.minutes = this.state?.duration ? this.state.duration - this.hours * 60 : 0;
   }
 
   private closeEditMode(): void {
