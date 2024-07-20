@@ -40,6 +40,10 @@ export class AddButtonComponent {
     });
   }
 
+  public openUrlModal(getUrlModal): void {
+    getUrlModal.open({});
+  }
+
   private getCurrentCategory(): string {
     const [, type, id] = this.router.url.split('/');
     if (type !== 'categories') {

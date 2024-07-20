@@ -42,9 +42,10 @@ export class RecipePageComponent implements OnInit, OnDestroy {
       .subscribe(([params, recipes, categories]) => {
         this.categoryList = categories;
         const recipeId = params.get('rid');
+        const recipeState = history.state.recipeState;
         this.recipe = recipes.find(r => r.id === recipeId);
         if (!this.recipe) {
-          this.initNewRecipe(recipeId);
+          this.initNewRecipe(recipeId, recipeState);
           this.editModeService.toggleEditMode(true);
           return;
         }
@@ -70,8 +71,8 @@ export class RecipePageComponent implements OnInit, OnDestroy {
     };
   }
 
-  private initNewRecipe(recipeId: string): void {
-    this.state = {
+  private initNewRecipe(recipeId: string, recipeState: RecipeEditState): void {
+    this.state = recipeState ?? {
       id: recipeId,
       title: '',
       isFavourite: false,
@@ -82,10 +83,12 @@ export class RecipePageComponent implements OnInit, OnDestroy {
       quantity: '',
       image: '',
       newRecipe: true,
-      options: this.categoryList.map(category => {
-        return { category, selected: history.state.currentCategory === category.id };
-      })
+      options: []
     };
+
+    this.state.options = this.categoryList.map(category => {
+      return { category, selected: history.state.currentCategory === category.id };
+    });
   }
 
   public shouldShowCopyButton(): boolean {

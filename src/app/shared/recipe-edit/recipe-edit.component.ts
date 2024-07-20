@@ -122,6 +122,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   private getDuration(): number {
     return (this.hours && this.hours > 0 ? this.hours * 60 : 0) + (this.minutes && this.minutes > 0 ? this.minutes : 0);
   }
+
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
