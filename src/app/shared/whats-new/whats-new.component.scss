@@ -7,8 +7,6 @@
 }
 
 .modal-body {
-  font-size: 30px;
-  line-height: 30px;
   text-align: right;
   border-bottom: 1px solid grey;
   background-color: antiquewhite;
@@ -16,18 +14,12 @@
   max-height: 50vh;
   overflow-y: auto;
 
-  h3 {
-    font-family: Stanga-Bold, Stanga-English-Bold;
-  }
-
   i {
     font-size: 20px;
   }
 }
 
 .modal-footer {
-  font-size: 20px;
-  line-height: 20px;
   justify-content: space-between;
   border: none;
   background-color: #d8e2d7;;

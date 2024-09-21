@@ -5,7 +5,7 @@
 <ng-template #recipeImageModal let-modal>
     <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
     <div class="modal-header">
-    <h4 class="modal-title">תמונה למתכון</h4>
+    <h4 class="modal-title normal-35">תמונה למתכון</h4>
     <button type="button" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -23,12 +23,12 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="onDeleteImage(modal, errorToast)">
-            <i class="far fa-trash-alt"></i>
+        <button type="button" class="btn btn-danger normal-30" (click)="onDeleteImage(modal, errorToast)">
+            <i class="far fa-trash-alt small-25"></i>
         </button>
         <div class="action-buttons">
-            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
-            <button type="button" class="btn btn-success" [disabled]="!imageStr" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
+            <button type="button" class="btn btn-light normal-30" (click)="modal.close('Close click')">סגירה</button>
+            <button type="button" class="btn btn-success normal-30" [disabled]="!imageStr" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
         </div>
     </div>
 </ng-template>

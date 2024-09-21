@@ -2,11 +2,11 @@
     {{ errorMessage }}
 </ng-template>
 
-<div class="recipe-edit-container" *ngIf="state">
+<div class="recipe-edit-container normal-30" *ngIf="state">
     <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
-    <input [(ngModel)]="state.title" type="text" class="recipe-name-input" placeholder="שם המתכון" />
+    <input [(ngModel)]="state.title" type="text" class="recipe-name-input large-bold" placeholder="שם המתכון" />
     <div class="form-is-favourite-checkbox">
-        <label class="container form-check-label">
+        <label class="container form-check-label normal-30">
             <input class="form-checkbox" [(ngModel)]="state.isFavourite" type="checkbox" checked="checked">
             <span class="checkmark"></span>
             הוספה למועדפים
@@ -18,7 +18,7 @@
                 <button class="btn btn-outline-primary" ngbDropdownToggle>בחרו קטגוריות למתכון</button>
                 <div ngbDropdownMenu>
                     <div class="form-categories-checkboxes" *ngFor="let option of state.options">
-                        <label class="container form-check-label">
+                        <label class="container form-check-label normal-30">
                             <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked">
                             <span class="checkmark"></span>
                             <div class="checkbox-category-name" style="background: {{ option.category.color }};">
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div *ngFor="let o of state.options" style="display: inline-block">
-            <div *ngIf="o.selected" style="background: {{ o.category.color }}" class="category-label">
+            <div *ngIf="o.selected" style="background: {{ o.category.color }}" class="category-label x-small-20">
                 {{ o.category.name }}
             </div>
         </div>
@@ -60,7 +60,7 @@
     <textarea [(ngModel)]="state.prep" type="text" class="prep-input" rows="10" placeholder="אופן הכנה"></textarea>
     <h5>לינק</h5>
     <input [(ngModel)]="state.link" type="text" class="link-input" placeholder="לינק" />
-    <div class="buttons-container">
+    <div class="buttons-container small-25">
         <button type="button" class="btn btn-light" (click)="onCancel()">ביטול</button>
         <button type="button" class="btn btn-danger" (click)="onDeleteClick(errorToast)" *ngIf="!isNew">מחיקת מתכון</button>
         <button type="button" class="btn btn-success" (click)="onOK(errorToast)" ngbAutofocus>שמירה</button>

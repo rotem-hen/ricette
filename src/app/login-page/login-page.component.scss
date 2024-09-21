@@ -5,7 +5,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 55px;
     flex-direction: column;
 
     .login-buttons {
@@ -22,7 +21,6 @@
     flex-direction: column;
 
     .contact {
-        font-size: 34px !important;
         padding: 7px 16px !important;
         margin: 10px !important;
     }
@@ -34,8 +32,6 @@
     align-items: center;
     letter-spacing: 2px;
     word-spacing: 4px;
-    font-size: 30px;
-    line-height: 30px;
     background-color: #f1d9ba;
     color: #475b5d;
     padding: 8px 16px;

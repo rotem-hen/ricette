@@ -11,7 +11,7 @@
     style="cursor: pointer;">
   </i>
   <div class="search-container">
-    <input [(ngModel)]="this.searchService.searchTerm" (input)="onSearchInputChange($event)" (click)="searchInputClick()" type="text" class="form-control" />
+    <input [(ngModel)]="this.searchService.searchTerm" (input)="onSearchInputChange($event)" (click)="searchInputClick()" type="text" class="form-control small-25" />
     <i class="fas fa-search square-icon"></i>
   </div>
   <button class="navbar-toggler" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed" aria-label="Toggle navigation" (click)="collapsed = !collapsed">
@@ -19,7 +19,7 @@
   </button>
 
   <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto small-25">
       <li *ngFor="let i of navButtons" class="nav-item" ngbDropdown>
         <a class="nav-link" style="cursor: pointer" ngbDropdownToggle role="button" (click)="i.onClick()">
           {{ i.text }}

@@ -1,21 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: Stanga;
-  src: url(assets/fonts/stanga-regular-aaa1.ttf) format("opentype");
-}
-
-@font-face {
-  font-family: Stanga-Bold;
-  src: url(assets/fonts/stanga-bold-aaa1.ttf) format("opentype");
-}
-
-@font-face {
-  font-family: Stanga-English;
-  src: url(assets/fonts/stanga-light-aaa.woff) format("woff");
-}
-
-@font-face {
-  font-family: Stanga-English-Bold;
   src: url(assets/fonts/stanga-regular-aaa.woff) format("woff");
 }
 
@@ -25,7 +10,7 @@
 }
 
 body {
-  font-family: 'Stanga', 'Stanga-English', 'Rounded', 'Lucida Sans Regular', Verdana, sans-serif;
+  font-family: 'Stanga', 'Rounded', 'Lucida Sans Regular', Verdana, sans-serif;
   height: 100%;
   margin: 0;
   color: #515C5D;
@@ -91,4 +76,51 @@ button:focus {
   background-color: transparent;
   border: none;
   width: 350px;
+}
+
+/* labels */
+
+app-root, ngb-modal-window {
+
+  .x-small-20 {
+    font-size: 20px;
+    line-height: 20px;
+  }
+  
+  .small-25 {
+    font-size: 25px;
+    line-height: 25px;
+  }
+  
+  .normal-30 {
+    font-size: 28px;
+    line-height: 28px;
+  }
+  
+  .bold-30 {
+    font-size: 28px;
+    line-height: 28px;
+    font-weight: 600;
+  }
+  
+  .normal-35 {
+    font-size: 30px;
+    line-height: 30px;
+  }
+  
+  .medium-40 {
+    font-size: 35px;
+    line-height: 35px;
+  }
+  
+  .large-50 {
+    font-size: 45px;
+    line-height: 45px;
+  }
+  
+  .large-bold {
+    font-size: 45px;
+    line-height: 45px;
+    font-weight: 700;
+  }
 }

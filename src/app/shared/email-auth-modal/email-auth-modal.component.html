@@ -5,7 +5,7 @@
 <ng-template #emailAuthModal let-modal>
     <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
     <div class="modal-header">
-    <h4 class="modal-title">התחברות עם אימייל</h4>
+    <h4 class="modal-title normal-35">התחברות עם אימייל</h4>
     <button type="button" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -14,21 +14,21 @@
     <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
         <button
             type="button"
-            class="btn btn-secondary"
+            class="btn btn-secondary small-25"
             [class.selected]="this.state === fEmailAuthState.Login"
             (click)="setState(fEmailAuthState.Login)">
             התחברות
         </button>
         <button
             type="button"
-            class="btn btn-secondary middle"
+            class="btn btn-secondary middle small-25"
             [class.selected]="this.state === fEmailAuthState.Signup"
             (click)="setState(fEmailAuthState.Signup)">
             הרשמה
         </button>
         <button
             type="button"
-            class="btn btn-secondary"
+            class="btn btn-secondary small-25"
             [class.selected]="this.state === fEmailAuthState.Reset"
             (click)="setState(fEmailAuthState.Reset)">
             איפוס סיסמה
@@ -37,7 +37,7 @@
     <form>
         <div class="input-group mb-3">
         <div class="input-group-append">
-            <span class="input-group-text">אימייל</span>
+            <span class="input-group-text normal-30">אימייל</span>
         </div>
         <input
             #emailAddress
@@ -46,16 +46,16 @@
             type="email"
             name="email"
             autocomplete="on"
-            class="form-control field-input"
+            class="form-control field-input small-25"
             [class.is-invalid]="isEmailInvalid" />
-            <div class="error invalid-feedback">
+            <div class="error invalid-feedback small-25">
                 אימייל לא תקין
             </div>
         </div>
 
         <div class="input-group mb-3" *ngIf="this.state === fEmailAuthState.Login || this.state === fEmailAuthState.Signup">
             <div class="input-group-append">
-                <span class="input-group-text">סיסמה</span>
+                <span class="input-group-text normal-30">סיסמה</span>
             </div>
             <input
             #password
@@ -64,16 +64,16 @@
             type="password"
             name="password"
             autocomplete="on"
-            class="form-control field-input"
+            class="form-control field-input small-25"
             [class.is-invalid]="isPasswordInvalid" />
-            <div class="error invalid-feedback">
+            <div class="error invalid-feedback small-25">
             הסיסמה חייבת להיות לפחות 6 תווים
             </div>
         </div>
 
         <div class="input-group mb-3" *ngIf="this.state === fEmailAuthState.Signup">
             <div class="input-group-append">
-                <span class="input-group-text">סיסמה בשנית</span>
+                <span class="input-group-text normal-30">סיסמה בשנית</span>
             </div>
             <input
                 #secondPassword
@@ -81,16 +81,16 @@
                 (input)="onInputChange($event, 'secondPassword')"
                 type="password"
                 autocomplete="on"
-                class="form-control field-input"
+                class="form-control field-input small-25"
                 [class.is-invalid]="isSecondPasswordInvalid" />
-            <div class="error invalid-feedback">
+            <div class="error invalid-feedback small-25">
                 הסיסמאות לא תואמות
             </div>
         </div>
     </form>
     </div>
     <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
-    <button type="button" class="btn btn-success" (click)="onOK(modal, messageToast)" [disabled]="confirmButtonDisabled" ngbAutofocus>{{ confirmButtonText }}</button>
+    <button type="button" class="btn btn-light normal-30" (click)="modal.close('Close click')">סגירה</button>
+    <button type="button" class="btn btn-success normal-30" (click)="onOK(modal, messageToast)" [disabled]="confirmButtonDisabled" ngbAutofocus>{{ confirmButtonText }}</button>
     </div>
 </ng-template>

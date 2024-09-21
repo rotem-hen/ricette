@@ -32,8 +32,6 @@
     width: 60%;
 
     input {
-        font-size: 25px;
-        line-height: 25px;
         margin-right: 10px;
         width: 100%;
         height: 40px;
@@ -44,8 +42,6 @@ li {
     display: flex;
     align-items: center;
     text-align: center;
-    font-size: 26px;
-    line-height: 26px;
 
     .dropdown-toggle::after {
         display: none;

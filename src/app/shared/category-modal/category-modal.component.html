@@ -5,32 +5,32 @@
 <ng-template #categoryModal let-modal>
     <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
     <div class="modal-header">
-      <h4 class="modal-title">{{ action }} קטגוריה</h4>
-      <button type="button" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <h4 class="modal-title normal-35">{{ action }} קטגוריה</h4>
+      <button type="button normal-30" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <div class="input-group mb-3">
         <div class="input-group-append">
-            <span class="input-group-text">שם הקטגוריה</span>
+            <span class="input-group-text normal-30">שם הקטגוריה</span>
         </div>
         <input
           #categoryName
           [value]="this.state.name"
           (input)="onCategoryNameInputChange($event)"
           type="text"
-          class="form-control"
+          class="form-control small-25"
           [maxLength]="NAME_MAX_LENGTH" />
-        <div class="counter">{{ remainingChars }}</div>
+        <div class="counter x-small-20">{{ remainingChars }}</div>
       </div>
       
       <div class="input-group mb-3">
         <div class="input-group-append">
-            <span class="input-group-text">צבע רקע</span>
+            <span class="input-group-text normal-30">צבע רקע</span>
         </div>
         <button
-          class="button pick-color"
+          class="button pick-color small-25"
           [cpPosition]="'bottom'"
           [(colorPicker)]="this.state.color"
           [style.background]="this.state.color"
@@ -44,7 +44,7 @@
       <div class="row" *ngIf="state.options.length" class="add-recipes-to-category">
         <div class="col">
           <div ngbDropdown placement="bottom-right" container="body">
-            <button class="btn btn-outline-primary" ngbDropdownToggle>בחרו מתכונים לקטגוריה</button>
+            <button class="btn btn-outline-primary normal-30" ngbDropdownToggle>בחרו מתכונים לקטגוריה</button>
             <div ngbDropdownMenu class="dropdown-recipe-list">
               <div class="form-recipes-checkboxes" *ngFor="let option of state.options">
                 <label class="container form-check-label">
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">סגירה</button>
-      <button type="button" class="btn btn-success" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
+      <button type="button" class="btn btn-light normal-30" (click)="modal.close('Close click')">סגירה</button>
+      <button type="button" class="btn btn-success normal-30" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
     </div>
   </ng-template>
