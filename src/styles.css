@@ -5,6 +5,11 @@
 }
 
 @font-face {
+  font-family: Stanga-Bold;
+  src: url(assets/fonts/stanga-bold-aaa.ttf) format("opentype");
+}
+
+@font-face {
   font-family: Rounded;
   src: url(assets/fonts/MPLUSRounded1c-Light.ttf) format("opentype");
 }
@@ -80,47 +85,53 @@ button:focus {
 
 /* labels */
 
-app-root, ngb-modal-window {
+app-root, ngb-modal-window, .dropdown-menu {
 
   .x-small-20 {
     font-size: 20px;
     line-height: 20px;
+    letter-spacing: 0.03rem;
   }
   
   .small-25 {
     font-size: 25px;
     line-height: 25px;
+    letter-spacing: 0.03rem;
   }
   
   .normal-30 {
-    font-size: 28px;
-    line-height: 28px;
+    font-size: 25px;
+    line-height: 25px;
+    letter-spacing: 0.03rem;
   }
   
   .bold-30 {
-    font-size: 28px;
-    line-height: 28px;
-    font-weight: 600;
+    font-size: 30px;
+    line-height: 30px;
+    font-family: Stanga-Bold, Stanga;
   }
   
   .normal-35 {
     font-size: 30px;
     line-height: 30px;
+    letter-spacing: 0.03rem;
   }
   
   .medium-40 {
     font-size: 35px;
     line-height: 35px;
+    letter-spacing: 0.03rem;
   }
   
   .large-50 {
     font-size: 45px;
     line-height: 45px;
+    letter-spacing: 0.03rem;
   }
   
   .large-bold {
-    font-size: 45px;
-    line-height: 45px;
-    font-weight: 700;
+    font-size: 50px;
+    line-height: 50px;
+    font-family: Stanga-Bold, Stanga;
   }
 }
