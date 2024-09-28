@@ -34,8 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private popupService: PopupService,
     private stateService: StateService,
     private viewportScroller: ViewportScroller
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
     this.router.events.pipe(takeUntil(this.destroy$)).subscribe(val => {

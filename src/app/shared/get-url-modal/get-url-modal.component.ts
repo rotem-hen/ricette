@@ -8,6 +8,15 @@ import * as uuid from 'uuid';
 import { Router } from '@angular/router';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 
+async function fetchWithTimeout(url: string, options: RequestInit, timeout = 10000): Promise<Response> {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
+  const response = await fetch(url, { ...options, signal: controller.signal });
+  clearTimeout(id);
+  return response;
+}
+
 @Component({
   selector: 'app-get-url-modal',
   templateUrl: './get-url-modal.component.html',
@@ -53,25 +62,27 @@ export class GetUrlModalComponent implements OnDestroy {
     this.loading = true;
 
     try {
-      // let response = await fetch('https://smartfreshbear.com/food/api', {
-      //   method: 'GET',
-      //   headers: {
-      //     'SFB-TOKEN': 'fibonacci_heap_2022',
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     url: 'https://www.mako.co.il/food-cooking_magazine/keren_agam_bakery/Recipe-21c53f8593fa771026.htm'
-      //   })
-      // });
-      // response = await response.json();
-      // console.log(response);
+      const responseRaw = await fetchWithTimeout(`https://smartfreshbear.com/food/api?url=${this.url}`, {
+        method: 'GET',
+        headers: {
+          SFB: 'fibonacci_heap_2022',
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const response: {
+        title: string;
+        ingredients: string[];
+        instructions: string[];
+        url: string;
+      } = await responseRaw.json();
 
       const recipeState: RecipeEditState = {
-        title: 'לצורך כריך',
+        title: response.title,
         isFavourite: false,
-        ingredients: 'ing\ning2\ning3',
-        prep: 'do1\ndo2',
-        link: 'https://the_link.com',
+        ingredients: response.ingredients.join('\n'),
+        prep: response.instructions.join('\n'),
+        link: response.url,
         duration: null,
         quantity: null,
         image: null,
