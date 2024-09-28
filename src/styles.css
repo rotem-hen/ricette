@@ -87,49 +87,43 @@ button:focus {
 
 app-root, ngb-modal-window, .dropdown-menu {
 
-  .x-small-20 {
+  .label-x-small {
     font-size: 20px;
     line-height: 20px;
     letter-spacing: 0.03rem;
   }
   
-  .small-25 {
+  .label-small {
     font-size: 25px;
     line-height: 25px;
     letter-spacing: 0.03rem;
   }
   
-  .normal-30 {
+  .label-normal {
     font-size: 25px;
     line-height: 25px;
     letter-spacing: 0.03rem;
   }
   
-  .bold-30 {
+  .label-normal-bold {
     font-size: 30px;
     line-height: 30px;
     font-family: Stanga-Bold, Stanga;
   }
   
-  .normal-35 {
-    font-size: 30px;
-    line-height: 30px;
-    letter-spacing: 0.03rem;
-  }
-  
-  .medium-40 {
+  .label-medium {
     font-size: 35px;
     line-height: 35px;
     letter-spacing: 0.03rem;
   }
   
-  .large-50 {
+  .label-large {
     font-size: 45px;
     line-height: 45px;
     letter-spacing: 0.03rem;
   }
   
-  .large-bold {
+  .label-large-bold {
     font-size: 50px;
     line-height: 50px;
     font-family: Stanga-Bold, Stanga;

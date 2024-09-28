@@ -4,15 +4,15 @@
 
 <div class="welcome-mask" *ngIf="showMessages.categoriesMessage || showMessages.iosMessage || showMessages.androidMessage">
     <div class="mask"></div>
-    <div class="message normal-35" *ngIf="showMessages.categoriesMessage">
+    <div class="message label-normal" *ngIf="showMessages.categoriesMessage">
         שמנו כמה קטגוריות לדוגמה.
         <br>
         תוכלו להוסיף בכפתור הפלוס למטה,
         <br>
         ולמחוק בכפתור העריכה למעלה
-        <button class="btn small-25" (click)="gotIt('categoriesMessage')">אישור</button>
+        <button class="btn label-small" (click)="gotIt('categoriesMessage')">אישור</button>
     </div>
-    <div class="message normal-35 add-app-message" *ngIf="showMessages.iosMessage">
+    <div class="message label-normal add-app-message" *ngIf="showMessages.iosMessage">
         <div>
             הוסיפו כאפליקציה!
             <br>
@@ -20,23 +20,25 @@
             <br>
             ובחרו "הוסף למסך הבית"
         </div>
-        <button class="btn small-25" (click)="gotIt('iosMessage')">אישור</button>
+        <button class="btn label-small" (click)="gotIt('iosMessage')">אישור</button>
     </div>
-    <div class="message normal-35 add-app-message" *ngIf="showMessages.androidMessage">
+    <div class="message label-normal add-app-message" *ngIf="showMessages.androidMessage">
         <div>
             הוסיפו כאפליקציה!
         <br>
             לחצו בתפריט הדפדפן
         <br>
             על "התקן אפליקציה"
+        <br>
+            או "הוסף למסך הבית"
     </div>
-        <button class="btn small-25" (click)="gotIt('androidMessage')">אישור</button>
+        <button class="btn label-small" (click)="gotIt('androidMessage')">אישור</button>
     </div>
 </div>
 <div class="category-container">
     <div
         *ngFor="let i of categoryList"
-        class="category button btn btn-2 btn-2d large-50"
+        class="category button btn btn-2 btn-2d label-large"
         style="background: {{ i.color }}"
         (click)="onCategoryClick(i)">
         <i

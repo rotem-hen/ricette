@@ -4,7 +4,7 @@
     [showEdit]="isStandardCategory()">
 </app-content-title>
 <app-recipe-entry *ngFor="let i of recipeList" [recipe]="i" [categoryId]="categoryId"></app-recipe-entry>
-<div class="no-recepies medium-40" *ngIf="recipeList?.length === 0">
+<div class="no-recepies label-medium" *ngIf="recipeList?.length === 0">
     <img src="./assets/cactus.png" width="140" height="140" />
     <p *ngIf="categoryId !== SpecialCategories.SEARCH_RESULTS; else noResult">
         <span *ngIf="categoryId !== SpecialCategories.UNCATEGORIZED">עדיין </span>אין כאן מתכונים
