@@ -44,6 +44,10 @@ export class AddButtonComponent {
     getUrlModal.open({});
   }
 
+  public isBetaUser(): boolean {
+    return localStorage.getItem('betaFeaturesEnabled') === '1';
+  }
+
   private getCurrentCategory(): string {
     const [, type, id] = this.router.url.split('/');
     if (type !== 'categories') {

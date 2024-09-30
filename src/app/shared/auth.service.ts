@@ -11,6 +11,7 @@ interface User {
   uid: string;
   email: string;
   role?: string;
+  betaFeaturesEnabled?: boolean;
 }
 
 export enum LoginState {
@@ -112,6 +113,7 @@ export class AuthService {
     if (!userData.exists) {
       this.newUser$.next(uid);
     }
+    localStorage.setItem('betaFeaturesEnabled', userData?.data()?.betaFeaturesEnabled ? '1' : '0');
     return userRef.set({ uid, email }, { merge: true });
   }
 

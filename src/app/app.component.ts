@@ -55,12 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
         }
 
         if (localStorage.getItem('newVersion')) {
-          this.popupService.whatsNew(
-            ['תיקון באגים בהוספת מתכון חדש'],
-            [
-              'סימונים במתכון (כמו מחיקת מצרכים וסימון שלב) יישארו גם ביציאה ממנו וחזרה אליו, ויאופסו רק לאחר כשעתיים ללא שימוש'
-            ]
-          );
+          this.popupService.whatsNew(['שיפור קל בפונט, לנראוּת וקריאוּת טובה יותר'], ['תיקון באגים בהוספת מתכון חדש']);
           localStorage.setItem('newVersion', '');
         }
       }

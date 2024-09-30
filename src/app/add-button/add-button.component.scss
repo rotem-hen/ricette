@@ -39,8 +39,12 @@
 .shown {
     padding: 5px 20px;
     width: 200px;
-    height: 165px;
+    height: 100px;
     transition: all linear 180ms;
+}
+
+.beta {
+    height: 165px;
 }
 
 .hidden {
