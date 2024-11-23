@@ -8,7 +8,7 @@ import * as uuid from 'uuid';
 import { Router } from '@angular/router';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 
-async function fetchWithTimeout(url: string, options: RequestInit, timeout = 10000): Promise<Response> {
+async function fetchWithTimeout(url: string, options: RequestInit, timeout = 20000): Promise<Response> {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
 
