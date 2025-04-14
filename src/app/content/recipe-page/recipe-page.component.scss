@@ -16,12 +16,16 @@
     margin: 10px 20px;
 }
 
-.category-label {
+.category-label, .recipe-label {
     display: inline-block;
     padding: 4px;
     margin: 5px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.recipe-label {
+    background: bisque;
 }
 
 .extra-info {

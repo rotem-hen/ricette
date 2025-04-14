@@ -45,7 +45,7 @@
         margin-bottom: 20px;
     }
     
-    .add-categories-to-recipe {
+    .add-categories-to-recipe, .add-related-recipes {
         margin-bottom: 20px;
     
         .col {
@@ -64,17 +64,21 @@
             display: flex;
             align-items: center;
 
-            .checkbox-category-name {
+            .checkbox-category-name, .checkbox-recipe-name {
                 padding: 2px 3px;
                 border-radius: 5px;
             }
         }
 
-        .category-label {
+        .category-label, .recipe-label {
             display: inline-block;
             padding: 4px;
             margin: 5px;
             border-radius: 5px;
+        }
+
+        .recipe-label {
+            background: bisque;
         }
     }
 
@@ -137,7 +141,8 @@
         max-width: 1000px;
         display: flex;
         justify-content: center;
-        
+        z-index: 1;
+
         button {
             height: 50px;
             margin: 5px;

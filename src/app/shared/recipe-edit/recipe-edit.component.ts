@@ -100,11 +100,21 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       const id = this.state.id ?? uuid.v4();
       const categoryIds = this.state.options.filter(o => o.selected).map(o => o.category.id);
       const categoryRefs = categoryIds.map(id => this.dbService.getCategoryRef(id));
+      const recipeIds = this.state.relatedRecipes.filter(o => o.selected).map(o => o.recipe.id);
+      const recipeRefs = recipeIds.map(id => this.dbService.getCategoryRef(id));
       this.state.duration = this.getDuration();
 
       const savePromise = this.state.newRecipe
-        ? this.dbService.addRecipe(id, { ...omit(this.state, 'options'), categories: categoryRefs })
-        : this.dbService.editRecipe(this.state.id, { ...omit(this.state, 'options'), categories: categoryRefs });
+        ? this.dbService.addRecipe(id, {
+            ...omit(this.state, 'options', 'relatedRecipes'),
+            categories: categoryRefs,
+            relatedRecipes: recipeRefs
+          })
+        : this.dbService.editRecipe(this.state.id, {
+            ...omit(this.state, 'options', 'relatedRecipes'),
+            categories: categoryRefs,
+            relatedRecipes: recipeRefs
+          });
       await Promise.race([savePromise, timeout]);
       this.editModeService.toggleEditMode(false);
       this.analytics.logEvent('recipe_edit', { name: this.state.title, isEdit: !this.state.newRecipe });

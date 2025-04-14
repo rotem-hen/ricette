@@ -86,6 +86,7 @@ export class GetUrlModalComponent implements OnDestroy {
         duration: null,
         quantity: null,
         image: null,
+        relatedRecipes: [],
         newRecipe: true,
         options: []
       };

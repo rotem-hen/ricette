@@ -1,4 +1,5 @@
 import { Category } from 'app/content/interface/category.interface';
+import { Recipe } from 'app/content/interface/recipe.interface';
 
 export interface RecipeEditState {
   id?: string;
@@ -13,6 +14,10 @@ export interface RecipeEditState {
   newRecipe: boolean;
   options: {
     category: Category;
+    selected: boolean;
+  }[];
+  relatedRecipes: {
+    recipe: Recipe;
     selected: boolean;
   }[];
 }

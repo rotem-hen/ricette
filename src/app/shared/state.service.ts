@@ -133,7 +133,7 @@ export class StateService {
   }
 
   private stageToString(stage: number): string {
-    return stage !== null ? stage.toString() : '-1';
+    return stage ? stage.toString() : '-1';
   }
 
   private getIndexById(recipeId: string): number {

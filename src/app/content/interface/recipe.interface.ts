@@ -11,5 +11,6 @@ export interface Recipe {
   duration: number;
   quantity: string;
   link: string;
+  relatedRecipes: DocumentReference[];
   image: string;
 }

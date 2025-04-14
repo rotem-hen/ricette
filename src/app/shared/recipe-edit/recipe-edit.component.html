@@ -17,7 +17,7 @@
             <div ngbDropdown placement="bottom" class="d-inline-block">
                 <button class="btn btn-outline-primary" ngbDropdownToggle>בחרו קטגוריות למתכון</button>
                 <div ngbDropdownMenu>
-                    <div class="form-categories-checkboxes" *ngFor="let option of state.options">
+                    <div class="form-checkboxes" *ngFor="let option of state.options">
                         <label class="container form-check-label label-normal">
                             <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked">
                             <span class="checkmark"></span>
@@ -65,5 +65,27 @@
         <button type="button" class="btn btn-danger" (click)="onDeleteClick(errorToast)" *ngIf="!isNew">מחיקת מתכון</button>
         <button type="button" class="btn btn-success" (click)="onOK(errorToast)" ngbAutofocus>שמירה</button>
     </div>
-    
+    <div class="row" *ngIf="state.relatedRecipes?.length" class="add-related-recipes">
+        <div class="col">
+            <div ngbDropdown placement="bottom" class="d-inline-block">
+                <button class="btn btn-outline-primary" ngbDropdownToggle>בחרו מתכונים קשורים</button>
+                <div ngbDropdownMenu>
+                    <div class="form-checkboxes" *ngFor="let option of state.relatedRecipes">
+                        <label class="container form-check-label label-normal">
+                            <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            <div class="checkbox-recipe-name">
+                                {{ option.recipe.title }}
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngFor="let o of state.relatedRecipes" style="display: inline-block">
+            <div *ngIf="o.selected" class="recipe-label label-x-small">
+                {{ o.recipe.title }}
+            </div>
+        </div>
+    </div>
 </div>

@@ -23,6 +23,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   public striked = new Set<number>();
   public copyResultMessage: string;
   private categoryList: Category[];
+  private recipeList: Recipe[];
   private destroy$ = new Subject();
 
   constructor(
@@ -41,6 +42,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(([params, recipes, categories]) => {
         this.categoryList = categories;
+        this.recipeList = recipes;
         const recipeId = params.get('rid');
         const recipeState = history.state.recipeState;
         this.recipe = recipes.find(r => r.id === recipeId);
@@ -67,6 +69,9 @@ export class RecipePageComponent implements OnInit, OnDestroy {
       newRecipe: false,
       options: this.categoryList.map(category => {
         return { category, selected: this.recipe.categories.some(c => c.id === category.id) };
+      }),
+      relatedRecipes: this.recipeList.map(recipe => {
+        return { recipe, selected: this.recipe.relatedRecipes?.some(c => c.id === recipe.id) };
       })
     };
   }
@@ -82,12 +87,16 @@ export class RecipePageComponent implements OnInit, OnDestroy {
       duration: 0,
       quantity: '',
       image: '',
+      relatedRecipes: [],
       newRecipe: true,
       options: []
     };
 
     this.state.options = this.categoryList.map(category => {
       return { category, selected: history.state.currentCategory === category.id };
+    });
+    this.state.relatedRecipes = this.recipeList.map(recipe => {
+      return { recipe, selected: false };
     });
   }
 
@@ -156,8 +165,12 @@ ${this.recipe.link}`);
     return `${hoursStr}${minutesStr}`;
   }
 
-  public onLabelClick(categoryId: string): void {
+  public onCategoryLabelClick(categoryId: string): void {
     this.router.navigate(['categories', categoryId]);
+  }
+
+  public onRecipeLabelClick(recipeId: string): void {
+    this.router.navigate(['recipes', recipeId]);
   }
 
   public onImageClick(recipeImageModal): void {
