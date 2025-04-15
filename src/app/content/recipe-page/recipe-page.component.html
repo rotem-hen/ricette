@@ -12,6 +12,16 @@
         </div>
     </div>
     <img [src]="recipe.image || './assets/click_to_add.png'" class="page-image" (click)="onImageClick(recipeImageModal)" width="150" height="150" />
+    <div *ngIf="recipe.relatedRecipes?.length > 0">
+        <div class="labels-container">
+            <div class="label-x-small" style="display: inline-block">מתכונים קשורים</div>
+            <div *ngFor="let o of state.relatedRecipes" style="display: inline-block">
+                <div *ngIf="o.selected" class="recipe-label label-x-small" (click)="onRecipeLabelClick(o.recipe.id)">
+                    {{ o.recipe.title }}
+                </div>
+            </div>
+        </div>
+    </div>
     <div *ngIf="recipe.duration || recipe.quantity" class="extra-info label-small">
         <p *ngIf="recipe.duration"><i class="fas fa-clock"></i> {{ formatDuration(recipe.duration) }} </p>
         <p *ngIf="recipe.quantity"><i class="fas fa-utensils"></i> {{ recipe.quantity }} </p>
@@ -38,17 +48,6 @@
         <hr>
         <div class="link label-normal">
             <a [href]="recipe.link" target="_blank">{{ recipe.link }}</a>
-        </div>
-    </div>
-    <div *ngIf="recipe.relatedRecipes?.length > 0">
-        <hr>
-        <div class="labels-container">
-            <div class="label-x-small" style="display: inline-block">מתכונים קשורים</div>
-            <div *ngFor="let o of state.relatedRecipes" style="display: inline-block">
-                <div *ngIf="o.selected" class="recipe-label label-x-small" (click)="onRecipeLabelClick(o.recipe.id)">
-                    {{ o.recipe.title }}
-                </div>
-            </div>
         </div>
     </div>
     <div class="share-container">

@@ -56,8 +56,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
         if (localStorage.getItem('newVersion')) {
           this.popupService.whatsNew(
-            ['תיקון בעיה בחיפוש מתכונים באנגלית'],
-            ['שיפור קל בפונט, לנראוּת וקריאוּת טובה יותר']
+            [
+              'לכל מתכון ניתן לצרף מתכונים קשורים, ולהגיע אליהם בלחיצת כפתור. כדי להוסיף, ערכו מתכון ומצאו את כפתור בחירת המתכונים'
+            ],
+            ['תיקון בעיה בחיפוש מתכונים באנגלית']
           );
           localStorage.setItem('newVersion', '');
         }
