@@ -13,7 +13,7 @@
     </div>
     <img [src]="recipe.image || './assets/click_to_add.png'" class="page-image" (click)="onImageClick(recipeImageModal)" width="150" height="150" />
     <div *ngIf="recipe.relatedRecipes?.length > 0">
-        <div class="labels-container">
+        <div class="related-recipes">
             <div class="label-x-small" style="display: inline-block">מתכונים קשורים</div>
             <div *ngFor="let o of state.relatedRecipes" style="display: inline-block">
                 <div *ngIf="o.selected" class="recipe-label label-x-small" (click)="onRecipeLabelClick(o.recipe.id)">
