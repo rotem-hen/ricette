@@ -52,7 +52,11 @@ export class RecipePageComponent implements OnInit, OnDestroy {
           return;
         }
         this.initExistingRecipe();
-        this.striked = this.stateService.getStrikedSetById(recipeId) ?? this.striked;
+        this.striked = new Set<number>();
+        const savedStriked = this.stateService.getStrikedSetById(recipeId);
+        if (savedStriked) {
+          this.striked = savedStriked;
+        }
         this.activeStage = this.stateService.getStageNumberById(recipeId);
       });
   }
