@@ -32,7 +32,7 @@ export class EmailAuthModalComponent implements OnDestroy {
   public passwordChanged: boolean;
   public secondPasswordChanged: boolean;
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(
     private modalService: NgbModal,

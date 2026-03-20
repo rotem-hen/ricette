@@ -5,7 +5,7 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { GetUrlModalComponent } from './get-url-modal/get-url-modal.component';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ColorPickerModule } from 'ngx-color-picker';
+import { ColorPickerDirective } from 'ngx-color-picker';
 import { ImageCropperComponent } from './image-cropper/image-cropper.component';
 import { FormsModule } from '@angular/forms';
 import { ConfirmComponent } from './confirm/confirm.component';
@@ -25,7 +25,7 @@ import { WhatsNewComponent } from './whats-new/whats-new.component';
     WhatsNewComponent,
     ImageCropperComponent
   ],
-  imports: [CommonModule, NgbModule, ColorPickerModule, FormsModule],
+  imports: [CommonModule, NgbModule, ColorPickerDirective, FormsModule],
   exports: [
     CategoryModalComponent,
     RecipeEditComponent,

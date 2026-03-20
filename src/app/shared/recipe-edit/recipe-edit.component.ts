@@ -5,7 +5,7 @@ import { ToastService } from 'app/shared/toast.service';
 import { EditModeService } from '../edit-mode.service';
 import { DatabaseService } from '../database.service';
 import { Category } from 'app/content/interface/category.interface';
-import * as uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -30,7 +30,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   public minutes: number;
   public errorMessage: string;
   public loading = false;
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(
     private toastService: ToastService,
@@ -98,7 +98,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
     const timeout = new Promise(resolve => setTimeout(resolve, 2000));
     try {
-      const id = this.state.id ?? uuid.v4();
+      const id = this.state.id ?? uuidv4();
       const categoryIds = this.state.options.filter(o => o.selected).map(o => o.category.id);
       const categoryRefs = categoryIds.map(id => this.dbService.getCategoryRef(id));
       const recipeIds = this.state.relatedRecipes.filter(o => o.selected).map(o => o.recipe.id);

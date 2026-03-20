@@ -14,7 +14,7 @@ import { takeUntil, filter, take } from 'rxjs/operators';
 import { AuthService } from 'app/shared/auth.service';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import initialCategories from './initial-categories.json';
-import * as uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
     selector: 'app-categories',
@@ -34,7 +34,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     androidMessage: !this.messageShown('androidMessage') && this.isAndroid() && !this.isPwa()
   };
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(
     private router: Router,
@@ -119,7 +119,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   private async createInitialCategories(uid: string): Promise<void> {
     try {
       const promises = initialCategories.map(({ name, color }: Category) =>
-        this.dbService.addCategory(uuid.v4(), {
+        this.dbService.addCategory(uuidv4(), {
           uid,
           name,
           color

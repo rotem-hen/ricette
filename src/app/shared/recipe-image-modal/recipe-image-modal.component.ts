@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild, Input } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../toast.service';
 import { DatabaseService } from '../database.service';
-import * as uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { StorageService } from '../storage.service';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
@@ -48,7 +48,7 @@ export class RecipeImageModalComponent {
         await this.storageService.removeImage(this.existingImgDownloadUrl);
       }
       const imageBlob = await (await fetch(this.imageStr)).blob();
-      const fileName = `recipeImages/${uuid.v4()}`;
+      const fileName = `recipeImages/${uuidv4()}`;
       await this.storageService.upload(fileName, imageBlob);
       const url = await this.storageService.getDownloadUrlFromLink(fileName);
       await this.dbService.editRecipeImage(this.recipeId, url);

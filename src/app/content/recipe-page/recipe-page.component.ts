@@ -25,7 +25,7 @@ export class RecipePageComponent implements OnInit, OnDestroy {
   public copyResultMessage: string;
   private categoryList: Category[];
   private recipeList: Recipe[];
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,

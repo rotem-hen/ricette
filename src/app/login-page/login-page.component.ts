@@ -12,7 +12,7 @@ import { AuthService } from '../shared/auth.service';
     standalone: false
 })
 export class LoginPageComponent implements OnInit {
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(public authService: AuthService, private popupService: PopupService, private router: Router) {}
 

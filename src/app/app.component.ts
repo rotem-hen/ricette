@@ -20,7 +20,7 @@ import { ViewportScroller } from '@angular/common';
     standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
   public updateExist = false;
   public LoginState = LoginState;
 

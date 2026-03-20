@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EditModeService } from 'app/shared/edit-mode.service';
-import * as uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
 
 @Component({
@@ -35,7 +35,7 @@ export class AddButtonComponent {
   }
 
   public openRecipeEdit(): void {
-    const newId = uuid.v4();
+    const newId = uuidv4();
     this.router.navigate(['/recipes', newId], {
       state: { currentCategory: this.getCurrentCategory(), isNew: true }
     });

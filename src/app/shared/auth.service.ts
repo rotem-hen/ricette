@@ -25,7 +25,7 @@ export enum LoginState {
 })
 export class AuthService {
   user$: Observable<User>;
-  logout$ = new Subject();
+  logout$ = new Subject<void>();
   newUser$ = new BehaviorSubject(null);
   loggedInUserId: string;
   state: LoginState = LoginState.Loading;

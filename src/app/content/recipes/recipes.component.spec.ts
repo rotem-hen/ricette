@@ -25,7 +25,7 @@ describe('RecipesComponent', () => {
   ];
 
   function setupComponent(categoryId: string, recipes = mockRecipes): void {
-    routeParamsSubject = new Subject();
+    routeParamsSubject = new Subject<void>();
     searchService = new SearchService();
 
     TestBed.configureTestingModule({

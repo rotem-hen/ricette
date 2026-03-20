@@ -4,7 +4,7 @@ import { ToastService } from 'app/shared/toast.service';
 import { EditModeService } from '../edit-mode.service';
 import { RecipeEditState } from '../interface/recipe-edit-state.interface';
 import { Subject } from 'rxjs';
-import * as uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
@@ -29,7 +29,7 @@ export class GetUrlModalComponent implements OnDestroy {
   public errorMessage: string;
   public loading = false;
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(
     private modalService: NgbModal,
@@ -109,7 +109,7 @@ export class GetUrlModalComponent implements OnDestroy {
   }
 
   private openRecipeEdit(recipeState: RecipeEditState): void {
-    const newId = uuid.v4();
+    const newId = uuidv4();
     this.router.navigate(['/recipes', newId], {
       state: { recipeState, isNew: true }
     });

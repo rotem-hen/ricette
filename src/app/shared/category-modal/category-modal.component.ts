@@ -6,7 +6,7 @@ import { isEmpty, omit } from 'lodash-es';
 import { ToastService } from 'app/shared/toast.service';
 import { EditModeService } from '../edit-mode.service';
 import { DatabaseService } from '../database.service';
-import * as uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
@@ -32,7 +32,7 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
     return this.NAME_MAX_LENGTH - this.state.name.length;
   }
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(
     private modalService: NgbModal,
@@ -75,7 +75,7 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
 
     const timeout = new Promise(resolve => setTimeout(resolve, 2000));
     try {
-      const id = uuid.v4();
+      const id = uuidv4();
       const savePromise = this.editModeService.isEditMode
         ? this.dbService.editCategory(omit(this.state, 'options'))
         : this.dbService.addCategory(id, omit(this.state, 'options')).then(() => (this.state.id = id));

@@ -23,7 +23,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
   public recipeList: Recipe[];
   private allRecipes: Recipe[];
   public SpecialCategories = SpecialCategories;
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   private QUERY_PARAM = 'searchTerm';
 
