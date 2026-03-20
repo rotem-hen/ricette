@@ -31,6 +31,7 @@ export class RecipeImageModalComponent {
   public open(recipeId: string): void {
     this.recipeId = recipeId;
     this.imageStr = null;
+    this.loading = false;
     this.modalService.open(this.modalRef, {
       scrollable: true,
       beforeDismiss: () => {
