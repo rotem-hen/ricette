@@ -6,7 +6,7 @@ import { GetUrlModalComponent } from './get-url-modal/get-url-modal.component';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { NgxImgModule } from 'ngx-img';
+import { ImageCropperComponent } from './image-cropper/image-cropper.component';
 import { FormsModule } from '@angular/forms';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { RecipeImageModalComponent } from './recipe-image-modal/recipe-image-modal.component';
@@ -22,9 +22,10 @@ import { WhatsNewComponent } from './whats-new/whats-new.component';
     ConfirmComponent,
     RecipeImageModalComponent,
     EmailAuthModalComponent,
-    WhatsNewComponent
+    WhatsNewComponent,
+    ImageCropperComponent
   ],
-  imports: [CommonModule, NgbModule, ColorPickerModule, NgxImgModule.forRoot(), FormsModule],
+  imports: [CommonModule, NgbModule, ColorPickerModule, FormsModule],
   exports: [
     CategoryModalComponent,
     RecipeEditComponent,

@@ -4,7 +4,6 @@ import { ToastService } from '../toast.service';
 import { DatabaseService } from '../database.service';
 import * as uuid from 'uuid';
 import { StorageService } from '../storage.service';
-import { debounce } from 'lodash-es';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 @Component({
@@ -31,7 +30,6 @@ export class RecipeImageModalComponent {
   public open(recipeId: string): void {
     this.recipeId = recipeId;
     this.imageStr = null;
-    document.addEventListener('crop', this.startCrop);
     this.modalService.open(this.modalRef, {
       scrollable: true,
       beforeDismiss: () => {
@@ -54,7 +52,6 @@ export class RecipeImageModalComponent {
       const url = await this.storageService.getDownloadUrlFromLink(fileName);
       await this.dbService.editRecipeImage(this.recipeId, url);
 
-      document.removeEventListener('crop', this.startCrop);
       this.analytics.logEvent('recipe_image_edit', { recipeId: this.recipeId });
       modal.close('Ok click');
     } catch (error) {
@@ -89,12 +86,4 @@ export class RecipeImageModalComponent {
   public reset(): void {
     this.imageStr = null;
   }
-
-  startCrop = debounce(
-    () => {
-      this.imageStr = null;
-    },
-    50,
-    { leading: true }
-  );
 }

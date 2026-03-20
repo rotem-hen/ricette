@@ -1,0 +1,20 @@
+@import 'cropperjs/dist/cropper.css';
+
+.image-cropper-wrapper {
+  width: 100%;
+}
+
+.file-select {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.cropper-container {
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+}
