@@ -46,7 +46,8 @@ describe('DatabaseService', () => {
       removeImage: jasmine.createSpy('removeImage').and.returnValue(Promise.resolve())
     };
 
-    service = new DatabaseService(firestoreMock, authServiceMock, storageServiceMock);
+    const injectorMock = { runInContext: (fn: Function) => fn() } as any;
+    service = new DatabaseService(firestoreMock, authServiceMock, storageServiceMock, injectorMock);
   });
 
   it('should be created', () => {

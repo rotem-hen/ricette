@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EnvironmentInjector, Injectable, runInInjectionContext } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference, DocumentData } from '@angular/fire/compat/firestore';
 import { Category } from 'app/content/interface/category.interface';
 import { Recipe } from 'app/content/interface/recipe.interface';
@@ -18,7 +18,8 @@ export class DatabaseService {
   constructor(
     private firestore: AngularFirestore,
     private authService: AuthService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private injector: EnvironmentInjector
   ) {
     this.categories$ = firestore.collection<Category>('categories', ref =>
       ref.where('uid', '==', authService.loggedInUserId).orderBy('name')
@@ -29,19 +30,21 @@ export class DatabaseService {
   }
 
   public getCategories(): Observable<Category[]> {
-    return this.firestore
-      .collection<Category>('categories', ref =>
-        ref.where('uid', '==', this.authService.loggedInUserId).orderBy('name')
-      )
-      .valueChanges({ idField: 'id' })
-      .pipe(takeUntil(this.authService.logout$));
+    return runInInjectionContext(this.injector, () =>
+      this.firestore
+        .collection<Category>('categories', ref =>
+          ref.where('uid', '==', this.authService.loggedInUserId).orderBy('name')
+        )
+        .valueChanges({ idField: 'id' })
+    ).pipe(takeUntil(this.authService.logout$));
   }
 
   public getRecipes(): Observable<Recipe[]> {
-    return this.firestore
-      .collection<Recipe>('recipes', ref => ref.where('uid', '==', this.authService.loggedInUserId).orderBy('title'))
-      .valueChanges({ idField: 'id' })
-      .pipe(takeUntil(this.authService.logout$));
+    return runInInjectionContext(this.injector, () =>
+      this.firestore
+        .collection<Recipe>('recipes', ref => ref.where('uid', '==', this.authService.loggedInUserId).orderBy('title'))
+        .valueChanges({ idField: 'id' })
+    ).pipe(takeUntil(this.authService.logout$));
   }
 
   public async editCategory({ id, name, color }: Category): Promise<string> {

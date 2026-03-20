@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EnvironmentInjector, Injectable, runInInjectionContext } from '@angular/core';
 import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
@@ -46,12 +46,19 @@ export class AuthService {
     default: 'הפעולה נכשלה (7). נסו שוב או צרו קשר'
   };
 
-  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    private router: Router,
+    private injector: EnvironmentInjector
+  ) {
     this.user$ = afAuth.authState.pipe(
       tap(user => {
         if (user) this.updateUserData(user);
       }),
-      switchMap(user => (user ? afs.doc<User>(`users/${user.uid}`).valueChanges() : of(null)))
+      switchMap(user =>
+        user ? runInInjectionContext(this.injector, () => afs.doc<User>(`users/${user.uid}`).valueChanges()) : of(null)
+      )
     );
 
     this.afAuth
@@ -108,13 +115,15 @@ export class AuthService {
   }
 
   private async updateUserData({ uid, email }: User): Promise<void> {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${uid}`);
-    const userData = await userRef.get().toPromise();
+    const userRef: AngularFirestoreDocument<User> = runInInjectionContext(this.injector, () =>
+      this.afs.doc(`users/${uid}`)
+    );
+    const userData = await runInInjectionContext(this.injector, () => userRef.get().toPromise());
     if (!userData.exists) {
       this.newUser$.next(uid);
     }
     localStorage.setItem('betaFeaturesEnabled', userData?.data()?.betaFeaturesEnabled ? '1' : '0');
-    return userRef.set({ uid, email }, { merge: true });
+    return runInInjectionContext(this.injector, () => userRef.set({ uid, email }, { merge: true }));
   }
 
   private setStateAndUser(user: User): void {
