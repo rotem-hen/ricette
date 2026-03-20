@@ -12,9 +12,10 @@ import { SpecialCategories } from '../category-views/category-views';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 @Component({
-  selector: 'app-recipe-entry',
-  templateUrl: './recipe-entry.component.html',
-  styleUrls: ['./recipe-entry.component.scss']
+    selector: 'app-recipe-entry',
+    templateUrl: './recipe-entry.component.html',
+    styleUrls: ['./recipe-entry.component.scss'],
+    standalone: false
 })
 export class RecipeEntryComponent implements OnInit {
   @Input() recipe: Recipe;

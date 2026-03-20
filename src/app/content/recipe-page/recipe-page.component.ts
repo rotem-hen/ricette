@@ -11,9 +11,10 @@ import { ToastService } from 'app/shared/toast.service';
 import { StateService } from 'app/shared/state.service';
 
 @Component({
-  selector: 'app-recipe-page',
-  templateUrl: './recipe-page.component.html',
-  styleUrls: ['./recipe-page.component.scss']
+    selector: 'app-recipe-page',
+    templateUrl: './recipe-page.component.html',
+    styleUrls: ['./recipe-page.component.scss'],
+    standalone: false
 })
 export class RecipePageComponent implements OnInit, OnDestroy {
   public recipe: Recipe;

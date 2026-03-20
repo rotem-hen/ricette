@@ -12,9 +12,10 @@ export enum EmailAuthState {
 }
 
 @Component({
-  selector: 'app-email-auth-modal',
-  templateUrl: './email-auth-modal.component.html',
-  styleUrls: ['./email-auth-modal.component.scss']
+    selector: 'app-email-auth-modal',
+    templateUrl: './email-auth-modal.component.html',
+    styleUrls: ['./email-auth-modal.component.scss'],
+    standalone: false
 })
 export class EmailAuthModalComponent implements OnDestroy {
   @ViewChild('emailAuthModal') modalRef: ElementRef;

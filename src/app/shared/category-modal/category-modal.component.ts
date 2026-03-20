@@ -13,9 +13,10 @@ import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { PresetColors } from 'app/shared/preset-colors';
 
 @Component({
-  selector: 'app-category-modal',
-  templateUrl: './category-modal.component.html',
-  styleUrls: ['./category-modal.component.scss']
+    selector: 'app-category-modal',
+    templateUrl: './category-modal.component.html',
+    styleUrls: ['./category-modal.component.scss'],
+    standalone: false
 })
 export class CategoryModalComponent implements OnInit, OnDestroy {
   @ViewChild('categoryModal') modalRef: ElementRef;

@@ -4,9 +4,10 @@ import * as uuid from 'uuid';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-button',
-  templateUrl: './add-button.component.html',
-  styleUrls: ['./add-button.component.scss']
+    selector: 'app-add-button',
+    templateUrl: './add-button.component.html',
+    styleUrls: ['./add-button.component.scss'],
+    standalone: false
 })
 export class AddButtonComponent {
   public showPopover = false;

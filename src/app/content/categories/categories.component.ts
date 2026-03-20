@@ -17,9 +17,10 @@ import initialCategories from './initial-categories.json';
 import * as uuid from 'uuid';
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+    selector: 'app-categories',
+    templateUrl: './categories.component.html',
+    styleUrls: ['./categories.component.scss'],
+    standalone: false
 })
 export class CategoriesComponent implements OnInit, OnDestroy {
   public categoryList: Category[];

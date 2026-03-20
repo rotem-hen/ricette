@@ -15,9 +15,10 @@ import { PopupService } from '../popup.service';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 @Component({
-  selector: 'app-recipe-edit',
-  templateUrl: './recipe-edit.component.html',
-  styleUrls: ['./recipe-edit.component.scss']
+    selector: 'app-recipe-edit',
+    templateUrl: './recipe-edit.component.html',
+    styleUrls: ['./recipe-edit.component.scss'],
+    standalone: false
 })
 export class RecipeEditComponent implements OnInit, OnDestroy {
   @Input() state: RecipeEditState;

@@ -18,9 +18,10 @@ async function fetchWithTimeout(url: string, options: RequestInit, timeout = 200
 }
 
 @Component({
-  selector: 'app-get-url-modal',
-  templateUrl: './get-url-modal.component.html',
-  styleUrls: ['./get-url-modal.component.scss']
+    selector: 'app-get-url-modal',
+    templateUrl: './get-url-modal.component.html',
+    styleUrls: ['./get-url-modal.component.scss'],
+    standalone: false
 })
 export class GetUrlModalComponent implements OnDestroy {
   @ViewChild('getUrlModal') modalRef: ElementRef;

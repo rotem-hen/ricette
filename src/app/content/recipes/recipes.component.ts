@@ -9,9 +9,10 @@ import { DatabaseService } from 'app/shared/database.service';
 import { CategoryModalState } from 'app/shared/interface/category-modal-state.interface';
 
 @Component({
-  selector: 'app-recipes',
-  templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.scss']
+    selector: 'app-recipes',
+    templateUrl: './recipes.component.html',
+    styleUrls: ['./recipes.component.scss'],
+    standalone: false
 })
 export class RecipesComponent implements OnInit, OnDestroy {
   public categoryName = '';

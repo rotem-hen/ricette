@@ -8,9 +8,10 @@ import { PopupService } from '../shared/popup.service';
 import { Button } from 'app/shared/interface/button.inteface';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss'],
+    standalone: false
 })
 export class NavbarComponent {
   public collapsed = true;

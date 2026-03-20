@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output, ViewChild, ElementRef, OnDestro
 import Cropper from 'cropperjs';
 
 @Component({
-  selector: 'app-image-cropper',
-  templateUrl: './image-cropper.component.html',
-  styleUrls: ['./image-cropper.component.scss']
+    selector: 'app-image-cropper',
+    templateUrl: './image-cropper.component.html',
+    styleUrls: ['./image-cropper.component.scss'],
+    standalone: false
 })
 export class ImageCropperComponent implements OnDestroy {
   @Input() set imgSrc(value: string) {

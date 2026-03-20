@@ -7,9 +7,10 @@ import { StorageService } from '../storage.service';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 @Component({
-  selector: 'app-recipe-image-modal',
-  templateUrl: './recipe-image-modal.component.html',
-  styleUrls: ['./recipe-image-modal.component.scss']
+    selector: 'app-recipe-image-modal',
+    templateUrl: './recipe-image-modal.component.html',
+    styleUrls: ['./recipe-image-modal.component.scss'],
+    standalone: false
 })
 export class RecipeImageModalComponent {
   @Input() existingImgDownloadUrl: string;

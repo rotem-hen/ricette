@@ -3,9 +3,10 @@ import { Location } from '@angular/common';
 import { EditModeService } from 'app/shared/edit-mode.service';
 
 @Component({
-  selector: 'app-content-title',
-  templateUrl: './content-title.component.html',
-  styleUrls: ['./content-title.component.scss']
+    selector: 'app-content-title',
+    templateUrl: './content-title.component.html',
+    styleUrls: ['./content-title.component.scss'],
+    standalone: false
 })
 export class ContentTitleComponent {
   @Input() title: string;
