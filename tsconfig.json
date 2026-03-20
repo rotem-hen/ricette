@@ -16,13 +16,7 @@
     "paths": {
       "firebase/compat": ["../node_modules/firebase/compat/index.d.ts"]
     },
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "useDefineForClassFields": false
   }
 }

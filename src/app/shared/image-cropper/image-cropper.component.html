@@ -1,13 +1,15 @@
 <div class="image-cropper-wrapper">
-  <div *ngIf="!previewUrl" class="file-select">
+  @if (!previewUrl) {
+  <div class="file-select">
     <label class="btn btn-outline-primary label-normal">
       בחירת תמונה
-      <input #fileInput type="file" accept="image/gif,image/jpeg,image/png" (change)="onFileSelected($event)" hidden>
+      <input #fileInput type="file" accept="image/gif,image/jpeg,image/png" (change)="onFileSelected($event)" hidden />
     </label>
   </div>
-
-  <div *ngIf="previewUrl" class="cropper-container">
-    <img #imageElement [src]="previewUrl" alt="crop preview">
+  } @if (previewUrl) {
+  <div class="cropper-container">
+    <img #imageElement [src]="previewUrl" alt="crop preview" />
     <button type="button" class="btn btn-sm btn-outline-secondary mt-2" (click)="onReset()">בחירת תמונה אחרת</button>
   </div>
+  }
 </div>

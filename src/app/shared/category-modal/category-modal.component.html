@@ -3,63 +3,79 @@
 </ng-template>
 
 <ng-template #categoryModal let-modal>
-    <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
-    <div class="modal-header">
-      <h4 class="modal-title label-normal">{{ action }} קטגוריה</h4>
-      <button type="button label-normal" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
+  @if (loading) {
+  <div class="mask"><i class="fas fa-spin fa-circle-notch"></i></div>
+  }
+  <div class="modal-header">
+    <h4 class="modal-title label-normal">{{ action }} קטגוריה</h4>
+    <button
+      type="button label-normal"
+      class="close"
+      style="margin: 0; padding: 0"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="input-group mb-3">
+      <div class="input-group-append">
+        <span class="input-group-text label-normal">שם הקטגוריה</span>
+      </div>
+      <input
+        #categoryName
+        [value]="this.state.name"
+        (input)="onCategoryNameInputChange($event)"
+        type="text"
+        class="form-control label-small"
+        [maxLength]="NAME_MAX_LENGTH"
+      />
+      <div class="counter label-x-small">{{ remainingChars }}</div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-append">
+        <span class="input-group-text label-normal">צבע רקע</span>
+      </div>
+      <button
+        class="button pick-color label-small"
+        [cpPosition]="'bottom'"
+        [(colorPicker)]="this.state.color"
+        [style.background]="this.state.color"
+        [cpPresetColors]="presetColors"
+        [cpPresetColorsClass]="'preset-colors'"
+        [cpPresetLabel]="'תוכלו גם לבחור מתוך צבעים מוגדרים מראש:'"
+      >
+        {{ categoryName.value || 'שם הקטגוריה' }}
       </button>
     </div>
-    <div class="modal-body">
-      <div class="input-group mb-3">
-        <div class="input-group-append">
-            <span class="input-group-text label-normal">שם הקטגוריה</span>
-        </div>
-        <input
-          #categoryName
-          [value]="this.state.name"
-          (input)="onCategoryNameInputChange($event)"
-          type="text"
-          class="form-control label-small"
-          [maxLength]="NAME_MAX_LENGTH" />
-        <div class="counter label-x-small">{{ remainingChars }}</div>
-      </div>
-      
-      <div class="input-group mb-3">
-        <div class="input-group-append">
-            <span class="input-group-text label-normal">צבע רקע</span>
-        </div>
-        <button
-          class="button pick-color label-small"
-          [cpPosition]="'bottom'"
-          [(colorPicker)]="this.state.color"
-          [style.background]="this.state.color"
-          [cpPresetColors]="presetColors"
-          [cpPresetColorsClass]="'preset-colors'"
-          [cpPresetLabel]="'תוכלו גם לבחור מתוך צבעים מוגדרים מראש:'">
-            {{ categoryName.value || 'שם הקטגוריה' }}
-        </button>
-      </div>
 
-      <div class="row" *ngIf="state.options.length" class="add-recipes-to-category">
-        <div class="col">
-          <div ngbDropdown placement="bottom-right" container="body">
-            <button class="btn btn-outline-primary label-normal" ngbDropdownToggle>בחרו מתכונים לקטגוריה</button>
-            <div ngbDropdownMenu class="dropdown-recipe-list">
-              <div class="form-recipes-checkboxes" *ngFor="let option of state.options">
-                <label class="container form-check-label label-normal">
-                  <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked">
-                  <span class="checkmark"></span>
-                  {{ option.recipe.title }}
-                </label>
-              </div>
+    @if (state.options.length) {
+    <div class="row" class="add-recipes-to-category">
+      <div class="col">
+        <div ngbDropdown placement="bottom-right" container="body">
+          <button class="btn btn-outline-primary label-normal" ngbDropdownToggle>בחרו מתכונים לקטגוריה</button>
+          <div ngbDropdownMenu class="dropdown-recipe-list">
+            @for (option of state.options; track option) {
+            <div class="form-recipes-checkboxes">
+              <label class="container form-check-label label-normal">
+                <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked" />
+                <span class="checkmark"></span>
+                {{ option.recipe.title }}
+              </label>
             </div>
+            }
           </div>
         </div>
       </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light label-normal" (click)="modal.close('Close click')">סגירה</button>
-      <button type="button" class="btn btn-success label-normal" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
-    </div>
-  </ng-template>
+    }
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light label-normal" (click)="modal.close('Close click')">סגירה</button>
+    <button type="button" class="btn btn-success label-normal" (click)="onOK(modal, errorToast)" ngbAutofocus>
+      אישור
+    </button>
+  </div>
+</ng-template>

@@ -1,91 +1,118 @@
 <ng-template #errorToast>
-    {{ errorMessage }}
+  {{ errorMessage }}
 </ng-template>
 
-<div class="recipe-edit-container label-normal" *ngIf="state">
-    <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
-    <input [(ngModel)]="state.title" type="text" class="recipe-name-input label-large-bold" placeholder="שם המתכון" />
-    <div class="form-is-favourite-checkbox">
-        <label class="container form-check-label label-normal">
-            <input class="form-checkbox" [(ngModel)]="state.isFavourite" type="checkbox" checked="checked">
-            <span class="checkmark"></span>
-            הוספה למועדפים
-        </label>
+@if (state) {
+<div class="recipe-edit-container label-normal">
+  @if (loading) {
+  <div class="mask"><i class="fas fa-spin fa-circle-notch"></i></div>
+  }
+  <input [(ngModel)]="state.title" type="text" class="recipe-name-input label-large-bold" placeholder="שם המתכון" />
+  <div class="form-is-favourite-checkbox">
+    <label class="container form-check-label label-normal">
+      <input class="form-checkbox" [(ngModel)]="state.isFavourite" type="checkbox" checked="checked" />
+      <span class="checkmark"></span>
+      הוספה למועדפים
+    </label>
+  </div>
+  @if (state.options.length) {
+  <div class="row" class="add-categories-to-recipe">
+    <div class="col">
+      <div ngbDropdown placement="bottom" class="d-inline-block">
+        <button class="btn btn-outline-primary" ngbDropdownToggle>בחרו קטגוריות למתכון</button>
+        <div ngbDropdownMenu>
+          @for (option of state.options; track option) {
+          <div class="form-checkboxes">
+            <label class="container form-check-label label-normal">
+              <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked" />
+              <span class="checkmark"></span>
+              <div class="checkbox-category-name" style="background: {{ option.category.color }};">
+                {{ option.category.name }}
+              </div>
+            </label>
+          </div>
+          }
+        </div>
+      </div>
     </div>
-    <div class="row" *ngIf="state.options.length" class="add-categories-to-recipe">
-        <div class="col">
-            <div ngbDropdown placement="bottom" class="d-inline-block">
-                <button class="btn btn-outline-primary" ngbDropdownToggle>בחרו קטגוריות למתכון</button>
-                <div ngbDropdownMenu>
-                    <div class="form-checkboxes" *ngFor="let option of state.options">
-                        <label class="container form-check-label label-normal">
-                            <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked">
-                            <span class="checkmark"></span>
-                            <div class="checkbox-category-name" style="background: {{ option.category.color }};">
-                                {{ option.category.name }}
-                            </div>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div *ngFor="let o of state.options" style="display: inline-block">
-            <div *ngIf="o.selected" style="background: {{ o.category.color }}" class="category-label label-x-small">
-                {{ o.category.name }}
-            </div>
-        </div>
+    @for (o of state.options; track o) {
+    <div style="display: inline-block">
+      @if (o.selected) {
+      <div style="background: {{ o.category.color }}" class="category-label label-x-small">
+        {{ o.category.name }}
+      </div>
+      }
     </div>
-    <div class="row" *ngIf="state.relatedRecipes?.length" class="add-related-recipes">
-        <div class="col">
-            <div ngbDropdown placement="bottom" class="d-inline-block">
-                <button class="btn btn-outline-primary" ngbDropdownToggle>בחרו מתכונים קשורים</button>
-                <div ngbDropdownMenu>
-                    <div class="form-checkboxes" *ngFor="let option of state.relatedRecipes">
-                        <label class="container form-check-label label-normal">
-                            <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked">
-                            <span class="checkmark"></span>
-                            <div class="checkbox-recipe-name">
-                                {{ option.recipe.title }}
-                            </div>
-                        </label>
-                    </div>
-                </div>
-            </div>
+    }
+  </div>
+  } @if (state.relatedRecipes?.length) {
+  <div class="row" class="add-related-recipes">
+    <div class="col">
+      <div ngbDropdown placement="bottom" class="d-inline-block">
+        <button class="btn btn-outline-primary" ngbDropdownToggle>בחרו מתכונים קשורים</button>
+        <div ngbDropdownMenu>
+          @for (option of state.relatedRecipes; track option) {
+          <div class="form-checkboxes">
+            <label class="container form-check-label label-normal">
+              <input class="form-checkbox" [(ngModel)]="option.selected" type="checkbox" checked="checked" />
+              <span class="checkmark"></span>
+              <div class="checkbox-recipe-name">
+                {{ option.recipe.title }}
+              </div>
+            </label>
+          </div>
+          }
         </div>
-        <div *ngFor="let o of state.relatedRecipes" style="display: inline-block">
-            <div *ngIf="o.selected" class="recipe-label label-x-small">
-                {{ o.recipe.title }}
-            </div>
-        </div>
+      </div>
     </div>
-    <h5>זמן הכנה</h5>
-    <div class="duration-grid-container">
-        <div class="h">
-            <h5>שעות</h5>
-        </div>
-        <div class="space"></div>
-        <div class="m">
-            <h5>דקות</h5>
-        </div>  
-        <div class="H">
-            <input [(ngModel)]="hours" onclick="this.select()" type="number" placeholder="שעות" />
-        </div>
-        <div class="colon">:</div>
-        <div class="M">
-            <input [(ngModel)]="minutes" onclick="this.select()" type="number" placeholder="דקות" />
-        </div>
+    @for (o of state.relatedRecipes; track o) {
+    <div style="display: inline-block">
+      @if (o.selected) {
+      <div class="recipe-label label-x-small">
+        {{ o.recipe.title }}
+      </div>
+      }
     </div>
-    <h5>כמות</h5>
-    <input [(ngModel)]="state.quantity" type="text" placeholder="5 מנות / 20 עוגיות / 2 תבניות אינגליש קייק..." />
-    <h5>מרכיבים</h5>
-    <textarea [(ngModel)]="state.ingredients" type="text" class="ingredients-input" rows="5" placeholder="מרכיבים"></textarea>
-    <h5>אופן הכנה</h5>
-    <textarea [(ngModel)]="state.prep" type="text" class="prep-input" rows="10" placeholder="אופן הכנה"></textarea>
-    <h5>לינק</h5>
-    <input [(ngModel)]="state.link" type="text" class="link-input" placeholder="לינק" />
-    <div class="buttons-container label-small">
-        <button type="button" class="btn btn-light" (click)="onCancel()">ביטול</button>
-        <button type="button" class="btn btn-danger" (click)="onDeleteClick(errorToast)" *ngIf="!isNew">מחיקת מתכון</button>
-        <button type="button" class="btn btn-success" (click)="onOK(errorToast)" ngbAutofocus>שמירה</button>
+    }
+  </div>
+  }
+  <h5>זמן הכנה</h5>
+  <div class="duration-grid-container">
+    <div class="h">
+      <h5>שעות</h5>
     </div>
+    <div class="space"></div>
+    <div class="m">
+      <h5>דקות</h5>
+    </div>
+    <div class="H">
+      <input [(ngModel)]="hours" onclick="this.select()" type="number" placeholder="שעות" />
+    </div>
+    <div class="colon">:</div>
+    <div class="M">
+      <input [(ngModel)]="minutes" onclick="this.select()" type="number" placeholder="דקות" />
+    </div>
+  </div>
+  <h5>כמות</h5>
+  <input [(ngModel)]="state.quantity" type="text" placeholder="5 מנות / 20 עוגיות / 2 תבניות אינגליש קייק..." />
+  <h5>מרכיבים</h5>
+  <textarea
+    [(ngModel)]="state.ingredients"
+    type="text"
+    class="ingredients-input"
+    rows="5"
+    placeholder="מרכיבים"
+  ></textarea>
+  <h5>אופן הכנה</h5>
+  <textarea [(ngModel)]="state.prep" type="text" class="prep-input" rows="10" placeholder="אופן הכנה"></textarea>
+  <h5>לינק</h5>
+  <input [(ngModel)]="state.link" type="text" class="link-input" placeholder="לינק" />
+  <div class="buttons-container label-small">
+    <button type="button" class="btn btn-light" (click)="onCancel()">ביטול</button>
+    @if (!isNew) {
+    <button type="button" class="btn btn-danger" (click)="onDeleteClick(errorToast)">מחיקת מתכון</button>
+    }
+    <button type="button" class="btn btn-success" (click)="onOK(errorToast)" ngbAutofocus>שמירה</button>
+  </div>
 </div>
+}

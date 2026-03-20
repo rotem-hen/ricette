@@ -3,27 +3,33 @@
 </ng-template>
 
 <ng-template #getUrlModal let-modal>
-    <div class="mask" *ngIf="loading"><i class="fas fa-spin fa-circle-notch"></i></div>
-    <div class="modal-header">
-      <h4 class="modal-title label-normal">הוספת מתכון מלינק</h4>
-      <button type="button" class="close" style="margin:0;padding:0" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="input-group mb-3">
-        <div class="input-group-append">
-            <span class="input-group-text label-normal">לינק</span>
-        </div>
-        <input
-          [value]="this.url"
-          (input)="onUrlInputChange($event)"
-          type="text"
-          class="form-control label-small" />
+  @if (loading) {
+  <div class="mask"><i class="fas fa-spin fa-circle-notch"></i></div>
+  }
+  <div class="modal-header">
+    <h4 class="modal-title label-normal">הוספת מתכון מלינק</h4>
+    <button
+      type="button"
+      class="close"
+      style="margin: 0; padding: 0"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="input-group mb-3">
+      <div class="input-group-append">
+        <span class="input-group-text label-normal">לינק</span>
       </div>
+      <input [value]="this.url" (input)="onUrlInputChange($event)" type="text" class="form-control label-small" />
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light label-normal" (click)="modal.close('Close click')">סגירה</button>
-      <button type="button" class="btn btn-success label-normal" (click)="onOK(modal, errorToast)" ngbAutofocus>אישור</button>
-    </div>
-  </ng-template>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light label-normal" (click)="modal.close('Close click')">סגירה</button>
+    <button type="button" class="btn btn-success label-normal" (click)="onOK(modal, errorToast)" ngbAutofocus>
+      אישור
+    </button>
+  </div>
+</ng-template>

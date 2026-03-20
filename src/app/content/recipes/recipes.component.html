@@ -1,19 +1,20 @@
-<app-content-title
-    [title]="categoryName"
-    [onEdit]="onEditCategory(categoryModal)"
-    [showEdit]="isStandardCategory()">
+<app-content-title [title]="categoryName" [onEdit]="onEditCategory(categoryModal)" [showEdit]="isStandardCategory()">
 </app-content-title>
-<app-recipe-entry *ngFor="let i of recipeList" [recipe]="i" [categoryId]="categoryId"></app-recipe-entry>
-<div class="no-recepies label-medium" *ngIf="recipeList?.length === 0">
-    <img src="./assets/cactus.png" width="140" height="140" />
-    <p *ngIf="categoryId !== SpecialCategories.SEARCH_RESULTS; else noResult">
-        <span *ngIf="categoryId !== SpecialCategories.UNCATEGORIZED">עדיין </span>אין כאן מתכונים
-    </p>
-    <ng-template #noResult>
-        <p>
-            אין תוצאות
-        </p>
-    </ng-template>
+@for (i of recipeList; track i) {
+<app-recipe-entry [recipe]="i" [categoryId]="categoryId"></app-recipe-entry>
+} @if (recipeList?.length === 0) {
+<div class="no-recepies label-medium">
+  <img src="./assets/cactus.png" width="140" height="140" />
+  @if (categoryId !== SpecialCategories.SEARCH_RESULTS) {
+  <p>
+    @if (categoryId !== SpecialCategories.UNCATEGORIZED) {
+    <span>עדיין </span>
+    }אין כאן מתכונים
+  </p>
+  } @else {
+  <p>אין תוצאות</p>
+  }
 </div>
+}
 
 <app-category-modal #categoryModal></app-category-modal>
