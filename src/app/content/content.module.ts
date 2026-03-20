@@ -48,7 +48,7 @@ import { AuthGuard } from 'app/shared/auth.guard';
           ]
         }
       ],
-      { relativeLinkResolution: 'legacy' }
+      {}
     )
   ],
   exports: [ContentComponent, ContentTitleComponent],
