@@ -8,11 +8,14 @@
     "baseUrl": "src",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "target": "ES2022",
+    "paths": {
+      "firebase/compat": ["../node_modules/firebase/compat/index.d.ts"]
+    },
     "typeRoots": [
       "node_modules/@types"
     ],
