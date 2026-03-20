@@ -1,12 +1,11 @@
-import { Component, EventEmitter, Input, Output, ViewChild, ElementRef, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import Cropper from 'cropperjs';
 
 @Component({
     selector: 'app-image-cropper',
     templateUrl: './image-cropper.component.html',
     styleUrls: ['./image-cropper.component.scss'],
-    standalone: false,
-    encapsulation: ViewEncapsulation.None
+    standalone: false
 })
 export class ImageCropperComponent implements OnDestroy {
   @Input() set imgSrc(value: string) {

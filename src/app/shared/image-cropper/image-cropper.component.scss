@@ -1,3 +1,5 @@
+@import 'cropperjs/dist/cropper.css';
+
 .image-cropper-wrapper {
   width: 100%;
 }
@@ -8,7 +10,7 @@
   padding: 2rem;
 }
 
-.cropper-area {
+.cropper-container {
   text-align: center;
 
   img {
