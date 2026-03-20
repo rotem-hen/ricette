@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CategoriesComponent } from './categories/categories.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -16,42 +16,33 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthGuard } from 'app/shared/auth.guard';
 
-@NgModule({
-  declarations: [
-    NavbarComponent,
-    AddButtonComponent,
-    ContentComponent,
-    CategoriesComponent,
-    RecipesComponent,
-    RecipePageComponent,
-    ContentTitleComponent,
-    RecipeEntryComponent
-  ],
-  imports: [
-    FormsModule,
-    FontAwesomeModule,
-    NgbModule,
-    SharedModule,
-    BrowserModule,
-    HttpClientModule,
-    RouterModule.forRoot(
-      [
-        {
-          path: '',
-          canActivate: [AuthGuard],
-          component: ContentComponent,
-          children: [
-            { path: 'recipes/:rid', component: RecipePageComponent },
-            { path: 'categories/:cid', component: RecipesComponent },
-            { path: 'categories', component: CategoriesComponent },
-            { path: '', redirectTo: '/categories', pathMatch: 'full' }
-          ]
-        }
-      ],
-      {}
-    )
-  ],
-  exports: [ContentComponent, ContentTitleComponent],
-  bootstrap: [CategoriesComponent]
-})
+@NgModule({ declarations: [
+        NavbarComponent,
+        AddButtonComponent,
+        ContentComponent,
+        CategoriesComponent,
+        RecipesComponent,
+        RecipePageComponent,
+        ContentTitleComponent,
+        RecipeEntryComponent
+    ],
+    exports: [ContentComponent, ContentTitleComponent],
+    bootstrap: [CategoriesComponent], imports: [FormsModule,
+        FontAwesomeModule,
+        NgbModule,
+        SharedModule,
+        BrowserModule,
+        RouterModule.forRoot([
+            {
+                path: '',
+                canActivate: [AuthGuard],
+                component: ContentComponent,
+                children: [
+                    { path: 'recipes/:rid', component: RecipePageComponent },
+                    { path: 'categories/:cid', component: RecipesComponent },
+                    { path: 'categories', component: CategoriesComponent },
+                    { path: '', redirectTo: '/categories', pathMatch: 'full' }
+                ]
+            }
+        ], {})], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class ContentModule {}
