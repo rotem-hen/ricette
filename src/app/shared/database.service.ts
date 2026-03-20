@@ -29,8 +29,12 @@ export class DatabaseService {
     );
   }
 
+  private run<T>(fn: () => T): T {
+    return runInInjectionContext(this.injector, fn);
+  }
+
   public getCategories(): Observable<Category[]> {
-    return runInInjectionContext(this.injector, () =>
+    return this.run(() =>
       this.firestore
         .collection<Category>('categories', ref =>
           ref.where('uid', '==', this.authService.loggedInUserId).orderBy('name')
@@ -40,7 +44,7 @@ export class DatabaseService {
   }
 
   public getRecipes(): Observable<Recipe[]> {
-    return runInInjectionContext(this.injector, () =>
+    return this.run(() =>
       this.firestore
         .collection<Recipe>('recipes', ref => ref.where('uid', '==', this.authService.loggedInUserId).orderBy('title'))
         .valueChanges({ idField: 'id' })
@@ -48,32 +52,34 @@ export class DatabaseService {
   }
 
   public async editCategory({ id, name, color }: Category): Promise<string> {
-    await this.categories$.doc(id).update({ name, color });
+    await this.run(() => this.categories$.doc(id).update({ name, color }));
     return id;
   }
 
   public async editRecipe(id: string, recipe: Recipe): Promise<void> {
-    return this.recipes$.doc(id).update({ ...recipe });
+    return this.run(() => this.recipes$.doc(id).update({ ...recipe }));
   }
 
   public async editRecipeImage(id: string, image: string): Promise<void> {
-    return this.recipes$.doc(id).update({ image });
+    return this.run(() => this.recipes$.doc(id).update({ image }));
   }
 
   public async addCategory(id: string, category: Category): Promise<void> {
-    return this.categories$
-      .doc(id)
-      .set({ ...category, uid: this.authService.loggedInUserId })
-      .catch(e => console.error(e));
+    return this.run(() =>
+      this.categories$
+        .doc(id)
+        .set({ ...category, uid: this.authService.loggedInUserId })
+    ).catch(e => console.error(e));
   }
 
   public async addRecipe(id: string, recipe: Recipe): Promise<void> {
-    const doc = this.recipes$.doc(id);
-    await doc.set({ ...recipe, uid: this.authService.loggedInUserId });
+    await this.run(() =>
+      this.recipes$.doc(id).set({ ...recipe, uid: this.authService.loggedInUserId })
+    );
   }
 
   public async deleteCategory(id: string): Promise<void> {
-    const categoryRef = this.categories$.doc(id);
+    const categoryRef = this.run(() => this.categories$.doc(id));
 
     const query = this.recipes$.ref
       .where('uid', '==', this.authService.loggedInUserId)
@@ -94,15 +100,15 @@ export class DatabaseService {
 
   public async deleteRecipe(id: string, imageUrl: string): Promise<void> {
     this.storageService.removeImage(imageUrl);
-    return this.recipes$.doc(id).delete();
+    return this.run(() => this.recipes$.doc(id).delete());
   }
 
   public addCategoryToRecipe(recipeId: string, categoryId: string): void {
     const categoryRef = this.getCategoryRef(categoryId);
-    this.recipes$
+    this.run(() => this.recipes$
       .doc(recipeId)
       .get()
-      .pipe(take(1))
+    ).pipe(take(1))
       .subscribe(doc => {
         const categories = doc.data().categories;
         categories.push(categoryRef);
@@ -111,10 +117,10 @@ export class DatabaseService {
   }
 
   public removeCategoryFromRecipe(recipeId: string, categoryId: string): void {
-    this.recipes$
+    this.run(() => this.recipes$
       .doc(recipeId)
       .get()
-      .pipe(take(1))
+    ).pipe(take(1))
       .subscribe(doc => {
         this.removeCategoryFromRecipeWithDoc(doc, categoryId);
       });
@@ -131,6 +137,6 @@ export class DatabaseService {
   }
 
   public getCategoryRef(id: string): DocumentReference {
-    return this.categories$.doc(id).ref;
+    return this.run(() => this.categories$.doc(id).ref);
   }
 }

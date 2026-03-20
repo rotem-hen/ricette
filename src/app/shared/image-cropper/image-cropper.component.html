@@ -6,8 +6,8 @@
       <input #fileInput type="file" accept="image/gif,image/jpeg,image/png" (change)="onFileSelected($event)" hidden />
     </label>
   </div>
-  } @if (previewUrl) {
-  <div class="cropper-container">
+  } @else {
+  <div class="cropper-wrapper">
     <img #imageElement [src]="previewUrl" alt="crop preview" />
     <button type="button" class="btn btn-sm btn-outline-secondary mt-2" (click)="onReset()">בחירת תמונה אחרת</button>
   </div>

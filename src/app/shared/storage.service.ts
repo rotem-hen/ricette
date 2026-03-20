@@ -1,5 +1,6 @@
 import { EnvironmentInjector, Injectable, runInInjectionContext } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,10 @@ export class StorageService {
   }
 
   public async getDownloadUrlFromLink(link: string): Promise<string> {
-    return runInInjectionContext(this.injector, () =>
-      this.afStorage.ref(link).getDownloadURL().toPromise()
+    return lastValueFrom(
+      runInInjectionContext(this.injector, () =>
+        this.afStorage.ref(link).getDownloadURL()
+      )
     );
   }
 

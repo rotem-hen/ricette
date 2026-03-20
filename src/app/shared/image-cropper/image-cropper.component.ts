@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, ElementRef, OnDestroy, NgZone } from '@angular/core';
 import Cropper from 'cropperjs';
 
 @Component({
@@ -8,6 +8,8 @@ import Cropper from 'cropperjs';
     standalone: false
 })
 export class ImageCropperComponent implements OnDestroy {
+  constructor(private ngZone: NgZone) {}
+
   @Input() set imgSrc(value: string) {
     if (value) {
       this.previewUrl = value;
@@ -75,7 +77,9 @@ export class ImageCropperComponent implements OnDestroy {
       maxHeight: 1000
     });
     if (canvas) {
-      this.imageCropped.emit(canvas.toDataURL('image/jpeg'));
+      this.ngZone.run(() => {
+        this.imageCropped.emit(canvas.toDataURL('image/jpeg'));
+      });
     }
   }
 

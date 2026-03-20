@@ -5,6 +5,7 @@ import { DatabaseService } from '../database.service';
 import { v4 as uuidv4 } from 'uuid';
 import { StorageService } from '../storage.service';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
     selector: 'app-recipe-image-modal',
@@ -49,7 +50,8 @@ export class RecipeImageModalComponent {
       }
       const imageBlob = await (await fetch(this.imageStr)).blob();
       const fileName = `recipeImages/${uuidv4()}`;
-      await this.storageService.upload(fileName, imageBlob);
+      const task = this.storageService.upload(fileName, imageBlob);
+      await lastValueFrom(task.snapshotChanges());
       const url = await this.storageService.getDownloadUrlFromLink(fileName);
       await this.dbService.editRecipeImage(this.recipeId, url);
 

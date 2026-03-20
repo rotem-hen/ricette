@@ -1,5 +1,5 @@
 import { EnvironmentInjector, Injectable, runInInjectionContext } from '@angular/core';
-import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, of, Subject, BehaviorSubject, lastValueFrom } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
@@ -90,7 +90,7 @@ export class AuthService {
 
   async emailSignIn(email: string, pass: string): Promise<void> {
     try {
-      const { user } = await firebase.auth().signInWithEmailAndPassword(email, pass);
+      const { user } = await this.afAuth.signInWithEmailAndPassword(email, pass);
       this.setStateAndUser(user);
     } catch (error) {
       throw new Error(this.errorCode2String[error.code] ?? this.errorCode2String['default']);
@@ -99,7 +99,7 @@ export class AuthService {
 
   async emailSignup(email: string, pass: string): Promise<void> {
     try {
-      const { user } = await firebase.auth().createUserWithEmailAndPassword(email, pass);
+      const { user } = await this.afAuth.createUserWithEmailAndPassword(email, pass);
       this.setStateAndUser(user);
     } catch (error) {
       throw new Error(this.errorCode2String[error.code] ?? this.errorCode2String['default']);
@@ -108,7 +108,7 @@ export class AuthService {
 
   async emailReset(email: string): Promise<void> {
     try {
-      await firebase.auth().sendPasswordResetEmail(email);
+      await this.afAuth.sendPasswordResetEmail(email);
     } catch (error) {
       throw new Error(this.errorCode2String[error.code] ?? this.errorCode2String['default']);
     }
@@ -118,7 +118,7 @@ export class AuthService {
     const userRef: AngularFirestoreDocument<User> = runInInjectionContext(this.injector, () =>
       this.afs.doc(`users/${uid}`)
     );
-    const userData = await runInInjectionContext(this.injector, () => userRef.get().toPromise());
+    const userData = await lastValueFrom(runInInjectionContext(this.injector, () => userRef.get()));
     if (!userData.exists) {
       this.newUser$.next(uid);
     }

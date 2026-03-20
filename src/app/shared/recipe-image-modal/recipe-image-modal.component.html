@@ -25,9 +25,11 @@
     </div>
   </div>
   <div class="modal-footer">
+    @if (existingImgDownloadUrl) {
     <button type="button" class="btn btn-danger label-normal" (click)="onDeleteImage(modal, errorToast)">
       <i class="far fa-trash-alt label-small"></i>
     </button>
+    }
     <div class="action-buttons">
       <button type="button" class="btn btn-light label-normal" (click)="modal.close('Close click')">סגירה</button>
       <button

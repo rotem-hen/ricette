@@ -36,6 +36,14 @@ body {
   margin: 0 auto;
 }
 
+ngb-modal-backdrop {
+  z-index: 1050 !important;
+}
+
+ngb-modal-window {
+  z-index: 1055 !important;
+}
+
 .button {
   border-radius: 15px;
   text-align: center;
