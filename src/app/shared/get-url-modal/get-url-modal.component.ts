@@ -6,7 +6,7 @@ import { RecipeEditState } from '../interface/recipe-edit-state.interface';
 import { Subject } from 'rxjs';
 import * as uuid from 'uuid';
 import { Router } from '@angular/router';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 async function fetchWithTimeout(url: string, options: RequestInit, timeout = 20000): Promise<Response> {
   const controller = new AbortController();

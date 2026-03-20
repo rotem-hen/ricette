@@ -8,7 +8,7 @@ import { PopupService } from 'app/shared/popup.service';
 import { AuthService } from 'app/shared/auth.service';
 import { of, BehaviorSubject } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 describe('CategoriesComponent', () => {
   let component: CategoriesComponent;

@@ -5,7 +5,7 @@ import { DatabaseService } from '../database.service';
 import * as uuid from 'uuid';
 import { StorageService } from '../storage.service';
 import { debounce } from 'lodash-es';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 @Component({
   selector: 'app-recipe-image-modal',

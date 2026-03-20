@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RecipeEditState } from '../interface/recipe-edit-state.interface';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 describe('RecipeEditComponent', () => {
   let component: RecipeEditComponent;

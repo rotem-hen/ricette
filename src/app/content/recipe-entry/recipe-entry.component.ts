@@ -4,12 +4,12 @@ import { Recipe } from '../interface/recipe.interface';
 import { EditModeService } from 'app/shared/edit-mode.service';
 import { DatabaseService } from 'app/shared/database.service';
 import { Category } from '../interface/category.interface';
-import { DocumentReference } from '@angular/fire/firestore';
+import { DocumentReference } from '@angular/fire/compat/firestore';
 import { ToastService } from 'app/shared/toast.service';
 import { Button } from 'app/shared/interface/button.inteface';
 import { PopupService } from 'app/shared/popup.service';
 import { SpecialCategories } from '../category-views/category-views';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 @Component({
   selector: 'app-recipe-entry',

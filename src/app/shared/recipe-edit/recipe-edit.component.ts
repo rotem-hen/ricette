@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
 import { Location } from '@angular/common';
 import { Button } from '../interface/button.inteface';
 import { PopupService } from '../popup.service';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 @Component({
   selector: 'app-recipe-edit',

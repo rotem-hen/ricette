@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'app/shared/toast.service';
 import { AuthService } from '../auth.service';
 import { Subject } from 'rxjs';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 
 export enum EmailAuthState {
   Login,

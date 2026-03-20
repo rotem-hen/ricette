@@ -6,7 +6,7 @@ import { SearchService } from './shared/search.service';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService, LoginState } from './shared/auth.service';
 import { SwUpdate } from '@angular/service-worker';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { BeforeInstallPromptEvent } from 'typings';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 import { PopupService } from './shared/popup.service';

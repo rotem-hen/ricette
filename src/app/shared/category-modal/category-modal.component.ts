@@ -9,7 +9,7 @@ import { DatabaseService } from '../database.service';
 import * as uuid from 'uuid';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { PresetColors } from 'app/shared/preset-colors';
 
 @Component({

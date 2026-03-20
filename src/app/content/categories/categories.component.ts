@@ -12,7 +12,7 @@ import { Button } from 'app/shared/interface/button.inteface';
 import { Subject } from 'rxjs';
 import { takeUntil, filter, take } from 'rxjs/operators';
 import { AuthService } from 'app/shared/auth.service';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import initialCategories from './initial-categories.json';
 import * as uuid from 'uuid';
 

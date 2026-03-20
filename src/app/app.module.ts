@@ -6,16 +6,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContentModule } from './content/content.module';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule, NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AngularFireModule } from '@angular/fire';
+import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
-import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/compat/analytics';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './shared/auth.guard';
 import { UpdateNotificationComponent } from './update-notification/update-notification.component';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { GlobalErrorHandler } from './shared/globalErrorHandler';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { BackOfficeComponent } from './admin/back-office/back-office.component';
@@ -39,7 +39,7 @@ import { AdminModule } from './admin/admin.module';
         { path: 'login', component: LoginPageComponent },
         { path: 'bo', component: BackOfficeComponent }
       ],
-      { relativeLinkResolution: 'legacy' }
+      {}
     ),
     AngularFireAnalyticsModule
   ],
