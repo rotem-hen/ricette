@@ -1,5 +1,6 @@
-import { EnvironmentInjector, Injectable, runInInjectionContext } from '@angular/core';
+import { EnvironmentInjector, Injectable, NgZone, runInInjectionContext } from '@angular/core';
 import { Observable, of, Subject, BehaviorSubject, lastValueFrom } from 'rxjs';
+import { enterZone } from './enter-zone';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
@@ -50,7 +51,8 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
-    private injector: EnvironmentInjector
+    private injector: EnvironmentInjector,
+    private ngZone: NgZone
   ) {
     this.user$ = afAuth.authState.pipe(
       tap(user => {
@@ -58,7 +60,8 @@ export class AuthService {
       }),
       switchMap(user =>
         user ? runInInjectionContext(this.injector, () => afs.doc<User>(`users/${user.uid}`).valueChanges()) : of(null)
-      )
+      ),
+      enterZone(this.ngZone)
     );
 
     this.afAuth

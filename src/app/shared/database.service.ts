@@ -1,9 +1,10 @@
-import { EnvironmentInjector, Injectable, runInInjectionContext } from '@angular/core';
+import { EnvironmentInjector, Injectable, NgZone, runInInjectionContext } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference, DocumentData } from '@angular/fire/compat/firestore';
 import { Category } from 'app/content/interface/category.interface';
 import { Recipe } from 'app/content/interface/recipe.interface';
 import { Observable } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
+import { enterZone } from './enter-zone';
 import { AuthService } from './auth.service';
 import { StorageService } from './storage.service';
 import firebase from 'firebase/compat/app';
@@ -19,7 +20,8 @@ export class DatabaseService {
     private firestore: AngularFirestore,
     private authService: AuthService,
     private storageService: StorageService,
-    private injector: EnvironmentInjector
+    private injector: EnvironmentInjector,
+    private ngZone: NgZone
   ) {
     this.categories$ = firestore.collection<Category>('categories', ref =>
       ref.where('uid', '==', authService.loggedInUserId).orderBy('name')
@@ -40,7 +42,7 @@ export class DatabaseService {
           ref.where('uid', '==', this.authService.loggedInUserId).orderBy('name')
         )
         .valueChanges({ idField: 'id' })
-    ).pipe(takeUntil(this.authService.logout$));
+    ).pipe(enterZone(this.ngZone), takeUntil(this.authService.logout$));
   }
 
   public getRecipes(): Observable<Recipe[]> {
@@ -48,7 +50,7 @@ export class DatabaseService {
       this.firestore
         .collection<Recipe>('recipes', ref => ref.where('uid', '==', this.authService.loggedInUserId).orderBy('title'))
         .valueChanges({ idField: 'id' })
-    ).pipe(takeUntil(this.authService.logout$));
+    ).pipe(enterZone(this.ngZone), takeUntil(this.authService.logout$));
   }
 
   public async editCategory({ id, name, color }: Category): Promise<string> {

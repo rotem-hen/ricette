@@ -26,7 +26,8 @@ describe('AuthService', () => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
     const injectorMock = { runInContext: (fn: Function) => fn() } as any;
-    service = new AuthService(afAuthMock, afsMock, routerSpy, injectorMock);
+    const ngZoneMock = { run: (fn: Function) => fn() } as any;
+    service = new AuthService(afAuthMock, afsMock, routerSpy, injectorMock, ngZoneMock);
   });
 
   it('should be created', () => {

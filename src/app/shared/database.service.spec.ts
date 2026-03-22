@@ -47,7 +47,8 @@ describe('DatabaseService', () => {
     };
 
     const injectorMock = { runInContext: (fn: Function) => fn() } as any;
-    service = new DatabaseService(firestoreMock, authServiceMock, storageServiceMock, injectorMock);
+    const ngZoneMock = { run: (fn: Function) => fn() } as any;
+    service = new DatabaseService(firestoreMock, authServiceMock, storageServiceMock, injectorMock, ngZoneMock);
   });
 
   it('should be created', () => {

@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'cropperjs/dist/cropper.css';
 @font-face {
   font-family: Stanga;
   src: url(assets/fonts/stanga-regular-aaa.woff) format("woff");
