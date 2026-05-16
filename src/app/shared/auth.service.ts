@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import { environment } from '../../environments/environment';
 
 interface User {
   uid: string;
@@ -66,8 +67,10 @@ export class AuthService {
 
     this.afAuth
       .getRedirectResult()
-      .then(({ user }) => {
-        this.setStateAndUser(user);
+      .then(result => {
+        if (result?.user) {
+          this.setStateAndUser(result.user);
+        }
       })
       .catch(e => console.error(e));
     this.user$.subscribe(async user => {
@@ -81,7 +84,14 @@ export class AuthService {
       prompt: 'select_account'
     });
     this.state = LoginState.Loading;
-    await this.afAuth.signInWithRedirect(provider);
+
+    // Use popup for local development, redirect for production
+    if (environment.production) {
+      await this.afAuth.signInWithRedirect(provider);
+    } else {
+      const result = await this.afAuth.signInWithPopup(provider);
+      this.setStateAndUser(result.user);
+    }
   }
 
   async signOut(): Promise<boolean> {
