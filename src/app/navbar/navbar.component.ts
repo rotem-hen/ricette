@@ -22,6 +22,7 @@ export class NavbarComponent {
   public collapsed = true;
   public exportMessage = '';
   private exportAbortController: AbortController | null = null;
+  public isDesktop = !('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
   public navButtons = [
     {

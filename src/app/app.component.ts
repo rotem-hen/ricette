@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
         if (localStorage.getItem('newVersion')) {
           this.popupService.whatsNew(
             [
-              'ייצוא מתכונים! מעכשיו ניתן לייצא את המתכונים שלכם בפורמט PDF או כטבלה.'
+              'ייצוא מתכונים! מעכשיו ניתן לייצא את המתכונים שלכם בפורמט PDF או כטבלה. הייצוא זמין רק בגירסת המחשב ולא דרך מכשיר נייד.'
             ],
             [
               'שדרוג טכנולוגי גדול מאחורי הקלעים - אנא דווחו לי אם ראיתם בעיות כלשהן.'
