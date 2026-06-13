@@ -42,6 +42,12 @@
       </li>
       }
       <li class="nav-item" ngbDropdown>
+        <a class="nav-link" style="cursor: pointer" ngbDropdownToggle role="button" (click)="onExportClick()">
+          <i class="fas fa-download" placement="right" ngbTooltip="ייצוא כל המתכונים"></i>
+          <span>ייצוא</span>
+        </a>
+      </li>
+      <li class="nav-item" ngbDropdown>
         <a class="nav-link" style="cursor: pointer" ngbDropdownToggle role="button" (click)="authService.signOut()">
           <i class="fas fa-sign-out-alt" placement="right" ngbTooltip="יציאה מהחשבון"></i>
         </a>
@@ -49,3 +55,10 @@
     </ul>
   </div>
 </nav>
+
+<ng-template #exportProgress>
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <span>{{ exportMessage }}</span>
+    <button class="btn btn-sm btn-light" style="margin-right: 10px;" (click)="cancelExport()">ביטול</button>
+  </div>
+</ng-template>

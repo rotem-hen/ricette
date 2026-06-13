@@ -13,6 +13,8 @@ export class ImageCropperComponent implements OnDestroy {
   @Input() set imgSrc(value: string) {
     if (value) {
       this.previewUrl = value;
+      this.cropperReady = false;
+      this.isNewFileSelection = false;
       this.initCropperOnLoad();
     }
   }
@@ -23,6 +25,8 @@ export class ImageCropperComponent implements OnDestroy {
 
   previewUrl: string = null;
   private cropper: Cropper = null;
+  private cropperReady = false;
+  private isNewFileSelection = false;
 
   ngOnDestroy(): void {
     this.destroyCropper();
@@ -39,6 +43,8 @@ export class ImageCropperComponent implements OnDestroy {
     const reader = new FileReader();
     reader.onload = () => {
       this.previewUrl = reader.result as string;
+      this.cropperReady = false;
+      this.isNewFileSelection = true;
       this.imageReset.emit();
       this.initCropperOnLoad();
     };
@@ -48,6 +54,7 @@ export class ImageCropperComponent implements OnDestroy {
   onReset(): void {
     this.destroyCropper();
     this.previewUrl = null;
+    this.cropperReady = false;
     if (this.fileInput) {
       this.fileInput.nativeElement.value = '';
     }
@@ -63,8 +70,17 @@ export class ImageCropperComponent implements OnDestroy {
       this.cropper = new Cropper(this.imageElement.nativeElement, {
         aspectRatio: 1,
         viewMode: 1,
+        ready: () => {
+          this.cropperReady = true;
+          // If this is a new file selection, emit immediately
+          if (this.isNewFileSelection) {
+            this.emitCroppedImage();
+          }
+        },
         crop: () => {
-          this.emitCroppedImage();
+          if (this.cropperReady) {
+            this.emitCroppedImage();
+          }
         }
       });
     });

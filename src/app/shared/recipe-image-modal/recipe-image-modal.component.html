@@ -20,8 +20,17 @@
   </div>
   <div class="modal-body">
     <div class="image-container">
-      <app-image-cropper [imgSrc]="existingImgDownloadUrl" (imageCropped)="onSelect($event)" (imageReset)="reset()">
-      </app-image-cropper>
+      @if (!isEditing && existingImgDownloadUrl) {
+        <div class="image-preview">
+          <img [src]="existingImgDownloadUrl" alt="Recipe image" style="max-width: 100%; height: auto;" />
+          <button type="button" class="btn btn-outline-primary mt-3 label-normal" (click)="startEditing()">
+            שינוי תמונה
+          </button>
+        </div>
+      } @else {
+        <app-image-cropper [imgSrc]="isEditing ? existingImgDownloadUrl : null" (imageCropped)="onSelect($event)" (imageReset)="reset()">
+        </app-image-cropper>
+      }
     </div>
   </div>
   <div class="modal-footer">

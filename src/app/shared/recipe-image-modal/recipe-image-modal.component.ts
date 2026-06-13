@@ -18,6 +18,7 @@ export class RecipeImageModalComponent {
   @ViewChild('recipeImageModal') modalRef: ElementRef;
   public errorMessage: string;
   public loading = false;
+  public isEditing = false;
   private imageStr: string;
   private recipeId: string;
 
@@ -32,6 +33,7 @@ export class RecipeImageModalComponent {
   public open(recipeId: string): void {
     this.recipeId = recipeId;
     this.imageStr = null;
+    this.isEditing = false;
     this.modalService.open(this.modalRef, {
       scrollable: true,
       beforeDismiss: () => {
@@ -39,6 +41,10 @@ export class RecipeImageModalComponent {
         return true;
       }
     });
+  }
+
+  public startEditing(): void {
+    this.isEditing = true;
   }
 
   public async onOK(modal: NgbModalRef, errorToast): Promise<void> {
@@ -88,5 +94,6 @@ export class RecipeImageModalComponent {
 
   public reset(): void {
     this.imageStr = null;
+    // Keep isEditing true so user can select another image
   }
 }

@@ -52,7 +52,7 @@
   </div>
   } @if (recipe.ingredients?.length > 0) {
   <div class="ingredients label-normal">
-    @for (ing of recipe.ingredients.split('\n'); track ing; let i = $index) {
+    @for (ing of recipe.ingredients.split('\n'); track $index; let i = $index) {
     <li
       (click)="onIngredientClick(i)"
       [class.striked]="!isSubtitle(ing) && isStriked(i)"
@@ -67,7 +67,7 @@
     <hr />
     @if (recipe.prep?.length > 0) {
     <div class="prep label-normal">
-      @for (p of recipe.prep.split('\n'); track p; let i = $index) {
+      @for (p of recipe.prep.split('\n'); track $index; let i = $index) {
       <li (click)="onStageClick(i)" [class.active]="activeStage === i">{{ p }}</li>
       }
     </div>
